@@ -1,0 +1,82 @@
+.personal-body
+{
+    background-color: #efefef;
+}
+.personal-body-navigation {
+    margin-top: 150px;
+    font-size: 14px;
+}
+.personal-body-navigation-frame {
+    margin-left: 30px;
+}
+/* AVATAR */
+.personal-body-avatar {
+    
+}
+.personal-body-avatar-frame {
+    display: flex;
+}
+.personal-body-avatar-name {
+    padding-left: 10px;
+    line-height: 30px;
+}
+/* SỬA HỒ SƠ */
+.personal-body-fix-frame {
+    display: flex;
+    margin-left: 35px;
+    align-items: center;
+}
+.personal-body-fix-frame i {
+    color: #878686;
+   
+}
+.personal-body-fix-text {
+    padding-left: 5px;
+    color: #878686;
+    
+}
+.personal-body-avatar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+
+}
+/* TÀI KHOẢN CỦA TÔI */
+.personal-body-my-account-header-frame {
+    display: flex;margin-top: 10px;
+}
+.personal-body-my-account-header-frame i {
+    color: blue;
+}
+.personal-body-my-account-text {
+    margin-left: 10px;
+}
+.personal-body-my-account-list {
+    list-style-type: none;
+    margin-left: 25px;
+}
+.personal-body-my-account-item {
+    margin-top: 5px;
+}
+/* ĐƠN MUA */
+.personal-body-order-frame {
+    display: flex;
+}
+.personal-body-order-frame i {
+    color: orangered;
+}
+.personal-body-order-header-frame {
+    display: flex;
+}
+.personal-body-order-header-frame i {
+    color: orangered;
+}
+.personal-body-order-text {
+    margin-left: ;
+}
+/* BODY DETAIL */
+.personal-body-detail {
+    background-color:#ffff;
+    margin-top: 150px;
+    height: 500px;
+}

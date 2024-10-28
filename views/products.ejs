@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../function.js">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+      <!-- Header-Logo -->
+      
+        <img src="../image/logo.jpg" alt="" class="logo-img">
+        <h4 class="header-logo-text">Ecolink for life</h3>
+      
+      <div class="header-search">
+       
+        <!-- Header-Services -->
+          <div class="header-service">
+            <div class="header-service-item">
+              <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="">
+              <a href="#contact">Ecolink</a>
+            </div>
+
+            <div class="header-service-item">
+              <i class="fa-solid fa-question"></i>
+              <a class="active" href="#home">Hỗ trợ</a>
+            </div>
+
+            <div class="header-service-item">
+              <i class="fa-regular fa-bell"></i>
+              <a href="#about">Thông báo</a>
+            </div>
+            
+            
+            
+          </div>
+    
+        <!-- Header-serach&cart -->
+         <div class="header-search-and-cart">
+          <!-- Header-Search-frame -->
+          <div class="search-frame">
+            <input class="header-search-input" type="text" placeholder="Tìm kiếm">
+            <div class="header-search-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <!--Search history-->
+            <div class="header__search-history">
+              <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
+              <ul class="header__search-history-list">
+                  <li class="header__search-history-item">
+                      <a href="" class="">Kem dưỡng da</a>
+                  </li>
+                  <li class="header__search-history-item">
+                      <a href="" class="">Kem trị mụn</a>
+                  </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Cart -->
+          <div class="header-icon-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div class="cart-quantity">
+              <p class="cart-quantity-number">15</p>
+            </div>
+          </div>
+          <div class="product-in-cart">
+            <div class="product-in-cart-arrow"></div>
+            <ul class="product-in-cart-list">
+              <li class="product-in-cart-item">
+                <img src="../image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Premium Vector</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Premium Vector</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+              </li>
+              <li class="product-in-cart-item">
+                <img src="../image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+              </li>
+            </ul>
+          </div>
+
+         </div>
+       
+       <!-- NAVIGATION -->
+     <div class="navigation">
+      <ul class="navigation-list">
+        <li id = "trang-chu" class="navigation-item">Trang chủ</li>
+        <li id = "san-pham" class="navigation-item">Sản phẩm</li>
+        <li id = "dien-dan" class="navigation-item">Diễn đàn</li>
+        <li id = "blog" class="navigation-item">Bài Blog</li>
+      </ul>
+    </div>
+      </div>
+     
+  </div>
+     <!-- Back ground -->
+     <div class="body-background">
+      <img class="body-background-img" src="../image/qc-sanpham.jpg" alt="">
+      <div class="body-background-text">
+        <h1 class="body-background-text-title">Ecolink for life</h1>
+        <h4 class="body-background-text-title">Home - Shop - Green product</h1>
+      </div>
+     </div>
+    <!-- MAIN CONTENT -->
+     <div class="main-content">
+      <div class="body row">
+     
+        <!-- SlideBar -->
+         <div class="slide-bar col-lg-2">
+           <div class="slide-bar-header">
+             <i class="fa-solid fa-filter"></i>
+             <h4 class="slide-bar-title">Bộ lọc tìm kiếm</h2>
+           </div>
+           <label class="container">Thực phẩm tươi
+             <input type="checkbox" checked="checked">
+             <span class="checkmark"></span>
+           </label>
+           
+           <label class="container">Văn phòng phẩm
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+           
+           <label class="container">Gia dụng
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+           
+           <label class="container">Chăm sóc cá nhân
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+   
+           <label class="container">Làm đẹp
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+   
+           <label class="container">Thời trang xanh
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+   
+           <label class="container">Hoa quả hữu cơ
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+           
+           <label class="container">Đồ tái chế
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+           
+           <label class="container">Đồ uống hữu cơ
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+           
+           <label class="container">Cây trồng hạt giống
+             <input type="checkbox">
+             <span class="checkmark"></span>
+           </label>
+           
+         </div>
+         <!-- List Product -->
+        <div class="body-main col-lg-10">
+         <div class="body-list-range ">
+           <p class="body-list-range-title">Sắp xếp theo</p>
+           <div class="body-list-range-item list-range-active">Liên quan</div>
+           <div class="body-list-range-item">Mới nhất</div>
+           <div class="body-list-range-item">Bán chạy</div>
+           <div class="body-list-range-item">Giá
+             <i class="fa-solid fa-chevron-down"></i>
+           </div>
+         </div>
+         <div class="body-list-products">
+       <!-- HÀNG SẢN PHẨM THỨ NHẤT -->
+           <div class="body-list-product-item col-lg-2">
+           <div class="body-list-products-item-img">
+               <img src="../image/cscn1.jpg" alt="" class="product-list-img">
+           </div>
+           <div class="body-list-product-item-title">Tinh dầu cam xả Essential</div>
+           <div class="body-list-product-item-discount">15%</div>
+           <div class="body-list-products-item-price">199.000
+            <div class="body-list-products-item-price-unit">đ</div>
+             <i class="fa-solid fa-tag"></i>
+           </div>
+           
+       </div>
+   
+       <div class="body-list-product-item col-lg-2">
+           <div class="body-list-products-item-img">
+               <img src="../image/cscn2.jpg" alt="" class="product-list-img">
+           </div>
+           <div class="body-list-product-item-title">Nước hoa hồng Essancia (Rosa rubirinosa)</div>          
+           <div class="body-list-product-item-discount">32%</div>
+           <div class="body-list-products-item-price">199.000
+            
+            <div class="body-list-products-item-price-unit">đ</div>
+             <i class="fa-solid fa-tag"></i>
+           </div>
+       </div>
+   
+       <div class="body-list-product-item col-lg-2">
+           <div class="body-list-products-item-img">
+               <img src="../image/cscn3.jpg" alt="" class="product-list-img">
+           </div>
+           <div class="body-list-product-item-title">Dầu dưỡng da mặt- Cây gai dầu & Argan </div>
+           <div class="body-list-product-item-discount">20%</div>
+           <div class="body-list-products-item-price">160.200 
+            <div class="body-list-products-item-price-unit">đ</div>
+             <i class="fa-solid fa-tag"></i>
+           </div>
+       </div>
+   
+       <div class="body-list-product-item col-lg-2">
+           <div class="body-list-products-item-img">
+               <img src="../image/cscn4.jpg" alt="" class="product-list-img">
+           </div>
+           <div class="body-list-product-item-title">Tinh chất dưỡng ẩm Greentea</div>
+           <div class="body-list-product-item-discount">32%</div>
+           <div class="body-list-products-item-price">200.400           
+            <div class="body-list-products-item-price-unit">đ</div> 
+            <i class="fa-solid fa-tag"></i>
+           </div>
+       </div>
+   
+       <div class="body-list-product-item col-lg-2">
+         <div class="body-list-products-item-img">
+             <img src="../image/cscn5.jpg" alt="" class="product-list-img">
+         </div>
+         <div class="body-list-product-item-title">Essancia Ylang Ylang (Cananga Odorata) </div>
+         <div class="body-list-product-item-discount">25%</div>
+         <div class="body-list-products-item-price">197.000
+          
+          <div class="body-list-products-item-price-unit">đ</div>
+           <i class="fa-solid fa-tag"></i>
+         </div>
+     </div>
+   
+          <!-- HÀNG SẢN PHẨM THỨ NHẤT -->
+          <div class="body-list-product-item col-lg-2">
+            <div class="body-list-products-item-img">
+                <img src="../image/cscn11.jpg" alt="" class="product-list-img">
+            </div>
+            <div class="body-list-product-item-title">Serum trị mụn giá học sinh hiệu quả tốt nhất</div>
+            <div class="body-list-product-item-discount">15%</div>
+            <div class="body-list-products-item-price">199.000
+             <div class="body-list-products-item-price-unit">đ</div>
+              <i class="fa-solid fa-tag"></i>
+            </div>
+            
+        </div>
+    
+        <div class="body-list-product-item col-lg-2">
+            <div class="body-list-products-item-img">
+                <img src="../image/cscn12.jpg" alt="" class="product-list-img">
+            </div>
+            <div class="body-list-product-item-title">Sữa tắm - Dầu ô liu Farmasi Naturelle</div>          
+            <div class="body-list-product-item-discount">32%</div>
+            <div class="body-list-products-item-price">199.000
+             
+             <div class="body-list-products-item-price-unit">đ</div>
+              <i class="fa-solid fa-tag"></i>
+            </div>
+        </div>
+    
+        <div class="body-list-product-item col-lg-2">
+            <div class="body-list-products-item-img">
+                <img src="../image/cscn13.jpg" alt="" class="product-list-img">
+            </div>
+            <div class="body-list-product-item-title">Xịt khoáng Vara Veda Tejati - Lành tính với da</div>
+            <div class="body-list-product-item-discount">20%</div>
+            <div class="body-list-products-item-price">160.200 
+             <div class="body-list-products-item-price-unit">đ</div>
+              <i class="fa-solid fa-tag"></i>
+            </div>
+        </div>
+    
+        <div class="body-list-product-item col-lg-2">
+            <div class="body-list-products-item-img">
+                <img src="../image/cscn14.jpg" alt="" class="product-list-img">
+            </div>
+            <div class="body-list-product-item-title">Neutrogena - Gel nước tăng cường Hydro Boost</div>
+            <div class="body-list-products-item-price">200.400           
+             <div class="body-list-products-item-price-unit">đ</div> 
+             <i class="fa-solid fa-tag"></i>
+            </div>
+        </div>
+    
+        <div class="body-list-product-item col-lg-2">
+          <div class="body-list-products-item-img">
+              <img src="../image/cscn15.jpg" alt="" class="product-list-img">
+          </div>
+          <div class="body-list-product-item-title">Serum cấp ẩm và phục hồi da </div>
+          <div class="body-list-product-item-discount">25%</div>
+          <div class="body-list-products-item-price">197.000
+           
+           <div class="body-list-products-item-price-unit">đ</div>
+            <i class="fa-solid fa-tag"></i>
+          </div>
+      </div>
+     <!-- HÀNG SẢN PHẨM THỨ 2 -->
+     <div class="body-list-product-item col-lg-2">
+       <div class="body-list-products-item-img">
+           <img src="../image/cscn6.jpg" alt="" class="product-list-img">
+       </div>
+       <div class="body-list-product-item-title">Gel trị mụn CeraVe</div>
+       <div class="body-list-product-item-discount">30%</div>
+       <div class="body-list-products-item-price">251.000        
+        <div class="body-list-products-item-price-unit">đ</div>
+         <i class="fa-solid fa-tag"></i>
+       </div>
+   </div>
+   
+   <div class="body-list-product-item col-lg-2">
+       <div class="body-list-products-item-img">
+           <img src="../image/cscn7.jpg" alt="" class="product-list-img">
+       </div>
+       <div class="body-list-product-item-title">Cicaplast Baume B5 (Dầu dưỡng sửa chữa)</div>
+       <div class="body-list-product-item-discount">15%</div>
+       <div class="body-list-products-item-price">199.000
+        <div class="body-list-products-item-price-unit">đ</div>
+         <i class="fa-solid fa-tag"></i>
+       </div>
+   </div>
+   
+   <div class="body-list-product-item col-lg-2">
+       <div class="body-list-products-item-img">
+           <img src="../image/cscn8.jpg" alt="" class="product-list-img">
+       </div>
+       <div class="body-list-product-item-title">Serum tối đa hóa rạng rỡ mới</div>
+       <div class="body-list-product-item-discount">10%</div>
+       <div class="body-list-products-item-price">160.200
+        <div class="body-list-products-item-price-unit">đ</div>
+         <i class="fa-solid fa-tag"></i>
+       </div>
+   </div>
+   
+   <div class="body-list-product-item col-lg-2">
+       <div class="body-list-products-item-img">
+           <img src="../image/cscn9.jpg" alt="" class="product-list-img">
+       </div>
+       <div class="body-list-product-item-title">Serum trị mụn Ampoule Wardah</div>
+       <div class="body-list-product-item-discount">10%</div>
+       <div class="body-list-products-item-price">200.400
+        <div class="body-list-products-item-price-unit">đ</div>
+         <i class="fa-solid fa-tag"></i>
+       </div>
+   </div>
+   
+   <div class="body-list-product-item col-lg-2">
+     <div class="body-list-products-item-img">
+         <img src="../image/cscn10.jpg" alt="" class="product-list-img">
+     </div>
+     <div class="body-list-product-item-title">Sự yên tĩnh tới từ thiên nhiên (Tinh dầu oải hương)</div>
+     <div class="body-list-product-item-discount">25%</div>
+     <div class="body-list-products-item-price">197.000
+      <div class="body-list-products-item-price-unit">đ</div>
+       <i class="fa-solid fa-tag"></i>
+     </div>
+   </div>
+         </div>
+        </div>
+       </div>
+       <!-- PAGE NUMBER -->
+        <div class="body-page-number">
+         <i class="fa-solid fa-chevron-left"></i>
+         <ul class="body-page-number-list">
+           <li class="body-page-number-item page-number-active">1</li>
+           <li class="body-page-number-item">2</li>
+           <li class="body-page-number-item">3</li>
+           <li class="body-page-number-item">4</li>
+           <li class="body-page-number-item">5</li>
+           <li class="body-page-number-item">...</li>
+         </ul>
+         <i class="fa-solid fa-chevron-right"></i>
+        </div>
+     </div>
+     <script type="text/javascript" src="../function.js"></script>
+</body>
+<footer>
+<div class="footer">
+  <div class="footer-logo">
+    <h1 class="footer-logo-text">ECOLINK FOR LIFE</h1>
+  </div>
+  <div class="footer-infor">
+    <ul class="footer-infor-list">
+      <li class="footer-infor-item">About us</li>
+      <li class="footer-infor-item">News</li>
+      <li class="footer-infor-item">Official Store</li>
+      <li class="footer-infor-item">Company</li>
+      <li class="footer-infor-item">Careers</li>
+    </ul>
+  </div>
+
+  <div class="footer-infor">
+    <ul class="footer-infor-list">
+      <li class="footer-infor-item">Get Help</li>
+      <li class="footer-infor-item">FAQ</li>
+      <li class="footer-infor-item">Shipping</li>
+      <li class="footer-infor-item">Payment</li>
+      <li class="footer-infor-item">Returns</li>
+      <li class="footer-infor-item">Contact Us</li>     
+    </ul>
+  </div>
+  <div class="footer-infor">
+    <ul class="footer-infor-list">
+      <li class="footer-infor-item">Follow Us</li>
+      <li class="footer-infor-item">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-brands fa-twitter"></i>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="footer-year-guide">
+  <a href="" class="footer-year-guide-item">Guide</a>
+  <a href="" class="footer-year-guide-item">Terms & Conditions</a>
+  <a href="" class="footer-year-guide-item">Privacy Policy</a>
+</div>
+<div class="footer-year">
+  <i class="fa-regular fa-circle-check"></i>
+  2024 ECOLINK. All Rights Reserved
+</div>
+</footer>
+</html>

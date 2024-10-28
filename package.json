@@ -1,0 +1,22 @@
+{
+  "name": "ecolink-green-consumer-e-commerce-floor-for-life",
+  "version": "1.0.0",
+  "description": "\"Ecolink Green Consumer E-Commerce Floor for Life is a sustainable e-commerce platform aimed at connecting consumers with green and environmentally friendly products. The project focuses on promoting responsible consumption and supporting businesses committed to environmental protection.\"",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "mssql": "^11.0.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.3",
+    "nodemon": "^3.1.7"
+  }
+}

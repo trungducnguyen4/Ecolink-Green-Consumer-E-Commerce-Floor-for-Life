@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Slider</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .products-row {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            transform: translateX(0);
+        }
+        .product {
+            width: 200px;
+            margin: 10px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+        .navigation button {
+            background-color: #7AC64D;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="products-row" id="productSlider">
+            <div class="product">
+                <img src="product1.jpg" alt="Product 1">
+                <h4>Product 1</h4>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Product 2">
+                <h4>Product 2</h4>
+            </div>
+            <div class="product">
+                <img src="product3.jpg" alt="Product 3">
+                <h4>Product 3</h4>
+            </div>
+            <div class="product">
+                <img src="product4.jpg" alt="Product 4">
+                <h4>Product 4</h4>
+            </div>
+            <div class="product">
+                <img src="product5.jpg" alt="Product 5">
+                <h4>Product 5</h4>
+            </div>
+            <div class="product">
+                <img src="product6.jpg" alt="Product 6">
+                <h4>Product 6</h4>
+            </div>
+            <div class="product">
+                <img src="product7.jpg" alt="Product 7">
+                <h4>Product 7</h4>
+            </div>
+            <div class="product">
+                <img src="product8.jpg" alt="Product 8">
+                <h4>Product 8</h4>
+            </div>
+        </div>
+        <div class="navigation">
+            <button id="leftBtn">Left</button>
+            <button id="rightBtn">Right</button>
+        </div>
+    </div>
+
+    <script>
+const productsRow = document.getElementById('productSlider');
+const products = document.querySelectorAll('.product');
+const totalProducts = products.length;
+const productsPerPage = 5; // Hiển thị 4 sản phẩm cùng lúc
+const productWidth = 220; // 200px + 10px margin
+let currentPosition = 0;
+let isTransitioning = false; // Trạng thái đang chuyển đổi
+
+// Sao chép các sản phẩm đầu vào cuối danh sách để tạo vòng lặp
+function cloneProducts() {
+    for (let i = 0; i < productsPerPage; i++) {
+        const clone = products[i].cloneNode(true);
+        productsRow.appendChild(clone);
+    }
+}
+cloneProducts();
+
+function updatePosition() {
+    // Cập nhật vị trí của dãy sản phẩm
+    productsRow.style.transition = 'transform 0.5s ease-in-out';
+    productsRow.style.transform = `translateX(${-currentPosition * productWidth}px)`;
+}
+
+function moveLeft() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    if (currentPosition > 0) {
+        currentPosition--;
+    } else {
+        // Nếu đã ở vị trí đầu, dịch chuyển đến vị trí sao chép cuối
+        currentPosition = totalProducts;
+        productsRow.style.transition = 'none'; // Tắt hiệu ứng để dịch nhanh
+        productsRow.style.transform = `translateX(${-currentPosition * productWidth}px)`;
+        
+        setTimeout(() => {
+            // Sau đó dịch chuyển tiếp đến vị trí trước sao chép
+            currentPosition = totalProducts - 1;
+            updatePosition();
+        }, 20); // Delay một chút để không thấy sự thay đổi đột ngột
+    }
+
+    updatePosition();
+    setTimeout(() => isTransitioning = false, 100); // Sau khi chuyển xong, cho phép tiếp tục
+}
+
+function moveRight() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    currentPosition++;
+    
+    updatePosition();
+
+    // Nếu đến vị trí cuối (sản phẩm sao chép), quay lại sản phẩm đầu tiên
+    if (currentPosition === totalProducts) {
+        setTimeout(() => {
+            productsRow.style.transition = 'none'; // Tắt hiệu ứng để quay lại vị trí đầu
+            currentPosition = 0;
+            productsRow.style.transform = `translateX(0px)`;
+        }, 100); // Delay một chút để kết thúc hiệu ứng trước khi quay lại đầu
+    }
+
+    setTimeout(() => isTransitioning = false, 100); // Sau khi chuyển xong, cho phép tiếp tục
+}
+
+// Xử lý khi bấm nút "left"
+document.getElementById('leftBtn').addEventListener('click', function() {
+    moveLeft();
+});
+
+// Xử lý khi bấm nút "right"
+document.getElementById('rightBtn').addEventListener('click', function() {
+    moveRight();
+});
+
+
+    </script>
+</body>
+</html>
