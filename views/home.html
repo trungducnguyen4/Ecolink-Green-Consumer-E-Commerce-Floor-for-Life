@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecolink for life</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="../public/main.css">
+    <link rel="stylesheet" href="../function.js">
+</head>
+<body>
+    <!-- HEADER -->
+        <!-- HEADER -->
+        <div class="header">
+            <!-- Header-Logo -->
+            
+              <img src="../image/logo.jpg" alt="" class="logo-img">
+              <h4 class="header-logo-text">Ecolink for life</h3>
+            
+            <div class="header-search">
+             
+              <!-- Header-Services -->
+                <div class="header-service">
+                  <div class="header-service-item">
+                    <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="">
+                    <a href="#contact">Ecolink</a>
+                  </div>
+      
+                  <div class="header-service-item">
+                    <i class="fa-solid fa-question"></i>
+                    <a class="active" href="#home">Hỗ trợ</a>
+                  </div>
+      
+                  <div class="header-service-item">
+                    <i class="fa-regular fa-bell"></i>
+                    <a href="#about">Thông báo</a>
+                  </div>
+                  
+                  
+                  
+                </div>
+          
+              <!-- Header-serach&cart -->
+               <div class="header-search-and-cart">
+                <!-- Header-Search-frame -->
+                <div class="search-frame">
+                  <input class="header-search-input" type="text" placeholder="Tìm kiếm">
+                  <div class="header-search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </div>
+                  <!--Search history-->
+                  <div class="header__search-history">
+                    <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
+                    <ul class="header__search-history-list">
+                        <li class="header__search-history-item">
+                            <a href="" class="">Kem dưỡng da</a>
+                        </li>
+                        <li class="header__search-history-item">
+                            <a href="" class="">Kem trị mụn</a>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+      
+                <!-- Cart -->
+                <div class="header-icon-cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <div class="cart-quantity">
+                    <p class="cart-quantity-number">15</p>
+                  </div>
+                </div>
+                <div class="product-in-cart">
+                  <div class="product-in-cart-arrow"></div>
+                  <ul class="product-in-cart-list">
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Premium Vector</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Premium Vector</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="../image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                    </li>
+                  </ul>
+                </div>
+      
+               </div>
+             
+             <!-- NAVIGATION -->
+           <div class="navigation">
+            <ul class="navigation-list">
+              <li id = "trang-chu" class="navigation-item">Trang chủ</li>
+              <li id = "san-pham" class="navigation-item">Sản phẩm</li>
+              <li id = "dien-dan" class="navigation-item">Diễn đàn</li>
+              <li id = "blog" class="navigation-item">Bài Blog</li>
+            </ul>
+          </div>
+            </div>
+           
+        </div>
+    <!--Phần nội dung-->
+    <div class="main-background slideshow-container">
+      <i class="fa-solid fa-play" id="playButton"></i>
+      <i class="fa-solid fa-stop" id="stopButton" style="display: none;"></i>
+      <i class="fa-solid fa-chevron-left" id="home-slide-leftBtn"></i>
+      <i class="fa-solid fa-chevron-right" id="home-slide-rightBtn"></i>
+      <div>
+        <img class="mySlides" src="../image/ads.png" alt="">
+      </div>      
+      <div >
+        <img class="mySlides" src="../image/ads2.png" alt="">
+      </div>
+      <div>
+        <img class="mySlides" src="../image/ads3.png" alt="">
+      </div>
+      <div>
+        <img class="mySlides" src="../image/ads4.png" alt="">
+      </div>
+      <div>
+        <img class="mySlides" src="../image/ads5.png" alt="">
+      </div>
+      <div>
+        <img class="mySlides" src="../image/ads6.png" alt="">
+      </div>
+        
+        <!-- <img class="icon-ads left" src="/iconn/chevronleft.svg" alt="" />
+        <img class="icon-ads right" src="/iconn/chevronright.svg"  alt=""/> -->
+    </div>
+    <div class="body-home">
+        <div class="body-news">
+            <h3 class="main-blog-text">Bài viết liên quan</h3>
+            
+            <div class="line"></div>
+            <div class="main-card row">
+              <img class="main-card-img" src="image/bv3.jpg" alt="">
+              <div class="main-card-content">
+                <div class="main-card-title">Sự gia tăng đáng báo động: Khủng hoảng toàn cầu về tình trạng thừa cân và béo phì ở trẻ em</div>
+                <div class="main-card-text">Bài viết này khám phá sự gia tăng toàn cầu của bệnh béo phì ở trẻ em, nêu bật các rủi ro sức khỏe liên quan và tác động lâu dài đến sức khỏe cộng đồng. Vấn đề này đã trở nên nghiêm ...</div>
+              </div>
+             
+            </div>
+            <div class="main-card row">
+              <img class="main-card-img" src="image/r1c4.jpg" alt="">
+              <div class="main-card-content">
+                <div class="main-card-content">
+                  <div class="main-card-title">Giảm cân thành công phụ thuộc vào việc ăn nhiều protein</div>
+                  <div class="main-card-text">Nghiên cứu cho thấy chế độ ăn uống linh hoạt và cá nhân hóa, tập trung vào việc tăng lượng protein và chất xơ đồng thời hạn chế lượng calo, sẽ cải thiện đáng kể thành công giảm cân. Bài viết này thảo luận về cách tiếp cận cá nhân .....
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="main-card row">
+              <img class="main-card-img" src="image/bv2.jpg" alt="">
+              <div class="main-card-content">
+                <div class="main-card-title">Tiêu thụ thịt đỏ và thịt chế biến có liên quan đến...</div>
+                <div class="main-card-text">Một nghiên cứu với hơn hai triệu người đã tìm thấy mối tương quan chặt chẽ giữa việc tiêu thụ thịt đỏ và thịt chế biến sẵn với việc tăng nguy cơ mắc bệnh tiểu đường Loại 2. Bài viết này đi sâu vào ý nghĩa của những phát hiện này và cách lựa chọn chế độ ...</div>
+              </div>
+            </div>
+            <div class="main-card row">
+              <img class="main-card-img" src="image/bv1.jpg" alt="">
+              <div class="main-card-content">
+                <div class="main-card-title">Hành vi ăn uống của cha mẹ ảnh hưởng đến con cái họ...</div>
+                <div class="main-card-text">Bài viết này xem xét hành vi và lựa chọn ăn uống của cha mẹ có thể hình thành mối quan hệ của con cái họ với thực phẩm như thế nào, có khả năng ảnh hưởng đến kết quả sức khỏe lâu dài như béo phì và thói quen ăn kiêng.</div>
+              </div>
+            </div>
+            <div class="main-card-see-more">Xem thêm
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="home-body-nav">
+            <h3 class="main-blog-text">Sản phẩm nổi bật</h3>
+            <div class="line"></div>
+            <div class="main-list-frame">
+               
+                <a class="main-list-pick main-list-pick-underline">Tất cả</a>
+                <a class="main-list-pick">Rau sạch</a>
+                <a class="main-list-pick">Thịt tươi</a>
+                <a class="main-list-pick">Trái cây hữu cơ</a>
+                
+            </div>
+            <div class="container2">
+              <i class="fa-solid fa-chevron-left" id="leftBtn"></i>
+              <div class="main-list-product-sample" id="productSlider">
+                
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demoall.jpg" alt="">              
+                  <div class="main-item-product-sample-title">Tất cả</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo1.png" alt="">              
+                  <div class="main-item-product-sample-title">Thực phẩm hữu cơ</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo3.png" alt="">              
+                  <div class="main-item-product-sample-title">Văn phòng phẩm</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo5.png" alt="">              
+                  <div class="main-item-product-sample-title">Gia dụng</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo2.png" alt="">              
+                  <div class="main-item-product-sample-title">Chăm sóc cá nhân</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo15.png" alt="">              
+                  <div class="main-item-product-sample-title">Làm đẹp</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo13.png" alt="">              
+                  <div class="main-item-product-sample-title">Thời trang xanh</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo12.png" alt="">              
+                  <div class="main-item-product-sample-title">Hoa quả hữu cơ</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo14.png" alt="">              
+                  <div class="main-item-product-sample-title">Đồ tái chế</div>
+                </div>
+                <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo11.png" alt="">              
+                  <div class="main-item-product-sample-title">Đồ uống hữu cơ</div>
+                </div>
+                <!-- <div class="main-item-product-sample">               
+                  <img class="main-item-product-sample-img" src="../image/demo10.jpg" alt="">              
+                  <div class="main-item-product-sample-title">Cây trồng hạt giống</div>
+                </div> -->
+              </div>
+              <i class="fa-solid fa-chevron-right" id="rightBtn"></i>
+            </div>
+
+        </div>
+        <div class="home-body-product-list">
+            <!-- Hàng sản phẩm thứ nhất -->
+            <div class="home-body-product-item">
+              <h3 class="home-body-product-item-title">
+                <i class="fa-solid fa-lemon"></i>
+                Thực phẩm hữu cơ</h3>
+              <!-- Hàng sản phẩm thứ nhất -->
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tphc1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Gạo Làng ta - Gạo thơm lài dẻo hữu cơ</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tphc2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Tương cà KISSAN - Cà chua sạch hữu cơ</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">32.000
+                     
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tphc3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Thức ăn giảm cân thuần chay - Vị cà rốt và táo </div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tphc4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Hạt ngũ cốc TASTY FOOD - thành phần từ thiên nhiên</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">210.400           
+                     <div class="body-list-products-item-price-unit">đ</div> 
+                     <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/tphc5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Phân bón hữu cơ thành phần tự nhiên </div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                   
+                   <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-rightBtn"></i>
+                </div>
+            </div>
+            <!-- Hàng sản phẩm thứ hai -->
+            <div class="home-body-product-item" style="background-color: #f5f5f5;">
+              <h3 class="home-body-product-item-title" style="color:  green;">
+                <i class="fa-solid fa-book"></i>
+                Văn phòng phẩm</h3>
+              <!-- Hàng sản phẩm thứ nhất -->
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/vpp1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bút chì gỗ, ruột chì viết êm tay</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">19.000
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/vpp2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bút chì đầu hạt giống Perejil</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">29.000
+                     
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/vpp3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bút chì gỗ có thể trồng thành cây</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/vpp4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">USB bằng gỗ thân thiện với môi trường</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                     <div class="body-list-products-item-price-unit">đ</div> 
+                     <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/vpp5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Combo sản phẩm từ bã mía - Eco minded</div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                   
+                   <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+
+            <!-- Hàng sản phẩm thứ ba -->
+            <div class="home-body-product-item">
+              <h3 class="home-body-product-item-title">
+                <i class="fa-solid fa-utensils"></i>
+                Gia dụng</h3>
+              <!-- Hàng sản phẩm thứ nhất -->
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/gd1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bộ dụng cụ ăn uống bằng gỗ</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/gd2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bàn chảy đánh răng bằng gỗ</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">59.000
+                     
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/gd3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Hộp đựng thức ăn mang đi bằng giấy (Combo 12 hộp)</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/gd4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bộ dụng cụ ăn uống picnic bằng bã mía</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                     <div class="body-list-products-item-price-unit">đ</div> 
+                     <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/gd5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Combo 10 ly giấy thân thiện, tự nhiên</div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">67.000
+                   
+                   <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+
+            <!-- Hàng sản phẩm thứ tư -->
+            <div class="home-body-product-item" style="background-color: #f5f5f5;">
+              <h3 class="home-body-product-item-title" style="color: green;">
+                <i class="fa-solid fa-hand-holding-medical"></i>
+                Chăm sóc cá nhân</h3>
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/yte3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Gel rửa tay dạng xịt hương cam thảo</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/yte2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Gel rửa tay khô hương hoa đinh lan</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">199.000
+                     
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/yte1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Khẩu trang bằng vải nhiều màu (gói 10 cái)</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                     <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/yte4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bông tắm bằng xơ mướp, thân thiện với da nhạy cảm</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">20.400           
+                     <div class="body-list-products-item-price-unit">đ</div> 
+                     <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/yte5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Bộ tinh dầu xông phòng tắm Eco</div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                   
+                   <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+
+            <!-- Hàng sản phẩm thứ năm -->
+            <div class="home-body-product-item">
+              <h3 class="home-body-product-item-title" style="color: white;">
+                <i class="fa-solid fa-crown"></i>
+                Làm đẹp</h3>
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/cscn1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Tinh dầu cam xả Essential</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/cscn2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Tinh dầu tầm xuân Essancia (Rosa Rubirinosa)</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">199.000
+                      
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/cscn3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Dầu dưỡng da mặt - Hemp & Argan</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/cscn4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Tinh chất dưỡng ẩm trà xanh Essence</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                      <div class="body-list-products-item-price-unit">đ</div> 
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/cscn5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Essancia Ylang Ylang (Cananga Odorata) </div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                    
+                    <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+
+            <!-- Hàng sản phẩm thứ sáu -->
+            <div class="home-body-product-item" style="background-color: #f5f5f5;">
+              <h3 class="home-body-product-item-title" style="color: green;">
+                <i class="fa-solid fa-socks"></i>
+                Thời trang xanh</h3>
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tt1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Combo vải dệt nhiều màu 100% hữu cơ </div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tt2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Set áo quần cho da nhạy cảm của bé</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">199.000
+                      
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tt3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Túi vải thời trang họa tiết hoa </div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tt4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Sợi chỉ dệt làm hoàn toàn từ tre</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                      <div class="body-list-products-item-price-unit">đ</div> 
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/tt5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Túi vải họa tiết đơn giản, hiện đại </div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                    
+                    <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+        
+            <!-- Hàng sản phẩm thứ bảy -->
+            <div class="home-body-product-item">
+              <h3 class="home-body-product-item-title" style="color: white;">
+                <i class="fa-solid fa-carrot" ></i>
+                Hoa quả hữu cơ</h3>
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/hq1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Bơ organic lấy trực tiếp từ vườn</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/hq2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Kiwi tươi hữu cơ sạch 100%</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">199.000
+                      
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/hq3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Cà chua hữu cơ không phân bón hóa học</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/hq4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Dưa lưới hái trực tiếp tại vườn</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                      <div class="body-list-products-item-price-unit">đ</div> 
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/hq5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Xoài sạch không thuốc trừ sâu</div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                    
+                    <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+
+            <!-- Hàng sản phẩm thứ tám -->
+            <div class="home-body-product-item" style="background-color: #f5f5f5;">
+              <h3 class="home-body-product-item-title" style="color: green;">
+                <i class="fa-solid fa-recycle"></i>
+                Đồ tái chế</h3>
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tc1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Ly giấy tái chế từ bã vỏ dừa</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">19.000
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tc2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Combo chậu cây làm từ xơ mướp</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">199.000
+                      
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tc3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Vỉ 5, 7, 10 trứng làm từ tre</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/tc4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Túi đựng ly 20x25 đan từ cối</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                      <div class="body-list-products-item-price-unit">đ</div> 
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/tc5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Chậu trồng cây tái chế từ bả trấu</div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                    
+                    <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+           
+            <!-- Hàng sản phẩm thứ chín -->
+            <div class="home-body-product-item">
+              <h3 class="home-body-product-item-title" style="color: white;">
+                <i class="fa-solid fa-mug-hot"></i>
+                Đồ uống hữu cơ</h3>
+                <div class="home-body-product-item-frame">
+                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
+                  <div class="body-list-product-item ">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/nuoc1.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Nước ép NATLULIST 100% làm từ táo hữu cơ</div>
+                    <div class="body-list-product-item-discount">15%</div>
+                    <div class="body-list-products-item-price">199.000
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                    
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/nuoc2.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Nước ép Squeeze 100% làm từ táo hữu cơ</div>          
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">199.000
+                      
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/nuoc3.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Nước cốt dừa tươi đóng hộp (Eco milk)</div>
+                    <div class="body-list-product-item-discount">20%</div>
+                    <div class="body-list-products-item-price">160.200 
+                      <div class="body-list-products-item-price-unit">đ</div>
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                    <div class="body-list-products-item-img">
+                        <img src="../image/nuoc4.jpg" alt="" class="product-list-img">
+                    </div>
+                    <div class="body-list-product-item-title">Nước ép lựu đóng chai Captain</div>
+                    <div class="body-list-product-item-discount">32%</div>
+                    <div class="body-list-products-item-price">200.400           
+                      <div class="body-list-products-item-price-unit">đ</div> 
+                      <i class="fa-solid fa-tag"></i>
+                    </div>
+                  </div>
+            
+                  <div class="body-list-product-item">
+                  <div class="body-list-products-item-img">
+                      <img src="../image/nuoc5.jpg" alt="" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title">Sữa bò đóng hộp tiệt trùng </div>
+                  <div class="body-list-product-item-discount">25%</div>
+                  <div class="body-list-products-item-price">197.000
+                    
+                    <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <script type="text/javascript" src="../function.js">
+      
+    </script>
+
+</body>
+<footer>
+  <div class="footer">
+    <div class="footer-logo">
+      <h1 class="footer-logo-text">ECOLINK FOR LIFE</h1>
+    </div>
+    <div class="footer-infor">
+      <ul class="footer-infor-list">
+        <li class="footer-infor-item">About us</li>
+        <li class="footer-infor-item">News</li>
+        <li class="footer-infor-item">Official Store</li>
+        <li class="footer-infor-item">Company</li>
+        <li class="footer-infor-item">Careers</li>
+      </ul>
+    </div>
+  
+    <div class="footer-infor">
+      <ul class="footer-infor-list">
+        <li class="footer-infor-item">Get Help</li>
+        <li class="footer-infor-item">FAQ</li>
+        <li class="footer-infor-item">Shipping</li>
+        <li class="footer-infor-item">Payment</li>
+        <li class="footer-infor-item">Returns</li>
+        <li class="footer-infor-item">Contact Us</li>     
+      </ul>
+    </div>
+    <div class="footer-infor">
+      <ul class="footer-infor-list">
+        <li class="footer-infor-item">Follow Us</li>
+        <li class="footer-infor-item">
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-youtube"></i>
+          <i class="fa-brands fa-twitter"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-year-guide">
+    <a href="" class="footer-year-guide-item">Guide</a>
+    <a href="" class="footer-year-guide-item">Terms & Conditions</a>
+    <a href="" class="footer-year-guide-item">Privacy Policy</a>
+  </div>
+  <div class="footer-year">
+    <i class="fa-regular fa-circle-check"></i>
+    2024 ECOLINK. All Rights Reserved
+  </div>
+</footer>

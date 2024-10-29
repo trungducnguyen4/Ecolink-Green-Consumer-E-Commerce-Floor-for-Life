@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 4000;
 
 // set template engine
 app.set('view engine', 'ejs');
-app.use(express.static('uploads'));
+app.use(express.static('public'));
+
 app.use("", require('./routes/routes'));
 
 // create connection to database
@@ -16,8 +17,8 @@ const sqlConfig = {
     server: 'localhost',
     port: 1433, // Specify the port if not the default
     database: 'SPXanh',
-    user: 'root',
-    password: '',
+    user: 'trungduc1407',
+    password: '14072004az',
     options: {
         encrypt: true,
         trustServerCertificate: true
