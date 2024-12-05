@@ -6,13 +6,14 @@ const { use } = require('./routes/routes');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+
 // set template engine
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.use("", require('./routes/routes'));
 
-// create connection to database
+// create connection to database 
 const sqlConfig = {
     server: 'localhost',
     port: 1433, // Specify the port if not the default
@@ -26,6 +27,8 @@ const sqlConfig = {
 };
 
 
+
+
 sql.connect(sqlConfig).then(() => {
     console.log('Connected to SQL Server database:', process.env.SQL_DATABASE);
 }).catch((err) => {
@@ -36,3 +39,5 @@ sql.connect(sqlConfig).then(() => {
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+

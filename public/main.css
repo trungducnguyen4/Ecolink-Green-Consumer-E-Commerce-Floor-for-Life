@@ -305,7 +305,7 @@ input:focus {
 .navigation-list {
     display: flex;
     list-style-type: none;
-    justify-content:space-between; 
+    justify-content:space-evenly; 
     line-height: 38px;
 
 }
@@ -318,6 +318,8 @@ input:focus {
 }
 .navigation-item:hover {
     cursor: pointer;
+    text-decoration: none;
+    color: #07583f;
 }
 .navigation-item:first-child {
     border-top-left-radius: 10px;
@@ -1064,7 +1066,7 @@ input:focus {
     border-bottom: 1.5px solid #b7b6b6;
     height: 80px;
     background-color: #ffffff;
-    z-index: 0 ;
+    z-index: 1 ;
     line-height: 100px;
     width: 100%;
     padding-top: 8px;
@@ -1086,7 +1088,7 @@ input:focus {
 .news-body {
     position: relative;
     padding-top: 200px;
-    z-index: -1;
+    z-index: 0;
     margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 40px;
