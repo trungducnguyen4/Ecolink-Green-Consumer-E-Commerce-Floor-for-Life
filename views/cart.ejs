@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./cart.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
+    <title>Cart</title>
+</head>
+<body>
+        <!-- HEADER -->
+        <div class="header">
+            <!-- Header-Logo -->           
+            <img src="./image/logo.jpg" alt="" class="logo-img">
+            <h4 class="header-logo-text">Giỏ hàng</h3>
+            
+            <div class="header-search">
+                
+            <!-- Header-Services -->
+            <div class="header-service">
+                <div class="header-service-item">
+                <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
+                <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
+                </div>
+    
+                <div class="header-service-item">
+                <i class="fa-solid fa-question"></i>
+                <a class="active" href="#home">Hỗ trợ</a>
+                </div>
+    
+                <div class="header-service-item">
+                <i class="fa-regular fa-bell"></i>
+                <a href="#about">Thông báo</a>
+                </div>
+                <div class="header-service-item">
+                <i class="fa-solid fa-store"></i>
+                <a class="active" href="#home">Kênh người bán</a>
+                </div>
+            </div>  
+            </div>         
+        </div>
+        <!-- BODY -->
+        <div class="wrapper">
+            <div class="cart-header">
+                <ul class="cart-header-list row">
+                    <li class="cart-header-item col-lg-5">
+                        <input type="checkbox">
+                        <p class="cart-header-item-product"> Sản phẩm</p>
+                       
+                    </li>
+                    <li class="cart-header-item col-lg-2">Đơn giá</li>
+                    <li class="cart-header-item col-lg-2">Số lượng</li>
+                    <li class="cart-header-item col-lg-2">Thành tiền</li>
+                    <li class="cart-header-item col-lg-1">Thao tác</li>
+                </ul>
+            </div>
+
+            <div class="cart-body">
+                <div class="cart-body-item row">
+                    <div class="cart-body-shopName">
+                        <input type="checkbox">
+                        <div class="cart-body-shopName-title">ECOLINK FOR LIFE</div>
+                    </div>
+                    <div class="cart-body-infor-wrap row">
+                        <div class="cart-body-infor col-lg-5">
+                            <input type="checkbox">
+                            <img src="./image/sp1.jpg" alt="" class="cart-body-img">
+                            <div class="cart-body-nameProduct">ÁO THUN CROPTOP PHỐI BÈO</div>
+                            <div class="cart-body-typeProduct">Đen, Free</div>
+                        </div>
+                        <div class="cart-body-priceProduct col-lg-2">44.000</div>
+                        <div class="cart-quantityProduct col-lg-2">1</div>
+                        <div class="cart-body-totalCostProduct col-lg-2">44.000</div>
+                        <div class="cart-body-delete col-lg-1">Xóa</div>
+                    </div>
+                    
+                </div>
+                <div class="cart-body-item row">
+                    <div class="cart-body-shopName">
+                        <input type="checkbox">
+                        <div class="cart-body-shopName-title">ECOLINK FOR LIFE</div>
+                    </div>
+                    <div class="cart-body-infor-wrap row">
+                        <div class="cart-body-infor col-lg-5">
+                            <input type="checkbox">
+                            <img src="./image/sp1.jpg" alt="" class="cart-body-img">
+                            <div class="cart-body-nameProduct">ÁO THUN CROPTOP PHỐI BÈO</div>
+                            <div class="cart-body-typeProduct">Đen, Free</div>
+                        </div>
+                        <div class="cart-body-priceProduct col-lg-2">44.000</div>
+                        <div class="cart-quantityProduct col-lg-2">1</div>
+                        <div class="cart-body-totalCostProduct col-lg-2">44.000</div>
+                        <div class="cart-body-delete col-lg-1">Xóa</div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- TOTAL COST -->
+            <div class="total-cost-wrap">
+               <div class="total-cost-wrap row">
+                <div class="total-cost-selectAll col-lg-6">
+                    <input type="checkbox">
+                    <p class="total-cost-text">Chọn tất cả</p>
+                </div>
+                <div class="total-cost-total-price col-lg-3">
+                    <div class="total-cost-text">Tổng thanh toán:</div>
+                    <div class="total-cost-price">84.000</div>
+                </div>
+                <div class="total-cost-buy-order col-lg-3">
+                    <button class="btn-order">Mua Hàng</button>
+                </div>
+               </div>
+            
+            </div>
+        </div>
+
+        
+</body>
+</html>

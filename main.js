@@ -1,43 +1,36 @@
+
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const sql = require('mssql');
-const { use } = require('./routes/routes');
+const routes = require('./routes/routes');
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 
-// set template engine
+// Import và kết nối cơ sở dữ liệu
+const db = require('./db'); // Đảm bảo kết nối được thiết lập
+
+// Cấu hình view engine
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-app.use("", require('./routes/routes'));
+// Middleware để xử lý JSON và URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// create connection to database 
-const sqlConfig = {
-    server: 'localhost',
-    port: 1433, // Specify the port if not the default
-    database: 'SPXanh',
-    user: 'trungduc1407',
-    password: '14072004az',
-    options: {
-        encrypt: true,
-        trustServerCertificate: true
-    }
-};
+// Sử dụng các route đã định nghĩa
+app.use('/', routes);
 
 
-
-
-sql.connect(sqlConfig).then(() => {
-    console.log('Connected to SQL Server database:', process.env.SQL_DATABASE);
-}).catch((err) => {
-    console.error('SQL Server connection error:', err);
-});
-
-//route prefix
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-});
-
-
+// Khởi động server sau khi kết nối DB thành công
+db.poolPromise
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server is running at http://localhost:${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error('Failed to start server:', err);
+    });

@@ -1,0 +1,155 @@
+.wrapper {
+    background-color: #f5f5f5;
+    padding-top: 100px;
+    height: 1000px;
+}
+.order-address {
+    background-color: white;
+    margin-left:30px;
+    margin-right: 30px;
+    margin-top: 20px ;
+}
+
+.order-address-header {
+    display: flex;
+    align-items: center; /* Căn giữa các phần tử con theo chiều dọc */
+    padding-top: 15px;
+}
+.order-address-header i {
+    color: #007b59;
+    margin-right: 10px;
+   margin-left: 30px;
+}
+
+.order-address-title {
+    color: #007b59;
+    font-size: 20px;
+}
+
+.order-address-infor {
+    margin-left: 30px;
+    font-size: 16px;
+    display: flex;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+
+.order-address-infor-name-phomeNumber {
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.order-product {
+    margin-top: 10px;
+    background-color: white;
+    margin-left:30px;
+    margin-right: 30px;
+}
+.order-product-header {
+    border-bottom: 1px solid #007b59;
+}
+.order-product-header-list {
+    display: flex;
+    list-style-type: none;
+    padding-top: 30px;
+    margin-left: 20px;
+}
+.order-product-header-item:first-child {
+    font-size: 18px;
+    margin-left: 20px;
+    color: black; /* Màu đen cho item đầu tiên */
+}
+
+.order-product-header-item {
+    color: #a0a0a0; /* Màu xám cho các item còn lại */
+}
+.order-product-body {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+.order-product-body-item {
+    align-items: center;
+    height: 60px;
+    line-height: 60px;
+}
+.order-product-body-infor {
+    display: flex;
+}
+.order-product-body-img {
+    
+    width: 50px;
+    height: 50px;
+}
+.order-product-body-nameProduct {
+    margin-left: 10px;
+}
+.order-product-body-typeProduct {
+    margin-left: 20px;
+    color: #a0a0a0;
+}
+
+.order-payment {
+    margin-top: 10px;
+    background-color: white;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    border-bottom: 1px solid #a0a0a0;
+}
+.order-payment-header {
+
+    display: flex;
+}
+.order-payment-header-title {
+    font-size: 18px;
+}
+
+.order-payment-header-payType {
+    display: flex;
+}
+
+.order-payment-header-creditType {
+    width: 140px;
+    height: 30px;
+    border: 1px solid #007b59;
+    margin-left: 10px;
+    color: #007b59;
+    text-align: center;
+    line-height: 30px;
+}
+.order-payment-header-momoType {
+    width: 80px;
+    height: 30px;
+    border: 1px solid #007b59;
+    margin-left: 10px;
+    color: #007b59;
+    text-align: center;
+    line-height: 30px;
+}
+.order-payment-header-cashType {
+    width: 80px;
+    height: 30px;
+    border: 1px solid #007b59;
+    margin-left: 10px;
+    color: #007b59;
+    text-align: center;
+    line-height: 30px;
+}
+.order-buy {
+    background-color: white;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.order-buy-btn {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 960px;
+    background-color: #007b59;
+    color: white;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 2px;
+}
