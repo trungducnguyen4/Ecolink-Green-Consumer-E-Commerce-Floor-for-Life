@@ -9,7 +9,7 @@ async function getProducts(page = 1, pageSize = 18) {
 
         // Truy vấn sản phẩm với OFFSET và LIMIT (FETCH NEXT)
         const query = `
-            SELECT MASP, TENSP, GIABAN, HINH
+            SELECT MASP, TENSP, DGBanMacDinh, HinhChinh
             FROM SANPHAM
             ORDER BY MASP
             OFFSET ${offset} ROWS FETCH NEXT ${pageSize} ROWS ONLY;

@@ -1,899 +1,163 @@
-/*==============================================================*/
-/* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     28/10/2024 1:59:26 PM                        */
-/*==============================================================*/
-
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('BAIVIETNGUOIBAN') and o.name = 'FK_BAIVIETN_TAO_NGUOIBAN')
-alter table BAIVIETNGUOIBAN
-   drop constraint FK_BAIVIETN_TAO_NGUOIBAN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('BINHLUAN') and o.name = 'FK_BINHLUAN_BINHLUAN_BAIVIETN')
-alter table BINHLUAN
-   drop constraint FK_BINHLUAN_BINHLUAN_BAIVIETN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('BINHLUAN') and o.name = 'FK_BINHLUAN_BINHLUAN2_NGUOIDUN')
-alter table BINHLUAN
-   drop constraint FK_BINHLUAN_BINHLUAN2_NGUOIDUN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('CTDH') and o.name = 'FK_CTDH_CTDH_DONHANG')
-alter table CTDH
-   drop constraint FK_CTDH_CTDH_DONHANG
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('CTDH') and o.name = 'FK_CTDH_CTDH2_SANPHAM')
-alter table CTDH
-   drop constraint FK_CTDH_CTDH2_SANPHAM
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('CT_DDX') and o.name = 'FK_CT_DDX_CT_DDX_SANPHAM')
-alter table CT_DDX
-   drop constraint FK_CT_DDX_CT_DDX_SANPHAM
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('CT_DDX') and o.name = 'FK_CT_DDX_CT_DDX2_DACDIEMX')
-alter table CT_DDX
-   drop constraint FK_CT_DDX_CT_DDX2_DACDIEMX
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DANHGIASANPHAM') and o.name = 'FK_DANHGIAS_DANHGIASA_NGUOIDUN')
-alter table DANHGIASANPHAM
-   drop constraint FK_DANHGIAS_DANHGIASA_NGUOIDUN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DANHGIASANPHAM') and o.name = 'FK_DANHGIAS_DANHGIASA_SANPHAM')
-alter table DANHGIASANPHAM
-   drop constraint FK_DANHGIAS_DANHGIASA_SANPHAM
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DONHANG') and o.name = 'FK_DONHANG_CHO_PHUONGTH')
-alter table DONHANG
-   drop constraint FK_DONHANG_CHO_PHUONGTH
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DONHANG') and o.name = 'FK_DONHANG_CUA_PHUONGTH')
-alter table DONHANG
-   drop constraint FK_DONHANG_CUA_PHUONGTH
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DONHANG') and o.name = 'FK_DONHANG_MUA_NGUOIDUN')
-alter table DONHANG
-   drop constraint FK_DONHANG_MUA_NGUOIDUN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('GIOHANG') and o.name = 'FK_GIOHANG_CO_NGUOIDUN')
-alter table GIOHANG
-   drop constraint FK_GIOHANG_CO_NGUOIDUN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('KHUYENMAI') and o.name = 'FK_KHUYENMA_TAO_RA_NGUOIBAN')
-alter table KHUYENMAI
-   drop constraint FK_KHUYENMA_TAO_RA_NGUOIBAN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('NGUOIBAN') and o.name = 'FK_NGUOIBAN_LA2_NGUOIDUN')
-alter table NGUOIBAN
-   drop constraint FK_NGUOIBAN_LA2_NGUOIDUN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('NGUOIDUNG') and o.name = 'FK_NGUOIDUN_LA_NGUOIBAN')
-alter table NGUOIDUNG
-   drop constraint FK_NGUOIDUN_LA_NGUOIBAN
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SANPHAM') and o.name = 'FK_SANPHAM_THUOC_NHOMSANP')
-alter table SANPHAM
-   drop constraint FK_SANPHAM_THUOC_NHOMSANP
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SANPHAM') and o.name = 'FK_SANPHAM_VE_KHUYENMA')
-alter table SANPHAM
-   drop constraint FK_SANPHAM_VE_KHUYENMA
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SANPHAMTRONGGIO') and o.name = 'FK_SANPHAMT_SANPHAMTR_GIOHANG')
-alter table SANPHAMTRONGGIO
-   drop constraint FK_SANPHAMT_SANPHAMTR_GIOHANG
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SANPHAMTRONGGIO') and o.name = 'FK_SANPHAMT_SANPHAMTR_SANPHAM')
-alter table SANPHAMTRONGGIO
-   drop constraint FK_SANPHAMT_SANPHAMTR_SANPHAM
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('BAIVIETNGUOIBAN')
-            and   name  = 'TAO_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index BAIVIETNGUOIBAN.TAO_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('BAIVIETNGUOIBAN')
-            and   type = 'U')
-   drop table BAIVIETNGUOIBAN
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('BINHLUAN')
-            and   name  = 'BINHLUAN_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index BINHLUAN.BINHLUAN_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('BINHLUAN')
-            and   name  = 'BINHLUAN2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index BINHLUAN.BINHLUAN2_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('BINHLUAN')
-            and   type = 'U')
-   drop table BINHLUAN
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('CTDH')
-            and   name  = 'CTDH_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index CTDH.CTDH_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('CTDH')
-            and   name  = 'CTDH2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index CTDH.CTDH2_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('CTDH')
-            and   type = 'U')
-   drop table CTDH
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('CT_DDX')
-            and   name  = 'CT_DDX_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index CT_DDX.CT_DDX_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('CT_DDX')
-            and   name  = 'CT_DDX2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index CT_DDX.CT_DDX2_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('CT_DDX')
-            and   type = 'U')
-   drop table CT_DDX
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('DACDIEMXANH')
-            and   type = 'U')
-   drop table DACDIEMXANH
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('DANHGIASANPHAM')
-            and   name  = 'DANHGIASANPHAM_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index DANHGIASANPHAM.DANHGIASANPHAM_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('DANHGIASANPHAM')
-            and   name  = 'DANHGIASANPHAM2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index DANHGIASANPHAM.DANHGIASANPHAM2_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('DANHGIASANPHAM')
-            and   type = 'U')
-   drop table DANHGIASANPHAM
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('DONHANG')
-            and   name  = 'CHO_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index DONHANG.CHO_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('DONHANG')
-            and   name  = 'CUA_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index DONHANG.CUA_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('DONHANG')
-            and   name  = 'MUA_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index DONHANG.MUA_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('DONHANG')
-            and   type = 'U')
-   drop table DONHANG
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('GIOHANG')
-            and   type = 'U')
-   drop table GIOHANG
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('KHUYENMAI')
-            and   name  = 'TAO_RA_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index KHUYENMAI.TAO_RA_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('KHUYENMAI')
-            and   type = 'U')
-   drop table KHUYENMAI
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('NGUOIBAN')
-            and   name  = 'LA2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index NGUOIBAN.LA2_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('NGUOIBAN')
-            and   type = 'U')
-   drop table NGUOIBAN
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('NGUOIDUNG')
-            and   name  = 'LA_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index NGUOIDUNG.LA_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('NGUOIDUNG')
-            and   type = 'U')
-   drop table NGUOIDUNG
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('NHOMSANPHAM')
-            and   type = 'U')
-   drop table NHOMSANPHAM
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('PHUONGTHUCTHANHTOAN')
-            and   type = 'U')
-   drop table PHUONGTHUCTHANHTOAN
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('PHUONGTHUCVANCHUYEN')
-            and   type = 'U')
-   drop table PHUONGTHUCVANCHUYEN
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('SANPHAM')
-            and   name  = 'VE_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index SANPHAM.VE_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('SANPHAM')
-            and   name  = 'THUOC_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index SANPHAM.THUOC_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('SANPHAM')
-            and   type = 'U')
-   drop table SANPHAM
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('SANPHAMTRONGGIO')
-            and   name  = 'SANPHAMTRONGGIO_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index SANPHAMTRONGGIO.SANPHAMTRONGGIO_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('SANPHAMTRONGGIO')
-            and   name  = 'SANPHAMTRONGGIO2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index SANPHAMTRONGGIO.SANPHAMTRONGGIO2_FK
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('SANPHAMTRONGGIO')
-            and   type = 'U')
-   drop table SANPHAMTRONGGIO
-go
-
-/*==============================================================*/
-/* Table: BAIVIETNGUOIBAN                                       */
-/*==============================================================*/
-create table BAIVIETNGUOIBAN (
-   MABAIVIET            nvarchar(20)         not null,
-   MANGUOIBAN           nvarchar(20)         not null,
-   TIEUDE               nvarchar(200)        null,
-   NOIDUNG              text                 null,
-   NGAYDANG             datetime             null,
-   HIENTHI              bit                  null,
-   constraint PK_BAIVIETNGUOIBAN primary key nonclustered (MABAIVIET)
-)
-go
-
-/*==============================================================*/
-/* Index: TAO_FK                                                */
-/*==============================================================*/
-create index TAO_FK on BAIVIETNGUOIBAN (
-MANGUOIBAN ASC
-)
-go
-
-/*==============================================================*/
-/* Table: BINHLUAN                                              */
-/*==============================================================*/
-create table BINHLUAN (
-   MAUSER               nvarchar(20)         not null,
-   MABAIVIET            nvarchar(20)         not null,
-   NOIDUNG              text                 null,
-   constraint PK_BINHLUAN primary key nonclustered (MAUSER, MABAIVIET)
-)
-go
-
-/*==============================================================*/
-/* Index: BINHLUAN2_FK                                          */
-/*==============================================================*/
-create index BINHLUAN2_FK on BINHLUAN (
-MAUSER ASC
-)
-go
-
-/*==============================================================*/
-/* Index: BINHLUAN_FK                                           */
-/*==============================================================*/
-create index BINHLUAN_FK on BINHLUAN (
-MABAIVIET ASC
-)
-go
-
-/*==============================================================*/
-/* Table: CTDH                                                  */
-/*==============================================================*/
-create table CTDH (
-   MASP                 nvarchar(20)         not null,
-   MADH                 nvarchar(20)         not null,
-   SOLUONGSP            int                  null,
-   constraint PK_CTDH primary key nonclustered (MASP, MADH)
-)
-go
-
-/*==============================================================*/
-/* Index: CTDH2_FK                                              */
-/*==============================================================*/
-create index CTDH2_FK on CTDH (
-MASP ASC
-)
-go
-
-/*==============================================================*/
-/* Index: CTDH_FK                                               */
-/*==============================================================*/
-create index CTDH_FK on CTDH (
-MADH ASC
-)
-go
-
-/*==============================================================*/
-/* Table: CT_DDX                                                */
-/*==============================================================*/
-create table CT_DDX (
-   MADDX                nchar(20)            not null,
-   MASP                 nvarchar(20)         not null,
-   HINHDDX              nvarchar(300)        null,
-   COQUANCAP            nvarchar(150)        null,
-   constraint PK_CT_DDX primary key nonclustered (MADDX, MASP)
-)
-go
-
-/*==============================================================*/
-/* Index: CT_DDX2_FK                                            */
-/*==============================================================*/
-create index CT_DDX2_FK on CT_DDX (
-MADDX ASC
-)
-go
-
-/*==============================================================*/
-/* Index: CT_DDX_FK                                             */
-/*==============================================================*/
-create index CT_DDX_FK on CT_DDX (
-MASP ASC
-)
-go
-
-/*==============================================================*/
-/* Table: DACDIEMXANH                                           */
-/*==============================================================*/
-create table DACDIEMXANH (
-   MADDX                nchar(20)            not null,
-   TENDDX               nvarchar(100)        null,
-   MOTADDX              nvarchar(200)        null,
-   constraint PK_DACDIEMXANH primary key nonclustered (MADDX)
-)
-go
-
-/*==============================================================*/
-/* Table: DANHGIASANPHAM                                        */
-/*==============================================================*/
-create table DANHGIASANPHAM (
-   MASP                 nvarchar(20)         not null,
-   MAUSER               nvarchar(20)         not null,
-   DIEMDANHGIA          int                  null,
-   NDDANHGIA            text                 null,
-   NGAYDANHGIA          datetime             null,
-   HINHDANHGIA          nvarchar(300)        null,
-   VIDEODANHGIA         nvarchar(300)        null,
-   constraint PK_DANHGIASANPHAM primary key nonclustered (MASP, MAUSER)
-)
-go
-
-/*==============================================================*/
-/* Index: DANHGIASANPHAM2_FK                                    */
-/*==============================================================*/
-create index DANHGIASANPHAM2_FK on DANHGIASANPHAM (
-MASP ASC
-)
-go
-
-/*==============================================================*/
-/* Index: DANHGIASANPHAM_FK                                     */
-/*==============================================================*/
-create index DANHGIASANPHAM_FK on DANHGIASANPHAM (
-MAUSER ASC
-)
-go
-
-/*==============================================================*/
-/* Table: DONHANG                                               */
-/*==============================================================*/
-create table DONHANG (
-   MADH                 nvarchar(20)         not null,
-   MAUSER               nvarchar(20)         not null,
-   MAPTVC               nvarchar(20)         not null,
-   MAPTTT               nchar(20)            not null,
-   NGAYDATHANG          datetime             null,
-   TONGTIEN             int                  null,
-   TRANGTHAIDH          nvarchar(30)         null,
-   constraint PK_DONHANG primary key nonclustered (MADH)
-)
-go
-
-/*==============================================================*/
-/* Index: MUA_FK                                                */
-/*==============================================================*/
-create index MUA_FK on DONHANG (
-MAUSER ASC
-)
-go
-
-/*==============================================================*/
-/* Index: CUA_FK                                                */
-/*==============================================================*/
-create index CUA_FK on DONHANG (
-MAPTVC ASC
-)
-go
-
-/*==============================================================*/
-/* Index: CHO_FK                                                */
-/*==============================================================*/
-create index CHO_FK on DONHANG (
-MAPTTT ASC
-)
-go
-
-/*==============================================================*/
-/* Table: GIOHANG                                               */
-/*==============================================================*/
-create table GIOHANG (
-   MAUSER               nvarchar(20)         not null,
-   MAGIOHANG            nvarchar(20)         not null,
-   NGAYTAOGIO           datetime             null,
-   constraint PK_GIOHANG primary key nonclustered (MAUSER, MAGIOHANG)
-)
-go
-
-/*==============================================================*/
-/* Table: KHUYENMAI                                             */
-/*==============================================================*/
-create table KHUYENMAI (
-   MAKM                 nvarchar(20)         not null,
-   MANGUOIBAN           nvarchar(20)         not null,
-   TENKM                nvarchar(50)         null,
-   NOIDUNGKM            nvarchar(100)        null,
-   GIAMGIA              float                null,
-   TGIAKM               float                null,
-   DKAPDUNG             nvarchar(400)        null,
-   NGAYBATDAU           datetime             null,
-   NGAYKETTHUC          datetime             null,
-   constraint PK_KHUYENMAI primary key nonclustered (MAKM)
-)
-go
-
-/*==============================================================*/
-/* Index: TAO_RA_FK                                             */
-/*==============================================================*/
-create index TAO_RA_FK on KHUYENMAI (
-MANGUOIBAN ASC
-)
-go
-
-/*==============================================================*/
-/* Table: NGUOIBAN                                              */
-/*==============================================================*/
-create table NGUOIBAN (
-   MANGUOIBAN           nvarchar(20)         not null,
-   MAUSER               nvarchar(20)         not null,
-   TENCUAHANG           nvarchar(100)        null,
-   MOTACH               text                 null,
-   NGAYTAOCH            datetime             null,
-   TTCUAHANG            nvarchar(50)         null,
-   constraint PK_NGUOIBAN primary key nonclustered (MANGUOIBAN)
-)
-go
-
-/*==============================================================*/
-/* Index: LA2_FK                                                */
-/*==============================================================*/
-create index LA2_FK on NGUOIBAN (
-MAUSER ASC
-)
-go
-
-/*==============================================================*/
-/* Table: NGUOIDUNG                                             */
-/*==============================================================*/
-create table NGUOIDUNG (
-   MAUSER               nvarchar(20)         not null,
-   MANGUOIBAN           nvarchar(20)         null,
-   HOUSER               nvarchar(50)         null,
-   TENUSER              nvarchar(30)         null,
-   TENDANGNHAP          nvarchar(50)         null,
-   MATKHAU              nvarchar(20)         null,
-   NGUOIMUA             bit                  null,
-   NGAYTAO              datetime             null,
-   TTUSER               nvarchar(50)         null,
-   SODIENTHOAI          nvarchar(15)         null,
-   DIACHI               nvarchar(150)        null,
-   EMAIL                nvarchar(100)        null,
-   constraint PK_NGUOIDUNG primary key nonclustered (MAUSER)
-)
-go
-
-/*==============================================================*/
-/* Index: LA_FK                                                 */
-/*==============================================================*/
-create index LA_FK on NGUOIDUNG (
-MANGUOIBAN ASC
-)
-go
-
-/*==============================================================*/
-/* Table: NHOMSANPHAM                                           */
-/*==============================================================*/
-create table NHOMSANPHAM (
-   MANHOMSP             nvarchar(20)         not null,
-   TENNHOMSP            nvarchar(100)        null,
-   MOTA                 text                 null,
-   constraint PK_NHOMSANPHAM primary key nonclustered (MANHOMSP)
-)
-go
-
-/*==============================================================*/
-/* Table: PHUONGTHUCTHANHTOAN                                   */
-/*==============================================================*/
-create table PHUONGTHUCTHANHTOAN (
-   MAPTTT               nchar(20)            not null,
-   TENPTTT              nvarchar(100)        null,
-   MOTAPTTT             nvarchar(300)        null,
-   constraint PK_PHUONGTHUCTHANHTOAN primary key nonclustered (MAPTTT)
-)
-go
-
-/*==============================================================*/
-/* Table: PHUONGTHUCVANCHUYEN                                   */
-/*==============================================================*/
-create table PHUONGTHUCVANCHUYEN (
-   MAPTVC               nvarchar(20)         not null,
-   TENPTVC              nvarchar(50)         null,
-   PHIVC                int                  null,
-   THOIGIANGH           nvarchar(50)         null,
-   constraint PK_PHUONGTHUCVANCHUYEN primary key nonclustered (MAPTVC)
-)
-go
-
-/*==============================================================*/
-/* Table: SANPHAM                                               */
-/*==============================================================*/
-create table SANPHAM (
-   MASP                 nvarchar(20)         not null,
-   MANHOMSP             nvarchar(20)         not null,
-   MAKM                 nvarchar(20)         not null,
-   TENSP                nvarchar(100)        null,
-   XUATXU               text                 null,
-   DGBAN                int                  null,
-   SOLUONGTON           int                  null,
-   CONHANG              bit                  null,
-   NSX                  datetime             null,
-   HSD                  datetime             null,
-   MOTACH               text                 null,
-   HINH                 nvarchar(100)        null,
-   constraint PK_SANPHAM primary key nonclustered (MASP)
-)
-go
-
-/*==============================================================*/
-/* Index: THUOC_FK                                              */
-/*==============================================================*/
-create index THUOC_FK on SANPHAM (
-MANHOMSP ASC
-)
-go
-
-/*==============================================================*/
-/* Index: VE_FK                                                 */
-/*==============================================================*/
-create index VE_FK on SANPHAM (
-MAKM ASC
-)
-go
-
-/*==============================================================*/
-/* Table: SANPHAMTRONGGIO                                       */
-/*==============================================================*/
-create table SANPHAMTRONGGIO (
-   MASP                 nvarchar(20)         not null,
-   MAUSER               nvarchar(20)         not null,
-   MAGIOHANG            nvarchar(20)         not null,
-   SOLUONGSPTRONGGIO    int                  null,
-   constraint PK_SANPHAMTRONGGIO primary key nonclustered (MASP, MAUSER, MAGIOHANG)
-)
-go
-
-/*==============================================================*/
-/* Index: SANPHAMTRONGGIO2_FK                                   */
-/*==============================================================*/
-create index SANPHAMTRONGGIO2_FK on SANPHAMTRONGGIO (
-MASP ASC
-)
-go
-
-/*==============================================================*/
-/* Index: SANPHAMTRONGGIO_FK                                    */
-/*==============================================================*/
-create index SANPHAMTRONGGIO_FK on SANPHAMTRONGGIO (
-MAUSER ASC,
-MAGIOHANG ASC
-)
-go
-
-alter table BAIVIETNGUOIBAN
-   add constraint FK_BAIVIETN_TAO_NGUOIBAN foreign key (MANGUOIBAN)
-      references NGUOIBAN (MANGUOIBAN)
-go
-
-alter table BINHLUAN
-   add constraint FK_BINHLUAN_BINHLUAN_BAIVIETN foreign key (MABAIVIET)
-      references BAIVIETNGUOIBAN (MABAIVIET)
-go
-
-alter table BINHLUAN
-   add constraint FK_BINHLUAN_BINHLUAN2_NGUOIDUN foreign key (MAUSER)
-      references NGUOIDUNG (MAUSER)
-go
-
-alter table CTDH
-   add constraint FK_CTDH_CTDH_DONHANG foreign key (MADH)
-      references DONHANG (MADH)
-go
-
-alter table CTDH
-   add constraint FK_CTDH_CTDH2_SANPHAM foreign key (MASP)
-      references SANPHAM (MASP)
-go
-
-alter table CT_DDX
-   add constraint FK_CT_DDX_CT_DDX_SANPHAM foreign key (MASP)
-      references SANPHAM (MASP)
-go
-
-alter table CT_DDX
-   add constraint FK_CT_DDX_CT_DDX2_DACDIEMX foreign key (MADDX)
-      references DACDIEMXANH (MADDX)
-go
-
-alter table DANHGIASANPHAM
-   add constraint FK_DANHGIAS_DANHGIASA_NGUOIDUN foreign key (MAUSER)
-      references NGUOIDUNG (MAUSER)
-go
-
-alter table DANHGIASANPHAM
-   add constraint FK_DANHGIAS_DANHGIASA_SANPHAM foreign key (MASP)
-      references SANPHAM (MASP)
-go
-
-alter table DONHANG
-   add constraint FK_DONHANG_CHO_PHUONGTH foreign key (MAPTTT)
-      references PHUONGTHUCTHANHTOAN (MAPTTT)
-go
-
-alter table DONHANG
-   add constraint FK_DONHANG_CUA_PHUONGTH foreign key (MAPTVC)
-      references PHUONGTHUCVANCHUYEN (MAPTVC)
-go
-
-alter table DONHANG
-   add constraint FK_DONHANG_MUA_NGUOIDUN foreign key (MAUSER)
-      references NGUOIDUNG (MAUSER)
-go
-
-alter table GIOHANG
-   add constraint FK_GIOHANG_CO_NGUOIDUN foreign key (MAUSER)
-      references NGUOIDUNG (MAUSER)
-go
-
-alter table KHUYENMAI
-   add constraint FK_KHUYENMA_TAO_RA_NGUOIBAN foreign key (MANGUOIBAN)
-      references NGUOIBAN (MANGUOIBAN)
-go
-
-alter table NGUOIBAN
-   add constraint FK_NGUOIBAN_LA2_NGUOIDUN foreign key (MAUSER)
-      references NGUOIDUNG (MAUSER)
-go
-
-alter table NGUOIDUNG
-   add constraint FK_NGUOIDUN_LA_NGUOIBAN foreign key (MANGUOIBAN)
-      references NGUOIBAN (MANGUOIBAN)
-go
-
-alter table SANPHAM
-   add constraint FK_SANPHAM_THUOC_NHOMSANP foreign key (MANHOMSP)
-      references NHOMSANPHAM (MANHOMSP)
-go
-
-alter table SANPHAM
-   add constraint FK_SANPHAM_VE_KHUYENMA foreign key (MAKM)
-      references KHUYENMAI (MAKM)
-go
-
-alter table SANPHAMTRONGGIO
-   add constraint FK_SANPHAMT_SANPHAMTR_GIOHANG foreign key (MAUSER, MAGIOHANG)
-      references GIOHANG (MAUSER, MAGIOHANG)
-go
-
-alter table SANPHAMTRONGGIO
-   add constraint FK_SANPHAMT_SANPHAMTR_SANPHAM foreign key (MASP)
-      references SANPHAM (MASP)
-go
-
+CREATE TABLE DacDiemXanh (
+    MaDDX nchar(20) PRIMARY KEY,
+    TenDDX nvarchar(100) NOT NULL UNIQUE, -- Tên đặc điểm phải duy nhất
+    MoTaDDX text
+);
+
+CREATE TABLE NhomSanPham (
+    MaNhomSP nchar(20) PRIMARY KEY,
+    TenNhomSP nvarchar(100) NOT NULL UNIQUE, -- Tên nhóm phải duy nhất
+    MoTa text
+);
+CREATE TABLE SanPham (
+    MaSP nchar(20) PRIMARY KEY,
+    MaNhomSP nchar(20) , -- Mã nhóm sản phẩm
+    MaNguoiBan nchar(20) , -- Mã người bán
+    TenSP nvarchar(100) ,
+	Donvitinh nvarchar (20),
+    DGBanMacDinh decimal(10, 2) CHECK (DGBanMacDinh >= 0), -- Giá bán không âm
+    HinhChinh nvarchar(100),
+    MoTa text
+);
+
+CREATE TABLE PhienBanSanPham (
+    MaPhienBan nchar(20) PRIMARY KEY,
+    MaSP nchar(20) NOT NULL, -- Mã sản phẩm
+    MaKM nchar(20), -- Mã khuyến mãi
+    XuatXu nvarchar(50),
+    KichThuoc nvarchar(30),
+    MauSac nvarchar(30),
+    KhoiLuong float CHECK (KhoiLuong > 0), -- Khối lượng lớn hơn 0
+    DonGiaBan decimal(10, 2) NOT NULL CHECK (DonGiaBan >= 0), -- Giá bán không âm
+    SoLuongTon int NOT NULL CHECK (SoLuongTon >= 0), -- Số lượng tồn không âm
+    AnhPhienBan nvarchar(200)
+);
+
+CREATE TABLE CT_DDX (
+    MaDDX nchar(20) NOT NULL, -- Mã đặc điểm xanh
+    MaSP nchar(20) NOT NULL, -- Mã sản phẩm
+    HinhDDX nvarchar(300), -- Hình minh họa đặc điểm xanh
+    CoQuanCap nvarchar(150), -- Cơ quan cấp đặc điểm xanh
+    PRIMARY KEY (MaDDX, MaSP) -- Khóa chính ghép
+);
+create table NguoiBan (
+    MaNguoiBan nchar(20) primary key, -- Mã định danh người bán
+    TenDangNhap nvarchar(50) not null unique, -- Tên đăng nhập
+    MatKhau nvarchar(100) not null, -- Mật khẩu (cần mã hóa)
+    HoUserCH nvarchar(30), -- Họ của đại diện
+    TenUserCH nvarchar(30), -- Tên của đại diện
+	GioiTinh nvarchar(10), -- Giới tính (Nam, Nữ, Khác)
+    TenCuaHang nvarchar(100) not null, -- Tên cửa hàng
+    DiaChi nvarchar(100), -- Địa chỉ kinh doanh
+    SoDienThoai nvarchar(15), -- Số điện thoại liên hệ
+    Email nvarchar(100) unique, -- Email liên hệ
+    MaSoThue nchar(20), -- Mã số thuế 
+	GiayPhepKD nvarchar(300),--link hình ảnh giấy phép
+    NgayTao datetime not null default getdate(), -- Ngày tạo tài khoản
+    TrangThai bit not null default 1, -- Trạng thái tài khoản (Hoạt động/Khóa)
+	MoTaCH text -- Mô tả cửa hàng
+);
+CREATE TABLE NguoiDung (
+    MaUser nchar(20) PRIMARY KEY,
+	TenDangNhap nvarchar(50) UNIQUE, -- Tên đăng nhập không trùng lặp
+    MatKhau nvarchar(20),
+    HoUser nvarchar(50) ,
+    TenUser nvarchar(30) ,
+	GioiTinh nvarchar(10), -- Giới tính (Nam, Nữ, Khác)
+    NgayTao datetime  DEFAULT GETDATE(),
+    TinhTrangUser bit DEFAULT 1,
+    SoDienThoai nvarchar(15) UNIQUE CHECK (SoDienThoai LIKE '[0-9]%'), -- Định dạng số điện thoại
+    DiaChi nvarchar(150),
+    Email nvarchar(100) UNIQUE CHECK (Email LIKE '%@%.%') -- Định dạng email hợp lệ
+);
+CREATE TABLE DanhGiaSanPham (
+    MaPhienBan nchar(20) NOT NULL, -- ID phiên bản sản phẩm
+    MaUser nchar(20) NOT NULL, -- ID người dùng đánh giá
+    DiemDanhGia int CHECK (DiemDanhGia BETWEEN 1 AND 5), -- Điểm đánh giá từ 1 đến 5
+    NDDanhGia text, -- Nội dung đánh giá (có thể để trống)
+    NgayDanhGia datetime  DEFAULT GETDATE(), -- Ngày đánh giá, mặc định là ngày hiện tại
+    HinhDanhGia nvarchar(300), -- Đường dẫn hình ảnh đánh giá (nếu có)
+    VideoDanhGia nvarchar(300), -- Đường dẫn video đánh giá (nếu có)
+    PRIMARY KEY (MaPhienBan, MaUser) -- Khóa chính
+);
+
+
+
+
+CREATE TABLE PhuongThucVanChuyen (
+    MaPTVC nchar(20) PRIMARY KEY, -- Mã phương thức vận chuyển
+    TenPTVC nvarchar(50) NOT NULL, -- Tên phương thức
+    PhiVC int NOT NULL CHECK (PhiVC >= 0), -- Phí vận chuyển (>= 0)
+    ThoiGianGH nvarchar(50) NOT NULL -- Thời gian giao hàng
+);
+
+CREATE TABLE PhuongThucThanhToan (
+    MaPTTT nchar(20) PRIMARY KEY, -- Mã phương thức thanh toán
+    TenPTTT nvarchar(100) NOT NULL, -- Tên phương thức thanh toán
+    MoTaPTTT nvarchar(300) -- Mô tả phương thức
+);
+CREATE TABLE KhuyenMai (
+    MaKM nchar(20) PRIMARY KEY, -- Mã khuyến mãi
+    MaNguoiBan nchar(20) NOT NULL, -- Mã người bán
+    TenKM nvarchar(50) NOT NULL, -- Tên chương trình khuyến mãi
+    NoiDungKM nvarchar(400), -- Nội dung chi tiết khuyến mãi
+    GiaGiam float CHECK (GiaGiam >= 0), -- Phần trăm giảm (>= 0)
+    TienGiam float CHECK (TienGiam >= 0), -- Số tiền giảm trực tiếp (>= 0)
+    NgayBatDau datetime , -- Ngày bắt đầu
+    NgayKetThuc datetime  -- Ngày kết thúc 
+);
+CREATE TABLE DonHang (
+    MaDH nchar(20) PRIMARY KEY,
+    MaUser nchar(20) , -- Mã người dùng
+    MaPTVC nchar(20) , -- Mã phương thức vận chuyển
+    MaPTTT nchar(20) , -- Mã phương thức thanh toán
+    MaNguoiBan nchar(20) , -- Mã người bán
+    NgayDatHang datetime  DEFAULT GETDATE(),
+    TrangThaiDH nvarchar(30)  CHECK (TrangThaiDH IN (N'Chờ xử lý', N'Hoàn thành', N'Hủy'))
+);
+
+CREATE TABLE CTDH (
+    MaPhienBan nchar(20) NOT NULL, -- Mã phiên bản sản phẩm
+    MaDH nchar(20) NOT NULL, -- Mã đơn hàng
+    SoLuongSP int NOT NULL CHECK (SoLuongSP > 0), -- Số lượng sản phẩm (> 0)
+    PRIMARY KEY (MaPhienBan, MaDH) -- Khóa chính ghép
+);
+
+CREATE TABLE GioHang (
+    MaUser nchar(20) NOT NULL, -- Mã người dùng
+    MaGioHang nchar(20) NOT NULL, -- Mã giỏ hàng
+    NgayTaoGio datetime DEFAULT GETDATE(), -- Ngày tạo giỏ, mặc định ngày hiện tại
+    PRIMARY KEY (MaUser, MaGioHang) -- Khóa chính ghép
+);
+
+
+CREATE TABLE SanPhamTrongGio (
+    MaUser nchar(20) NOT NULL, -- Người sở hữu giỏ hàng
+    MaGioHang nchar(20) NOT NULL, -- Giỏ hàng
+    MaPhienBan nchar(20) NOT NULL, -- Sản phẩm phiên bản
+    SoLuongSPTrongGio int  CHECK (SoLuongSPTrongGio > 0), -- Số lượng phải lớn hơn 0
+    PRIMARY KEY (MaUser, MaGioHang, MaPhienBan)
+);
+CREATE TABLE BaiVietNguoiBan (
+    MaBaiViet nchar(20) PRIMARY KEY, -- ID bài viết
+    MaNguoiBan nchar(20) , -- Người bán tạo bài viết
+    TieuDe nvarchar(200), -- Tiêu đề bài viết
+    NoiDung text , -- Nội dung bài viết
+    NgayDang datetime  DEFAULT GETDATE(), -- Ngày đăng bài
+    HienThi bit DEFAULT 1 -- Trạng thái hiển thị bài viết
+);
+
+CREATE TABLE BinhLuan (
+    MaUser nchar(20) NOT NULL, -- Người bình luận
+    MaBaiViet nchar(20) NOT NULL, -- Bài viết được bình luận
+    NoiDung text , -- Nội dung bình luận
+    NgayBinhLuan datetime DEFAULT GETDATE(), -- Ngày bình luận
+    PRIMARY KEY (MaUser, MaBaiViet)
+);
+CREATE TABLE Chat (
+    MaNguoiBan nchar(20) NOT NULL, -- Người bán tham gia chat
+    MaUser nchar(20) NOT NULL, -- Người dùng tham gia chat
+    NoiDung text , -- Nội dung tin nhắn
+    ThoiGian datetime  DEFAULT GETDATE(), -- Thời gian gửi tin nhắn
+    PRIMARY KEY (MaNguoiBan, MaUser) -- Đảm bảo duy nhất cho mỗi tin nhắn
+);

@@ -1,17 +1,27 @@
 // db.js
 const sql = require('mssql');
 
-const sqlConfig = {
+// const sqlConfig = {
+//     server: 'localhost', // Địa chỉ máy chủ
+//     database: 'SPXanh',
+//     user: 'trungduc1407', // Tên người dùng SQL Server
+//     password: '14072004az', // Mật khẩu
+//     options: {
+//       encrypt: true,  // Thường dùng cho kết nối an toàn
+//       trustServerCertificate: true  // Chỉ cần nếu bạn đang sử dụng kết nối không an toàn
+//     }
+//   };
+  
+  const sqlConfig = {
     server: 'localhost', // Địa chỉ máy chủ
-    database: 'spxanh_test',
-    user: 'trungduc1407', // Tên người dùng SQL Server
-    password: '14072004az', // Mật khẩu
+    database: 'SPXanh',
+    user: 'manager1', // Tên người dùng SQL Server
+    password: '123', // Mật khẩu
     options: {
       encrypt: true,  // Thường dùng cho kết nối an toàn
       trustServerCertificate: true  // Chỉ cần nếu bạn đang sử dụng kết nối không an toàn
     }
   };
-  
 
 
 // Tạo một kết nối pool và xuất nó để sử dụng trong các module khác

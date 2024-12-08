@@ -93,12 +93,12 @@
                         <div class="item 1">
                             <div class="body-list-product-item">
                                 <div class="body-list-products-item-img">
-                                    <img src="<%= product.HINH %>" alt="<%= product.TENSP %>" class="product-list-img">
+                                    <img src="<%= product.HinhChinh %>" alt="<%= product.TENSP %>" class="product-list-img">
                                 </div>
                                 <div class="body-list-product-item-title"><%= product.TENSP %></div>
                                 <div class="body-list-product-item-discount">15%</div>
                                 <div class="body-list-products-item-price">
-                                    <%= new Intl.NumberFormat('vi-VN').format(product.GIABAN) %>
+                                    <%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %>
                                     <div class="body-list-products-item-price-unit">đ</div>
                                     <i class="fa-solid fa-tag"></i>
                                 </div>
