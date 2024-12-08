@@ -1,0 +1,101 @@
+body{
+    background: url('../img/bg.jpg');
+    background-size: cover;
+    background-position-y: -80px;
+    font-size: 16px;
+}
+.login-body {
+    background-color: #007b59;
+}
+#wrapper{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#form-login{
+    max-width: 400px;
+    background: white;
+    flex-grow: 1;
+    padding: 30px 30px 40px;
+    border-radius: 5px;
+}
+.form-heading{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.form-group{
+    border-bottom: 1px solid #fff;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    position: relative; 
+}
+.form-group i{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-right: 10px;
+    position: absolute; /* Định vị icon bên trong khung input */
+    left: 10px; /* Khoảng cách từ icon đến cạnh trái của vùng chứa */
+}
+.form-input{
+    background: transparent;
+    border: 1px solid #ccc;
+    outline: 0;
+    flex-grow: 1;
+    height: 35px;
+}
+.form-input::placeholder{
+    font-size: 13px;
+    padding-left: 30px;
+}
+
+#eye i{
+    padding-right: 0;
+    cursor: pointer;
+}
+.form-submit{
+    height: 40px;
+    background: #007b59;
+    color: white;
+    border: 1px solid #f5f5f5;
+    width: 100%;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: 0.25s ease-in-out;
+}
+.form-submit:hover{
+    opacity: 0.8;
+}
+.fogot-password {
+    color: #2b8bff;
+    margin-left: 245px;
+    font-size: 13px;
+ }
+
+ .business-login {
+    color: #2b8bff;
+    margin-left: 190px;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.customer-login {
+    color: #2b8bff;
+    margin-left: 200px;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+ 
+
+/* Ẩn icon khi người dùng nhập */
+.form-group input:not(:placeholder-shown) + i,
+.form-group input:focus + i {
+    opacity: 0;
+    visibility: hidden;
+}
+

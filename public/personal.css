@@ -66,13 +66,20 @@
     color: orangered;
 }
 .personal-body-order-header-frame {
-    display: flex;
+    display: flex;margin-top: 10px;
 }
 .personal-body-order-header-frame i {
     color: orangered;
 }
 .personal-body-order-text {
-    margin-left: 5px;
+    margin-left: 10px;
+}
+.personal-body-order-list {
+    list-style-type: none;
+    margin-left: 25px;
+}
+.personal-body-order-item {
+    margin-top: 5px;
 }
 /* BODY DETAIL */
 .personal-body-detail {
@@ -80,3 +87,50 @@
     margin-top: 150px;
     height: 500px;
 }
+.personal-body-detail-header-text {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-weight: 550;
+}
+.personal-body-detail-header-subtext {
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+.personal-line {
+    border-bottom: 2px solid #c5c5c5;
+    margin: 10px auto 0 auto;
+    width: 96%;
+    justify-items: center;
+}
+.personal-body-detail-body-item-frame {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.personal-body-detail-body-lable {
+    font-weight: 550;
+}
+.personal-body-detail-body-item-input {
+    margin-left: 10px;
+    width: 300px;
+}
+.personal-body-detail-body-male {
+    margin-right: 20px;
+}
+
+.personal-body-detail-body-date {
+    margin-right: 20px;
+    width: 80px;
+}
+.personal-body-detail-body-btnSave {
+    width: 80px;
+    height: 30px;
+    background-color: #007b59;
+    color: white;
+    border: none;
+    margin-left: 480px;
+    margin-top: 20px;
+}
+

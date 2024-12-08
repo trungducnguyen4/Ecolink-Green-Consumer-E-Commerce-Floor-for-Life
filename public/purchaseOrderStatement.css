@@ -1,0 +1,281 @@
+.personal-body
+{
+    background-color: #efefef;
+}
+.personal-body-navigation {
+    margin-top: 150px;
+    font-size: 14px;
+}
+.personal-body-navigation-frame {
+    margin-left: 30px;
+}
+/* AVATAR */
+.personal-body-avatar {
+    
+}
+.personal-body-avatar-frame {
+    display: flex;
+}
+.personal-body-avatar-name {
+    padding-left: 10px;
+    line-height: 30px;
+}
+/* SỬA HỒ SƠ */
+.personal-body-fix-frame {
+    display: flex;
+    margin-left: 35px;
+    align-items: center;
+}
+.personal-body-fix-frame i {
+    color: #878686;
+   
+}
+.personal-body-fix-text {
+    padding-left: 5px;
+    color: #878686;
+    
+}
+.personal-body-avatar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+
+}
+
+/* TÀI KHOẢN CỦA TÔI */
+.personal-body-my-account-header-frame {
+    display: flex;margin-top: 10px;
+}
+.personal-body-my-account-header-frame i {
+    color: blue;
+}
+.personal-body-my-account-text {
+    margin-left: 10px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.personal-body-my-account-list {
+    list-style-type: none;
+    margin-left: 25px;
+}
+.personal-body-my-account-item {
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.nav-active {
+    color: orangered;
+}
+/* ĐƠN MUA */
+.personal-body-order-frame {
+    display: flex;
+}
+.personal-body-order-frame i {
+    color: orangered;
+}
+.personal-body-order-header-frame {
+    display: flex;margin-top: 10px;
+}
+.personal-body-order-header-frame i {
+    color: orangered;
+}
+.personal-body-order-text {
+    margin-left: 10px;
+    cursor: pointer;
+}
+.personal-body-order-list {
+    list-style-type: none;
+    margin-left: 25px;
+}
+.personal-body-order-item {
+    margin-top: 5px;
+    cursor: pointer;
+}
+/* BODY DETAIL */
+.personal-body-detail {
+    background-color:#ffff;
+    margin-top: 150px;
+    height: 500px;
+}
+.personal-body-detail-header-text {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-weight: 550;
+}
+.personal-body-detail-header-subtext {
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+.personal-line {
+    border-bottom: 2px solid #c5c5c5;
+    margin: 10px auto 0 auto;
+    width: 96%;
+    justify-items: center;
+}
+.personal-body-detail-body-item-frame {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.personal-body-detail-body-lable {
+    font-weight: 550;
+}
+.personal-body-detail-body-item-input {
+    margin-left: 10px;
+    width: 300px;
+}
+.personal-body-detail-body-male {
+    margin-right: 20px;
+}
+
+.personal-body-detail-body-date {
+    margin-right: 20px;
+    width: 80px;
+}
+.personal-body-detail-body-btnSave {
+    width: 80px;
+    height: 30px;
+    background-color: #007b59;
+    color: white;
+    border: none;
+    margin-left: 480px;
+    margin-top: 20px;
+}
+
+/* ĐƠN MUA */
+.purchaseOrderStatus-body-detail {
+    margin-top: 150px;
+    height: 500px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.purchaseOrderStatus-body-nav {
+    margin-bottom: 15px;
+    line-height: 40px;
+    height: 40px;
+    background-color:#ffff;
+}
+.purchaseOrderStatus-body-nav-list {
+    list-style-type: none;
+    display: flex;
+    font-size: 15px;
+    line-height: 40px;
+    justify-content:space-around; 
+    
+}
+.purchaseOrderStatus-body-nav-item {
+    font-weight: 550;
+}
+
+.purchaseOrderStatus-body-nav-item:hover {
+    color: #007b59;
+    cursor: pointer;
+    
+}
+
+.purchaseOrderStatus-body-nav-item.nav-statetus-active {
+    position: relative; /* Ensures the pseudo-element is positioned relative to this item */
+    color: #007b59;
+    font-weight: bold;
+}
+
+.purchaseOrderStatus-body-nav-item.nav-statetus-active::after {
+    content: "";
+    position: absolute;
+    bottom: 0px; /* Positions the border right below the item */
+    left: 50%; /* Start from the center */
+    transform: translateX(-50%); /* Center align */
+    width: 120px;
+    height: 2px;
+    background-color: #007b59;
+}
+
+.purchaseOrderStatus-body-product-list {
+    background-color:#ffff;
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.purchaseOrderStatus-body-product-item {
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.purchaseOrderStatus-body-product-item:last-child {
+    margin-bottom: 0px;
+}
+
+.purchaseOrderStatus-body-product-item-header {
+    display: flex;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
+
+.purchaseOrderStatus-body-product-shopName {
+    font-size: 15px;
+    font-weight: 550;
+}
+.purchaseOrderStatus-body-product-btnView {
+    width: 70px;
+    height: 22px;
+    background-color: #007b59;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 22px;
+}
+.purchaseOrderStatus-body-product-process {
+    color: #007b59;
+    margin-left: 500px;
+}
+.purchaseOrderStatus-body-product-item-body {
+    height: 100px;
+    display: flex;
+    position: relative;
+}
+.purchaseOrderStatus-body-product-item-body-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    align-items: center;
+    position: absolute;
+    margin-left: 10px;
+    transform: translateY(-50%);
+    top: 50%;
+}
+.purchaseOrderStatus-body-product-item-body-infor {
+    position: absolute;
+    margin-left: 100px;
+    transform: translateY(-50%);
+    top: 50%;
+    
+}
+.purchaseOrderStatus-body-product-item-body-money {
+    margin-left: 700px;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    color: #007b59;
+}
+.purchaseOrderStatus-body-product-item-body-productName {
+    font-size: 14px;
+}
+.purchaseOrderStatus-body-product-item-body-lable {
+    color: #878686;
+    font-size: 14px;
+}
+.purchaseOrderStatus-body-product-item-body-classify {
+    color: #878686;
+    font-size: 14px;
+}
+.purchaseOrderStatus-body-product-item-body-num {
+    font-size: 14px;
+}

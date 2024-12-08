@@ -85,212 +85,64 @@
            </div>
          </div>
          <div class="body-list-products">
-       <!-- HÀNG SẢN PHẨM THỨ NHẤT -->
-        <a href="/product-detail">
-            <div class="item 1"  >
-                <div class="body-list-product-item col-lg-2">
-                <div class="body-list-products-item-img">
-                    <img src="../image/cscn1.jpg" alt="" class="product-list-img">
+             <!-- Lưới sản phẩm -->
+          <div class="row">
+            <% products.forEach((product, index) => { %>
+                <div class="col-lg-2">
+                    <a href="/product-detail">
+                        <div class="item 1">
+                            <div class="body-list-product-item">
+                                <div class="body-list-products-item-img">
+                                    <img src="<%= product.HINH %>" alt="<%= product.TENSP %>" class="product-list-img">
+                                </div>
+                                <div class="body-list-product-item-title"><%= product.TENSP %></div>
+                                <div class="body-list-product-item-discount">15%</div>
+                                <div class="body-list-products-item-price">
+                                    <%= new Intl.NumberFormat('vi-VN').format(product.GIABAN) %>
+                                    <div class="body-list-products-item-price-unit">đ</div>
+                                    <i class="fa-solid fa-tag"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="body-list-product-item-title">Tinh dầu cam xả Essential</div>
-                <div class="body-list-product-item-discount">15%</div>
-                <div class="body-list-products-item-price">199.000
-                  <div class="body-list-products-item-price-unit">đ</div>
-                  <i class="fa-solid fa-tag"></i>
-                </div>
-              </div>
-           
-            </div>
-          </a>
-   
-       <div class="body-list-product-item col-lg-2">
-           <div class="body-list-products-item-img">
-               <img src="../image/cscn2.jpg" alt="" class="product-list-img">
-           </div>
-           <div class="body-list-product-item-title">Nước hoa hồng Essancia (Rosa rubirinosa)</div>          
-           <div class="body-list-product-item-discount">32%</div>
-           <div class="body-list-products-item-price">199.000
-            
-            <div class="body-list-products-item-price-unit">đ</div>
-             <i class="fa-solid fa-tag"></i>
-           </div>
-       </div>
-   
-       <div class="body-list-product-item col-lg-2">
-           <div class="body-list-products-item-img">
-               <img src="../image/cscn3.jpg" alt="" class="product-list-img">
-           </div>
-           <div class="body-list-product-item-title">Dầu dưỡng da mặt- Cây gai dầu & Argan </div>
-           <div class="body-list-product-item-discount">20%</div>
-           <div class="body-list-products-item-price">160.200 
-            <div class="body-list-products-item-price-unit">đ</div>
-             <i class="fa-solid fa-tag"></i>
-           </div>
-       </div>
-   
-       <div class="body-list-product-item col-lg-2">
-           <div class="body-list-products-item-img">
-               <img src="../image/cscn4.jpg" alt="" class="product-list-img">
-           </div>
-           <div class="body-list-product-item-title">Tinh chất dưỡng ẩm Greentea</div>
-           <div class="body-list-product-item-discount">32%</div>
-           <div class="body-list-products-item-price">200.400           
-            <div class="body-list-products-item-price-unit">đ</div> 
-            <i class="fa-solid fa-tag"></i>
-           </div>
-       </div>
-   
-       <div class="body-list-product-item col-lg-2">
-         <div class="body-list-products-item-img">
-             <img src="../image/cscn5.jpg" alt="" class="product-list-img">
-         </div>
-         <div class="body-list-product-item-title">Essancia Ylang Ylang (Cananga Odorata) </div>
-         <div class="body-list-product-item-discount">25%</div>
-         <div class="body-list-products-item-price">197.000
-          
-          <div class="body-list-products-item-price-unit">đ</div>
-           <i class="fa-solid fa-tag"></i>
-         </div>
-     </div>
-   
-          <!-- HÀNG SẢN PHẨM THỨ NHẤT -->
-          <div class="body-list-product-item col-lg-2">
-            <div class="body-list-products-item-img">
-                <img src="../image/cscn11.jpg" alt="" class="product-list-img">
-            </div>
-            <div class="body-list-product-item-title">Serum trị mụn giá học sinh hiệu quả tốt nhất</div>
-            <div class="body-list-product-item-discount">15%</div>
-            <div class="body-list-products-item-price">199.000
-             <div class="body-list-products-item-price-unit">đ</div>
-              <i class="fa-solid fa-tag"></i>
-            </div>
-            
-        </div>
-    
-        <div class="body-list-product-item col-lg-2">
-            <div class="body-list-products-item-img">
-                <img src="../image/cscn12.jpg" alt="" class="product-list-img">
-            </div>
-            <div class="body-list-product-item-title">Sữa tắm - Dầu ô liu Farmasi Naturelle</div>          
-            <div class="body-list-product-item-discount">32%</div>
-            <div class="body-list-products-item-price">199.000
-             
-             <div class="body-list-products-item-price-unit">đ</div>
-              <i class="fa-solid fa-tag"></i>
-            </div>
-        </div>
-    
-        <div class="body-list-product-item col-lg-2">
-            <div class="body-list-products-item-img">
-                <img src="../image/cscn13.jpg" alt="" class="product-list-img">
-            </div>
-            <div class="body-list-product-item-title">Xịt khoáng Vara Veda Tejati - Lành tính với da</div>
-            <div class="body-list-product-item-discount">20%</div>
-            <div class="body-list-products-item-price">160.200 
-             <div class="body-list-products-item-price-unit">đ</div>
-              <i class="fa-solid fa-tag"></i>
-            </div>
-        </div>
-    
-        <div class="body-list-product-item col-lg-2">
-            <div class="body-list-products-item-img">
-                <img src="../image/cscn14.jpg" alt="" class="product-list-img">
-            </div>
-            <div class="body-list-product-item-title">Neutrogena - Gel nước tăng cường Hydro Boost</div>
-            <div class="body-list-products-item-price">200.400           
-             <div class="body-list-products-item-price-unit">đ</div> 
-             <i class="fa-solid fa-tag"></i>
-            </div>
-        </div>
-    
-        <div class="body-list-product-item col-lg-2">
-          <div class="body-list-products-item-img">
-              <img src="../image/cscn15.jpg" alt="" class="product-list-img">
-          </div>
-          <div class="body-list-product-item-title">Serum cấp ẩm và phục hồi da </div>
-          <div class="body-list-product-item-discount">25%</div>
-          <div class="body-list-products-item-price">197.000
-           
-           <div class="body-list-products-item-price-unit">đ</div>
-            <i class="fa-solid fa-tag"></i>
-          </div>
-      </div>
-     <!-- HÀNG SẢN PHẨM THỨ 2 -->
-     <div class="body-list-product-item col-lg-2">
-       <div class="body-list-products-item-img">
-           <img src="../image/cscn6.jpg" alt="" class="product-list-img">
-       </div>
-       <div class="body-list-product-item-title">Gel trị mụn CeraVe</div>
-       <div class="body-list-product-item-discount">30%</div>
-       <div class="body-list-products-item-price">251.000        
-        <div class="body-list-products-item-price-unit">đ</div>
-         <i class="fa-solid fa-tag"></i>
-       </div>
-   </div>
-   
-   <div class="body-list-product-item col-lg-2">
-       <div class="body-list-products-item-img">
-           <img src="../image/cscn7.jpg" alt="" class="product-list-img">
-       </div>
-       <div class="body-list-product-item-title">Cicaplast Baume B5 (Dầu dưỡng sửa chữa)</div>
-       <div class="body-list-product-item-discount">15%</div>
-       <div class="body-list-products-item-price">199.000
-        <div class="body-list-products-item-price-unit">đ</div>
-         <i class="fa-solid fa-tag"></i>
-       </div>
-   </div>
-   
-   <div class="body-list-product-item col-lg-2">
-       <div class="body-list-products-item-img">
-           <img src="../image/cscn8.jpg" alt="" class="product-list-img">
-       </div>
-       <div class="body-list-product-item-title">Serum tối đa hóa rạng rỡ mới</div>
-       <div class="body-list-product-item-discount">10%</div>
-       <div class="body-list-products-item-price">160.200
-        <div class="body-list-products-item-price-unit">đ</div>
-         <i class="fa-solid fa-tag"></i>
-       </div>
-   </div>
-   
-   <div class="body-list-product-item col-lg-2">
-       <div class="body-list-products-item-img">
-           <img src="../image/cscn9.jpg" alt="" class="product-list-img">
-       </div>
-       <div class="body-list-product-item-title">Serum trị mụn Ampoule Wardah</div>
-       <div class="body-list-product-item-discount">10%</div>
-       <div class="body-list-products-item-price">200.400
-        <div class="body-list-products-item-price-unit">đ</div>
-         <i class="fa-solid fa-tag"></i>
-       </div>
-   </div>
-   
-   <div class="body-list-product-item col-lg-2">
-     <div class="body-list-products-item-img">
-         <img src="../image/cscn10.jpg" alt="" class="product-list-img">
-     </div>
-     <div class="body-list-product-item-title">Sự yên tĩnh tới từ thiên nhiên (Tinh dầu oải hương)</div>
-     <div class="body-list-product-item-discount">25%</div>
-     <div class="body-list-products-item-price">197.000
-      <div class="body-list-products-item-price-unit">đ</div>
-       <i class="fa-solid fa-tag"></i>
-     </div>
-   </div>
-         </div>
-        </div>
-       </div>
+
+      <!-- Mỗi 6 sản phẩm sẽ đóng và mở lại <div class="row"> -->
+      <% if ((index + 1) % 6 === 0 && index !== products.length - 1) { %>
+          </div><div class="row">
+      <% } %>
+  <% }); %>
+</div>
        <!-- PAGE NUMBER -->
-        <div class="body-page-number">
-         <i class="fa-solid fa-chevron-left"></i>
-         <ul class="body-page-number-list">
-           <li class="body-page-number-item page-number-active">1</li>
-           <li class="body-page-number-item">2</li>
-           <li class="body-page-number-item">3</li>
-           <li class="body-page-number-item">4</li>
-           <li class="body-page-number-item">5</li>
-           <li class="body-page-number-item">...</li>
-         </ul>
-         <i class="fa-solid fa-chevron-right"></i>
-        </div>
+      <div class="body-page-number">
+        <!-- Left Arrow -->
+        <i class="fa-solid fa-chevron-left" 
+          <% if (page > 1) { %> 
+              onclick="window.location.href='/products?page=<%= page - 1 %>'"
+          <% } else { %>
+              class="disabled"
+          <% } %>
+        ></i>
+
+        <!-- Page Number List -->
+        <ul class="body-page-number-list">
+            <% for (let i = 1; i <= 10; i++) { %>
+                <li class="body-page-number-item <% if (i === page) { %>page-number-active<% } %>">
+                    <a href="/products?page=<%= i %>"><%= i %></a>
+                </li>
+            <% } %>
+        </ul>
+
+        <!-- Right Arrow -->
+        <i class="fa-solid fa-chevron-right"
+          <% if (page < 10) { %>
+              onclick="window.location.href='/products?page=<%= page + 1 %>'"
+          <% } else { %>
+              class="disabled"
+          <% } %>
+        ></i>
+      </div>
+
      </div>
      <script type="text/javascript" src="../function.js"></script>
 </body>
