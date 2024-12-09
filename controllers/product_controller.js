@@ -27,6 +27,5 @@ async function getProductsPage(req, res) {
     }
 }
 
+module.exports = { getProductsPage};
 
-
-module.exports = { getProductsPage };

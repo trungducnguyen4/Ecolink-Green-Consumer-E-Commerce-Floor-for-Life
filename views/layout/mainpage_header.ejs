@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.css">
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./personal.css">
+    <link rel="stylesheet" href="./product.css">
     <link rel="stylesheet" href="../function.js">
+    <link rel="stylesheet" href="../main.js">
+    <link rel="stylesheet" href="../cart.js">
+    <link rel="stylesheet" href="../main.js">
+    <link rel="stylesheet" href="./home.css">
+
 </head>
 <body>
     <!-- HEADER -->
@@ -46,10 +52,12 @@
                <div class="header-search-and-cart">
                 <!-- Header-Search-frame -->
                 <div class="search-frame">
-                  <input class="header-search-input" type="text" placeholder="Tìm kiếm">
-                  <div class="header-search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </div>
+                  <form action="/search" method="get" data-page="">
+                    <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm">
+                    <div class="header-search-icon">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                  </form>
                   <!--Search history-->
                   <div class="header__search-history">
                     <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>

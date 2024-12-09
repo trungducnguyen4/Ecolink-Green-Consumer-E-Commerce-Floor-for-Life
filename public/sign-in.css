@@ -1,0 +1,77 @@
+html
+{   
+    font-size: 62.5%; 
+    line-height: 1.6 rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;  
+    font-weight: 600;
+}
+body
+{
+    background-image: ;
+    font-size: 14px;
+}
+.login-background
+{
+    background-color: #ffffff;
+    height: 900px;
+    margin: 100px 400px 0 400px ;
+    border-radius: 10px;
+}
+.login-background-wrap
+{
+    margin:10px 10px 10px 10px;
+    padding-top: 10px;
+}
+.login-need
+{
+    display: inline;
+    color: red;
+}
+.checkmark 
+{
+    position: absolute;
+    margin: 0 auto auto 0;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+input[type="checkbox"], input[type="radio"]
+{
+    accent-color: #007b59; /* Màu tùy chỉnh */
+}
+.login-title
+{
+    border-left: 2px solid #007b59;
+}
+.login-title-text
+{
+    padding-left: 10px;
+}
+::placeholder
+{
+font-weight: 500;
+font-size: 14px;
+color: rgba(43, 41, 41, 0.42);
+}
+.login-background input[type=text] 
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 0 auto auto 20px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: block; /* Đặt display block để margin auto hoạt động */
+}
+.login-background input[type=file] 
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    justify-content: center;
+    margin: 0 auto auto 20px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: block; /* Đặt display block để margin auto hoạt động */
+    
+}

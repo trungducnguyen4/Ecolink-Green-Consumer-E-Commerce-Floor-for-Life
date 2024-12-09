@@ -10,6 +10,9 @@ const productController = require('../controllers/product_controller');
 router.get('/products', productController.getProductsPage);
 
 
+
+
+
 router.get("/", (req, res) => {
     res.render("home", { title: "Home" });
 });

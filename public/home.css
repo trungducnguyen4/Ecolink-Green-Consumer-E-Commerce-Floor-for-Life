@@ -1,0 +1,656 @@
+/* ===================================================================================================== */
+/* ===============HOME====================== */
+.body-home {
+    background-color: #f5f5f5;
+    margin-top: -35px;
+}
+.main-background-img {
+    width: 100%;
+    height: 320px;
+    z-index: -1;
+}
+.main-blog-text
+{
+    color: rgb(41, 40, 40);
+    font-weight: 500;
+    font-size: 30px;
+    font-weight: 550;
+    text-align: center;
+    display: block;
+    padding-top: 10px;
+  
+}
+.line {
+    width: 120px; /* Đặt chiều rộng là 50px */
+    border-bottom: 4px solid #7AC64D; /* Đường viền dưới cùng */
+    margin: 0 auto 20px auto; /* Căn giữa đường viền nếu nó nằm trong container lớn hơn */
+}
+.body-news {
+    margin: 0 200px;
+}
+.home-body-product-item {
+    margin: 0 auto;
+    height: 390px;
+    background-color: #07583f;
+    display: block;
+}
+.container2 {
+    margin: 10px auto;
+    overflow: hidden;
+    position: relative;
+    width: 890px;
+}
+
+.main-list-product-sample {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
+}
+.main-list-product-sample {
+    margin-top: 25px;
+}
+.main-list-product-sample i {
+    /* line-height: 200px;
+    font-size: 20px;
+    color: #6e6e6e;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); */
+    
+}/* Định dạng cho các nút left và right */
+#leftBtn, #rightBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  #leftBtn {
+    left: 10px;
+    z-index: 1;
+  }
+  
+  #rightBtn {
+    right: 10px;
+    z-index: 1;
+    margin-right: 15px;
+  }
+.home-body-product-item-frame .fa-chevron-left {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+    transform: translateX(-25%);
+    cursor: pointer;
+}
+.home-body-product-item-frame .fa-chevron-right {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+    transform: translateX(10%);
+    cursor: pointer;
+}
+
+.main-list-product-sample i:hover {
+    color: #B5C0BB;
+}
+.main-item-product-sample {
+    width: 160px;
+    height: 200px;
+    margin-right: 18px;
+    border-radius: 5px;
+    background-color:#f6f6f6;
+    border: 1px solid #a3a3a3;
+    flex-shrink: 0;
+}
+.main-item-product-sample:hover {
+    box-shadow: 0 1px 20px 0 rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+}
+.main-item-product-sample-img {
+    width: 160px;
+    height: 165px;
+    border-radius: 5px;
+}
+.main-item-product-sample-title {
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: white;
+    color:#00573D;
+    font-weight: 600;
+    margin: auto;
+    border-radius: 5px;
+}
+.main-card 
+{
+    display: flex;
+    background-color: rgb(255, 254, 254);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+    height: 140px;
+    width: 700px;
+    transition: 0.3s;
+    margin: 0 auto;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.main-card:hover {
+    box-shadow: 0 1px 20px 0 rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+    border-color: #007B59;
+    opacity: 0.8;
+}
+.main-card-see-more {
+    text-align: center;
+    font-size: 17px;
+    color: #1877F2;
+    cursor: pointer;
+    
+}
+.main-card-see-more:hover {
+    opacity: 0.5;
+}
+.main-card-img 
+{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 200px;
+    display: inline;
+    object-fit: cover;
+    justify-content: center;
+    align-items: center;
+}
+.main-card-title 
+{   
+    margin: 10px 0 5px 20px;
+    flex:80%;
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(39, 38, 38);
+}
+.main-card-text
+{   width: 450px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(39, 38, 38);
+    margin-left: 20px;
+}
+.main-list-frame {
+    text-align: center;
+    display: block;
+}
+.home-body-product-item-title {
+    color: white;
+    margin-left: 140px;
+    padding-top: 20px;
+    font-weight: 700;
+}
+.home-body-product-item-frame {
+    display: flex;
+    justify-content: center; /* Căn giữa các sản phẩm theo trục ngang */
+    align-items: center; /* Căn giữa các sản phẩm theo chiều cao */
+    flex-wrap: wrap; /* Đảm bảo rằng nếu kích thước màn hình nhỏ hơn, các sản phẩm sẽ xuống hàng */
+}
+.icon-ads
+{
+    border:none;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+}
+
+.main-list-product
+{
+    padding-left: 150px;
+    margin-top: 30px;
+    text-align: center;
+}
+.cachdeu
+{
+    margin-right: 70px;
+    justify-items:center;
+}
+.main-list-pick
+{
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 15px;
+    cursor: pointer;
+    text-decoration: none;  /* Loại bỏ gạch chân mặc định của thẻ a */
+}
+.main-list-pick-underline {
+    border-bottom: 2px solid #7AC64D;
+}
+.body-green
+{
+    background-color: #007b59;
+    margin: 0 20px;
+}
+.main-text-body-green
+{
+    font-size: 24px;
+    font-weight: 550;
+    color: rgb(255, 255, 255);
+    margin-left: 100px;
+}
+
+
+/* ==============================SLIDE SHOW============================================ */
+/* Hiệu ứng khi hover */
+i.fa-circle-check:hover {
+    color: #218838; /* Đổi màu xanh đậm hơn khi hover */
+    transform: scale(1.1); /* Phóng to nhẹ khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mềm mại */
+}
+.mySlides {
+    position: relative;
+}
+.fa-play {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+}
+.fa-play {
+    font-size: 20px; /* Adjust icon size */
+    color: #8f8c8c; /* Green color */
+    background-color: #f1f1f1; /* Light gray background */
+    padding: 10px;
+    border-radius: 50%; /* Circular background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    transition: transform 0.3s ease; /* Smooth hover animation */
+    opacity: 0.5;
+  }
+  
+  .fa-play:hover {
+    cursor: pointer;
+    color: #1b1b1b; /* Change color on hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for both size and color */
+    opacity: 1;
+}.fa-stop {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+}
+.fa-stop {
+    font-size: 20px; /* Adjust icon size */
+    color: #8f8c8c; /* Green color */
+    background-color: #f1f1f1; /* Light gray background */
+    padding: 10px;
+    border-radius: 50%; /* Circular background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    transition: transform 0.3s ease; /* Smooth hover animation */
+    opacity: 0.5;
+  }
+  
+  .fa-stop:hover {
+    cursor: pointer;
+    color: #1b1b1b; /* Change color on hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for both size and color */
+    opacity: 1;
+  }
+  .slideshow-container #home-slide-leftBtn {
+    position: absolute;
+    top: 65%; /* Adjust vertically */
+    left: 10%; /* Adjust horizontally */
+    transform: translateY(-50%); /* Center vertically based on its height */
+    font-size: 24px; 
+    color: #1b1b1b; 
+    background-color: #f1f1f1; 
+    padding: 10px;
+    border-radius: 50%; 
+    cursor: pointer; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    opacity: 0.5;
+}
+
+.slideshow-container #home-slide-leftBtn:hover {
+    opacity: 1;
+}
+
+.slideshow-container #home-slide-rightBtn {
+    position: absolute;
+    top: 65%; /* Adjust vertically */
+    right: 10%; /* Adjust horizontally */
+    transform: translateY(-50%); /* Center vertically based on its height */
+    font-size: 24px; 
+    color: #1b1b1b; 
+    background-color: #f1f1f1; 
+    padding: 10px;
+    border-radius: 50%; 
+    cursor: pointer; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    opacity: 0.5;
+}
+
+.slideshow-container #home-slide-rightBtn:hover {
+    opacity: 1;
+}
+
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    height: 400px; /* Chiều cao tùy chỉnh cho slideshow */
+    overflow: hidden; /* Ẩn các phần dư ra ngoài */
+  }
+  
+  .mySlides {
+    display: none; /* Ẩn tất cả các slide mặc định */
+    width: 100%;
+    height: 280px;
+    margin-top: 118px;
+    z-index: -1;
+  }
+  
+  img {
+    vertical-align: middle;
+  }
+
+/* ĐỊNH DẠNG CHO TRÁI LEMON - THỰC PHẨM HỮU CƠ */
+/* Thay đổi kích thước và màu sắc */
+i.fa-lemon {
+    font-size: 20px; /* Tăng kích thước icon */
+    color: #f39c12; /* Màu vàng tươi, giống màu của chanh */
+}
+
+/* Thêm nền và viền */
+i.fa-lemon {
+    background-color: #fff3e6; /* Nền sáng màu cam nhạt */
+    padding: 15px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-lemon:hover {
+    color: #e67e22; /* Màu vàng đậm hơn khi hover */
+    transform: scale(1.1) rotate(10deg); /* Phóng to và xoay nhẹ khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+
+/* ======================================================================================== */
+/* ĐỊNH DẠNG CHO BOOK - VĂN PHÒNG PHẨM */
+/* Thay đổi màu sắc và kích thước */
+i.fa-book {
+    font-size: 20px; /* Tăng kích thước icon */
+    color: #3498db; /* Màu xanh dương */
+}
+
+/* Thêm nền và viền */
+i.fa-book {
+    background-color: #f0f0f0; /* Nền xám nhạt */
+    padding: 12px;
+    border-radius: 10px; /* Bo góc cho nền */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng để làm nổi bật */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-book:hover {
+    color: #2980b9; /* Thay đổi màu khi hover */
+    transform: rotate(10deg) scale(1.1); /* Xoay nhẹ và phóng to icon */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+
+/* ============================================================================================ */
+/* ĐỊNH DẠNG CHO PLATE-WHEAT-ĐỒ GIA DỤNG */
+/* Định dạng cơ bản cho icon */
+i.fa-utensils {
+    font-size: 20px; /* Kích thước lớn cho icon */
+    color: #5a5858; /* Màu tím nổi bật */
+}
+
+/* Thêm nền và hiệu ứng đổ bóng */
+i.fa-utensils {
+    background-color: #f8f9fa; /* Nền màu sáng */
+    padding: 12px;
+    border-radius: 10px; /* Bo góc nhẹ cho nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+    display: inline-block; /* Để nền áp dụng với icon */
+}
+
+/* Hiệu ứng khi hover */
+i.fa-utensils:hover {
+    color: #1111; /* Đổi sang màu tím đậm hơn khi hover */
+    transform: scale(1.1); /* Phóng to icon khi hover */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt mà */
+}
+
+
+/* ĐỊNH DẠNG CHO BÀN TAY - CHĂM SÓC CÁ NHÂN */
+/* Thay đổi kích thước và màu sắc */
+i.fa-hand-holding-medical {
+    font-size: 20px; /* Tăng kích thước icon */
+    color: #28a745; /* Màu xanh biểu tượng cho y tế và sự sống */
+}
+
+/* Thêm nền và hiệu ứng */
+i.fa-hand-holding-medical {
+    background-color: #e9ecef; /* Nền xám nhạt */
+    padding: 12px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Bóng đổ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-hand-holding-medical:hover {
+    color: #218838; /* Màu xanh đậm hơn khi hover */
+    transform: translateY(-5px) scale(1.1); /* Phóng to và di chuyển icon lên một chút */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+}
+/* ĐỊNH DẠNG CHO EYES - LÀM ĐẸP */
+/* Định dạng cơ bản cho icon */
+i.fa-crown {
+    font-size: 20px; /* Kích thước lớn cho icon */
+    color: #f1c40f; /* Màu vàng rực rỡ cho vương miện */
+}
+
+/* Thêm nền và hiệu ứng đổ bóng */
+i.fa-crown {
+    background-color: #ffffff; /* Nền màu vàng nhạt */
+    padding: 12px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng mềm */
+    display: inline-block; /* Để nền áp dụng với icon */
+}
+
+/* Hiệu ứng khi hover */
+i.fa-crown:hover {
+    color: #f39c12; /* Đổi sang màu vàng đậm hơn khi hover */
+    transform: scale(1.15); /* Phóng to icon khi hover */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt mà */
+}
+
+/* ĐỊNH DẠNG CHO ĐÔI SHOCK - THỜI TRANG XANH */
+/* Thay đổi kích thước và màu sắc */
+i.fa-socks {
+    font-size: 20px; /* Tăng kích thước icon */
+    color: #1D9BF0; /* Màu đỏ rực */
+}
+
+/* Thêm nền và viền */
+i.fa-socks {
+    background-color: #f9f9f9; /* Nền trắng sáng */
+    padding: 12px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-socks:hover {
+    color: #1877F2; /* Màu đỏ đậm hơn khi hover */
+    transform: rotate(10deg) scale(1.2); /* Xoay nhẹ và phóng to icon khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+/* ĐỊNH DẠNG CHO CỦ CAROT - HOA QUẢ HỮU CƠ */
+/* Thay đổi kích thước và màu sắc */
+i.fa-carrot {
+    font-size: 20px; /* Tăng kích thước icon */
+    color: #e67e22; /* Màu cam nổi bật giống màu cà rốt */
+}
+
+/* Thêm nền và viền */
+i.fa-carrot {
+    background-color: #f0f3f4; /* Nền xám nhạt để làm nổi bật icon */
+    padding: 12px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng mờ xung quanh icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-carrot:hover {
+    color: #d35400; /* Màu cam đậm hơn khi hover */
+    transform: rotate(15deg) scale(1.2); /* Xoay nhẹ và phóng to khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+
+/* ĐỊNH DẠNG CHO RECYCLE - ĐỒ TÁI CHẾ */
+/* Thay đổi kích thước và màu sắc */
+i.fa-recycle {
+    font-size: 20px; /* Tăng kích thước icon */
+    color: #27ae60; /* Màu xanh lá cây, liên quan đến tái chế và bảo vệ môi trường */
+}
+
+/* Thêm nền và viền */
+i.fa-recycle {
+    background-color: #ecf0f1; /* Nền sáng để làm nổi bật icon */
+    padding: 12px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-recycle:hover {
+    color: #2ecc71; /* Màu xanh đậm hơn khi hover */
+    transform: rotate(360deg) scale(1.2); /* Xoay 360 độ và phóng to khi hover */
+    transition: transform 0.5s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+
+/* ĐỊNH DẠNG CHO LY NƯỚC - ĐỒ UỐNG HỮU CƠ */
+/* Định dạng cơ bản cho icon */
+i.fa-mug-hot {
+    font-size: 20px; /* Kích thước lớn cho icon */
+    color: #d35400; /* Màu nâu cam như cà phê nóng */
+}
+
+/* Thêm nền và hiệu ứng đổ bóng */
+i.fa-mug-hot {
+    background-color: #ffe5d9; /* Nền cam nhạt giống màu đồ uống nóng */
+    padding: 12px;
+    border-radius: 10px; /* Bo góc nhẹ cho nền */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Hiệu ứng đổ bóng */
+    display: inline-block; /* Để nền áp dụng với icon */
+}
+
+/* Hiệu ứng khi hover */
+i.fa-mug-hot:hover {
+    color: #e67e22; /* Đổi sang màu cam đậm hơn khi hover */
+    transform: scale(1.1); /* Phóng to icon khi hover */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt mà */
+}
+
+ /* PRODUCT */
+ .body-list-product-item {
+    width: 190px;
+    height: 280px;
+    background-color: #ffffff;
+    margin-right: 6px;
+    border: 1px solid #e1e1e1;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform linear 0.1s;
+    will-change: transform;
+}
+.body-list-product-item:hover {
+    box-shadow: 0 1px 20px 0 rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+    border-color: #007B59;
+}
+.body-list-product-item:hover .product-list-img {
+    border-color: #007B59; /* Đổi màu border của hình ảnh khi hover */
+}
+.body-list-products-item-img {
+    display: flex;
+    justify-content: center;
+    width: 190px;
+    height: 190px; /* Chiều cao của khung chứa hình ảnh */
+}
+.product-list-img {
+    width: 190px;
+    height: 190px;
+    border: 1px solid #e1e1e1; 
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 0 auto; 
+ 
+}
+.body-list-product-item-title {
+    margin-top: 5px;
+    width: 155px; /* Giới hạn chiều rộng */
+    display: -webkit-box; /* Sử dụng WebKit box model */
+    -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
+    -webkit-box-orient: vertical; /* Thiết lập hướng của box */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm ở cuối dòng bị cắt */
+    line-height: 1.4; /* Khoảng cách giữa các dòng */
+    height: calc(1.4em * 2); /* Chiều cao phù hợp cho 2 dòng */
+}
+.body-list-products-item-price {
+    color: #FF0000;
+    margin-left: -80px;
+    position: relative;
+    display: flex;
+}
+.body-list-products-item-price i {
+    margin-top: 5px;
+    margin-left: 5px ;
+}
+.body-list-products-item-price-unit {
+    text-decoration: underline;
+    color: #fa4949;
+    margin-left: 2px;
+    font-size: 13px;
+}
+.body-list-product-item-discount {
+    width: 30px;
+    height: 20px;
+    background-color: #feeeea;
+    color: #FF0000;
+    font-size: 12px;
+    margin-left: -127px;
+    text-align: center;
+    line-height: 20px;
+}
+.list-range-active {
+    text-align: center;
+    line-height: 35px;
+    background-color: #007B59;
+    color: #ffffff;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+}

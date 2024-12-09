@@ -1,0 +1,295 @@
+/* ==========================DIỄN ĐÀN====================================== */
+.blog
+{
+    background-color: #f5f5f5;
+    display: flex;
+}
+.blog-contact
+{
+    position: sticky;
+    padding-left: 30px;
+    padding-top: 150px;
+}
+.blog-contact-avatar {
+    display: flex;
+    margin-left: 10px;
+}
+.blog-contact-avatar-name {
+    font-size: 15px;
+    margin: auto 0 auto 15px;
+}
+.blog-contact-item
+{
+    margin-bottom: 7px;
+}
+.blog-contact-item i {
+    font-size: 15px;
+    font-weight: 550;
+}
+.blog-contact-item-frame {
+    margin-top: 7px;
+}
+a
+{
+    color: #1b1b1b;
+}
+.blog-contact-name
+{
+    padding-left: 10px;
+}
+.blog-post-contact-name {
+    font-weight: 600;
+    padding-left: 10px;
+    font-size: 15px;
+}
+.blog-post {
+    overflow-y: auto;
+}
+.blog-post::-webkit-scrollbar {
+    width: 20px;
+}
+.blog-post-frame
+{
+    box-shadow: 0 0 1px 1px rgba(216, 215, 215, 0.5); /* Bóng xuất hiện ở cả 4 phía */
+    background-color: white;
+    height: 85px;
+    border-radius: 10px;
+    position: relative;
+}
+.blog-post-1
+{
+    box-shadow: 0 0 1px 1px rgba(216, 215, 215, 0.5); 
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.blog-post-react {
+    text-align: center;
+}
+.blog-post-react span {
+    color: #8f8c8c;
+    font-weight: 530;
+}
+.blog-post-react-count {
+    display: flex;
+    border-bottom: 1px solid #c8c4c4;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.blog-post-react-count-sp {
+    margin-left: 20px;
+}
+.blog-post-react-count-num {
+    margin-left: 10px;
+    color: #8f8c8c;
+}
+
+.blog-post-item
+{
+    padding-top: 15px;
+    margin-top: 155px;
+}
+.blog-post-item-1
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.blog-input
+{
+    margin-left: 10px;
+    border-radius: 18px;
+    width: 500px;
+    height:30px;
+    border-color: #f5f5f5;
+    border: 1px solid #e1e1e1;
+    position: relative;
+}
+:placeholder-shown
+{
+    padding-left: 10px;
+    font-weight: 400;
+}
+.blog-post-frame {
+    text-align: center;
+}
+.blog-post-picture-vid
+{
+    margin-top: 15px;
+    font-size: 16px;
+    margin-right: 50px;
+}
+.blog-post-picture-vid i {
+    color: #2ecc71; 
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.blog-post-live
+{
+    margin-top: 15px;
+    font-size: 16px;
+    padding-top: 10px;
+}
+.blog-post-live i {
+    margin-top: 10px;
+    color: orangered; 
+    margin-right: 10px;
+}
+.blog-post-img
+{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+.blog-noidung
+{
+    padding-left: 18px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    text-align: justify;
+    font-weight: 500;
+    font-size: 14px;
+}
+.blog-contact-user
+{
+    margin-left: 10px;
+    margin-top: 160px;
+    height: 400px;
+}
+.blog-contact-user-item {
+    display: flex;
+}
+.blog-contact-user-content-frame {
+    /* flex-direction: column;
+    justify-content: center;
+    display: flex; */
+    margin: auto 10px auto 0;
+}
+.blog-contact-user-title
+{
+    margin-left: 15px;
+    font-size: 17px;
+    font-weight: 550;
+    margin-bottom: 10px;
+}
+.blog-contact-user-img
+{
+    margin-left: 15px;
+    width: 100px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.blog-contact-user-text
+{
+    position: absolute;
+    margin-left: 10px;
+    font-size: 17px;
+}
+.blog-contact-user-sub-text {
+opacity: 0.8;
+}
+.blog-contact-user-item
+{
+    margin-bottom: 10px;
+}
+/* ĐỊNH DẠNG CALENDAER (FORUM)  */
+/* Thay đổi kích thước và màu sắc */
+i.fa-calendar {
+    font-size: 15px; /* Tăng kích thước icon */
+    color: #3498db; /* Màu xanh dương tươi sáng */
+}
+
+/* Thêm nền và viền */
+i.fa-calendar {
+    background-color: #ecf0f1; /* Nền sáng để làm nổi bật icon */
+    padding: 10px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-calendar:hover {
+    color: #2980b9; /* Màu xanh đậm hơn khi hover */
+    transform: scale(1.2) rotate(5deg); /* Phóng to và xoay nhẹ khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+/* ĐỊNH DẠNG TREND */
+/* Thay đổi kích thước và màu sắc */
+i.fa-arrow-trend-up {
+    font-size: 15px; /* Tăng kích thước icon */
+    color: #2ecc71; /* Màu xanh lá cây tươi sáng, biểu thị sự tăng trưởng */
+}
+
+/* Thêm nền và viền */
+i.fa-arrow-trend-up {
+    background-color: #ecf0f1; /* Nền sáng để làm nổi bật icon */
+    padding: 8px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-arrow-trend-up:hover {
+    color: #27ae60; /* Màu xanh lá cây đậm hơn khi hover */
+    transform: scale(1.2) rotate(5deg); /* Phóng to và xoay nhẹ khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+}
+
+/* ĐỊNH DẠNG TRÁI TIM  */
+/* Thay đổi kích thước và màu sắc */
+i.fa-heart-circle-check {
+    font-size: 15px; /* Tăng kích thước icon */
+    color: #e74c3c; /* Màu đỏ tươi cho trái tim */
+}
+
+/* Thêm nền và viền */
+i.fa-heart-circle-check {
+    background-color: #ecf0f1; /* Nền sáng màu hồng nhạt */
+    padding: 8px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-heart-circle-check:hover {
+    color: #c0392b; /* Màu đỏ đậm hơn khi hover */
+    transform: scale(1.2) rotate(10deg); /* Phóng to và xoay nhẹ khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+}
+/* ĐỊNH DẠNG CÀI ĐẶT */
+/* Thay đổi kích thước và màu sắc */
+i.fa-gear {
+    font-size: 15px; /* Tăng kích thước icon */
+    color: #f39c12; /* Màu cam tươi sáng */
+}
+
+/* Thêm nền và viền */
+i.fa-gear {
+    background-color: #ecf0f1; /* Nền sáng màu xám nhạt */
+    padding: 8px;
+    border-radius: 50%; /* Bo tròn nền */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng mờ cho icon */
+}
+
+/* Hiệu ứng động khi hover */
+i.fa-gear:hover {
+    color: #e67e22; /* Màu cam đậm hơn khi hover */
+    transform: scale(1.2) rotate(15deg); /* Phóng to và xoay nhẹ khi hover */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+}
+
+/* Định dạng cơ bản cho icon */
+.blog-post-contact-name .fa-circle-check {
+    font-size: 17px; /* Kích thước lớn cho icon */
+    color: #28a745; /* Màu xanh lá cây đậm */
+    margin: 15px;
+}
+
+/* Thêm nền và hiệu ứng đổ bóng */
+.blog-post-contact-name .fa-circle-check {
+    background-color: #e9f7ef; /* Nền xanh nhạt */
+    border-radius: 50%; /* Bo tròn nền để khớp với icon */
+    display: inline-block; /* Giúp icon hiển thị như một khối */
+}

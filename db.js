@@ -14,7 +14,7 @@ const sql = require('mssql');
   
   const sqlConfig = {
     server: 'localhost', // Địa chỉ máy chủ
-    database: 'SPXanh',
+    database: 'NCKH',
     user: 'manager1', // Tên người dùng SQL Server
     password: '123', // Mật khẩu
     options: {
