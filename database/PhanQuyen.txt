@@ -1,0 +1,6 @@
+USE NCKH CREATE ROLE manager
+GRANT SELECT, UPDATE, DELETE TO manager
+CREATE LOGIN manager1 WITH PASSWORD='123' , DEFAULT_DATABASE = NCKH
+CREATE USER manager1 FOR LOGIN manager1
+--Cấp quyền cho quản lý
+Sp_addRoleMember 'manager', 'manager1'

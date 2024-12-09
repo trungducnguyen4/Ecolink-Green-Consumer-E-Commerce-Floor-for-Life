@@ -1,8 +1,137 @@
 
-<%- include('layout/mainpage_header') %>
-     
-  
-     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecolink for life</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./personal.css">
+    <link rel="stylesheet" href="./product.css">
+    <link rel="stylesheet" href="../function.js">
+    <link rel="stylesheet" href="../main.js">
+    <link rel="stylesheet" href="../cart.js">
+    <link rel="stylesheet" href="../main.js">
+    <link rel="stylesheet" href="./home.css">
+
+</head>
+<body>
+    <!-- HEADER -->
+        <!-- HEADER -->
+        <div class="header">
+            <!-- Header-Logo -->
+            
+              <img src="/image/logo.jpg" alt="" class="logo-img">
+              <h4 class="header-logo-text">Ecolink for life</h3>
+            
+            <div class="header-search">
+             
+              <!-- Header-Services -->
+                <div class="header-service">
+                  <div class="header-service-item">
+                    <img class= "header-service-item-avatar-img" src="/image/logo1.jpg" alt="">
+                    <a href="/log-in">Đăng nhập</a>
+                  </div>
+      
+                  <div class="header-service-item">
+                    <i class="fa-solid fa-question"></i>
+                    <a class="active" href="#home">Hỗ trợ</a>
+                  </div>
+      
+                  <div class="header-service-item">
+                    <i class="fa-regular fa-bell"></i>
+                    <a href="#about">Thông báo</a>
+                  </div>
+                  
+                  
+                  
+                </div>
+          
+              <!-- Header-serach&cart -->
+               <div class="header-search-and-cart">
+                <!-- Header-Search-frame -->
+                <div class="search-frame">
+                  <form action="/search" method="get" >
+                    <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
+                    <div type="submit" class="header-search-icon">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                  </form>
+                  <!--Search history-->
+                  <div class="header__search-history">
+                    <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
+                    <ul class="header__search-history-list">
+                        <li class="header__search-history-item">
+                            <a href="" class="">Kem dưỡng da</a>
+                        </li>
+                        <li class="header__search-history-item">
+                            <a href="" class="">Kem trị mụn</a>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+      
+                <!-- Cart -->
+                <a href="/cart" class="header-icon-cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <div class="cart-quantity">
+                    <p class="cart-quantity-number">15</p>
+                  </div>
+                </a>
+                <div class="product-in-cart">
+                  <div class="product-in-cart-arrow"></div>
+                  <ul class="product-in-cart-list">
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Premium Vector</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Premium Vector</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                    </li>
+                    <li class="product-in-cart-item">
+                      <img src="/image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                    </li>
+                  </ul>
+                </div>
+      
+               </div>
+             
+             <!-- NAVIGATION -->
+           <div class="navigation">
+            <ul class="navigation-list">
+              <li id = "trang-chu" ><a id="" href="/" class="navigation-item">Trang chủ</a></li>
+              <li id = "san-pham" ><a href="/products?page=1" class="navigation-item" >Sản phẩm</a></li>
+              <li id = "dien-dan" ><a href="/forum" class="navigation-item">Diễn đàn</a></li>
+              <li id = "blog" > <a href="/news" class="navigation-item">Bài Blog</a></li>
+            </ul>
+          </div>
+            </div>
+           
+        </div>
   </div>
      <!-- Back ground -->
      <div class="body-background">
@@ -93,12 +222,12 @@
                         <div class="item 1">
                             <div class="body-list-product-item">
                                 <div class="body-list-products-item-img">
-                                    <img src="<%= product.HINH %>" alt="<%= product.TENSP %>" class="product-list-img">
+                                    <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TENSP %>" class="product-list-img">
                                 </div>
                                 <div class="body-list-product-item-title"><%= product.TENSP %></div>
                                 <div class="body-list-product-item-discount">15%</div>
                                 <div class="body-list-products-item-price">
-                                    <%= new Intl.NumberFormat('vi-VN').format(product.GIABAN) %>
+                                    <%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %>
                                     <div class="body-list-products-item-price-unit">đ</div>
                                     <i class="fa-solid fa-tag"></i>
                                 </div>
@@ -126,16 +255,16 @@
 
         <!-- Page Number List -->
         <ul class="body-page-number-list">
-            <% for (let i = 1; i <= 10; i++) { %>
+            <% for (let i = 1; i <= totalPages; i++) { %>
                 <li class="body-page-number-item <% if (i === page) { %>page-number-active<% } %>">
-                    <a href="/products?page=<%= i %>"><%= i %></a>
+                    <a class="body-page-number-item" href="/products?page=<%= i %>"><%= i %></a>
                 </li>
             <% } %>
         </ul>
 
         <!-- Right Arrow -->
         <i class="fa-solid fa-chevron-right"
-          <% if (page < 10) { %>
+          <% if (page < totalPages) { %>
               onclick="window.location.href='/products?page=<%= page + 1 %>'"
           <% } else { %>
               class="disabled"
@@ -146,51 +275,5 @@
      </div>
      <script type="text/javascript" src="../function.js"></script>
 </body>
-<footer>
-<div class="footer">
-  <div class="footer-logo">
-    <h1 class="footer-logo-text">ECOLINK FOR LIFE</h1>
-  </div>
-  <div class="footer-infor">
-    <ul class="footer-infor-list">
-      <li class="footer-infor-item">About us</li>
-      <li class="footer-infor-item">News</li>
-      <li class="footer-infor-item">Official Store</li>
-      <li class="footer-infor-item">Company</li>
-      <li class="footer-infor-item">Careers</li>
-    </ul>
-  </div>
-
-  <div class="footer-infor">
-    <ul class="footer-infor-list">
-      <li class="footer-infor-item">Get Help</li>
-      <li class="footer-infor-item">FAQ</li>
-      <li class="footer-infor-item">Shipping</li>
-      <li class="footer-infor-item">Payment</li>
-      <li class="footer-infor-item">Returns</li>
-      <li class="footer-infor-item">Contact Us</li>     
-    </ul>
-  </div>
-  <div class="footer-infor">
-    <ul class="footer-infor-list">
-      <li class="footer-infor-item">Follow Us</li>
-      <li class="footer-infor-item">
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-youtube"></i>
-        <i class="fa-brands fa-twitter"></i>
-      </li>
-    </ul>
-  </div>
-</div>
-<div class="footer-year-guide">
-  <a href="" class="footer-year-guide-item">Guide</a>
-  <a href="" class="footer-year-guide-item">Terms & Conditions</a>
-  <a href="" class="footer-year-guide-item">Privacy Policy</a>
-</div>
-<div class="footer-year">
-  <i class="fa-regular fa-circle-check"></i>
-  2024 ECOLINK. All Rights Reserved
-</div>
-</footer>
+<%- include('layout/footer')  %>
 </html>
