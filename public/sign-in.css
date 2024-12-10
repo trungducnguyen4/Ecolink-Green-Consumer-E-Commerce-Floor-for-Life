@@ -1,77 +1,188 @@
-html
-{   
-    font-size: 62.5%; 
-    line-height: 1.6 rem;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;  
-    font-weight: 600;
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
 }
-body
-{
-    background-image: ;
-    font-size: 14px;
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: url('https://i.pinimg.com/736x/5c/a5/ac/5ca5ac475e6708ed4888fb41d4df8fff.jpg');
+  /* background: url("bg.png"), -webkit-linear-gradient(bottom, white, #007b59); */
+  background-size: cover; /* Kéo dài ảnh nền để phủ toàn bộ phần tử */
+  background-position: center; /* Căn giữa ảnh nền */
+  background-repeat: no-repeat; /* Ngừng lặp lại ảnh nền */
+  height: 100vh; /* Chiều cao của phần tử chiếm toàn bộ chiều cao màn hình */
+  width: 100%; /* Chiều rộng của phần tử chiếm toàn bộ chiều rộng màn hình */
 }
-.login-background
-{
-    background-color: #ffffff;
-    height: 900px;
-    margin: 100px 400px 0 400px ;
-    border-radius: 10px;
+::selection{
+  color: #fff;
+  background: #007b59;
 }
-.login-background-wrap
-{
-    margin:10px 10px 10px 10px;
-    padding-top: 10px;
+.container{
+  width: 400px;
+  background: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 30px 35px 10px 35px;
+  height: 500px;
 }
-.login-need
-{
-    display: inline;
-    color: red;
+.container header{
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0 0 30px 0;
 }
-.checkmark 
-{
-    position: absolute;
-    margin: 0 auto auto 0;
-    background-color: #eee;
-    border-radius: 50%;
+.container .form-outer{
+    margin-left: 35px;
+  width: 100%;
+  overflow: hidden;
+}
+.container .form-outer form{
+  display: flex;
+  width: 400%;
+}
+.form-outer form .page{
+  width: 25%;
+  transition: margin-left 0.3s ease-in-out;
+}
+.form-outer form .page .title{
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 auto;
+  margin-bottom: -5px;
+}
+.form-outer form .page .field{
+  width: 330px;
+  height: 45px;
+  margin: 45px 0;
+  display: flex;
+  position: relative;
+}
+form .page .field .label{
+  position: absolute;
+  top: -30px;
+}
+form .page .field input{
+  height: 100%;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 15px;
+  font-size: 18px;
+}
+form .page .field select{
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+}
+form .page .field button{
+  width: 100%;
+  height: calc(100% + 5px);
+  border: none;
+  background: #007b59;
+  margin-top: -20px;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing: 1px;
+  transition: 0.5s ease;
+}
+form .page .field button:hover{
+    opacity: 0.6;
+}
+form .page .btns button{
+  margin-top: -20px!important;
+}
+form .page .btns button.prev{
+  margin-right: 3px;
+  font-size: 17px;
+}
+form .page .btns button.next{
+  margin-left: 3px;
+}
+.container .progress-bar{
+  display: flex;
+  margin: 10px 0;
+  user-select: none;
+}
+.container .progress-bar .step{
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+.container .progress-bar .step p{
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 8px;
+}
+.progress-bar .step .bullet{
+  height: 25px;
+  width: 25px;
+  border: 1px solid #000;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  transition: 0.2s;
+  font-size: 17px;
+  line-height: 25px;
+}
+.progress-bar .step .bullet.active{
+  border-color: #007b59;
+  background: #007b59;
+}
+.progress-bar .step .bullet span{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.progress-bar .step .bullet.active span{
+  display: none;
+}
+.progress-bar .step .bullet:before,
+.progress-bar .step .bullet:after{
+  position: absolute;
+  content: '';
+  bottom: 11px;
+  right: -51px;
+  height: 2px;
+  width: 44px;
+  background: #262626;
+}
+.progress-bar .step .bullet.active:after{
+  background: #007b59;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 0.3s linear forwards;
+}
+@keyframes animate {
+  100%{
+    transform: scaleX(1);
+  }
+}
+.progress-bar .step:last-child .bullet:before,
+.progress-bar .step:last-child .bullet:after{
+  display: none;
+}
+.progress-bar .step p.active{
+  color: #007b59;
+  transition: 0.2s linear;
+}
+.progress-bar .step .check{
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  font-size: 15px;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.progress-bar .step .check.active{
+  display: block;
+  color: #fff;
 }
 
-input[type="checkbox"], input[type="radio"]
-{
-    accent-color: #007b59; /* Màu tùy chỉnh */
-}
-.login-title
-{
-    border-left: 2px solid #007b59;
-}
-.login-title-text
-{
-    padding-left: 10px;
-}
-::placeholder
-{
-font-weight: 500;
-font-size: 14px;
-color: rgba(43, 41, 41, 0.42);
-}
-.login-background input[type=text] 
-{
-    width: 500px;
-    padding: 4px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    justify-content: center;
-    margin: 0 auto auto 20px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
-    display: block; /* Đặt display block để margin auto hoạt động */
-}
-.login-background input[type=file] 
-{
-    width: 500px;
-    padding: 4px;
-    font-size: 14px;
-    justify-content: center;
-    margin: 0 auto auto 20px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
-    display: block; /* Đặt display block để margin auto hoạt động */
-    
-}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Multi Step Form</title>
+      <link rel="stylesheet" href="/sign-in.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="container">
+         <header>Đăng ký</header>
+         <div class="progress-bar">
+            <div class="step">
+               <p>Họ tên</p>
+               <div class="bullet">
+                  <span>1</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+               <p>Liên hệ</p>
+               <div class="bullet">
+                  <span>2</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+               <p>Ngày sinh</p>
+               <div class="bullet">
+                  <span>3</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+               <p>Đăng ký</p>
+               <div class="bullet">
+                  <span>4</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+         </div>
+         <div class="form-outer">
+            <form id="registerForm">
+                <!-- Trang 1: Họ Tên -->
+                <div class="page slide-page">
+                    <div class="title">Thông tin cá nhân:</div>
+                    <div class="field">
+                        <div class="label">Họ</div>
+                        <input type="text" name="HoUser" id="hoUser" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Tên</div>
+                        <input type="text" name="TenUser" id="tenUser" required>
+                    </div>
+                    <div class="field">
+                        <button class="firstNext next">Tiếp theo</button>
+                    </div>
+                </div>
+                <!-- Trang 2: Liên Hệ -->
+                <div class="page">
+                    <div class="title">Thông tin liên hệ:</div>
+                    <div class="field">
+                        <div class="label">Số điện thoại</div>
+                        <input type="tel" name="SoDienThoai" id="soDienThoai" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Địa chỉ</div>
+                        <input type="text" name="DiaChi" id="diaChi" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Email</div>
+                        <input type="email" name="Email" id="email" required>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-1 prev">Về trước</button>
+                        <button class="next-1 next">Tiếp theo</button>
+                    </div>
+                </div>
+                <!-- Trang 3: Giới Tính -->
+                <div class="page">
+                    <div class="title">Thông tin khác:</div>
+                    <div class="field">
+                        <div class="label">Giới tính</div>
+                        <select name="GioiTinh" id="gioiTinh" required>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-2 prev">Về trước</button>
+                        <button class="next-2 next">Tiếp theo</button>
+                    </div>
+                </div>
+                <!-- Trang 4: Tài Khoản -->
+                <div class="page">
+                    <div class="title">Thông tin đăng nhập:</div>
+                    <div class="field">
+                        <div class="label">Tên đăng nhập</div>
+                        <input type="text" name="TenDangNhap" id="tenDangNhap" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Mật khẩu</div>
+                        <input type="password" name="MatKhau" id="matKhau" required>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-3 prev">Về trước</button>
+                        <button type="submit" class="submit">Đăng ký</button>
+                    </div>
+                </div>
+            </form>
+         </div>
+      </div>
+
+      <!-- JavaScript -->
+      <script>
+        // JavaScript Xử Lý Chuyển Trang và Validation
+        const slidePage = document.querySelector(".slide-page");
+        const nextBtnFirst = document.querySelector(".firstNext");
+        const prevBtnSec = document.querySelector(".prev-1");
+        const nextBtnSec = document.querySelector(".next-1");
+        const prevBtnThird = document.querySelector(".prev-2");
+        const nextBtnThird = document.querySelector(".next-2");
+        const prevBtnFourth = document.querySelector(".prev-3");
+        const submitBtn = document.querySelector(".submit");
+        const progressText = document.querySelectorAll(".step p");
+        const progressCheck = document.querySelectorAll(".step .check");
+        const bullet = document.querySelectorAll(".step .bullet");
+        let current = 1;
+
+        // Logic Chuyển Trang và Validation
+        const form = document.getElementById("registerForm");
+
+        nextBtnFirst.addEventListener("click", function(event){
+            event.preventDefault();
+            if (!validateStep1()) return;
+            slidePage.style.marginLeft = "-25%";
+            updateProgress();
+        });
+
+        nextBtnSec.addEventListener("click", function(event){
+            event.preventDefault();
+            if (!validateStep2()) return;
+            slidePage.style.marginLeft = "-50%";
+            updateProgress();
+        });
+
+        nextBtnThird.addEventListener("click", function(event){
+            event.preventDefault();
+            slidePage.style.marginLeft = "-75%";
+            updateProgress();
+        });
+
+        // Quay Lại
+        prevBtnSec.addEventListener("click", (e) => goBack(e, "0%"));
+        prevBtnThird.addEventListener("click", (e) => goBack(e, "-25%"));
+        prevBtnFourth.addEventListener("click", (e) => goBack(e, "-50%"));
+
+        // Gửi Form
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/us-sign-in/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const message = await response.text();
+                if (response.ok) {
+                    alert(message);
+                    window.location.href = '/us-log-in';
+                } else {
+                    alert(`Lỗi: ${message}`);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('Đã xảy ra lỗi.');
+            }
+        });
+
+        function validateStep1() {
+            const ho = document.getElementById('hoUser').value.trim();
+            const ten = document.getElementById('tenUser').value.trim();
+            if (!ho || !ten) {
+                alert('Vui lòng điền đầy đủ họ và tên.');
+                return false;
+            }
+            return true;
+        }
+
+        function validateStep2() {
+            const soDienThoai = document.getElementById('soDienThoai').value.trim();
+            const email = document.getElementById('email').value.trim();
+            if (!soDienThoai.match(/^\d{10}$/)) {
+                alert('Số điện thoại không hợp lệ.');
+                return false;
+            }
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                alert('Email không hợp lệ.');
+                return false;
+            }
+            return true;
+        }
+
+        function updateProgress() {
+            bullet[current - 1].classList.add("active");
+            progressCheck[current - 1].classList.add("active");
+            progressText[current - 1].classList.add("active");
+            current++;
+        }
+
+        function goBack(event, marginLeft) {
+            event.preventDefault();
+            slidePage.style.marginLeft = marginLeft;
+            bullet[current - 2].classList.remove("active");
+            progressCheck[current - 2].classList.remove("active");
+            progressText[current - 2].classList.remove("active");
+            current--;
+        }
+      </script>
+   </body>
+</html>

@@ -135,6 +135,7 @@
 }
 .body-list-product-item-title {
     margin-top: 5px;
+    color: #007B59;
     width: 155px; /* Giới hạn chiều rộng */
     display: -webkit-box; /* Sử dụng WebKit box model */
     -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
@@ -143,6 +144,7 @@
     text-overflow: ellipsis; /* Thêm dấu ba chấm ở cuối dòng bị cắt */
     line-height: 1.4; /* Khoảng cách giữa các dòng */
     height: calc(1.4em * 2); /* Chiều cao phù hợp cho 2 dòng */
+    
 }
 .body-list-products-item-price {
     color: #FF0000;
@@ -205,7 +207,6 @@
     width: 40px;
     height: 30px;
     border-radius: 2px;
-    color: #ffffff;
 }
 .body-page-number-item.page-number-active {
     background-color: #007B59;

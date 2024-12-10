@@ -5,12 +5,35 @@ body{
     font-size: 16px;
 }
 .login-body {
-    background-image: url('https://i.pinimg.com/736x/d9/f8/1e/d9f81e99932fd6765ad1952bcd85cee5.jpg');
+    z-index: 1;
+    background-image: url('https://i.pinimg.com/736x/31/7b/8a/317b8a5ef681134a5a42947dba478d6d.jpg');
     background-size: cover; /* Kéo dài ảnh nền để phủ toàn bộ phần tử */
     background-position: center; /* Căn giữa ảnh nền */
     background-repeat: no-repeat; /* Ngừng lặp lại ảnh nền */
     height: 100vh; /* Chiều cao của phần tử chiếm toàn bộ chiều cao màn hình */
     width: 100%; /* Chiều rộng của phần tử chiếm toàn bộ chiều rộng màn hình */
+}
+/* Định dạng cho header */
+.header {
+    height: 80px;
+    background-color: #007b59;
+    margin-top: 0;  /* Loại bỏ margin-top nếu không cần thiết, tránh header bị đẩy xuống */
+    width: 100%;
+    display: flex;
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    position: fixed;  /* Đặt header cố định ở phía trên */
+    top: 0; /* Đảm bảo header luôn ở trên cùng */
+    left: 0; /* Đảm bảo header luôn ở bên trái */
+    z-index: 1000; /* Đảm bảo header không bị chồng lên bởi các phần tử khác */
+}
+.logo-img {
+    width: 100px;
+    height: 80px;
+    margin-left: 30px;
+}
+.header-logo-text {
+    color: #fff;
+    font-size: 25px;
 }
 
 #wrapper{
@@ -18,6 +41,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 80px;
 }
 #form-login{
     max-width: 400px;
@@ -92,7 +116,7 @@ body{
 }
 .log-in-line {
     margin-top: 10px;
-    border-top: 1px solid #ccc;
+border-top: 1px solid #ccc;
 
 }
 .sign-in-customer {

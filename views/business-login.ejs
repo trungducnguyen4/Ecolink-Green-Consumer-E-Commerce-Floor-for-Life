@@ -6,26 +6,41 @@
     <title>Ecolink for life</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
-    <link rel="stylesheet" href="./log-in.css">
+    <link rel="stylesheet" href="./bs-login.css">
     <link rel="stylesheet" href="./main.js">
 </head>
 <body>
     <!--Phần nội dung-->
     <div class="login-body">
+                <!-- HEADER -->
+                <div class="header">
+                    <!-- Header-Logo -->
+                      <img src="./image/logo.jpg" alt="" class="logo-img">
+                      <h4 class="header-logo-text">Kênh người bán</h3>
+                </div>
+        
         <div id="wrapper">
             <form action="" id="form-login">
                 <h1 class="form-heading">Đăng nhập</h1>
                 <div class="form-group">
                     <i class="far fa-user"></i>
-                    <input type="text" class="form-input" placeholder="Số điện thoại/Tên đăng nhập">
+                    <input type="text" class="form-input" placeholder="Số điện thoại/Email">
                 </div>
                 <div class="form-group">
                     <i class="fas fa-key"></i>
                     <input type="password" class="form-input" placeholder="Mật khẩu">
                 </div>
                 <input type="submit" value="Đăng nhập" class="form-submit">
-                <a href="/business_log-in" class="business-login">Đăng nhập doanh nghiệp</a>
-                <a href="" class="fogot-password">Quên mật khẩu</a>
+                <div class="href-link">
+                    
+                    <a href="/us-sign-in" class="log-in-saleChanel">Tài khoản người mua</a>
+                    <a href="" class="fogot-password">Quên mật khẩu</a>
+                </div>
+                <div class="log-in-line"></div>
+                <div class="sign-in-customer">
+                    Bạn muốn trở thành người bán ?
+                    <a href="/business-signin" class="sign-in-customer-link">Đăng ký</a>
+                </div>
             </form>
         </div>
     </div>
@@ -47,11 +62,11 @@
 
 
         document.querySelectorAll('.form-group input').forEach((input) => {
-    input.addEventListener('input', (event) => {
+        input.addEventListener('input', (event) => {
         const icon = event.target.previousElementSibling;
         if (icon) {
             icon.style.visibility = event.target.value ? 'hidden' : 'visible';
-            icon.style.opacity = event.target.value ? '0' : '1';
+icon.style.opacity = event.target.value ? '0' : '1';
         }
     });
 });

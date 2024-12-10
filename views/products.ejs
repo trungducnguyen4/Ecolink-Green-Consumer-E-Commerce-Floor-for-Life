@@ -7,14 +7,10 @@
     <title>Ecolink for life</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.css">
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./personal.css">
-    <link rel="stylesheet" href="./product.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/product.css">
     <link rel="stylesheet" href="../function.js">
     <link rel="stylesheet" href="../main.js">
-    <link rel="stylesheet" href="../cart.js">
-    <link rel="stylesheet" href="../main.js">
-    <link rel="stylesheet" href="./home.css">
 
 </head>
 <body>
@@ -53,7 +49,7 @@
                <div class="header-search-and-cart">
                 <!-- Header-Search-frame -->
                 <div class="search-frame">
-                  <form action="/search" method="get" >
+                  <form action="/products/search" method="get" >
                     <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
                     <div type="submit" class="header-search-icon">
                       <i class="fa-solid fa-magnifying-glass"></i>
@@ -216,32 +212,34 @@
          <div class="body-list-products">
              <!-- Lưới sản phẩm -->
           <div class="row">
-            <% products.forEach((product, index) => { %>
-                <div class="col-lg-2">
-                    <a href="/product-detail">
-                        <div class="item 1">
-                            <div class="body-list-product-item">
-                                <div class="body-list-products-item-img">
-                                    <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TENSP %>" class="product-list-img">
-                                </div>
-                                <div class="body-list-product-item-title"><%= product.TENSP %></div>
-                                <div class="body-list-product-item-discount">15%</div>
-                                <div class="body-list-products-item-price">
-                                    <%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %>
-                                    <div class="body-list-products-item-price-unit">đ</div>
-                                    <i class="fa-solid fa-tag"></i>
-                                </div>
+    
+        <% products.forEach((product, index) => { %>
+            <div class="col-lg-2">
+                <a href="/product-detail/<%= product.MaSP  %>">
+                    <div class="item 1">
+                        <div class="body-list-product-item">
+                            <div class="body-list-products-item-img">
+                                <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TENSP %>" class="product-list-img">
+                            </div>
+                            <div class="body-list-product-item-title"><%= product.TenSP %></div>
+                            <div class="body-list-product-item-discount">15%</div>
+                            <div class="body-list-products-item-price">
+                                <%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %>
+                                <div class="body-list-products-item-price-unit">đ</div>
+                                <i class="fa-solid fa-tag"></i>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+            </div>
 
-      <!-- Mỗi 6 sản phẩm sẽ đóng và mở lại <div class="row"> -->
-      <% if ((index + 1) % 6 === 0 && index !== products.length - 1) { %>
-          </div><div class="row">
-      <% } %>
-  <% }); %>
+            <!-- Mỗi 6 sản phẩm sẽ đóng và mở lại <div class="row"> -->
+            <% if ((index + 1) % 6 === 0 && index !== products.length - 1) { %>
+                </div><div class="row">
+            <% } %>
+        <% }); %>
 </div>
+
        <!-- PAGE NUMBER -->
       <div class="body-page-number">
         <!-- Left Arrow -->
