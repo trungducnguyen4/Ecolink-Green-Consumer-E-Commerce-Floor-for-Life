@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
     <link rel="stylesheet" href="./bs-login.css">
-    <link rel="stylesheet" href="./main.js">
+    <link rel="stylesheet" href="/main.js">
 </head>
 <body>
     <!--Phần nội dung-->
@@ -20,20 +20,20 @@
                 </div>
         
         <div id="wrapper">
-            <form action="" id="form-login">
+            <form action="/business-login/user" method="POST" id="form-login">
                 <h1 class="form-heading">Đăng nhập</h1>
                 <div class="form-group">
                     <i class="far fa-user"></i>
-                    <input type="text" class="form-input" placeholder="Số điện thoại/Email">
+                    <input type="text" name="TenDangNhap" id="username" class="form-input" placeholder="Số điện thoại/Email" required>
                 </div>
                 <div class="form-group">
                     <i class="fas fa-key"></i>
-                    <input type="password" class="form-input" placeholder="Mật khẩu">
+                    <input type="password" name="MatKhau" id="password" class="form-input" placeholder="Mật khẩu" required>
                 </div>
                 <input type="submit" value="Đăng nhập" class="form-submit">
                 <div class="href-link">
                     
-                    <a href="/us-sign-in" class="log-in-saleChanel">Tài khoản người mua</a>
+                    <a href="/us-log-in" class="log-in-saleChanel">Tài khoản người mua</a>
                     <a href="" class="fogot-password">Quên mật khẩu</a>
                 </div>
                 <div class="log-in-line"></div>
@@ -42,6 +42,11 @@
                     <a href="/business-signin" class="sign-in-customer-link">Đăng ký</a>
                 </div>
             </form>
+                <!-- Popup Thông Báo -->
+                <div id="popup" style="display: none; position: fixed; top: 30%; left: 50%; transform: translate(-50%, -30%); background: #f8f9fa; padding: 20px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <p id="popup-message"></p>
+                    <button id="popup-close">OK</button>
+                </div>
         </div>
     </div>
     <script>
@@ -73,4 +78,43 @@ icon.style.opacity = event.target.value ? '0' : '1';
 
 
     </script>
+
+<script>
+    document.getElementById('form-login').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Ngăn form submit mặc định
+
+        const TenDangNhap = document.getElementById('username').value.trim();
+        const MatKhau = document.getElementById('password').value.trim();
+
+        try {
+            const response = await fetch('/business-login/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ TenDangNhap, MatKhau }),
+            });
+
+            const result = await response.text();
+
+            // Hiển thị popup thông báo
+            const popup = document.getElementById('popup');
+            const popupMessage = document.getElementById('popup-message');
+            popupMessage.textContent = result;
+            popup.style.display = 'block';
+
+            // Đóng popup và chuyển hướng nếu đăng nhập thành công
+            document.getElementById('popup-close').addEventListener('click', () => {
+                popup.style.display = 'none';
+                if (response.ok) {
+                    window.location.href = '/'; // Chuyển đến trang dashboard hoặc trang chủ
+                }
+            });
+        } catch (err) {
+            console.error('Error:', err);
+            alert('Đã xảy ra lỗi trong quá trình đăng nhập.');
+        }
+    });
+</script>
+
 </body>

@@ -14,36 +14,99 @@
     <div class="">
         <div class="login-background">
             <div class="login-background-wrap">
-                <div class="login-title"><div class="login-title-text">Tài khoản</div></div>
-                <div>Tên đăng nhập</div>
-                <div><i class="fa-regular fa-user"></i><input type="text" placeholder="Tên doanh nghiệp"></div>
-                <div>Mật khẩu</div>
-                <div><input type="text" placeholder="********"></div>
-                <div>Nhập lại mật khẩu</div>
-                <div><input type="text" placeholder="********"></div>
-                <div class="login-title"><div class="login-title-text">Thông tin doanh nghiệp</div></div>
-                <div>Họ và tên <div class="login-need">*</div></div>
-                <div><input type="text" placeholder="Nguyen Van A"></div>
-                <div>Giới tính<div class="login-need">*</div></div>
-                <div>
-                    <label class="login-title-text"><input type="radio" checked="checked" name="radio">Nam <div class="checkmark"></div>
-                    </label>
-                    <label class="login-title-text"><input type="radio" name="radio">Nữ<div class="checkmark"></div>
-                    </label>
-                    <label class="login-title-text"><input type="radio" name="radio">Khác<div class="checkmark"></div>
-                    </label>
-                </div>
-                <div>Số điện thoại<div class="login-need">*</div></div>
-                <div><input type="text" placeholder="0*** *** ***"></div>
-                <div>Tên công ty<div class="login-need">*</div></div>
-                <div><i class="fa-regular fa-building"></i><input type="text" placeholder=""></div>
-                <div>Email<div class="login-need">*</div></div>
-                <div><input type="text" placeholder=""></div>
-                <div>Mã số thuế<div class="login-need">*</div></div>
-                <div><input type="text" placeholder=""></div>
-                <div>Giấy phép kinh doanh<div class="login-need">*</div></div>
-                <div><input type="file" class="file-uploader" multiple /></div>
+                <form id="registerBusinessForm">
+                    <div class="login-title"><div class="login-title-text">Tài khoản</div></div>
+                    <div>Tên đăng nhập</div>
+                    <div>
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" name="TenDangNhap" placeholder="Tên doanh nghiệp" required>
+                    </div>
+                    <div>Mật khẩu</div>
+                    <div>
+                        <input type="password" name="MatKhau" placeholder="********" required>
+                    </div>
+                    <div>Nhập lại mật khẩu</div>
+                    <div>
+                        <input type="password" name="MatKhauConfirm" placeholder="********" required>
+                    </div>
+                    <div class="login-title"><div class="login-title-text">Thông tin doanh nghiệp</div></div>
+                    <div>Họ và tên <div class="login-need">*</div></div>
+                    <div>
+                        <input type="text" name="HoUserCH" placeholder="Họ đại diện" required>
+                        <input type="text" name="TenUserCH" placeholder="Tên đại diện" required>
+                    </div>
+                    <div>Giới tính<div class="login-need">*</div></div>
+                    <div>
+                        <label class="login-title-text">
+                            <input type="radio" name="GioiTinh" value="Nam" checked> Nam
+                        </label>
+                        <label class="login-title-text">
+                            <input type="radio" name="GioiTinh" value="Nữ"> Nữ
+                        </label>
+                        <label class="login-title-text">
+                            <input type="radio" name="GioiTinh" value="Khác"> Khác
+                        </label>
+                    </div>
+                    <div>Số điện thoại<div class="login-need">*</div></div>
+                    <div>
+                        <input type="text" name="SoDienThoai" placeholder="0*** *** ***" required>
+                    </div>
+                    <div>Tên công ty<div class="login-need">*</div></div>
+                    <div>
+                        <i class="fa-regular fa-building"></i>
+                        <input type="text" name="TenCuaHang" placeholder="" required>
+                    </div>
+                    <div>Email<div class="login-need">*</div></div>
+                    <div>
+                        <input type="email" name="Email" placeholder="" required>
+                    </div>
+                    <div>Mã số thuế<div class="login-need">*</div></div>
+                    <div>
+                        <input type="text" name="MaSoThue" placeholder="" required>
+                    </div>
+                    <div>Giấy phép kinh doanh<div class="login-need">*</div></div>
+                    <div>
+                        <input type="file" name="GiayPhepKD" class="file-uploader" accept="image/*" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('registerBusinessForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            // Kiểm tra mật khẩu nhập lại
+            if (formData.get('MatKhau') !== formData.get('MatKhauConfirm')) {
+                alert('Mật khẩu không khớp. Vui lòng kiểm tra lại.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/business-signin/user', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const message = await response.text();
+                if (response.ok) {
+                    alert(message); // Hiển thị thông báo thành công
+                    window.location.href = '/business-login'; // Chuyển hướng đến trang đăng nhập
+                } else {
+                    alert(`Lỗi: ${message}`); // Hiển thị thông báo lỗi
+                }
+            } catch (err) {
+                console.error('Lỗi đăng ký:', err);
+                alert('Đã xảy ra lỗi trong quá trình đăng ký.');
+            }
+        });
+    </script>
 </body>
+</html>

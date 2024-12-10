@@ -23,11 +23,15 @@ app.use(session({
     saveUninitialized: true,
     cookie: { 
         secure: false,
-        maxAge: 30 * 60 * 1000
+        maxAge: 3600000
      }  // Set secure: true nếu sử dụng HTTPS
 }));
 
-
+// Middleware xử lý session cho tất cả các view
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 // Middleware để xử lý JSON và URL-encoded data
 app.use(express.json());
