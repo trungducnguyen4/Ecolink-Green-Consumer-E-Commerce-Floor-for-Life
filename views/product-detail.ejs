@@ -7,71 +7,124 @@
     <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./product-detail.css">
+    
     <title>Product-detail</title>
 </head>
 <body>
-    <!-- HEADER -->
-    <div class="header">
-        <!-- Header-Logo -->
+        <!-- HEADER -->
+        <div class="header">
+          <!-- Header-Logo -->
+          
+            <img src="./image/logo.jpg" alt="" class="logo-img">
+            <h4 class="header-logo-text">Ecolink for life</h3>
+          
+          <div class="header-search">
+           
+            <!-- Header-Services -->
+              <div class="header-service">
+                <div class="header-service-item">
+                  <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
+                  <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
+                </div>
+    
+                <div class="header-service-item">
+                  <i class="fa-solid fa-question"></i>
+                  <a class="active" href="#home">Hỗ trợ</a>
+                </div>
+    
+                <div class="header-service-item">
+                  <i class="fa-regular fa-bell"></i>
+                  <a href="#about">Thông báo</a>
+                </div>
+                <div class="header-service-item">
+                  <i class="fa-solid fa-store"></i>
+                  <a class="active" href="#home">Kênh người bán</a>
+                </div>
+                
+                
+              </div>
         
-          <img src="./image/logo.jpg" alt="" class="logo-img">
-          <h4 class="header-logo-text">Ecolink for life</h3>
-        
-        <div class="header-search">
-         
-          <!-- Header-Services -->
-            <div class="header-service">
-              <div class="header-service-item">
-                <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
-                <a href="#contact">Ecolink</a>
+            <!-- Header-serach&cart -->
+             <div class="header-search-and-cart">
+              <!-- Header-Search-frame -->
+              <div class="search-frame">
+                <input class="header-search-input" type="text" placeholder="Tìm kiếm">
+                <div class="header-search-icon">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <!--Search history-->
+                <div class="header__search-history">
+                  <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
+                  <ul class="header__search-history-list">
+                      <li class="header__search-history-item">
+                          <a href="" class="">Kem dưỡng da</a>
+                      </li>
+                      <li class="header__search-history-item">
+                          <a href="" class="">Kem trị mụn</a>
+                      </li>
+                  </ul>
+                </div>
               </div>
-  
-              <div class="header-service-item">
-                <i class="fa-solid fa-question"></i>
-                <a class="active" href="#home">Hỗ trợ</a>
+    
+              <!-- Cart -->
+              <div class="header-icon-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <div class="cart-quantity">
+                  <p class="cart-quantity-number">15</p>
+                </div>
               </div>
-  
-              <div class="header-service-item">
-                <i class="fa-regular fa-bell"></i>
-                <a href="#about">Thông báo</a>
+              <div class="product-in-cart">
+                <div class="product-in-cart-arrow"></div>
+                <ul class="product-in-cart-list">
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Premium Vector</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Premium Vector</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                  </li>
+                  <li class="product-in-cart-item">
+                    <img src="./image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                    <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                  </li>
+                </ul>
               </div>
-              
-              
-              
-            </div>
-      
-          <!-- Header-serach&cart -->
-           <div class="header-search-and-cart">
-            <!-- Header-Search-frame -->
-            <div class="search-frame">
-              <input type="text" placeholder="Search..">
-              <div class="header-search-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </div>
-            </div>
-  
-            <!-- Cart -->
-            <div class="header-icon-cart">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <div class="cart-quantity">
-                <p class="cart-quantity-number">15</p>
-              </div>
-            </div>
-  
-           </div>
-         
-         <!-- NAVIGATION -->
-       <div class="navigation">
-        <ul class="navigation-list">
-          <li class="navigation-item">Trang chủ</li>
-          <li class="navigation-item active">Sản phẩm</li>
-          <li class="navigation-item">Tạo chủ đề</li>
-          <li class="navigation-item">Bài viết</li>
-        </ul>
-      </div>
+    
+             </div>
+           
+           <!-- NAVIGATION -->
+         <div class="navigation">
+          <ul class="navigation-list">
+            <li id = "trang-chu" class="navigation-item">Trang chủ</li>
+            <li id = "san-pham" class="navigation-item">Sản phẩm</li>
+            <li id = "dien-dan" class="navigation-item">Diễn đàn</li>
+            <li id = "blog" class="navigation-item">Bài Blog</li>
+          </ul>
         </div>
-       
-       </div>
+          </div>
+         
+      </div>
        <!-- Back ground -->
        <div class="body-background">
         <img class="body-background-img" src="./image/qc-sanpham.jpg" alt="">
@@ -84,36 +137,61 @@
     <!-- MAIN BODY -->
      <div class="product-detail-body">
         <div class="product-detail">
-            <img src="./image/cocoon.jpg" alt="" class="product-detail-img">
+            <img src="https://down-vn.img.susercontent.com/file/980b933c74135a05f2ef07aaa12e1433@resize_w900_nl.webp" alt="" class="product-detail-img">
             <div class="product-detail-frame">
-                <div class="product-detail-title">Nước dưỡng tóc tinh dầu bưởi 140ml</div>
+                <div class="product-detail-title">Khăn Quàng Cổ - Khăn Choàng Cổ Len Ấm Áp Phong Cách Vintage K01</div>
                 <div class="product-detail-rate">
                     <i class="fa-solid fa-star rate-active"></i>
                     <i class="fa-solid fa-star rate-active"></i>
                     <i class="fa-solid fa-star rate-active"></i>
                     <i class="fa-solid fa-star rate-active"></i>
                     <i class="fa-solid fa-star"></i>
-                    <p class="product-detail-rate-number">  (5 rate)</p>
+                    <p class="product-detail-rate-number">(5 rate)</p>
                 </div>
-                <div class="product-detail-describe">Nước dưỡng tóc tinh dầu bưởi giúp ngăn ngừa 60% nguyên nhân rụng tóc, làm gia tăng mật độ của tóc, từ đó giúp tóc dày lên trông thấy. </div>
-                <div class="product-detail-price">
-                    <div class="product-detail-lable">Giá bán:</div>
-                    <div class="product-detail-price-number">95.000</div>
-                    <div class="product-detail-price-unit">đ</div>
+                <div class="product-detail-price row">
+                    <div class="product-detail-lable col-lg-2">Giá bán</div>
+                    <div class="product-detail-price-wrap col-lg-10">
+                      <div class="product-detail-price-number">95.000</div>
+                      <div class="product-detail-price-unit">đ</div>
+                    </div>
                 </div>
-                <div class="product-detail-like">
-                    <div class="product-detail-lable">Yêu thích:</div>
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-                <div class="product-detail-evaluate">
-                    <div class="product-detail-lable">Đánh giá:</div>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <div class="product-detail-evaluate-ok">OK</div>
-                </div>
+
+                <!-- THUỘC TÍNH SẢN PHẨM -->
+                 <!-- Màu sắc -->
+                <div class="product-detail-color row">
+                  <div class="product-detail-lable col-lg-2">Màu sắc</div>
+                  <select class="product-detail-dropdown col-lg-10" name="color" id="color">
+                      <option value="" disabled selected>Chọn màu sắc</option>
+                      <option value="red">Đỏ</option>
+                      <option value="blue">Xanh dương</option>
+                      <option value="green">Xanh lá</option>
+                      <option value="yellow">Vàng</option>
+                      <option value="black">Đen</option>
+                      <option value="white">Trắng</option>
+                  </select>
+              </div>
+
+              <!-- Kích thước -->
+              <div class="product-detail-size row">
+                <div class="product-detail-lable col-lg-2">Kích thước</div>
+                <select class="product-detail-dropdown col-lg-10" name="size" id="size">
+                    <option value="" disabled selected>Chọn kích thước</option>
+                    <option value="s">Nhỏ (S)</option>
+                    <option value="m">Vừa (M)</option>
+                    <option value="l">Lớn (L)</option>
+                    <option value="xl">Rất lớn (XL)</option>
+                </select>
+            </div>
+              
+            <div class="product-detail-quantity row">
+              <div class="product-detail-lable col-lg-2">Số lượng</div>
+              <div class="quantity-control col-lg-10">
+                  <button type="button" class="quantity-btn decrement" onclick="updateQuantity(-1)">−</button>
+                  <input type="number" class="quantity-input" id="quantity" value="1" min="1">
+                  <button type="button" class="quantity-btn increment" onclick="updateQuantity(1)">+</button>
+              </div>
+            </div>
+          
                 <div class="product-detail-buy">
                     <div class="product-detail-add-cart">  
                         <i class="fa-solid fa-cart-plus"></i>
@@ -126,20 +204,168 @@
             </div>
         </div>
        <div class="product-infor-frame">
+        <!-- Thanh điều hướng -->
         <div class="line-infor">
-            <div class="line-infor-left"></div>
-            <div class="line-infor-item line-infor-item-active">Mô tả</div>
-            <div class="line-infor-item">Thông tin</div>
-            <div class="line-infor-item">Đánh giá (2)</div>
-            <div class="line-infor-right"></div>
+          <div class="line-infor-left"></div>
+          <div class="line-infor-item line-infor-item-active" onclick="showContent('describe')">Mô tả</div>
+          <div class="line-infor-item" onclick="showContent('chungchi')">Chứng chỉ xanh</div>
+          <div class="line-infor-item" onclick="showContent('danhgia')">Đánh giá</div>
+          <div class="line-infor-right"></div>
         </div>
+
+      <!-- Nội dung Mô tả -->
+      <div id="describe" class="content-section active">
         <div class="product-describe">
             <h4 class="product-describe-title">Mô tả</h4>
             Sản phẩm có thành phần từ tinh dầu bưởi Việt Nam truyền thống, Xylishine, Vitamin B5, Baicapil và Bisabolol. Nước dưỡng tóc tinh dầu bưởi giúp ngăn ngừa 60% nguyên nhân rụng tóc, làm gia tăng mật độ của tóc, từ đó giúp tóc dày lên trông thấy. Đồng thời, sản phẩm còn giúp nuôi dưỡng da đầu và cung cấp độ ẩm cho tóc.
         </div>
+      </div>
+
+      <!-- Nội dung Chứng chỉ xanh -->
+      <div id="chungchi" class="content-section">
+        <div class="product-ChungChiXanh">
+            <img src="https://sonnhatban.com/wp-content/uploads/2019/11/Green-Label-Jica.jpg" alt="Hình chứng chỉ 1">
+            <img src="http://res.heraldm.com/phpwas/restmb_idxmake.php?idx=640&simg=/content/image/2015/03/09/20150309001630_0.jpg" alt="Hình chứng chỉ 2">
+        </div>
+      </div>
+
+      <!-- Nội dung review -->
+      <div id="danhgia" class="content-section">
+        <!--Testimonials------------------->
+        <section id="testimonials">
+            <!--testimonials-box-container------>
+            <div class="testimonial-box-container">
+                <!--BOX-1-------------->
+                <div class="testimonial-box">
+                    <!--top------------------------->
+                    <div class="box-top">
+                        <!--profile----->
+                        <div class="profile">
+                            <!--img---->
+                            <div class="profile-img">
+                                <img src="https://i.pinimg.com/736x/30/7d/68/307d68aeeb10c2d98bd1a9f6c4e5ff9e.jpg" />
+                            </div>
+                            <!--name-and-username-->
+                            <div class="name-user">
+                                <strong>Touseeq Ijaz</strong>
+                                <span>@touseeqijazweb</span>
+                            </div>
+                        </div>
+                        <!--reviews------>
+                        <div class="reviews">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i><!--Empty star-->
+                        </div>
+                    </div>
+                    <!--Comments---------------------------------------->
+                    <div class="client-comment">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+                    </div>
+                </div>
+                <!--BOX-2-------------->
+                <div class="testimonial-box">
+                    <!--top------------------------->
+                    <div class="box-top">
+                        <!--profile----->
+                        <div class="profile">
+                            <!--img---->
+                            <div class="profile-img">
+                                <img src="https://i.pinimg.com/736x/a8/4d/18/a84d1804038f430cd7faf5bcacb491d9.jpg" />
+                            </div>
+                            <!--name-and-username-->
+                            <div class="name-user">
+                                <strong>J.K Rowling</strong>
+                                <span>@jkrowling</span>
+                            </div>
+                        </div>
+                        <!--reviews------>
+                        <div class="reviews">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><!--Empty star-->
+                        </div>
+                    </div>
+                    <!--Comments---------------------------------------->
+                    <div class="client-comment">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+                    </div>
+                </div>
+                <!--BOX-3-------------->
+                <div class="testimonial-box">
+                    <!--top------------------------->
+                    <div class="box-top">
+                        <!--profile----->
+                        <div class="profile">
+                            <!--img---->
+                            <div class="profile-img">
+                                <img src="https://i.pinimg.com/736x/e6/b5/8c/e6b58cbf85f90d0095c6948d96f89b6b.jpg" />
+                            </div>
+                            <!--name-and-username-->
+                            <div class="name-user">
+                                <strong>Harry Potter</strong>
+                                <span>@DanielRedclief</span>
+                            </div>
+                        </div>
+                        <!--reviews------>
+                        <div class="reviews">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i><!--Empty star-->
+                        </div>
+                    </div>
+                    <!--Comments---------------------------------------->
+                    <div class="client-comment">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+                    </div>
+                </div>
+                <!--BOX-4-------------->
+                <div class="testimonial-box">
+                    <!--top------------------------->
+                    <div class="box-top">
+                        <!--profile----->
+                        <div class="profile">
+                            <!--img---->
+                            <div class="profile-img">
+                                <img src="https://i.pinimg.com/736x/d4/ce/c3/d4cec38c62c1474395d69c01ede601b6.jpg" />
+                            </div>
+                            <!--name-and-username-->
+                            <div class="name-user">
+                                <strong>Oliva</strong>
+                                <span>@Olivaadward</span>
+                            </div>
+                        </div>
+                        <!--reviews------>
+                        <div class="reviews">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i><!--Empty star-->
+                        </div>
+                    </div>
+                    <!--Comments---------------------------------------->
+                    <div class="client-comment">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+      </div>
+
+      <!--  -->
        </div>
      </div>
-
+     <script src="./product-detail.js"></script>
+     <script type="text/javascript" src="../assets/main.js">
+      
+     </script>
 </body>
 <footer>
     <div class="footer">

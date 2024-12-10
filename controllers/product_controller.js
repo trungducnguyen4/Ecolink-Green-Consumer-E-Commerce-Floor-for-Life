@@ -27,5 +27,57 @@ async function getProductsPage(req, res) {
     }
 }
 
-module.exports = { getProductsPage};
 
+async function searchProducts(req, res) {
+    try {
+        const keyword = req.query.keyword || '';
+
+        if (!keyword) {
+            return res.status(400).send('Keyword is required');
+        }
+
+        console.log('Searching for products with keyword:', keyword);
+
+        // Tìm kiếm sản phẩm từ cơ sở dữ liệu
+        const products = await productModel.searchProducts(keyword);
+
+        // Lấy tổng số sản phẩm tìm được từ cơ sở dữ liệu
+        const totalProducts = 20;
+
+        // Tính toán số trang
+        const totalPages = Math.ceil(totalProducts / 18);
+
+        // Xử lý phân trang
+        const page = parseInt(req.query.page) || 1;
+        const start = (page - 1) * 18;
+        const end = page * 18;
+        const paginatedProducts = products.slice(start, end);
+
+        // Nếu không có sản phẩm tìm thấy, trả về thông báo
+        if (paginatedProducts.length === 0) {
+            return res.render('products', {
+                products: [],
+                keyword,
+                message: 'Không có sản phẩm nào phù hợp với từ khóa tìm kiếm của bạn.',
+                page,
+                totalPages
+            });
+        }
+
+        // Trả về view với dữ liệu tìm kiếm
+        res.render('products', {
+            products: paginatedProducts,
+            keyword,
+            page,
+            totalPages
+        });
+    } catch (err) {
+        console.error('Error in searchProducts:', err);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+
+
+
+module.exports = {getProductsPage,searchProducts};

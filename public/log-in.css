@@ -1,12 +1,18 @@
 body{
-    background: url('../img/bg.jpg');
+   
     background-size: cover;
     background-position-y: -80px;
     font-size: 16px;
 }
 .login-body {
-    background-color: #007b59;
+    background-image: url('https://i.pinimg.com/736x/d9/f8/1e/d9f81e99932fd6765ad1952bcd85cee5.jpg');
+    background-size: cover; /* Kéo dài ảnh nền để phủ toàn bộ phần tử */
+    background-position: center; /* Căn giữa ảnh nền */
+    background-repeat: no-repeat; /* Ngừng lặp lại ảnh nền */
+    height: 100vh; /* Chiều cao của phần tử chiếm toàn bộ chiều cao màn hình */
+    width: 100%; /* Chiều rộng của phần tử chiếm toàn bộ chiều rộng màn hình */
 }
+
 #wrapper{
     min-height: 100vh;
     display: flex;
@@ -17,7 +23,7 @@ body{
     max-width: 400px;
     background: white;
     flex-grow: 1;
-    padding: 30px 30px 40px;
+    padding: 20px 30px 40px;
     border-radius: 5px;
 }
 .form-heading{
@@ -39,16 +45,18 @@ body{
     position: absolute; /* Định vị icon bên trong khung input */
     left: 10px; /* Khoảng cách từ icon đến cạnh trái của vùng chứa */
 }
-.form-input{
+.form-input {
     background: transparent;
     border: 1px solid #ccc;
     outline: 0;
     flex-grow: 1;
     height: 35px;
+    padding-left: 30px; /* Tạo khoảng cách 20px từ biên trái */
+    font-size: 13px;
 }
+
 .form-input::placeholder{
     font-size: 13px;
-    padding-left: 30px;
 }
 
 #eye i{
@@ -69,33 +77,42 @@ body{
 .form-submit:hover{
     opacity: 0.8;
 }
+.href-link {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
 .fogot-password {
     color: #2b8bff;
-    margin-left: 245px;
     font-size: 13px;
  }
-
- .business-login {
+.log-in-saleChanel {
     color: #2b8bff;
-    margin-left: 190px;
     font-size: 13px;
-    display: inline-block;
-    white-space: nowrap;
 }
+.log-in-line {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
 
-.customer-login {
-    color: #2b8bff;
-    margin-left: 200px;
+}
+.sign-in-customer {
+    justify-content: center;
     font-size: 13px;
-    display: inline-block;
-    white-space: nowrap;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row; /* Căn giữa các dòng chữ theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    text-align: center; /* Căn giữa chữ theo chiều ngang */
+    
 }
- 
-
+.sign-in-customer-link {
+    margin-left: 10px;
+    color: orangered;
+}
 /* Ẩn icon khi người dùng nhập */
 .form-group input:not(:placeholder-shown) + i,
 .form-group input:focus + i {
     opacity: 0;
     visibility: hidden;
 }
-
