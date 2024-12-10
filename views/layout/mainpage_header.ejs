@@ -31,8 +31,13 @@
               <!-- Header-Services -->
                 <div class="header-service">
                   <div class="header-service-item">
-                    <img class= "header-service-item-avatar-img" src="/image/logo1.jpg" alt="">
-                    <a href="/us-log-in">Đăng nhập</a>
+                    <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/default-avatar.jpg') %>" alt="Avatar">
+                    <% if (session.user || session.businessUser) { %>
+                      <span><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></span>
+                      <a href="/logout">Đăng xuất</a>
+                  <% } else { %>
+                      <a href="/us-log-in">Đăng nhập</a>
+                  <% } %>
                   </div>
       
                   <div class="header-service-item">

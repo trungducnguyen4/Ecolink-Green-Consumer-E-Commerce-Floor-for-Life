@@ -8,7 +8,9 @@ const { isAuthenticated } = require('../middlewares/auth');
 const productController = require('../controllers/product_controller');
 const loginController = require('../controllers/us_login_controller');
 const signinController = require('../controllers/us_signin_controller');
-
+const upload = require('../middlewares/uploads'); // Import middleware upload
+const businessSigninController = require('../controllers/bs_signin_controller');
+const businessLoginController = require('../controllers/bs_login_controller');
 
 //products
 router.get('/products', productController.getProductsPage);
@@ -43,10 +45,15 @@ router.get("/business-login", (req, res) => {
     res.render("business-login", { title: "Business Log-in" });
 });
 
+// Route đăng nhập cho người bán
+router.post('/business-login/user', businessLoginController.loginBusiness);
+
 router.get("/business-signin", (req, res) => {
     res.render("business-signin", { title: "Business Sign-in" });
 });
 
+// Route đăng ký doanh nghiệp
+router.post('/business-signin/user', upload.single('GiayPhepKD'), businessSigninController.registerBusiness);
 
 router.get("/news", (req, res) => {
     res.render("news", { title: "News" });
@@ -89,20 +96,41 @@ router.get('/check-session', (req, res) => {
     }
 });
 
+router.get('/check-business-session', (req, res) => {
+    if (req.session && req.session.businessUser) {
+        const businessAccount = req.session.businessUser.TenDangNhap;
+        res.status(200).send(`Doanh nghiệp đang đăng nhập với tài khoản: ${businessAccount}`);
+    } else {
+        res.status(401).send('Bạn chưa đăng nhập với tài khoản doanh nghiệp.');
+    }
+});
+
+
 router.get('/logout', (req, res) => {
+    // Lưu trạng thái người dùng trước khi hủy session
+    const isBusinessUser = req.session?.businessUser;
+
     req.session.destroy((err) => {
         if (err) {
             console.error('Lỗi khi xóa session:', err);
-            res.status(500).send('Đã xảy ra lỗi khi đăng xuất');
-        } else {
-            res.status(200).send('Đăng xuất thành công');
+            return res.status(500).send('Đã xảy ra lỗi khi đăng xuất');
         }
+        // Chuyển hướng đến trang đăng nhập tương ứng
+        res.redirect(isBusinessUser ? '/business-login' : '/us-log-in');
     });
 });
+
+
 
 // Route được bảo vệ
 router.get('/dashboard', isAuthenticated, (req, res) => {
     res.status(200).send(`Chào mừng ${req.session.user.TenDangNhap} đến trang dashboard`);
 });
+
+
+router.get('/business-dashboard', isAuthenticated, (req, res) => {
+    res.status(200).send(`Chào mừng ${req.session.businessUser.TenDangNhap} đến trang dashboard`);
+});
+
 
 module.exports = router;
