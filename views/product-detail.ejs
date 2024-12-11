@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./product-detail.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/product-detail.css">
+    
+    <title><%= product.TenSP %></title>
     
     <title>Product-detail</title>
 </head>
@@ -15,7 +17,7 @@
         <div class="header">
           <!-- Header-Logo -->
           
-            <img src="./image/logo.jpg" alt="" class="logo-img">
+            <img src="/image/logo.jpg" alt="" class="logo-img">
             <h4 class="header-logo-text">Ecolink for life</h3>
           
           <div class="header-search">
@@ -23,7 +25,7 @@
             <!-- Header-Services -->
               <div class="header-service">
                 <div class="header-service-item">
-                  <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
+                  <img class= "header-service-item-avatar-img" src="/image/avatar.jpg" alt="">
                   <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
                 </div>
     
@@ -77,27 +79,27 @@
                 <div class="product-in-cart-arrow"></div>
                 <ul class="product-in-cart-list">
                   <li class="product-in-cart-item">
-                    <img src="./image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp1.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Premium Vector</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp2.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Premium Vector</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp4.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp5.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp6.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp7.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
                   </li>
                   <li class="product-in-cart-item">
@@ -127,7 +129,7 @@
       </div>
        <!-- Back ground -->
        <div class="body-background">
-        <img class="body-background-img" src="./image/qc-sanpham.jpg" alt="">
+        <img class="body-background-img" src="/image/qc-sanpham.jpg" alt="">
         <div class="body-background-text">
           <h1 class="body-background-text-title">Ecolink for life</h1>
           <h4 class="body-background-text-title">Home - Shop - Green product</h1>
@@ -137,61 +139,48 @@
     <!-- MAIN BODY -->
      <div class="product-detail-body">
         <div class="product-detail">
-            <img src="https://down-vn.img.susercontent.com/file/980b933c74135a05f2ef07aaa12e1433@resize_w900_nl.webp" alt="" class="product-detail-img">
+            <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TenSP %>" class="product-detail-img">
             <div class="product-detail-frame">
-                <div class="product-detail-title">Khăn Quàng Cổ - Khăn Choàng Cổ Len Ấm Áp Phong Cách Vintage K01</div>
+                <div class="product-detail-title"><%= product.TenSP %></div>
                 <div class="product-detail-rate">
-                    <i class="fa-solid fa-star rate-active"></i>
-                    <i class="fa-solid fa-star rate-active"></i>
-                    <i class="fa-solid fa-star rate-active"></i>
-                    <i class="fa-solid fa-star rate-active"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <p class="product-detail-rate-number">(5 rate)</p>
+                  <% if (ratingCount > 0) { 
+                    const fullStars = Math.floor(averageRating);
+                    const halfStar = (averageRating - fullStars) >= 0.5;
+                    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+                %>
+                    <% for(let i = 0; i < fullStars; i++) { %>
+                        <i class="fa-solid fa-star rate-active"></i>
+                    <% } %>
+                    <% if (halfStar) { %>
+                        <i class="fa-solid fa-star-half-stroke rate-active"></i>
+                    <% } %>
+                    <% for(let i = 0; i < emptyStars; i++) { %>
+                        <i class="fa-solid fa-star"></i>
+                    <% } %>
+                    <p class="product-detail-rate-number"><%= ratingCount %> đánh giá</p>
+                <% } else { %>
+                    <p class="product-detail-rate-number">Chưa có đánh giá</p>
+                <% } %>
                 </div>
                 <div class="product-detail-price row">
                     <div class="product-detail-lable col-lg-2">Giá bán</div>
                     <div class="product-detail-price-wrap col-lg-10">
-                      <div class="product-detail-price-number">95.000</div>
+                      <div class="product-detail-price-number"><%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %></div>
                       <div class="product-detail-price-unit">đ</div>
                     </div>
                 </div>
 
-                <!-- THUỘC TÍNH SẢN PHẨM -->
-                 <!-- Màu sắc -->
-                <div class="product-detail-color row">
-                  <div class="product-detail-lable col-lg-2">Màu sắc</div>
-                  <select class="product-detail-dropdown col-lg-10" name="color" id="color">
-                      <option value="" disabled selected>Chọn màu sắc</option>
-                      <option value="red">Đỏ</option>
-                      <option value="blue">Xanh dương</option>
-                      <option value="green">Xanh lá</option>
-                      <option value="yellow">Vàng</option>
-                      <option value="black">Đen</option>
-                      <option value="white">Trắng</option>
-                  </select>
-              </div>
-
-              <!-- Kích thước -->
-              <div class="product-detail-size row">
-                <div class="product-detail-lable col-lg-2">Kích thước</div>
-                <select class="product-detail-dropdown col-lg-10" name="size" id="size">
-                    <option value="" disabled selected>Chọn kích thước</option>
-                    <option value="s">Nhỏ (S)</option>
-                    <option value="m">Vừa (M)</option>
-                    <option value="l">Lớn (L)</option>
-                    <option value="xl">Rất lớn (XL)</option>
-                </select>
-            </div>
+               
               
             <div class="product-detail-quantity row">
               <div class="product-detail-lable col-lg-2">Số lượng</div>
               <div class="quantity-control col-lg-10">
                   <button type="button" class="quantity-btn decrement" onclick="updateQuantity(-1)">−</button>
-                  <input type="number" class="quantity-input" id="quantity" value="1" min="1">
+                  <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="<%= product.SoLuongTon %>">
                   <button type="button" class="quantity-btn increment" onclick="updateQuantity(1)">+</button>
               </div>
             </div>
-          
+            <% if (product.SoLuongTon > 0) { %>
                 <div class="product-detail-buy">
                     <div class="product-detail-add-cart">  
                         <i class="fa-solid fa-cart-plus"></i>
@@ -201,6 +190,7 @@
                         Mua ngay
                     </div>
                 </div>
+            <% } %>
             </div>
         </div>
        <div class="product-infor-frame">
@@ -362,8 +352,8 @@
       <!--  -->
        </div>
      </div>
-     <script src="./product-detail.js"></script>
-     <script type="text/javascript" src="../assets/main.js">
+     <script src="/product-detail.js"></script>
+     <script type="text/javascript" src="/main.js">
       
      </script>
 </body>

@@ -17,9 +17,9 @@ router.get('/products', productController.getProductsPage);
 
 router.get('/products/search', productController.searchProducts);
 //product detail
-router.get("/product-detail", (req, res) => {
-    res.render("product-detail", { title: "Product detail" });
-});
+
+
+router.get('/product-detail/:id', productController.getProductDetail);
 
 
 //Trang chủ
@@ -86,6 +86,24 @@ router.get("/test", (req, res) => {
 router.get("/cart", (req, res) => {
     res.render("cart", { title: "Cart" });
 });
+
+router.get("/order-payment", (req, res) => {
+    res.render("order-payment", { title: "Order payment" });
+});
+
+router.get("/purchaseOrderStatus", (req, res) => {
+    res.render("purchaseOrderStatus", { title: "purchaseOrderStatus" });
+});
+
+router.get("/sale-chanels", (req, res) => {
+    res.render("sale_chanels", { title: "Sale chanels" });
+});
+
+// Route thử nghiệm
+router.get('/test-view', (req, res) => {
+    res.render('error', { message: 'Đây là trang thử nghiệm lỗi.' });
+});
+
 
 //test đăng nhập
 router.get('/check-session', (req, res) => {
