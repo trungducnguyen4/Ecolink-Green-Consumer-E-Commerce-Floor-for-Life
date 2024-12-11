@@ -1,37 +1,28 @@
-﻿CREATE TABLE DacDiemXanh (
-    MaDDX nchar(20) PRIMARY KEY,
-    TenDDX nvarchar(100) NOT NULL UNIQUE, -- Tên đặc điểm phải duy nhất
-    MoTaDDX nvarchar(max)
-);
-
+﻿
 CREATE TABLE NhomSanPham (
     MaNhomSP nchar(20) PRIMARY KEY,
     TenNhomSP nvarchar(100) NOT NULL UNIQUE, -- Tên nhóm phải duy nhất
     MoTa nvarchar(max)
 );
+
+
 CREATE TABLE SanPham (
     MaSP nchar(20) PRIMARY KEY,
     MaNhomSP nchar(20) , -- Mã nhóm sản phẩm
     MaNguoiBan nchar(20) , -- Mã người bán
-    TenSP nvarchar(100) ,
-	Donvitinh nvarchar (20),
+    TenSP nvarchar(200) ,
+	SoLuongTon int,
     DGBanMacDinh decimal(10, 2) CHECK (DGBanMacDinh >= 0), -- Giá bán không âm
     HinhChinh nvarchar(100),
     MoTa nvarchar(max)
 );
 
-CREATE TABLE PhienBanSanPham (
-    MaPhienBan nchar(20) PRIMARY KEY,
-    MaSP nchar(20) NOT NULL, -- Mã sản phẩm
-    MaKM nchar(20), -- Mã khuyến mãi
-    XuatXu nvarchar(50),
-    KichThuoc nvarchar(30),
-    MauSac nvarchar(30),
-    KhoiLuong float CHECK (KhoiLuong > 0), -- Khối lượng lớn hơn 0
-    DonGiaBan decimal(10, 2) NOT NULL CHECK (DonGiaBan >= 0), -- Giá bán không âm
-    SoLuongTon int NOT NULL CHECK (SoLuongTon >= 0), -- Số lượng tồn không âm
-    AnhPhienBan nvarchar(200)
+CREATE TABLE DacDiemXanh (
+    MaDDX nchar(20) PRIMARY KEY,
+    TenDDX nvarchar(100) NOT NULL UNIQUE, -- Tên đặc điểm phải duy nhất
+    MoTaDDX nvarchar(max)
 );
+
 
 CREATE TABLE CT_DDX (
     MaDDX nchar(20) NOT NULL, -- Mã đặc điểm xanh
@@ -40,6 +31,17 @@ CREATE TABLE CT_DDX (
     CoQuanCap nvarchar(150), -- Cơ quan cấp đặc điểm xanh
     PRIMARY KEY (MaDDX, MaSP) -- Khóa chính ghép
 );
+CREATE TABLE DanhGiaSanPham (
+    MaSP nchar(20) NOT NULL, -- ID phiên bản sản phẩm
+    MaUser nchar(20) NOT NULL, -- ID người dùng đánh giá
+    DiemDanhGia int CHECK (DiemDanhGia BETWEEN 1 AND 5), -- Điểm đánh giá từ 1 đến 5
+    NDDanhGia text, -- Nội dung đánh giá (có thể để trống)
+    NgayDanhGia datetime  DEFAULT GETDATE(), -- Ngày đánh giá, mặc định là ngày hiện tại
+    HinhDanhGia nvarchar(300), -- Đường dẫn hình ảnh đánh giá (nếu có)
+    VideoDanhGia nvarchar(300), -- Đường dẫn video đánh giá (nếu có)
+    PRIMARY KEY (MaSP, MaUser) -- Khóa chính
+);
+
 create table NguoiBan (
     MaNguoiBan nchar(20) primary key, -- Mã định danh người bán
     TenDangNhap nvarchar(50) not null unique, -- Tên đăng nhập
@@ -71,16 +73,9 @@ CREATE TABLE NguoiDung (
     DiaChi nvarchar(150),
     Email nvarchar(100)  -- Định dạng email hợp lệ
 );
-CREATE TABLE DanhGiaSanPham (
-    MaPhienBan nchar(20) NOT NULL, -- ID phiên bản sản phẩm
-    MaUser nchar(20) NOT NULL, -- ID người dùng đánh giá
-    DiemDanhGia int CHECK (DiemDanhGia BETWEEN 1 AND 5), -- Điểm đánh giá từ 1 đến 5
-    NDDanhGia text, -- Nội dung đánh giá (có thể để trống)
-    NgayDanhGia datetime  DEFAULT GETDATE(), -- Ngày đánh giá, mặc định là ngày hiện tại
-    HinhDanhGia nvarchar(300), -- Đường dẫn hình ảnh đánh giá (nếu có)
-    VideoDanhGia nvarchar(300), -- Đường dẫn video đánh giá (nếu có)
-    PRIMARY KEY (MaPhienBan, MaUser) -- Khóa chính
-);
+
+
+
 
 
 
@@ -97,16 +92,19 @@ CREATE TABLE PhuongThucThanhToan (
     TenPTTT nvarchar(100) NOT NULL, -- Tên phương thức thanh toán
     MoTaPTTT nvarchar(300) -- Mô tả phương thức
 );
+
+
 CREATE TABLE KhuyenMai (
     MaKM nchar(20) PRIMARY KEY, -- Mã khuyến mãi
     MaNguoiBan nchar(20) NOT NULL, -- Mã người bán
     TenKM nvarchar(50) NOT NULL, -- Tên chương trình khuyến mãi
     NoiDungKM nvarchar(400), -- Nội dung chi tiết khuyến mãi
-    GiaGiam float CHECK (GiaGiam >= 0), -- Phần trăm giảm (>= 0)
-    TienGiam float CHECK (TienGiam >= 0), -- Số tiền giảm trực tiếp (>= 0)
+    PhanTramGiam float CHECK (PhanTramGiam >= 0), -- Phần trăm giảm (>= 0)
     NgayBatDau datetime , -- Ngày bắt đầu
-    NgayKetThuc datetime  -- Ngày kết thúc 
+    NgayKetThuc datetime,  -- Ngày kết thúc
+	DieuKienGiam decimal(10, 2) --Giá trị đơn hàng tối thiểu để được giảm
 );
+
 CREATE TABLE DonHang (
     MaDH nchar(20) PRIMARY KEY,
     MaUser nchar(20) , -- Mã người dùng
@@ -114,14 +112,18 @@ CREATE TABLE DonHang (
     MaPTTT nchar(20) , -- Mã phương thức thanh toán
     MaNguoiBan nchar(20) , -- Mã người bán
     NgayDatHang datetime  DEFAULT GETDATE(),
-    TrangThaiDH nvarchar(30)  CHECK (TrangThaiDH IN (N'Chờ xác nhận', N'Chờ lấy hàng', N'Đang giao', N'Đã giao', N'Trả hàng/ Hoàn tiền/ Hủy'))
+	MaKM nchar(20),--MaKhuyenMai
+	PhanTramGiam float CHECK (PhanTramGiam >= 0), -- Phần trăm giảm (>= 0)
+	TongTien decimal(10, 2), --Tổng tiền sau khi trừ khuyến mãi
+    TrangThaiDH nvarchar(30)  CHECK (TrangThaiDH IN (N'Chờ xác nhận', N'Chờ lấy hàng', N'Đang giao', N'Đã giao', N'Trả hàng/ Hoàn tiền/ Hủy')),
+	YeuCauDacBiet nvarchar(255)--Yêu cầu cho người bán khi mua nếu có
 );
 
 CREATE TABLE CTDH (
-    MaPhienBan nchar(20) NOT NULL, -- Mã phiên bản sản phẩm
+    MaSP nchar(20) NOT NULL, -- Mã  sản phẩm
     MaDH nchar(20) NOT NULL, -- Mã đơn hàng
     SoLuongSP int NOT NULL CHECK (SoLuongSP > 0), -- Số lượng sản phẩm (> 0)
-    PRIMARY KEY (MaPhienBan, MaDH) -- Khóa chính ghép
+    PRIMARY KEY (MaSP, MaDH) -- Khóa chính ghép
 );
 
 CREATE TABLE GioHang (
@@ -135,9 +137,9 @@ CREATE TABLE GioHang (
 CREATE TABLE SanPhamTrongGio (
     MaUser nchar(20) NOT NULL, -- Người sở hữu giỏ hàng
     MaGioHang nchar(20) NOT NULL, -- Giỏ hàng
-    MaPhienBan nchar(20) NOT NULL, -- Sản phẩm phiên bản
+    MaSP nchar(20) NOT NULL, -- Sản phẩm phiên bản
     SoLuongSPTrongGio int  CHECK (SoLuongSPTrongGio > 0), -- Số lượng phải lớn hơn 0
-    PRIMARY KEY (MaUser, MaGioHang, MaPhienBan)
+    PRIMARY KEY (MaUser, MaGioHang, MaSP)
 );
 CREATE TABLE BaiVietNguoiBan (
     MaBaiViet nchar(20) PRIMARY KEY, -- ID bài viết
