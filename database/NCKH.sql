@@ -29,7 +29,7 @@ CREATE TABLE CT_DDX (
     MaNguoiBan nchar(20) NOT NULL, -- Mã sản phẩm
     HinhDDX nvarchar(300), -- Hình minh họa đặc điểm xanh
     CoQuanCap nvarchar(150), -- Cơ quan cấp đặc điểm xanh
-    PRIMARY KEY (MaDDX, MaSP) -- Khóa chính ghép
+    PRIMARY KEY (MaDDX, MaNguoiBan) -- Khóa chính ghép
 );
 CREATE TABLE DanhGiaSanPham (
     MaSP nchar(20) NOT NULL, -- ID phiên bản sản phẩm
@@ -71,7 +71,8 @@ CREATE TABLE NguoiDung (
     TinhTrangUser bit DEFAULT 1,
     SoDienThoai nvarchar(15) , -- Định dạng số điện thoại
     DiaChi nvarchar(150),
-    Email nvarchar(100)  -- Định dạng email hợp lệ
+    Email nvarchar(100),  -- Định dạng email hợp lệ
+	Avatar NVARCHAR(300)
 );
 
 

@@ -106,6 +106,38 @@ async function getProductDetail(req, res) {
 
         const product = productResult.recordset[0];
 
+        // Lấy thông tin đánh giá
+        const reviewsResult = await pool.request()
+            .input('MaSP', sql.NChar(20), MaSP)
+            .query(`
+                SELECT 
+                    dg.DiemDanhGia, 
+                    dg.NDDanhGia, 
+                    dg.NgayDanhGia, 
+                    nd.TenDangNhap, 
+                    nd.HoUser, 
+                    nd.TenUser,
+                    nd.Avatar
+                FROM DanhGiaSanPham dg
+                JOIN NguoiDung nd ON dg.MaUser = nd.MaUser
+                WHERE dg.MaSP = @MaSP
+                ORDER BY dg.NgayDanhGia DESC
+            `);
+
+        const reviews = reviewsResult.recordset;
+
+         // Truy vấn đặc điểm xanh của sản phẩm
+         const certificatesResult = await pool.request()
+         .input('MaSP', sql.NVarChar, MaSP)
+         .query(`
+             SELECT D.TenDDX, C.HinhDDX, C.CoQuanCap
+             FROM CT_DDX C
+             JOIN SanPham SP ON C.MaNguoiBan = SP.MaNguoiBan JOIN DacDiemXanh D ON D.MaDDX=C.MaDDX
+             Where SP.MaSP = @MaSP
+         `);
+
+     const certificates = certificatesResult.recordset;
+
         // Truy vấn đánh giá trung bình
         const ratingResult = await pool.request()
             .input('MaSP', sql.NChar(20), MaSP)
@@ -119,7 +151,7 @@ async function getProductDetail(req, res) {
         const ratingCount = ratingResult.recordset[0].RatingCount;
 
         // Gửi dữ liệu đến view
-        res.render('product-detail', { product, averageRating, ratingCount });
+        res.render('product-detail', { product,reviews, certificates, averageRating, ratingCount });
     } catch (err) {
         console.error('Error in getProductDetail:', err);
         res.status(500).render('error', { message: 'Đã xảy ra lỗi khi lấy thông tin sản phẩm.' });

@@ -207,146 +207,72 @@
       <div id="describe" class="content-section active">
         <div class="product-describe">
             <h4 class="product-describe-title">Mô tả</h4>
-            Sản phẩm có thành phần từ tinh dầu bưởi Việt Nam truyền thống, Xylishine, Vitamin B5, Baicapil và Bisabolol. Nước dưỡng tóc tinh dầu bưởi giúp ngăn ngừa 60% nguyên nhân rụng tóc, làm gia tăng mật độ của tóc, từ đó giúp tóc dày lên trông thấy. Đồng thời, sản phẩm còn giúp nuôi dưỡng da đầu và cung cấp độ ẩm cho tóc.
+            <p class="product-description"><%= product.MoTa %></p>
         </div>
       </div>
 
       <!-- Nội dung Chứng chỉ xanh -->
       <div id="chungchi" class="content-section">
         <div class="product-ChungChiXanh">
-            <img src="https://sonnhatban.com/wp-content/uploads/2019/11/Green-Label-Jica.jpg" alt="Hình chứng chỉ 1">
-            <img src="http://res.heraldm.com/phpwas/restmb_idxmake.php?idx=640&simg=/content/image/2015/03/09/20150309001630_0.jpg" alt="Hình chứng chỉ 2">
+          <% if (certificates.length > 0) { %>
+            <% certificates.forEach(cert => { %>
+                <div class="certificate-item">
+                    <img src="/certificates/<%= cert.HinhDDX %>" alt="<%= cert.TenDDX %>" class="certificate-img">
+                    <div class="certificate-info">
+                        <p><strong><%= cert.TenDDX %></strong></p>
+                        <p><%= cert.CoQuanCap %></p>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>Chưa có chứng chỉ xanh cho sản phẩm này.</p>
+        <% } %>
         </div>
       </div>
 
       <!-- Nội dung review -->
       <div id="danhgia" class="content-section">
         <!--Testimonials------------------->
+        <!-- Phần hiển thị đánh giá -->
+    <% if (reviews.length > 0) { %>
         <section id="testimonials">
-            <!--testimonials-box-container------>
             <div class="testimonial-box-container">
-                <!--BOX-1-------------->
-                <div class="testimonial-box">
-                    <!--top------------------------->
-                    <div class="box-top">
-                        <!--profile----->
-                        <div class="profile">
-                            <!--img---->
-                            <div class="profile-img">
-                                <img src="https://i.pinimg.com/736x/30/7d/68/307d68aeeb10c2d98bd1a9f6c4e5ff9e.jpg" />
+                <% reviews.forEach(review => { %>
+                    <div class="testimonial-box">
+                        <!-- top -->
+                        <div class="box-top">
+                            <!-- profile -->
+                            <div class="profile">
+                                <div class="profile-img">
+                                    <img src="/avatar/<%= review.Avatar || 'default-avatar.jpg' %>" alt="Avatar" />
+                                </div>
+                                <div class="name-user">
+                                    <strong><%= review.HoUser %> <%= review.TenUser %></strong>
+                                    <span>@<%= review.TenDangNhap %></span>
+                                </div>
                             </div>
-                            <!--name-and-username-->
-                            <div class="name-user">
-                                <strong>Touseeq Ijaz</strong>
-                                <span>@touseeqijazweb</span>
-                            </div>
-                        </div>
-                        <!--reviews------>
-                        <div class="reviews">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i><!--Empty star-->
-                        </div>
-                    </div>
-                    <!--Comments---------------------------------------->
-                    <div class="client-comment">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-                    </div>
-                </div>
-                <!--BOX-2-------------->
-                <div class="testimonial-box">
-                    <!--top------------------------->
-                    <div class="box-top">
-                        <!--profile----->
-                        <div class="profile">
-                            <!--img---->
-                            <div class="profile-img">
-                                <img src="https://i.pinimg.com/736x/a8/4d/18/a84d1804038f430cd7faf5bcacb491d9.jpg" />
-                            </div>
-                            <!--name-and-username-->
-                            <div class="name-user">
-                                <strong>J.K Rowling</strong>
-                                <span>@jkrowling</span>
+                            <!-- reviews -->
+                            <div class="reviews">
+                                <% for (let i = 0; i < review.DiemDanhGia; i++) { %>
+                                    <i class="fas fa-star"></i>
+                                <% } %>
+                                <% for (let i = review.DiemDanhGia; i < 5; i++) { %>
+                                    <i class="far fa-star"></i>
+                                <% } %>
                             </div>
                         </div>
-                        <!--reviews------>
-                        <div class="reviews">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i><!--Empty star-->
+                        <!-- comments -->
+                        <div class="client-comment">
+                            <p><%= review.NDDanhGia %></p>
+                            <small>Ngày đánh giá: <%= new Date(review.NgayDanhGia).toLocaleDateString('vi-VN') %></small>
                         </div>
                     </div>
-                    <!--Comments---------------------------------------->
-                    <div class="client-comment">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-                    </div>
-                </div>
-                <!--BOX-3-------------->
-                <div class="testimonial-box">
-                    <!--top------------------------->
-                    <div class="box-top">
-                        <!--profile----->
-                        <div class="profile">
-                            <!--img---->
-                            <div class="profile-img">
-                                <img src="https://i.pinimg.com/736x/e6/b5/8c/e6b58cbf85f90d0095c6948d96f89b6b.jpg" />
-                            </div>
-                            <!--name-and-username-->
-                            <div class="name-user">
-                                <strong>Harry Potter</strong>
-                                <span>@DanielRedclief</span>
-                            </div>
-                        </div>
-                        <!--reviews------>
-                        <div class="reviews">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i><!--Empty star-->
-                        </div>
-                    </div>
-                    <!--Comments---------------------------------------->
-                    <div class="client-comment">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-                    </div>
-                </div>
-                <!--BOX-4-------------->
-                <div class="testimonial-box">
-                    <!--top------------------------->
-                    <div class="box-top">
-                        <!--profile----->
-                        <div class="profile">
-                            <!--img---->
-                            <div class="profile-img">
-                                <img src="https://i.pinimg.com/736x/d4/ce/c3/d4cec38c62c1474395d69c01ede601b6.jpg" />
-                            </div>
-                            <!--name-and-username-->
-                            <div class="name-user">
-                                <strong>Oliva</strong>
-                                <span>@Olivaadward</span>
-                            </div>
-                        </div>
-                        <!--reviews------>
-                        <div class="reviews">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i><!--Empty star-->
-                        </div>
-                    </div>
-                    <!--Comments---------------------------------------->
-                    <div class="client-comment">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-                    </div>
-                </div>
+                <% }); %>
             </div>
         </section>
+    <% } else { %>
+        <p>Chưa có đánh giá nào cho sản phẩm này.</p>
+    <% } %>
       </div>
 
       <!--  -->
