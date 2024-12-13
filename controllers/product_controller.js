@@ -1,5 +1,7 @@
 const productModel = require('../models/product_model');
 const { poolPromise, sql } = require('../db');
+const multer = require('multer');
+const path = require('path');
 
 
 async function getProductsPage(req, res) {
@@ -161,5 +163,56 @@ async function getProductDetail(req, res) {
 
 
 
+// Cấu hình multer để lưu hình ảnh
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/product_image'); // Thư mục lưu hình ảnh
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
 
-module.exports = {getProductsPage,searchProducts,getProductDetail};
+const upload = multer({ storage });
+
+// Xử lý form thêm sản phẩm
+async function addProduct(req, res) {
+    try {
+        const pool = await poolPromise;
+        const { MaSP, TenSP, MaNhomSP, SoLuongTon, DGBanMacDinh, MoTa } = req.body;
+        const HinhChinh = req.file ? req.file.filename : null;
+
+        const MaNguoiBan = req.session.businessUser.id; // Lấy từ session
+
+
+        if (!HinhChinh) {
+            return res.status(400).render('error', { message: 'Hình ảnh sản phẩm là bắt buộc.' });
+        }
+
+        await pool.request()
+            .input('MaSP', sql.NChar(20), MaSP)
+            .input('TenSP', sql.NVarChar(200), TenSP)
+            .input('MaNguoiBan', sql.NChar(20), MaNguoiBan)
+            .input('MaNhomSP', sql.NChar(20), MaNhomSP)
+            .input('SoLuongTon', sql.Int, SoLuongTon)
+            .input('DGBanMacDinh', sql.Decimal(10, 2), DGBanMacDinh)
+            .input('MoTa', sql.NVarChar(sql.MAX), MoTa)
+            .input('HinhChinh', sql.NVarChar(100), HinhChinh)
+            .query(`
+                INSERT INTO SanPham (MaSP, TenSP, MaNguoiBan, MaNhomSP, SoLuongTon, DGBanMacDinh, MoTa, HinhChinh)
+                VALUES (@MaSP, @TenSP, @MaNguoiBan, @MaNhomSP, @SoLuongTon, @DGBanMacDinh, @MoTa, @HinhChinh)
+            `);
+
+            res.status(401).send('Nhập sản phẩm thành công');
+    } catch (err) {
+        console.error('Error adding product:', err);
+        res.status(500).render('error', { message: 'Lỗi khi thêm sản phẩm.' });
+    }
+}
+
+
+
+
+
+
+module.exports = {getProductsPage,searchProducts,getProductDetail,addProduct,upload};

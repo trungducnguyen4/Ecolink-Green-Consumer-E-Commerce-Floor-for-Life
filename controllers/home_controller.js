@@ -1,0 +1,123 @@
+const { poolPromise, sql } = require('../db');
+
+async function getHomePage(req, res) {
+    try {
+        const pool = await poolPromise;
+
+        // Lấy sản phẩm thuộc nhóm thực phẩm
+        const productsTPResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'TP')
+            .query(`
+                SELECT top 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsTP = productsTPResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm văn phòng phẩm
+        const productsVPPResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'VVP')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsVPP = productsVPPResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm gia dụng
+        const productsGDResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'GD')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsGD = productsGDResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm Chăm sóc cá nhân
+        const productsCSCNResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'CSCN')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsCSCN = productsCSCNResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm mỹ phẩm
+        const productsMPResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'MP')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsMP = productsMPResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm Thoi trang
+        const productsTTResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'QA')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsTT = productsTTResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm đồ uốn
+        const productsDUResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'DU')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsDU = productsDUResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm thiết bị điện tử
+        const productsTBDTResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'TBDT')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsTBDT = productsTBDTResult.recordset;
+
+        // Lấy sản phẩm thuộc nhóm đồ uốn
+        const productsKhacResult = await pool.request()
+            .input('MaNhomSP', sql.NChar(20), 'Khac')
+            .query(`
+                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                FROM SanPham
+                WHERE MaNhomSP = @MaNhomSP
+                ORDER BY NEWID()
+            `);
+
+        const productsKhac = productsKhacResult.recordset;
+
+        // Render trang home với danh sách sản phẩm
+        res.render('home', { productsTP,productsVPP,productsGD,productsCSCN,productsMP,productsTT,productsDU,productsTBDT,productsKhac });
+    } catch (err) {
+        console.error('Error in getHomePage:', err);
+        res.status(500).render('error', { message: 'Lỗi khi tải trang chủ.' });
+    }
+}
+
+module.exports = { getHomePage };

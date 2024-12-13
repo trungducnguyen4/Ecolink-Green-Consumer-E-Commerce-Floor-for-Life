@@ -11,6 +11,8 @@ const signinController = require('../controllers/us_signin_controller');
 const upload = require('../middlewares/uploads'); // Import middleware upload
 const businessSigninController = require('../controllers/bs_signin_controller');
 const businessLoginController = require('../controllers/bs_login_controller');
+const homeController = require('../controllers/home_controller');
+const checkBusinessUser = require('../middlewares/check_business_user');
 
 //products
 router.get('/products', productController.getProductsPage);
@@ -23,9 +25,7 @@ router.get('/product-detail/:id', productController.getProductDetail);
 
 
 //Trang chủ
-router.get("/", (req, res) => {
-    res.render("home", { title: "Home" });
-});
+router.get("/", homeController.getHomePage);
 
 //Đăng nhập đăng ký
 router.get("/us-log-in", (req, res) => {
@@ -98,6 +98,20 @@ router.get("/purchaseOrderStatus", (req, res) => {
 router.get("/sale-chanels", (req, res) => {
     res.render("sale_chanels", { title: "Sale chanels" });
 });
+
+// Trang thêm sản phẩm
+router.get('/add-product', (req, res) => {
+    if (!req.session.businessUser) {
+        return res.status(403).send('Chỉ Business User mới có quyền thêm sản phẩm.');
+    }
+
+    const { MaNguoiBan } = req.session.businessUser;
+    res.render('add-product', { MaNguoiBan });
+});
+
+
+// Route POST xử lý form thêm sản phẩm
+router.post('/add-product', checkBusinessUser.checkBusinessUser, productController.upload.single('HinhChinh'), productController.addProduct);
 
 // Route thử nghiệm
 router.get('/test-view', (req, res) => {
