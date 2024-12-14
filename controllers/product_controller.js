@@ -1,5 +1,7 @@
 const productModel = require('../models/product_model');
 const { poolPromise, sql } = require('../db');
+const multer = require('multer');
+const path = require('path');
 
 
 async function getProductsPage(req, res) {
@@ -106,6 +108,38 @@ async function getProductDetail(req, res) {
 
         const product = productResult.recordset[0];
 
+        // Lấy thông tin đánh giá
+        const reviewsResult = await pool.request()
+            .input('MaSP', sql.NChar(20), MaSP)
+            .query(`
+                SELECT 
+                    dg.DiemDanhGia, 
+                    dg.NDDanhGia, 
+                    dg.NgayDanhGia, 
+                    nd.TenDangNhap, 
+                    nd.HoUser, 
+                    nd.TenUser,
+                    nd.Avatar
+                FROM DanhGiaSanPham dg
+                JOIN NguoiDung nd ON dg.MaUser = nd.MaUser
+                WHERE dg.MaSP = @MaSP
+                ORDER BY dg.NgayDanhGia DESC
+            `);
+
+        const reviews = reviewsResult.recordset;
+
+         // Truy vấn đặc điểm xanh của sản phẩm
+         const certificatesResult = await pool.request()
+         .input('MaSP', sql.NVarChar, MaSP)
+         .query(`
+             SELECT D.TenDDX, C.HinhDDX, C.CoQuanCap
+             FROM CT_DDX C
+             JOIN SanPham SP ON C.MaNguoiBan = SP.MaNguoiBan JOIN DacDiemXanh D ON D.MaDDX=C.MaDDX
+             Where SP.MaSP = @MaSP
+         `);
+
+     const certificates = certificatesResult.recordset;
+
         // Truy vấn đánh giá trung bình
         const ratingResult = await pool.request()
             .input('MaSP', sql.NChar(20), MaSP)
@@ -119,7 +153,7 @@ async function getProductDetail(req, res) {
         const ratingCount = ratingResult.recordset[0].RatingCount;
 
         // Gửi dữ liệu đến view
-        res.render('product-detail', { product, averageRating, ratingCount });
+        res.render('product-detail', { product,reviews, certificates, averageRating, ratingCount });
     } catch (err) {
         console.error('Error in getProductDetail:', err);
         res.status(500).render('error', { message: 'Đã xảy ra lỗi khi lấy thông tin sản phẩm.' });
@@ -129,5 +163,68 @@ async function getProductDetail(req, res) {
 
 
 
+// Cấu hình multer để lưu hình ảnh
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/product_image'); // Thư mục lưu hình ảnh
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
 
-module.exports = {getProductsPage,searchProducts,getProductDetail};
+const upload = multer({ storage });
+
+// Xử lý form thêm sản phẩm
+async function addProduct(req, res) {
+    try {
+        const pool = await poolPromise;
+
+        // Lấy dữ liệu từ form
+        const { TenSP, MaNhomSP, SoLuongTon, DGBanMacDinh, MoTa } = req.body;
+        const HinhChinh = req.file ? req.file.filename : null;
+
+        // Lấy mã người bán từ session
+        const MaNguoiBan = req.session.businessUser.id;
+
+        // Kiểm tra hình ảnh
+        if (!HinhChinh) {
+            return res.status(400).render('error', { message: 'Hình ảnh sản phẩm là bắt buộc.' });
+        }
+
+        // Tạo mã sản phẩm tự động
+        const productCountResult = await pool.request()
+            .query('SELECT COUNT(*) AS Total FROM SanPham');
+        const productCount = productCountResult.recordset[0].Total;
+        const MaSP = `SP${productCount + 1}`;
+
+        // Thêm sản phẩm vào database
+        await pool.request()
+            .input('MaSP', sql.NChar(20), MaSP)
+            .input('TenSP', sql.NVarChar(200), TenSP)
+            .input('MaNguoiBan', sql.NChar(20), MaNguoiBan)
+            .input('MaNhomSP', sql.NChar(20), MaNhomSP)
+            .input('SoLuongTon', sql.Int, SoLuongTon)
+            .input('DGBanMacDinh', sql.Decimal(10, 2), DGBanMacDinh)
+            .input('MoTa', sql.NVarChar(sql.MAX), MoTa)
+            .input('HinhChinh', sql.NVarChar(100), HinhChinh)
+            .query(`
+                INSERT INTO SanPham (MaSP, TenSP, MaNguoiBan, MaNhomSP, SoLuongTon, DGBanMacDinh, MoTa, HinhChinh)
+                VALUES (@MaSP, @TenSP, @MaNguoiBan, @MaNhomSP, @SoLuongTon, @DGBanMacDinh, @MoTa, @HinhChinh)
+            `);
+
+        // Redirect kèm query string thành công
+        res.redirect('/add-product?success=true');
+    } catch (err) {
+        console.error('Error adding product:', err);
+        res.status(500).render('error', { message: 'Lỗi khi thêm sản phẩm.' });
+    }
+}
+
+
+
+
+
+
+
+module.exports = {getProductsPage,searchProducts,getProductDetail,addProduct,upload};

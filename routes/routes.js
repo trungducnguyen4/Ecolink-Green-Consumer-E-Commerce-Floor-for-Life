@@ -11,7 +11,9 @@ const signinController = require('../controllers/us_signin_controller');
 const upload = require('../middlewares/uploads'); // Import middleware upload
 const businessSigninController = require('../controllers/bs_signin_controller');
 const businessLoginController = require('../controllers/bs_login_controller');
-const cartController = require('../controllers/cart_controller');
+const cartController = require('../controllers/cart_controller');  // Thêm cartController từ nhánh main
+const homeController = require('../controllers/home_controller'); // Thêm homeController từ nhánh KogMin
+const checkBusinessUser = require('../middlewares/check_business_user');
 
 // Initialize session middleware
 router.use(session({
@@ -35,11 +37,10 @@ router.get('/products', productController.getProductsPage);
 router.get('/products/search', productController.searchProducts);
 router.get('/product-detail/:id', productController.getProductDetail);
 
-// Other routes
-router.get("/", (req, res) => {
-    res.render("home", { title: "Home" });
-});
+// Trang chủ
+router.get("/", homeController.getHomePage);  // Trang chủ sử dụng homeController
 
+// Các route khác
 router.get("/us-log-in", (req, res) => {
     res.render("us-log-in", { title: "Log-in" });
 });
@@ -60,6 +61,7 @@ router.get("/business-signin", (req, res) => {
 });
 router.post('/business-signin/user', upload.single('GiayPhepKD'), businessSigninController.registerBusiness);
 
+// Các route khác
 router.get("/news", (req, res) => {
     res.render("news", { title: "News" });
 });
@@ -99,6 +101,19 @@ router.get("/purchaseOrderStatus", (req, res) => {
 router.get("/sale-chanels", (req, res) => {
     res.render("sale_chanels", { title: "Sale chanels" });
 });
+
+// Trang thêm sản phẩm
+router.get('/add-product', (req, res) => {
+    if (!req.session.businessUser) {
+        return res.status(403).send('Chỉ Business User mới có quyền thêm sản phẩm.');
+    }
+
+    const businessUser = req.session.businessUser;
+    res.render('add-product', { businessUser });
+});
+
+// Route POST xử lý form thêm sản phẩm
+router.post('/add-product', checkBusinessUser.checkBusinessUser, productController.upload.single('HinhChinh'), productController.addProduct);
 
 // Route thử nghiệm
 router.get('/test-view', (req, res) => {
