@@ -1,20 +1,19 @@
-
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const sql = require('mssql');
 const routes = require('./routes/routes');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
 
 // Import và kết nối cơ sở dữ liệu
 const db = require('./db'); // Đảm bảo kết nối được thiết lập
 
 // Cấu hình view engine
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Cấu hình session
 app.use(session({
@@ -39,7 +38,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Sử dụng các route đã định nghĩa
 app.use('/', routes);
-
 
 // Khởi động server sau khi kết nối DB thành công
 db.poolPromise

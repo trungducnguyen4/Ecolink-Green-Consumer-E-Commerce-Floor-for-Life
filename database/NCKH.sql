@@ -1,5 +1,4 @@
-﻿
-CREATE TABLE NhomSanPham (
+﻿CREATE TABLE NhomSanPham (
     MaNhomSP nchar(20) PRIMARY KEY,
     TenNhomSP nvarchar(100) NOT NULL UNIQUE, -- Tên nhóm phải duy nhất
     MoTa nvarchar(max)
@@ -32,6 +31,7 @@ CREATE TABLE CT_DDX (
     PRIMARY KEY (MaDDX, MaSP) -- Khóa chính ghép
 );
 CREATE TABLE DanhGiaSanPham (
+    MaSP nchar(20) NOT NULL, -- ID phiên bản sản phẩm
     MaSP nchar(20) NOT NULL, -- ID phiên bản sản phẩm
     MaUser nchar(20) NOT NULL, -- ID người dùng đánh giá
     DiemDanhGia int CHECK (DiemDanhGia BETWEEN 1 AND 5), -- Điểm đánh giá từ 1 đến 5
@@ -164,3 +164,55 @@ CREATE TABLE Chat (
     ThoiGian datetime  DEFAULT GETDATE(), -- Thời gian gửi tin nhắn
     PRIMARY KEY (MaNguoiBan, MaUser) -- Đảm bảo duy nhất cho mỗi tin nhắn
 );
+select * from SanPham
+-- Insert vào GioHang
+INSERT INTO GioHang (MaUser, MaGioHang, NgayTaoGio)
+VALUES ('1', 'GH01000001', GETDATE());
+
+-- Insert sản phẩm vào SanPhamTrongGio
+INSERT INTO SanPhamTrongGio (MaUser, MaGioHang, MaSP, SoLuongSPTrongGio)
+VALUES ('1', 'GH01000001', 'SP01000001', 2);
+select * from SanPham
+
+CREATE PROCEDURE AddToCart
+    @MaUser nchar(20),
+    @MaSP nchar(20),
+    @SoLuong int,
+    @ProductPrice decimal(10, 2)
+AS
+BEGIN
+    DECLARE @MaGioHang nchar(20);
+    DECLARE @ExistingQuantity int;
+
+    -- Check if the user already has a cart
+    SELECT @MaGioHang = MaGioHang
+    FROM GioHang
+    WHERE MaUser = @MaUser;
+
+    -- If the user does not have a cart, create one
+    IF @MaGioHang IS NULL
+    BEGIN
+        SET @MaGioHang = 'GH' + RIGHT('00000000' + CAST((SELECT ISNULL(MAX(CAST(SUBSTRING(MaGioHang, 3, 8) AS int)), 0) + 1 FROM GioHang) AS varchar), 8);
+        INSERT INTO GioHang (MaUser, MaGioHang, NgayTaoGio)
+        VALUES (@MaUser, @MaGioHang, GETDATE());
+    END
+
+    -- Check if the product is already in the cart
+    SELECT @ExistingQuantity = SoLuongSPTrongGio
+    FROM SanPhamTrongGio
+    WHERE MaUser = @MaUser AND MaGioHang = @MaGioHang AND MaSP = @MaSP;
+
+    -- If the product is already in the cart, update the quantity
+    IF @ExistingQuantity IS NOT NULL
+    BEGIN
+        UPDATE SanPhamTrongGio
+        SET SoLuongSPTrongGio = @ExistingQuantity + @SoLuong
+        WHERE MaUser = @MaUser AND MaGioHang = @MaGioHang AND MaSP = @MaSP;
+    END
+    ELSE
+    BEGIN
+        -- If the product is not in the cart, add it
+        INSERT INTO SanPhamTrongGio (MaUser, MaGioHang, MaSP, SoLuongSPTrongGio)
+        VALUES (@MaUser, @MaGioHang, @MaSP, @SoLuong);
+    END
+END;
