@@ -8,115 +8,190 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
     <title>Cart</title>
+    <style>
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 5px; /* Reduce padding by 50% */
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .quantity-input {
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 2.5px; /* Reduce margin by 50% */
+        }
+    </style>
 </head>
 <body>
-        <!-- HEADER -->
-        <div class="header">
-            <!-- Header-Logo -->           
-            <img src="./image/logo.jpg" alt="" class="logo-img">
-            <h4 class="header-logo-text">Giỏ hàng</h3>
+    <!-- HEADER -->
+    <div class="header">
+        <!-- Header-Logo -->           
+        <img src="./image/logo.jpg" alt="" class="logo-img">
+        <h4 class="header-logo-text">Giỏ hàng</h4>
+        
+        <div class="header-search">
             
-            <div class="header-search">
-                
-            <!-- Header-Services -->
-            <div class="header-service">
-                <div class="header-service-item">
-                <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
-                <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
-                </div>
-    
-                <div class="header-service-item">
-                <i class="fa-solid fa-question"></i>
-                <a class="active" href="#home">Hỗ trợ</a>
-                </div>
-    
-                <div class="header-service-item">
-                <i class="fa-regular fa-bell"></i>
-                <a href="#about">Thông báo</a>
-                </div>
-                <div class="header-service-item">
-                <i class="fa-solid fa-store"></i>
-                <a class="active" href="#home">Kênh người bán</a>
-                </div>
-            </div>  
-            </div>         
+        <!-- Header-Services -->
+        <div class="header-service">
+            <div class="header-service-item">
+            <img class="header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
+            <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
+            </div>
+
+            <div class="header-service-item">
+            <i class="fa-solid fa-question"></i>
+            <a class="active" href="#home">Hỗ trợ</a>
+            </div>
+
+            <div class="header-service-item">
+            <i class="fa-regular fa-bell"></i>
+            <a href="#about">Thông báo</a>
+            </div>
+            <div class="header-service-item">
+            <i class="fa-solid fa-store"></i>
+            <a class="active" href="#home">Kênh người bán</a>
+            </div>
+        </div>  
+        </div>         
+    </div>
+    <!-- BODY -->
+    <div class="wrapper">
+        <div class="cart-header">
+            <ul class="cart-header-list row">
+                <li class="cart-header-item col-lg-5">
+                    <input type="checkbox">
+                    <p class="cart-header-item-product"> Sản phẩm</p>
+                </li>
+                <li class="cart-header-item col-lg-2">Đơn giá</li>
+                <li class="cart-header-item col-lg-2">Số lượng</li>
+                <li class="cart-header-item col-lg-2">Thành tiền</li>
+                <li class="cart-header-item col-lg-1">Thao tác</li>
+            </ul>
         </div>
-        <!-- BODY -->
-        <div class="wrapper">
-            <div class="cart-header">
-                <ul class="cart-header-list row">
-                    <li class="cart-header-item col-lg-5">
-                        <input type="checkbox">
-                        <p class="cart-header-item-product"> Sản phẩm</p>
-                       
-                    </li>
-                    <li class="cart-header-item col-lg-2">Đơn giá</li>
-                    <li class="cart-header-item col-lg-2">Số lượng</li>
-                    <li class="cart-header-item col-lg-2">Thành tiền</li>
-                    <li class="cart-header-item col-lg-1">Thao tác</li>
-                </ul>
-            </div>
 
-            <div class="cart-body">
-                <div class="cart-body-item row">
-                    <div class="cart-body-shopName">
-                        <input type="checkbox">
-                        <div class="cart-body-shopName-title">ECOLINK FOR LIFE</div>
-                    </div>
-                    <div class="cart-body-infor-wrap row">
-                        <div class="cart-body-infor col-lg-5">
+        <div class="cart-body">
+            <% if (typeof cartItems !== 'undefined' && cartItems.length > 0) { %>
+                <% console.log('Cart Items:', cartItems); %> <!-- Debugging statement -->
+                <% cartItems.forEach(item => { %>
+                    <div class="cart-body-item row">
+                        <div class="cart-body-shopName">
                             <input type="checkbox">
-                            <img src="./image/sp1.jpg" alt="" class="cart-body-img">
-                            <div class="cart-body-nameProduct">ÁO THUN CROPTOP PHỐI BÈO</div>
-                            <div class="cart-body-typeProduct">Đen, Free</div>
+                            <div class="cart-body-shopName-title"><%= item.TenCuaHang %></div>
                         </div>
-                        <div class="cart-body-priceProduct col-lg-2">44.000</div>
-                        <div class="cart-quantityProduct col-lg-2">1</div>
-                        <div class="cart-body-totalCostProduct col-lg-2">44.000</div>
-                        <div class="cart-body-delete col-lg-1">Xóa</div>
-                    </div>
-                    
-                </div>
-                <div class="cart-body-item row">
-                    <div class="cart-body-shopName">
-                        <input type="checkbox">
-                        <div class="cart-body-shopName-title">ECOLINK FOR LIFE</div>
-                    </div>
-                    <div class="cart-body-infor-wrap row">
-                        <div class="cart-body-infor col-lg-5">
-                            <input type="checkbox">
-                            <img src="./image/sp1.jpg" alt="" class="cart-body-img">
-                            <div class="cart-body-nameProduct">ÁO THUN CROPTOP PHỐI BÈO</div>
-                            <div class="cart-body-typeProduct">Đen, Free</div>
+                        <div class="cart-body-infor-wrap row">
+                            <div class="cart-body-infor col-lg-5">
+                                <input type="checkbox">
+                                <img src="/product_image/<%= item.HinhChinh %>" alt="<%= item.TenSP %>" class="cart-body-img">
+                                <div class="cart-body-nameProduct"><%= item.TenSP %></div>
+                                <div class="cart-body-typeProduct"><%= item.MoTa %></div>
+                            </div>
+                            <div class="cart-body-priceProduct col-lg-2"><%= item.DGBanMacDinh %></div>
+                            <div class="cart-quantityProduct col-lg-2">
+                                <div class="quantity-container">
+                                    <button class="quantity-btn" data-action="decrease" data-id="<%= item.MaSP %>">-</button>
+                                    <input type="number" value="<%= item.SoLuongSPTrongGio %>" min="1" class="quantity-input" data-price="<%= item.DGBanMacDinh %>" data-id="<%= item.MaSP %>" readonly>
+                                    <button class="quantity-btn" data-action="increase" data-id="<%= item.MaSP %>">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-body-totalCostProduct col-lg-2"><%= item.DGBanMacDinh * item.SoLuongSPTrongGio %></div>
+                            <div class="cart-body-delete col-lg-1">Xóa</div>
                         </div>
-                        <div class="cart-body-priceProduct col-lg-2">44.000</div>
-                        <div class="cart-quantityProduct col-lg-2">1</div>
-                        <div class="cart-body-totalCostProduct col-lg-2">44.000</div>
-                        <div class="cart-body-delete col-lg-1">Xóa</div>
                     </div>
-                    
-                </div>
-            </div>
+                <% }); %>
+            <% } else { %>
+                <p>Giỏ hàng của bạn đang trống.</p>
+            <% } %>
+        </div>
 
-            <!-- TOTAL COST -->
-            <div class="total-cost-wrap">
-               <div class="total-cost-wrap row">
+        <!-- TOTAL COST -->
+        <div class="total-cost-wrap">
+            <div class="total-cost-wrap row">
                 <div class="total-cost-selectAll col-lg-6">
                     <input type="checkbox">
                     <p class="total-cost-text">Chọn tất cả</p>
                 </div>
                 <div class="total-cost-total-price col-lg-3">
                     <div class="total-cost-text">Tổng thanh toán:</div>
-                    <div class="total-cost-price">84.000</div>
+                    <div class="total-cost-price" id="total-cost">
+                        <%= cartItems.reduce((total, item) => total + item.DGBanMacDinh * item.SoLuongSPTrongGio, 0) %>
+                    </div>
                 </div>
                 <div class="total-cost-buy-order col-lg-3">
                     <button class="btn-order">Mua Hàng</button>
                 </div>
-               </div>
-            
             </div>
         </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateQuantity(input) {
+                const quantity = parseInt(input.value);
+                const price = parseFloat(input.dataset.price);
+                const productId = input.dataset.id;
 
-        
+                const totalCostElement = input.closest('.cart-body-item').querySelector('.cart-body-totalCostProduct');
+                totalCostElement.textContent = (price * quantity).toFixed(2);
+
+                // Update total cost
+                let totalCost = 0;
+                document.querySelectorAll('.cart-body-totalCostProduct').forEach(element => {
+                    totalCost += parseFloat(element.textContent);
+                });
+                document.getElementById('total-cost').textContent = totalCost.toFixed(2);
+
+                // Send AJAX request to update quantity in the database
+                fetch('/cart/update-quantity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productId, quantity }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert('Failed to update quantity');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while updating quantity');
+                });
+            }
+
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.dataset.action;
+                    const input = this.closest('.quantity-container').querySelector('.quantity-input');
+                    let quantity = parseInt(input.value);
+
+                    if (action === 'increase') {
+                        quantity++;
+                    } else if (action === 'decrease' && quantity > 1) {
+                        quantity--;
+                    }
+
+                    input.value = quantity;
+                    updateQuantity(input);
+                });
+            });
+
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.value < 1) {
+                        this.value = 1;
+                    }
+                    updateQuantity(this);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

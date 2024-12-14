@@ -103,11 +103,11 @@
                     <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp8.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
                   </li>
                   <li class="product-in-cart-item">
-                    <img src="./image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                    <img src="/image/sp9.jpg" alt="" class="product-in-cart-item-img">
                     <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
                   </li>
                 </ul>
@@ -182,7 +182,7 @@
             </div>
             <% if (product.SoLuongTon > 0) { %>
                 <div class="product-detail-buy">
-                    <div class="product-detail-add-cart">  
+                    <div class="product-detail-add-cart" onclick="addToCart('<%= product.MaSP %>', <%= product.DGBanMacDinh %>)">  
                         <i class="fa-solid fa-cart-plus"></i>
                         Thêm vào giỏ hàng
                     </div>
@@ -282,6 +282,30 @@
      <script type="text/javascript" src="/main.js">
       
      </script>
+     <script>
+        function addToCart(productId, productPrice) {
+            const quantity = parseInt(document.getElementById('quantity').value);
+            fetch('/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId, quantity, productPrice }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Sản phẩm đã được thêm vào giỏ hàng');
+                } else {
+                    alert('Không thể thêm sản phẩm vào giỏ hàng: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng: ' + error.message);
+            });
+        }
+        </script>
 </body>
 <footer>
     <div class="footer">

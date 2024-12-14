@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-//const User = require('../models/users');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const multer = require('multer');
 const fs = require('fs');
-const session = require('express-session');
 const { isAuthenticated } = require('../middlewares/auth');
 const productController = require('../controllers/product_controller');
 const loginController = require('../controllers/us_login_controller');
@@ -11,50 +11,57 @@ const signinController = require('../controllers/us_signin_controller');
 const upload = require('../middlewares/uploads'); // Import middleware upload
 const businessSigninController = require('../controllers/bs_signin_controller');
 const businessLoginController = require('../controllers/bs_login_controller');
-const homeController = require('../controllers/home_controller');
+const cartController = require('../controllers/cart_controller');  // Thêm cartController từ nhánh main
+const homeController = require('../controllers/home_controller'); // Thêm homeController từ nhánh KogMin
 const checkBusinessUser = require('../middlewares/check_business_user');
 
-//products
+// Initialize session middleware
+router.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set to true if using HTTPS
+}));
+
+// Initialize body-parser middleware
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
+// Cart routes
+router.post('/cart/add', cartController.addToCart);
+router.get('/cart', isAuthenticated, cartController.getCartItems);
+router.post('/cart/update-quantity', isAuthenticated, cartController.updateCartItemQuantity);
+
+// Products routes
 router.get('/products', productController.getProductsPage);
-
 router.get('/products/search', productController.searchProducts);
-//product detail
-
-
 router.get('/product-detail/:id', productController.getProductDetail);
 
+// Trang chủ
+router.get("/", homeController.getHomePage);  // Trang chủ sử dụng homeController
 
-//Trang chủ
-router.get("/", homeController.getHomePage);
-
-//Đăng nhập đăng ký
+// Các route khác
 router.get("/us-log-in", (req, res) => {
     res.render("us-log-in", { title: "Log-in" });
 });
-// Route đăng nhập cho người dùng
 router.post('/us-login/user', loginController.loginUser);
 
 router.get("/us-sign-in", (req, res) => {
     res.render("us-sign-in", { title: "Sign-in" });
 });
-
-// Route đăng ký người dùng (nếu cần)
 router.post('/us-sign-in/user', signinController.createUser);
 
 router.get("/business-login", (req, res) => {
     res.render("business-login", { title: "Business Log-in" });
 });
-
-// Route đăng nhập cho người bán
 router.post('/business-login/user', businessLoginController.loginBusiness);
 
 router.get("/business-signin", (req, res) => {
     res.render("business-signin", { title: "Business Sign-in" });
 });
-
-// Route đăng ký doanh nghiệp
 router.post('/business-signin/user', upload.single('GiayPhepKD'), businessSigninController.registerBusiness);
 
+// Các route khác
 router.get("/news", (req, res) => {
     res.render("news", { title: "News" });
 });
@@ -83,10 +90,6 @@ router.get("/test", (req, res) => {
     res.render("test", { title: "Test" });
 });
 
-router.get("/cart", (req, res) => {
-    res.render("cart", { title: "Cart" });
-});
-
 router.get("/order-payment", (req, res) => {
     res.render("order-payment", { title: "Order payment" });
 });
@@ -109,7 +112,6 @@ router.get('/add-product', (req, res) => {
     res.render('add-product', { businessUser });
 });
 
-
 // Route POST xử lý form thêm sản phẩm
 router.post('/add-product', checkBusinessUser.checkBusinessUser, productController.upload.single('HinhChinh'), productController.addProduct);
 
@@ -118,8 +120,7 @@ router.get('/test-view', (req, res) => {
     res.render('error', { message: 'Đây là trang thử nghiệm lỗi.' });
 });
 
-
-//test đăng nhập
+// Test login
 router.get('/check-session', (req, res) => {
     if (req.session && req.session.user) {
         res.status(200).send(`Bạn đang đăng nhập với tài khoản: ${req.session.user.TenDangNhap}`);
@@ -137,9 +138,7 @@ router.get('/check-business-session', (req, res) => {
     }
 });
 
-
 router.get('/logout', (req, res) => {
-    // Lưu trạng thái người dùng trước khi hủy session
     const isBusinessUser = req.session?.businessUser;
 
     req.session.destroy((err) => {
@@ -147,22 +146,17 @@ router.get('/logout', (req, res) => {
             console.error('Lỗi khi xóa session:', err);
             return res.status(500).send('Đã xảy ra lỗi khi đăng xuất');
         }
-        // Chuyển hướng đến trang đăng nhập tương ứng
         res.redirect(isBusinessUser ? '/business-login' : '/us-log-in');
     });
 });
 
-
-
-// Route được bảo vệ
+// Protected routes
 router.get('/dashboard', isAuthenticated, (req, res) => {
     res.status(200).send(`Chào mừng ${req.session.user.TenDangNhap} đến trang dashboard`);
 });
 
-
 router.get('/business-dashboard', isAuthenticated, (req, res) => {
     res.status(200).send(`Chào mừng ${req.session.businessUser.TenDangNhap} đến trang dashboard`);
 });
-
 
 module.exports = router;
