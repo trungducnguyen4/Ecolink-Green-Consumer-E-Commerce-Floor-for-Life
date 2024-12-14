@@ -3,44 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecolink for life</title>
+    <title>Ecolink for Life - Thêm Sản Phẩm</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
-    <link rel="stylesheet" href="./add_product.css">
-    <link rel="stylesheet" href="./main.js">
+    <link rel="stylesheet" href="/add_product.css">
+    <script src="./main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
-<!--Phần nội dung-->
 <form action="/add-product" method="POST" enctype="multipart/form-data">
     <div class="login-background">
         <div class="login-background-wrap">
-            <div class="login-title"><div class="login-title-text">Thông tin cơ bản</div></div>
-            
-            <div class="login-text">Mã người bán</div>
-            <div class="text-title"><input type="text" id="MaNguoiBan" name="MaNguoiBan" value="<%= MaNguoiBan %>" placeholder="<%= MaNguoiBan %>" readonly /></div>
-            
-            <div class="login-text">Mã sản phẩm</div>
-            <div class="text-title"><input type="text" name="MaSP" placeholder="Nhập mã sản phẩm" required></div>
-            
+            <div class="login-title">
+                <div class="login-title-text">Thông tin cơ bản</div>
+            </div>
+
+            <!-- Tên sản phẩm -->
             <div class="login-text">Tên sản phẩm</div>
-            <div class="text-title"><input type="text" name="TenSP" placeholder="Nhập tên sản phẩm" required></div>
-            
-            <div class="login-text">Mã loại sản phẩm</div>
-            <div><input type="text" name="MaNhomSP" placeholder="Nhập mã loại sản phẩm"></div>
-            
+            <div class="text-title">
+                <input type="text" name="TenSP" placeholder="Nhập tên sản phẩm" required>
+            </div>
+
+            <!-- Mã loại sản phẩm -->
+            <div class="login-text">Loại sản phẩm</div>
+            <div>
+                <select name="MaNhomSP" class="select-text-product" required>
+                    <option value="" disabled selected>Chọn loại sản phẩm</option>
+                    <option value="CSCN">Chăm Sóc Cá Nhân</option>
+                    <option value="DU">Đồ Uống</option>
+                    <option value="GD">Gia Dụng</option>
+                    <option value="Khac">Khác</option>
+                    <option value="MP">Mỹ Phẩm</option>
+                    <option value="QA">Quần Áo</option>
+                    <option value="TBDT">Thiết Bị Điện Tử</option>
+                    <option value="TP">Thực Phẩm</option>
+                    <option value="VPP">Văn Phòng Phẩm</option>
+                </select>
+            </div>
+
+            <!-- Mã người bán -->
+            <div class="login-text">Mã người bán</div>
+            <div>
+                <input type="text" id="MaNguoiBan" name="MaNguoiBan" value="<%= businessUser.id %>" readonly>
+            </div>
+
+            <div class="login-title login-text">
+                <div class="login-title-text">Thông tin chi tiết</div>
+            </div>
+
+            <!-- Số lượng tồn kho -->
             <div class="login-text">Số lượng tồn kho<div class="login-need">*</div></div>
-            <div><input type="number" name="SoLuongTon" placeholder="Nhập số lượng tồn kho" required></div>
-            
+            <div>
+                <input type="number" name="SoLuongTon" placeholder="Nhập số lượng tồn kho" required>
+            </div>
+
+            <!-- Đơn giá -->
             <div class="login-text">Đơn giá<div class="login-need">*</div></div>
-            <div><input type="number" name="DGBanMacDinh" placeholder="Nhập đơn giá" required></div>
-            
+            <div>
+                <input type="number" name="DGBanMacDinh" placeholder="Nhập đơn giá" step="0.01" required>
+            </div>
+
+            <!-- Mô tả -->
             <div class="login-text">Mô tả<div class="login-need">*</div></div>
-            <div><textarea name="MoTa" placeholder="Mô tả sản phẩm: Kích thước, màu sắc, khối lượng,..." required></textarea></div>
+            <div>
+                <textarea name="MoTa" placeholder="Mô tả sản phẩm: Kích thước, màu sắc, khối lượng,..." required></textarea>
+            </div>
+
+            <!-- Hình ảnh sản phẩm -->
             <div class="login-text">Hình ảnh sản phẩm<div class="login-need">*</div></div>
-            <div><input type="file" name="HinhChinh" class="file-uploader" required /></div>
+            <div>
+                <input type="file" name="HinhChinh" class="file-uploader" required>
+            </div>
+
+            <!-- Nút thêm sản phẩm -->
             <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
         </div>
     </div>
 </form>
-
 </body>
+</html>

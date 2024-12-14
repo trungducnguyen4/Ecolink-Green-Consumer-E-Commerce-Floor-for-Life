@@ -105,8 +105,8 @@ router.get('/add-product', (req, res) => {
         return res.status(403).send('Chỉ Business User mới có quyền thêm sản phẩm.');
     }
 
-    const { MaNguoiBan } = req.session.businessUser;
-    res.render('add-product', { MaNguoiBan });
+    const businessUser = req.session.businessUser;
+    res.render('add-product', { businessUser });
 });
 
 

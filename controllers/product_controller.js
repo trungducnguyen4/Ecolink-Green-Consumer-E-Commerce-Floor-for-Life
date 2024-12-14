@@ -179,16 +179,26 @@ const upload = multer({ storage });
 async function addProduct(req, res) {
     try {
         const pool = await poolPromise;
-        const { MaSP, TenSP, MaNhomSP, SoLuongTon, DGBanMacDinh, MoTa } = req.body;
+
+        // Lấy dữ liệu từ form
+        const { TenSP, MaNhomSP, SoLuongTon, DGBanMacDinh, MoTa } = req.body;
         const HinhChinh = req.file ? req.file.filename : null;
 
-        const MaNguoiBan = req.session.businessUser.id; // Lấy từ session
+        // Lấy mã người bán từ session
+        const MaNguoiBan = req.session.businessUser.id;
 
-
+        // Kiểm tra hình ảnh
         if (!HinhChinh) {
             return res.status(400).render('error', { message: 'Hình ảnh sản phẩm là bắt buộc.' });
         }
 
+        // Tạo mã sản phẩm tự động
+        const productCountResult = await pool.request()
+            .query('SELECT COUNT(*) AS Total FROM SanPham');
+        const productCount = productCountResult.recordset[0].Total;
+        const MaSP = `SP${productCount + 1}`;
+
+        // Thêm sản phẩm vào database
         await pool.request()
             .input('MaSP', sql.NChar(20), MaSP)
             .input('TenSP', sql.NVarChar(200), TenSP)
@@ -203,12 +213,14 @@ async function addProduct(req, res) {
                 VALUES (@MaSP, @TenSP, @MaNguoiBan, @MaNhomSP, @SoLuongTon, @DGBanMacDinh, @MoTa, @HinhChinh)
             `);
 
-            res.status(401).send('Nhập sản phẩm thành công');
+        // Redirect kèm query string thành công
+        res.redirect('/add-product?success=true');
     } catch (err) {
         console.error('Error adding product:', err);
         res.status(500).render('error', { message: 'Lỗi khi thêm sản phẩm.' });
     }
 }
+
 
 
 

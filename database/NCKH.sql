@@ -31,6 +31,7 @@ CREATE TABLE CT_DDX (
     CoQuanCap nvarchar(150), -- Cơ quan cấp đặc điểm xanh
     PRIMARY KEY (MaDDX, MaNguoiBan) -- Khóa chính ghép
 );
+
 CREATE TABLE DanhGiaSanPham (
     MaSP nchar(20) NOT NULL, -- ID phiên bản sản phẩm
     MaUser nchar(20) NOT NULL, -- ID người dùng đánh giá
@@ -39,7 +40,6 @@ CREATE TABLE DanhGiaSanPham (
     NgayDanhGia datetime  DEFAULT GETDATE(), -- Ngày đánh giá, mặc định là ngày hiện tại
     HinhDanhGia nvarchar(300), -- Đường dẫn hình ảnh đánh giá (nếu có)
     VideoDanhGia nvarchar(300), -- Đường dẫn video đánh giá (nếu có)
-    PRIMARY KEY (MaSP, MaUser) -- Khóa chính
 );
 
 create table NguoiBan (
