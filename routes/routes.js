@@ -14,6 +14,7 @@ const businessLoginController = require('../controllers/bs_login_controller');
 const cartController = require('../controllers/cart_controller');  // Thêm cartController từ nhánh main
 const homeController = require('../controllers/home_controller'); // Thêm homeController từ nhánh KogMin
 const checkBusinessUser = require('../middlewares/check_business_user');
+const personalController = require('../controllers/personal_controller');
 
 // Initialize session middleware
 router.use(session({
@@ -78,9 +79,11 @@ router.get("/log-in", (req, res) => {
     res.render("log-in", { title: "Login" });
 });
 
-router.get("/personal", (req, res) => {
-    res.render("personal", { title: "Personal" });
-});
+// Hiển thị trang cá nhân
+router.get('/personal', isAuthenticated, personalController.getPersonalInfo);
+
+// Cập nhật thông tin cá nhân
+router.post('/personal/updatePersonal', isAuthenticated, personalController.upload.single('Avatar'), personalController.updatePersonalInfo);
 
 router.get("/personal_forum", (req, res) => {
     res.render("personal_forum", { title: "Personal forum" });

@@ -36,10 +36,7 @@
                 </div>
             </form>
 
-            <div id="popup" style="display: none; position: fixed; top: 30%; left: 50%; transform: translate(-50%, -30%); background: #f8f9fa; padding: 20px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <p id="popup-message"></p>
-                <button id="popup-close">Đóng</button>
-            </div>
+            
         </div>
     </div>
     <script>
@@ -69,42 +66,62 @@
     });
 });
     </script>
-<script>
-document.querySelector('#form-login').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Ngăn chặn hành vi mặc định của form (tải lại trang)
-
-    const TenDangNhap = document.querySelector('#TenDangNhap-input').value;
-    const MatKhau = document.querySelector('#MatKhau-input').value;
-
-    try {
-        // Gửi yêu cầu POST tới server
-        const response = await fetch('/us-login/user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ TenDangNhap, MatKhau }),
-        });
-
-        const message = await response.text(); // Lấy thông báo từ server
-
-        // Hiển thị popup với thông báo
-        document.getElementById('popup-message').textContent = message;
-        document.getElementById('popup').style.display = 'block';
-
-        // Xử lý khi đóng popup
-        document.getElementById('popup-close').addEventListener('click', () => {
-            document.getElementById('popup').style.display = 'none';
-            
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.querySelector('#form-login').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+    
+        const TenDangNhap = document.querySelector('#TenDangNhap-input').value.trim();
+        const MatKhau = document.querySelector('#MatKhau-input').value.trim();
+    
+        try {
+            // Gửi yêu cầu POST tới server
+            const response = await fetch('/us-login/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ TenDangNhap, MatKhau }),
+            });
+    
+            const message = await response.text(); // Lấy thông báo từ server
+    
             if (response.ok) {
-                // Chỉ chuyển hướng nếu đăng nhập thành công
-                window.location.href = '/'; // Chuyển về trang chủ
+                // SweetAlert2 thông báo thành công và tự động chuyển hướng
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng nhập thành công!',
+                    text: message,
+                    timer: 1000, // Hiển thị trong 2 giây
+                    timerProgressBar: true,
+                    showConfirmButton: false, // Ẩn nút OK
+                    didClose: () => {
+                        window.location.href = '/'; // Tự động chuyển hướng sau khi pop-up đóng
+                    }
+                });
+            } else {
+                // SweetAlert2 thông báo lỗi
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Đăng nhập thất bại!',
+                    text: message,
+                    timer: 3000, // Hiển thị trong 3 giây
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
             }
-        });
-    } catch (err) {
-        console.error('Error:', err); // In lỗi ra console
-        alert('Đã xảy ra lỗi trong quá trình đăng nhập.');
-    }
-});
-</script>
+        } catch (err) {
+            console.error('Error:', err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi hệ thống!',
+                text: 'Đã xảy ra lỗi trong quá trình đăng nhập.',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        }
+    });
+    </script>
+    
 </body>

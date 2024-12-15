@@ -1,39 +1,39 @@
-async function checkUserSession() {
+async function checkSession() {
     try {
-        const response = await fetch('/check-session');
-        if (response.ok) {
-            const message = await response.text();
-            console.log(`Session hợp lệ: ${message}`);
-        } else if (response.status === 401) {
-            alert('Phiên người dùng đã hết hạn. Bạn sẽ được chuyển đến trang đăng nhập.');
-            window.location.href = '/us-log-in';
+        const userResponse = await fetch('/check-session');
+        const businessResponse = await fetch('/check-business-session');
+
+        // Kiểm tra session người dùng
+        if (userResponse.ok) {
+            const userMessage = await userResponse.text();
+            console.log(`Session người dùng hợp lệ: ${userMessage}`);
+        } else if (userResponse.status === 401) {
+            console.warn('Session người dùng không tồn tại hoặc đã hết hạn.');
         } else {
             console.error('Lỗi không xác định khi kiểm tra session người dùng.');
         }
-    } catch (err) {
-        console.error('Lỗi khi kiểm tra session người dùng:', err);
-    }
-}
 
-async function checkBusinessSession() {
-    try {
-        const response = await fetch('/check-business-session');
-        if (response.ok) {
-            const message = await response.text();
-            console.log(`Business session hợp lệ: ${message}`);
-        } else if (response.status === 401) {
-            alert('Phiên doanh nghiệp đã hết hạn. Bạn sẽ được chuyển đến trang đăng nhập.');
-            window.location.href = '/business-login';
+        // Kiểm tra session doanh nghiệp
+        if (businessResponse.ok) {
+            const businessMessage = await businessResponse.text();
+            console.log(`Session doanh nghiệp hợp lệ: ${businessMessage}`);
+        } else if (businessResponse.status === 401) {
+            console.warn('Session doanh nghiệp không tồn tại hoặc đã hết hạn.');
         } else {
             console.error('Lỗi không xác định khi kiểm tra session doanh nghiệp.');
         }
+
+        // Logic điều hướng nếu không có session nào hợp lệ
+        if (!userResponse.ok && !businessResponse.ok) {
+            alert('Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại.');
+            window.location.href = '/us-log-in'; // Hoặc chuyển đến `/business-login` tùy loại tài khoản
+        }
     } catch (err) {
-        console.error('Lỗi khi kiểm tra session doanh nghiệp:', err);
+        console.error('Lỗi khi kiểm tra session:', err);
     }
 }
 
 // Kiểm tra session định kỳ
 setInterval(() => {
-    checkUserSession();
-    checkBusinessSession();
-}, 60000); // 60 giây
+    checkSession();
+}, 5*60000); // 60 giây

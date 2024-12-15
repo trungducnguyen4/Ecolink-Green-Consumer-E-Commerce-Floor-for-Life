@@ -79,6 +79,7 @@ icon.style.opacity = event.target.value ? '0' : '1';
 
     </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.getElementById('form-login').addEventListener('submit', async (e) => {
         e.preventDefault(); // Ngăn form submit mặc định
@@ -87,6 +88,7 @@ icon.style.opacity = event.target.value ? '0' : '1';
         const MatKhau = document.getElementById('password').value.trim();
 
         try {
+            // Gửi yêu cầu POST tới server
             const response = await fetch('/business-login/user', {
                 method: 'POST',
                 headers: {
@@ -97,24 +99,44 @@ icon.style.opacity = event.target.value ? '0' : '1';
 
             const result = await response.text();
 
-            // Hiển thị popup thông báo
-            const popup = document.getElementById('popup');
-            const popupMessage = document.getElementById('popup-message');
-            popupMessage.textContent = result;
-            popup.style.display = 'block';
-
-            // Đóng popup và chuyển hướng nếu đăng nhập thành công
-            document.getElementById('popup-close').addEventListener('click', () => {
-                popup.style.display = 'none';
-                if (response.ok) {
-                    window.location.href = '/'; // Chuyển đến trang dashboard hoặc trang chủ
-                }
-            });
+            if (response.ok) {
+                // Hiển thị SweetAlert2 khi đăng nhập thành công
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng nhập thành công!',
+                    text: result,
+                    timer: 1000, // Hiển thị trong 2 giây
+                    timerProgressBar: true,
+                    showConfirmButton: false, // Không cần nút OK
+                    didClose: () => {
+                        window.location.href = '/'; // Chuyển đến trang dashboard hoặc trang chủ
+                    }
+                });
+            } else {
+                // Hiển thị SweetAlert2 khi đăng nhập thất bại
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Đăng nhập thất bại!',
+                    text: result,
+                    timer: 1000, // Hiển thị trong 3 giây
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            }
         } catch (err) {
             console.error('Error:', err);
-            alert('Đã xảy ra lỗi trong quá trình đăng nhập.');
+            // SweetAlert2 hiển thị khi xảy ra lỗi hệ thống
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi hệ thống!',
+                text: 'Đã xảy ra lỗi trong quá trình đăng nhập.',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
         }
     });
 </script>
+
 
 </body>

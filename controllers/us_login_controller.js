@@ -35,7 +35,7 @@ async function loginUser(req, res) {
         req.session.user = {
             id: user.MaUser,
             TenDangNhap: user.TenDangNhap,
-            AnhAvatar: user.AnhAvatar ? `/avatar/${user.AnhAvatar}` : '/avatar/default-avatar.jpg',
+            AnhAvatar: user.Avatar ? `/avatar/${user.Avatar}` : '/avatar/default-avatar.jpg',
             role: 'user',
         };
 

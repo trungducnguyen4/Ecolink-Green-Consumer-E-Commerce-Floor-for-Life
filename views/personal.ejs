@@ -32,10 +32,10 @@
                     </div>
 
                     <!-- ORDER -->
-                     <div class="personal-body-order-frame">
+                     <a href="/purchaseOrderStatus" class="personal-body-order-frame">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <div class="personal-body-my-account-text">Đơn Mua</div>
-                     </div>
+                     </a>
                       <!-- NOTIFICATION -->
                     <div class="personal-body-notification-frame">
                         <div class="personal-body-order-header-frame">
@@ -61,46 +61,100 @@
                 </div>
                 <!-- Detail-body -->
                  <div class="personal-body-detail-body">
-                    <div class="personal-body-detail-body-item-frame ">
-                        <div class="personal-body-detail-body-lable col-lg-3">Tên đăng nhập</div>
-                        <input type="text" class="personal-body-detail-body-item-input col-lg-6">
+                  <form id="personal-form" method="POST" enctype="multipart/form-data">
+                    <div class="personal-body-detail-body-item-frame">
+                        <label for="TenUser" class="personal-body-detail-body-lable col-lg-3">Tên</label>
+                        <input type="text" id="TenUser" name="TenUser" class="personal-body-detail-body-item-input col-lg-6" value="<%= user.TenUser %>" >
                     </div>
                     <div class="personal-body-detail-body-item-frame">
-                        <div class="personal-body-detail-body-lable col-lg-3">Tên</div>
-                        <input type="text" class="personal-body-detail-body-item-input col-lg-6">
+                        <label for="Email" class="personal-body-detail-body-lable col-lg-3">Email</label>
+                        <input type="email" id="Email" name="Email" class="personal-body-detail-body-item-input col-lg-6" value="<%= user.Email %>" >
                     </div>
                     <div class="personal-body-detail-body-item-frame">
-                        <div class="personal-body-detail-body-lable col-lg-3">Email</div>
-                        <input type="text" class="personal-body-detail-body-item-input col-lg-6">
+                        <label for="SoDienThoai" class="personal-body-detail-body-lable col-lg-3">Số điện thoại</label>
+                        <input type="text" id="SoDienThoai" name="SoDienThoai" class="personal-body-detail-body-item-input col-lg-6" value="<%= user.SoDienThoai %>" >
                     </div>
                     <div class="personal-body-detail-body-item-frame">
-                        <div class="personal-body-detail-body-lable col-lg-3">Số điện thoại</div>
-                        <input type="text" class="personal-body-detail-body-item-input col-lg-6">
+                        <label for="DiaChi" class="personal-body-detail-body-lable col-lg-3">Địa chỉ</label>
+                        <input type="text" id="DiaChi" name="DiaChi" class="personal-body-detail-body-item-input col-lg-6" value="<%= user.DiaChi %>" >
                     </div>
                     <div class="personal-body-detail-body-item-frame">
-                        <div class="personal-body-detail-body-lable col-lg-3">Giới tính</div>
-                        <input class="personal-body-detail-body-male" type="radio" checked="checked" name="radio">Nam <div class="checkmark"></div>
-                       
-                        <input class="personal-body-detail-body-male" type="radio" name="radio">Nữ<div class="checkmark"></div>
-                        
+                        <label class="personal-body-detail-body-lable col-lg-3">Giới tính</label>
+                        <input type="radio" id="Nam" name="GioiTinh" value="Nam" <%= user.GioiTinh === 'Nam' ? 'checked' : '' %>> Nam
+                        <input type="radio" id="Nu" name="GioiTinh" value="Nữ" <%= user.GioiTinh === 'Nữ' ? 'checked' : '' %>> Nữ
                     </div>
                     <div class="personal-body-detail-body-item-frame">
-                        <div class="personal-body-detail-body-lable col-lg-3">Ngày sinh</div>
-                        
-                        <input class="personal-body-detail-body-date" type="number" id="ngay" name="ngay" min="1" max="31" placeholder="Ngày">
-                        <input class="personal-body-detail-body-date" type="number" id="thang" name="thang" min="1" max="12" placeholder="Tháng">
-                        <input class="personal-body-detail-body-date" type="number" id="nam" name="nam" min="2023" max="2024" placeholder="Năm">
+                        <label for="NgaySinh" class="personal-body-detail-body-lable col-lg-3">Ngày sinh</label>
+                        <input type="date" id="NgaySinh" name="NgaySinh" class="personal-body-detail-body-date" value="<%= user.NgaySinh %>" >
                     </div>
-                    <button class="personal-body-detail-body-btnSave" type="button">Lưu</button>
-
+                    <div class="personal-body-detail-body-item-frame">
+                        <label for="Avatar" class="personal-body-detail-body-lable col-lg-3">Ảnh đại diện</label>
+                        <input type="file" id="Avatar" name="Avatar" class="file-uploader">
+                        <img id="previewAvatar" src="/avatar/<%= user.Avatar || 'default-avatar.jpg' %>" alt="Avatar" class="avatar-preview">
+                    </div>
+                
+                    <!-- Nút lưu -->
+                    <button type="submit" class="btn btn-success">Lưu thông tin</button>
+                </form>
+                
                  </div>
             </div>
         </div>
-        <script>
-          document.getElementById('profile').addEventListener('click', function() {
-            window.location.href = 'http://127.0.0.1:5500/assets/personal.html';
+        <!-- Thêm SweetAlert2 vào để hiển thị pop-up -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Lắng nghe sự kiện submit
+    const form = document.getElementById('personal-form');
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();  // Ngừng form gửi yêu cầu mặc định (refresh trang)
+        
+        const formData = new FormData(form);
+        const data = {};
+
+        // Lấy dữ liệu từ formData và chuyển thành đối tượng
+        formData.forEach((value, key) => {
+            data[key] = value;
         });
-        </script>
+
+        try {
+            const response = await fetch('/personal/updatePersonal', {
+                method: 'POST',
+                body: formData,  // Gửi dữ liệu form (bao gồm file avatar nếu có)
+            });
+
+            const message = await response.text();
+            if (response.ok) {
+                // Hiển thị thông báo thành công nếu server trả về OK
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cập nhật thành công!',
+                    text: message,
+                    timer: 5000, // Hiển thị pop-up trong 2 giây
+                    timerProgressBar: true, // Thêm thanh tiến trình
+                });
+                
+                
+            } else {
+                // Hiển thị thông báo lỗi
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Có lỗi xảy ra!',
+                    text: `Lỗi: ${message}`
+                });
+            }
+        } catch (err) {
+            console.error('Đã xảy ra lỗi:', err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi hệ thống',
+                text: 'Đã xảy ra lỗi khi cập nhật thông tin.'
+            });
+        }
+    });
+
+</script>
+
 </body>
 
 <footer>

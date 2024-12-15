@@ -134,3 +134,12 @@
     margin-top: 20px;
 }
 
+.avatar-preview {
+    display: block;
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}

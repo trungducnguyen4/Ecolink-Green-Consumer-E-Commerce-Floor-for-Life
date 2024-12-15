@@ -11,7 +11,7 @@ body{
   justify-content: center;
   min-height: 100vh;
   overflow: hidden;
-  background-image: url('https://i.pinimg.com/736x/5c/a5/ac/5ca5ac475e6708ed4888fb41d4df8fff.jpg');
+  background-image: url('/image/pexels-fecundap6-365638 (1).jpg');
   /* background: url("bg.png"), -webkit-linear-gradient(bottom, white, #007b59); */
   background-size: cover; /* Kéo dài ảnh nền để phủ toàn bộ phần tử */
   background-position: center; /* Căn giữa ảnh nền */

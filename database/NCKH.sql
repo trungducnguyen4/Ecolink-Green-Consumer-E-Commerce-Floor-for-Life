@@ -72,7 +72,8 @@ CREATE TABLE NguoiDung (
     SoDienThoai nvarchar(15) , -- Định dạng số điện thoại
     DiaChi nvarchar(150),
     Email nvarchar(100),  -- Định dạng email hợp lệ
-	Avatar NVARCHAR(300)
+	Avatar NVARCHAR(300),
+	NgaySinh date
 );
 
 
@@ -217,3 +218,5 @@ BEGIN
         VALUES (@MaUser, @MaGioHang, @MaSP, @SoLuong);
     END
 END;
+
+GRANT EXECUTE ON [dbo].[AddToCart] TO manager

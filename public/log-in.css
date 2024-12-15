@@ -5,7 +5,7 @@ body{
     font-size: 16px;
 }
 .login-body {
-    background-image: url('https://i.pinimg.com/736x/d9/f8/1e/d9f81e99932fd6765ad1952bcd85cee5.jpg');
+    background-image: url('/image/pexels-pixabay-66869.jpg');
     background-size: cover; /* Kéo dài ảnh nền để phủ toàn bộ phần tử */
     background-position: center; /* Căn giữa ảnh nền */
     background-repeat: no-repeat; /* Ngừng lặp lại ảnh nền */
