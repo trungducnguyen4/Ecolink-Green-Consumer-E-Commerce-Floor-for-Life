@@ -118,8 +118,7 @@ async function getProductDetail(req, res) {
                     dg.NgayDanhGia, 
                     nd.TenDangNhap, 
                     nd.HoUser, 
-                    nd.TenUser,
-                    nd.Avatar
+                    nd.TenUser
                 FROM DanhGiaSanPham dg
                 JOIN NguoiDung nd ON dg.MaUser = nd.MaUser
                 WHERE dg.MaSP = @MaSP

@@ -18,9 +18,11 @@ async function getCartItems(req, res) {
         const result = await pool.request()
             .input('MaUser', sql.NChar, userId)
             .query(`
-                SELECT sp.MaSP, sp.TenSP, sp.HinhChinh, sp.DGBanMacDinh, sp.SoLuongTon, stg.SoLuongSPTrongGio
+                SELECT sp.MaSP, sp.TenSP, sp.HinhChinh, sp.DGBanMacDinh, sp.SoLuongTon, stg.SoLuongSPTrongGio,
+                       nb.TenCuaHang, nb.AnhLogo, nb.MaNguoiBan
                 FROM SanPhamTrongGio stg
                 JOIN SanPham sp ON stg.MaSP = sp.MaSP
+                JOIN NguoiBan nb ON sp.MaNguoiBan = nb.MaNguoiBan
                 WHERE stg.MaUser = @MaUser
             `);
 

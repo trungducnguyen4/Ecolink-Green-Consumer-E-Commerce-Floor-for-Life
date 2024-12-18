@@ -27,6 +27,21 @@
             border: 1px solid #ccc;
             margin: 0 2.5px; /* Reduce margin by 50% */
         }
+        .shop-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .shop-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .shop-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -66,7 +81,6 @@
         <div class="cart-header">
             <ul class="cart-header-list row">
                 <li class="cart-header-item col-lg-5">
-                    <input type="checkbox">
                     <p class="cart-header-item-product"> Sản phẩm</p>
                 </li>
                 <li class="cart-header-item col-lg-2">Đơn giá</li>
@@ -78,33 +92,48 @@
 
         <div class="cart-body">
             <% if (typeof cartItems !== 'undefined' && cartItems.length > 0) { %>
-                <% console.log('Cart Items:', cartItems); %> <!-- Debugging statement -->
-                <% cartItems.forEach(item => { %>
-                    <div class="cart-body-item row">
-                        <div class="cart-body-shopName">
-                            <input type="checkbox">
-                            <div class="cart-body-shopName-title"><%= item.TenCuaHang %></div>
+                <% 
+                    const groupedItems = cartItems.reduce((acc, item) => {
+                        if (!acc[item.MaNguoiBan]) {
+                            acc[item.MaNguoiBan] = {
+                                shopName: item.TenCuaHang || 'Unknown Shop',
+                                shopLogo: item.AnhLogo || 'default-logo.png',
+                                items: []
+                            };
+                        }
+                        acc[item.MaNguoiBan].items.push(item);
+                        return acc;
+                    }, {});
+                %>
+                <% for (const [shopId, shop] of Object.entries(groupedItems)) { %>
+                    <div class="shop-group">
+                        <div class="shop-header">
+                            <img src="/shop_image/<%= shop.shopLogo %>" alt="<%= shop.shopName %>" class="shop-logo">
+                            <div class="shop-name"><%= shop.shopName %></div>
                         </div>
-                        <div class="cart-body-infor-wrap row">
-                            <div class="cart-body-infor col-lg-5">
-                                <input type="checkbox">
-                                <img src="/product_image/<%= item.HinhChinh %>" alt="<%= item.TenSP %>" class="cart-body-img">
-                                <div class="cart-body-nameProduct"><%= item.TenSP %></div>
-                                <div class="cart-body-typeProduct"><%= item.MoTa %></div>
-                            </div>
-                            <div class="cart-body-priceProduct col-lg-2"><%= item.DGBanMacDinh %></div>
-                            <div class="cart-quantityProduct col-lg-2">
-                                <div class="quantity-container">
-                                    <button class="quantity-btn" data-action="decrease" data-id="<%= item.MaSP %>">-</button>
-                                    <input type="number" value="<%= item.SoLuongSPTrongGio %>" min="1" class="quantity-input" data-price="<%= item.DGBanMacDinh %>" data-id="<%= item.MaSP %>" readonly>
-                                    <button class="quantity-btn" data-action="increase" data-id="<%= item.MaSP %>">+</button>
+                        <% shop.items.forEach(item => { %>
+                            <div class="cart-body-item row">
+                                <div class="cart-body-infor-wrap row">
+                                    <div class="cart-body-infor col-lg-5">
+                                        <img src="/product_image/<%= item.HinhChinh %>" alt="<%= item.TenSP %>" class="cart-body-img">
+                                        <div class="cart-body-nameProduct"><%= item.TenSP %></div>
+                                        <div class="cart-body-typeProduct"><%= item.MoTa %></div>
+                                    </div>
+                                    <div class="cart-body-priceProduct col-lg-2"><%= item.DGBanMacDinh %></div>
+                                    <div class="cart-quantityProduct col-lg-2">
+                                        <div class="quantity-container">
+                                            <button class="quantity-btn" data-action="decrease" data-id="<%= item.MaSP %>">-</button>
+                                            <input type="number" value="<%= item.SoLuongSPTrongGio %>" min="1" class="quantity-input" data-price="<%= item.DGBanMacDinh %>" data-id="<%= item.MaSP %>" readonly>
+                                            <button class="quantity-btn" data-action="increase" data-id="<%= item.MaSP %>">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="cart-body-totalCostProduct col-lg-2"><%= item.DGBanMacDinh * item.SoLuongSPTrongGio %></div>
+                                    <div class="cart-body-delete col-lg-1">Xóa</div>
                                 </div>
                             </div>
-                            <div class="cart-body-totalCostProduct col-lg-2"><%= item.DGBanMacDinh * item.SoLuongSPTrongGio %></div>
-                            <div class="cart-body-delete col-lg-1">Xóa</div>
-                        </div>
+                        <% }); %>
                     </div>
-                <% }); %>
+                <% } %>
             <% } else { %>
                 <p>Giỏ hàng của bạn đang trống.</p>
             <% } %>
@@ -124,7 +153,9 @@
                     </div>
                 </div>
                 <div class="total-cost-buy-order col-lg-3">
-                    <button class="btn-order">Mua Hàng</button>
+                    <form action="/order-payment" method="get">
+                        <button type="submit" class="btn-order">Mua Hàng</button>
+                    </form>
                 </div>
             </div>
         </div>

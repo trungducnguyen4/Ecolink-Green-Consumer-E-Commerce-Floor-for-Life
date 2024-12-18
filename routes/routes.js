@@ -14,7 +14,8 @@ const businessLoginController = require('../controllers/bs_login_controller');
 const cartController = require('../controllers/cart_controller');  // Thêm cartController từ nhánh main
 const homeController = require('../controllers/home_controller'); // Thêm homeController từ nhánh KogMin
 const checkBusinessUser = require('../middlewares/check_business_user');
-const personalController = require('../controllers/personal_controller');
+const orderController = require('../controllers/order_controller'); // Import order controller
+const promoController = require('../controllers/promo_controller'); // Import promo controller
 
 // Initialize session middleware
 router.use(session({
@@ -32,6 +33,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/cart/add', cartController.addToCart);
 router.get('/cart', isAuthenticated, cartController.getCartItems);
 router.post('/cart/update-quantity', isAuthenticated, cartController.updateCartItemQuantity);
+
+// Order routes
+router.post('/order-payment', isAuthenticated, orderController.loadOrderPaymentPage);
+
+// Promo code route
+router.post('/apply-promo-code', isAuthenticated, promoController.applyPromoCode);
 
 // Products routes
 router.get('/products', productController.getProductsPage);
@@ -79,11 +86,9 @@ router.get("/log-in", (req, res) => {
     res.render("log-in", { title: "Login" });
 });
 
-// Hiển thị trang cá nhân
-router.get('/personal', isAuthenticated, personalController.getPersonalInfo);
-
-// Cập nhật thông tin cá nhân
-router.post('/personal/updatePersonal', isAuthenticated, personalController.upload.single('Avatar'), personalController.updatePersonalInfo);
+router.get("/personal", (req, res) => {
+    res.render("personal", { title: "Personal" });
+});
 
 router.get("/personal_forum", (req, res) => {
     res.render("personal_forum", { title: "Personal forum" });
@@ -93,10 +98,7 @@ router.get("/test", (req, res) => {
     res.render("test", { title: "Test" });
 });
 
-router.get("/order-payment", (req, res) => {
-    res.render("order-payment", { title: "Order payment" });
-});
-
+router.get("/order-payment", isAuthenticated, orderController.loadOrderPaymentPage);
 router.get("/purchaseOrderStatus", (req, res) => {
     res.render("purchaseOrderStatus", { title: "purchaseOrderStatus" });
 });
