@@ -6,30 +6,45 @@ const path = require('path');
 
 async function getProductsPage(req, res) {
     try {
-        // Lấy tham số page từ query string, mặc định là trang 1
         const page = parseInt(req.query.page) || 1;
-        const pageSize = 18; // Mỗi trang có 18 sản phẩm
+        const pageSize = 18;  // Mỗi trang có 18 sản phẩm
 
-        // Lấy số lượng sản phẩm tổng cộng
-        const totalProductsResult = await productModel.getTotalProducts();
-        const totalProducts = totalProductsResult[0].TotalProducts;
+        // Lấy danh sách categories từ query string (nếu có)
+        const categories = req.query.categories ? req.query.categories.split(',') : [];
+
+        let products, totalProducts;
+
+        if (categories.length > 0) {
+            // Nếu có categories, lấy sản phẩm lọc theo danh mục
+            const categoryFilter = categories.map(cat => `'${cat}'`).join(',');
+
+            // Lấy tổng số sản phẩm và sản phẩm theo bộ lọc
+            totalProducts = await productModel.getTotalFilteredProducts(categoryFilter);
+            products = await productModel.getFilteredProducts(categoryFilter, page, pageSize);
+        } else {
+            // Nếu không có categories, lấy tất cả sản phẩm
+            totalProductsResult = await productModel.getTotalProducts();
+            totalProducts = totalProductsResult[0].TotalProducts;
+            products = await productModel.getProducts(page, pageSize);
+        }
 
         // Tính số trang
         const totalPages = Math.ceil(totalProducts / pageSize);
-
-        // Lấy sản phẩm cho trang hiện tại
-        const products = await productModel.getProducts(page, pageSize);
 
         // Truyền dữ liệu vào view
         res.render('products', {
             products,
             page,
-            totalPages  // Đảm bảo bạn truyền đúng biến này vào view
+            totalPages,
+            categories  // Truyền categories đã chọn cho view
         });
     } catch (err) {
+        console.error('Error in getProductsPage:', err);
         res.status(500).send('Internal Server Error');
     }
 }
+
+
 
 
 async function searchProducts(req, res) {
@@ -41,6 +56,9 @@ async function searchProducts(req, res) {
         }
 
         console.log('Searching for products with keyword:', keyword);
+
+        //cho biến categories là mảng rỗng
+        const categories = [];
 
         // Tìm kiếm sản phẩm từ cơ sở dữ liệu
         const products = await productModel.searchProducts(keyword);
@@ -64,7 +82,8 @@ async function searchProducts(req, res) {
                 keyword,
                 message: 'Không có sản phẩm nào phù hợp với từ khóa tìm kiếm của bạn.',
                 page,
-                totalPages
+                totalPages,
+                categories
             });
         }
 
@@ -73,13 +92,18 @@ async function searchProducts(req, res) {
             products: paginatedProducts,
             keyword,
             page,
-            totalPages
+            totalPages,
+            categories
         });
     } catch (err) {
         console.error('Error in searchProducts:', err);
         res.status(500).send('Internal Server Error');
     }
 }
+
+
+
+
 
 
 
@@ -226,4 +250,4 @@ async function addProduct(req, res) {
 
 
 
-module.exports = {getProductsPage,searchProducts,getProductDetail,addProduct,upload};
+module.exports = {getProductsPage, searchProducts, getProductDetail, addProduct, upload};

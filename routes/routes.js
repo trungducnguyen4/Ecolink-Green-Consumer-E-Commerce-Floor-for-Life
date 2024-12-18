@@ -43,6 +43,7 @@ router.post('/apply-promo-code', isAuthenticated, promoController.applyPromoCode
 // Products routes
 router.get('/products', productController.getProductsPage);
 router.get('/products/search', productController.searchProducts);
+router.get('/products/filter', productController.getProductsPage);
 router.get('/product-detail/:id', productController.getProductDetail);
 
 // Trang chủ

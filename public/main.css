@@ -109,7 +109,7 @@ input:focus {
     right:calc((100% / 2) - (500px / 2) + 3px);
     top: 50%;
     transform: translateY(-50%); /* Căn giữa icon theo chiều dọc */
-    pointer-events: none; /* Đảm bảo icon không cản trở việc nhập liệu */
+    /* pointer-events: none; Đảm bảo icon không cản trở việc nhập liệu */
     display: block; /* Đặt display block để margin auto hoạt động */
     background-color: #007B59;
     width: 50px;
@@ -117,6 +117,7 @@ input:focus {
     color: aliceblue;
     border-radius: 5px;
     cursor: pointer;
+    
   }
   .fa-magnifying-glass {
     display: block;

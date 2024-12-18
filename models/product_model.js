@@ -110,5 +110,33 @@ async function getTotalProductsByKeyword(keyword) {
 }
 
 
+const getTotalFilteredProducts = async (categoryFilter) => {
+    const pool = await poolPromise;
 
-module.exports= {getProducts, getTotalProducts,getTotalProductsByKeyword,searchProducts};
+    const query = `
+        SELECT COUNT(*) AS total 
+        FROM SanPham 
+        WHERE MaNhomSP IN (${categoryFilter})
+    `;
+    const result = await pool.request().query(query);
+    return result.recordset[0].total;
+};
+
+// Hàm lấy sản phẩm theo danh mục, phân trang
+const getFilteredProducts = async (categoryFilter, page, pageSize) => {
+    const pool = await poolPromise;
+
+    const offset = (page - 1) * pageSize;
+    const query = `
+        SELECT MaSP, MaNhomSP, TenSP, DGBanMacDinh, HinhChinh
+        FROM SanPham
+        WHERE MaNhomSP IN (${categoryFilter})
+        ORDER BY MaSP
+        OFFSET ${offset} ROWS FETCH NEXT ${pageSize} ROWS ONLY
+    `;
+    const result = await pool.request().query(query);
+    return result.recordset;
+};
+
+
+module.exports= {getProducts, getTotalProducts,getTotalProductsByKeyword,searchProducts,getTotalFilteredProducts,getFilteredProducts};
