@@ -5,6 +5,11 @@ const sql = require('mssql');
 const routes = require('./routes/routes');
 const path = require('path');
 
+const forumRoutes = require('./routes/forum_routes'); 
+const adminRoutes = require('./routes/admin_routes');
+const newsRoutes = require('./routes/news_routes'); 
+const newsDetailRoutes = require('./routes/newsDetail_routes');
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -14,6 +19,20 @@ const db = require('./db'); // Đảm bảo kết nối được thiết lập
 // Cấu hình view engine
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+// Cấu hình middleware để phục vụ tệp trong thư mục upload
+app.use('/upload', express.static(__dirname + '/upload'));
+// Đăng ký các router
+app.use('/forum', forumRoutes);  
+app.use('/admin', adminRoutes); 
+app.use('/api', forumRoutes);  
+app.use('/news', newsRoutes);  
+
+app.use('/news-detail', newsDetailRoutes);  
+
+
 
 // Cấu hình session
 app.use(session({
