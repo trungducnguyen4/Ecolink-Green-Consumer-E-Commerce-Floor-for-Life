@@ -72,8 +72,7 @@ CREATE TABLE NguoiDung (
     SoDienThoai nvarchar(15) , -- Định dạng số điện thoại
     DiaChi nvarchar(150),
     Email nvarchar(100),  -- Định dạng email hợp lệ
-	Avatar NVARCHAR(300),
-	NgaySinh date
+	Avatar NVARCHAR(300)
 );
 
 
@@ -218,5 +217,56 @@ BEGIN
         VALUES (@MaUser, @MaGioHang, @MaSP, @SoLuong);
     END
 END;
+INSERT INTO NguoiBan (
+    MaNguoiBan, TenDangNhap, MatKhau, HoUserCH, TenUserCH, GioiTinh, 
+    TenCuaHang, DiaChi, SoDienThoai, Email, MaSoThue, GiayPhepKD, 
+    NgayTao, TrangThai, AnhLogo, MoTaCH
+)
+VALUES (
+    N'NB001', 
+    N'nguoiban123', 
+    N'hashed_password', 
+    N'Nguyen', 
+    N'An', 
+    N'Nam', 
+    N'CH Tạp Hóa An Bình', 
+    N'123 Đường ABC, Quận 1, TP.HCM', 
+    N'0987654321', 
+    N'anbinh@gmail.com', 
+    N'123456789', 
+    N'https://example.com/giayphep.png', 
+    GETDATE(), 
+    1, 
+    N'https://example.com/logo.png', 
+    N'Cửa hàng chuyên cung cấp các mặt hàng tạp hóa, nhu yếu phẩm.'
+);
+INSERT INTO KhuyenMai (
+    MaKM, MaNguoiBan, TenKM, NoiDungKM, PhanTramGiam, 
+    NgayBatDau, NgayKetThuc, DieuKienGiam
+)
+VALUES (
+    N'KM001',
+    N'NB001',
+    N'Khuyến mãi Tết 2024',
+    N'Giảm 10% cho các đơn hàng từ 500,000 VNĐ trở lên.',
+    10,
+    '2024-01-01',
+    '2024-01-31',
+    500000.00
+);
 
-GRANT EXECUTE ON [dbo].[AddToCart] TO manager
+INSERT INTO KhuyenMai (
+    MaKM, MaNguoiBan, TenKM, NoiDungKM, PhanTramGiam, 
+    NgayBatDau, NgayKetThuc, DieuKienGiam
+)
+VALUES (
+    N'KM002',
+    N'NB001',
+    N'Khuyến mãi Tết 2024',
+    N'Giảm 10% cho các đơn hàng từ 500,000 VNĐ trở lên.',
+    10,
+    '2024-01-01',
+    '2024-12-31',
+    100000.00
+);
+select * from KhuyenMai
