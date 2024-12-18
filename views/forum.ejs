@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="/forum.css">
 <%- include('layout/mainpage_header') %>
     <!-- Blog main -->
     <div class="blog row">
         <div class="blog-contact col-md-3">
             <div class="blog-contact-avatar">
                 <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="">
-                <h4 class="blog-contact-avatar-name"><a href="/personal_forum" class="active">Ecolink for life</a></h4>
+                <h4 class="blog-contact-avatar-name"><a href="" class="active">Ecolink for life</a></h4>
             </div>
            <div class="blog-contact-item-frame">
             <div class="blog-contact-item">
@@ -36,81 +37,278 @@
                     </div>
                 </div>
             </div>
-            <div class="blog-post-1">
-                <div class="blog-post-item-1">
-                    <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="" style="margin-left: 20px;">
-                    <span class="blog-post-contact-name">
-                        <a href="">Ecolink for life</a>
-                        <a href="" style="padding-left: 30px;color: rgb(30, 30, 204);">Theo dõi 
-                          <i class="fa-solid fa-circle-check" style="margin-left: 3px;"></i>
-                        </a>
-                    </span>
-                    <div class="blog-noidung">Tinh chất bí đao có tính chất làm dịu, giảm viêm, trị mụn, giúp tái tạo da và cải thiện độ đàn hồi của da. Hiện nay, tinh chất bí đao Cocoon đang rất nổi tiếng ở thị trường mỹ phẩm chăm sóc da Việt Nam vì độ an toàn, lành tính và hiệu quả mà mang lại.</div>
-                    <img class= "blog-post-img" src="../image/post1.jpg" alt="">
-                    <div class="blog-post-react-count">
-                        <div class="blog-post-react-count-sp">
-                            <i class="fa-solid fa-heart" style="color: red;"></i>
-                            <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
-                            <i class="fa-regular fa-face-smile" style="color: orange;"></i>
+
+            <!-- POPUP -POST -->
+            <div class="overlay" id="overlay"></div>
+            <div class="container-createPost" id="createPostPopup">
+              <div class="wrapper-createPost">
+                <section class="post">
+                  <header>
+                    Tạo bài viết
+                    <i class="fas fa-times" id="close-icon" style="cursor: pointer;"></i>
+                  </header>
+                
+                  <form action="#">
+                    <div class="content">
+                      <img src="icons/logo.png" alt="logo">
+                      <div class="details">
+                        <p>Hân Nguyễn</p>
+                        <div class="privacy">
+                          <i class="fas fa-user-friends"></i>
+                          <span>Bạn bè</span>
+                          <i class="fas fa-caret-down"></i>
                         </div>
-                        <div class="blog-post-react-count-num">31</div>
+                      </div>
                     </div>
-                    <div class = "blog-post-react row" style="padding-top: 10px;">
-                        <span class="blog-post-react-like col-md-6"><i class="fa-regular fa-heart" style="padding-right: 10px; "></i>Like</span>
-                        <span class="blog-post-react-cmt col-md-6"><i class="fa-regular fa-comment" style="padding-right: 10px;"></i>Comment</span>
-                    </div>
-                </div>
-            </div>
-            <div class="blog-post-1">
-                <div class="blog-post-item-1">
-                    <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="" style="margin-left: 20px;">
-                    <span class="blog-post-contact-name">
-                        <a href="">Ecolink for life</a>
-                        <a href="" style="padding-left: 30px;color: rgb(30, 30, 204);">Theo dõi 
-                          <i class="fa-solid fa-circle-check" style="margin-left: 3px;"></i>
-                        </a>
-                    </span>
-                    <div class="blog-noidung">Tinh chất bí đao có tính chất làm dịu, giảm viêm, trị mụn, giúp tái tạo da và cải thiện độ đàn hồi của da. Hiện nay, tinh chất bí đao Cocoon đang rất nổi tiếng ở thị trường mỹ phẩm chăm sóc da Việt Nam vì độ an toàn, lành tính và hiệu quả mà mang lại.</div>
-                    <img class= "blog-post-img" src="../image/post2.jpg" alt="">
-                    <div class="blog-post-react-count">
-                        <div class="blog-post-react-count-sp">
-                            <i class="fa-solid fa-heart" style="color: red;"></i>
-                            <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
-                            <i class="fa-regular fa-face-smile" style="color: orange;"></i>
+                    <textarea id="contentInput" placeholder="Hân ơi, Bạn đang nghĩ gì thế?" spellcheck="false" required></textarea>
+
+
+                    <!-- Khung chèn ảnh và video -->
+                      <div class="media-upload" id="mediaUpload" style="display: none;">
+                        <div class="upload-icon" id="uploadIcon">
+                          <i class="fas fa-camera"></i> <!-- Biểu tượng cho ảnh -->
+                          <span>Thêm ảnh/video</span>
                         </div>
-                        <div class="blog-post-react-count-num">31</div>
+                        <!-- Thêm input file ẩn -->
+                        <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
                     </div>
-                    <div class = "blog-post-react row" style="padding-top: 10px;">
-                        <span class="blog-post-react-like col-md-6"><i class="fa-regular fa-heart" style="padding-right: 10px; "></i>Like</span>
-                        <span class="blog-post-react-cmt col-md-6"><i class="fa-regular fa-comment" style="padding-right: 10px;"></i>Comment</span>
+                      <!-- Hiển thị hình ảnh đã chọn -->
+                      <div id="imagePreviewContainer" style="display: none;">
+                        <img id="imagePreview" src="" alt="Hình ảnh đã chọn" >
+                      </div>
+                    
+                    
+
+                    <div class="theme-emoji">
+                      <img src="icons/theme.svg" alt="theme">
+                      <img src="icons/smile.svg" alt="smile" onclick="toggleEmojiPicker()">
+                    <!-- Bảng chọn emoji -->
+                  <div id="emojiPicker" class="emoji-picker" style="display: none;">
+                    <span class="emoji" onclick="selectEmoji('😊')">😊</span>
+                    <span class="emoji" onclick="selectEmoji('😃')">😃</span>
+                    <span class="emoji" onclick="selectEmoji('😁')">😁</span>
+                    <span class="emoji" onclick="selectEmoji('😂')">😂</span>
+                    <span class="emoji" onclick="selectEmoji('😍')">😍</span>
+                    <span class="emoji" onclick="selectEmoji('😎')">😎</span>
+                    <span class="emoji" onclick="selectEmoji('😜')">😜</span>
+                    <span class="emoji" onclick="selectEmoji('😢')">😢</span>
+                    <span class="emoji" onclick="selectEmoji('😡')">😡</span>
+                    <span class="emoji" onclick="selectEmoji('🥳')">🥳</span>
+                    <span class="emoji" onclick="selectEmoji('😱')">😱</span>
+                    <span class="emoji" onclick="selectEmoji('😇')">😇</span>
+                    <span class="emoji" onclick="selectEmoji('😅')">😅</span>
+                    <span class="emoji" onclick="selectEmoji('🤔')">🤔</span>
+                    <span class="emoji" onclick="selectEmoji('🤩')">🤩</span>
+                    <span class="emoji" onclick="selectEmoji('😈')">😈</span>
+                    <span class="emoji" onclick="selectEmoji('🤯')">🤯</span>
+                    <span class="emoji" onclick="selectEmoji('😜')">😜</span>
+                    <span class="emoji" onclick="selectEmoji('🤗')">🤗</span>
+                    <span class="emoji" onclick="selectEmoji('👻')">👻</span>
+                    <span class="emoji" onclick="selectEmoji('💀')">💀</span>
+                    <span class="emoji" onclick="selectEmoji('🥺')">🥺</span>
+                    <span class="emoji" onclick="selectEmoji('😋')">😋</span>
+                    <span class="emoji" onclick="selectEmoji('🤑')">🤑</span>
+                    <span class="emoji" onclick="selectEmoji('💩')">💩</span>
+                    <!-- Thêm nhiều emoji khác nếu cần -->
+                  </div>
                     </div>
-                </div>
-            </div>
-            <div class="blog-post-1">
-                <div class="blog-post-item-1">
-                    <img class= "header-service-item-avatar-img" src="../image/logo.jpg" alt="" style="margin-left: 20px;">
-                    <span class="blog-post-contact-name">
-                        <a href="">Ecolink for life</a>
-                        <a href="" style="padding-left: 30px;color: rgb(30, 30, 204);">Theo dõi 
-                          <i class="fa-solid fa-circle-check" style="margin-left: 3px;"></i>
-                        </a>
-                    </span>
-                    <div class="blog-noidung">Tinh chất bí đao có tính chất làm dịu, giảm viêm, trị mụn, giúp tái tạo da và cải thiện độ đàn hồi của da. Hiện nay, tinh chất bí đao Cocoon đang rất nổi tiếng ở thị trường mỹ phẩm chăm sóc da Việt Nam vì độ an toàn, lành tính và hiệu quả mà mang lại.</div>
-                    <img class= "blog-post-img" src="../image/r1c7.webp" alt="">
-                    <div class="blog-post-react-count">
-                        <div class="blog-post-react-count-sp">
-                            <i class="fa-solid fa-heart" style="color: red;"></i>
-                            <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
-                            <i class="fa-regular fa-face-smile" style="color: orange;"></i>
+                  
+
+                  
+
+                  
+                    <div class="options">
+                      <p>Thêm vào bài viết của bạn</p>
+                      <ul class="list">
+                        <li>
+                          <img src="icons/gallery.svg" alt="gallery" onclick="showMediaUpload()">
+                        </li>
+                        <li>
+                          <img src="icons/tag.svg" alt="tag" onclick="addHashtagToTextarea()">
+                        </li>
+                        <li>
+                          <img src="icons/emoji.svg" alt="emoji" >
+                        </li>
+                        <li>
+                          <img src="icons/mic.svg" alt="mic">
+                        </li>
+                        <li>
+                          <img src="icons/more.svg" alt="more">
+                        </li>
+                      </ul>
+                      
+                      
+                      
+                    </div>
+                    <button id="postButton">Đăng</button>
+                  </form>
+                </section>
+                <section class="audience">
+                  <header>
+                    <div class="arrow-back"><i class="fas fa-arrow-left"></i></div>
+                    <p>Đối tượng của bài viết</p>
+                  </header>
+                  <div class="content">
+                    <p>Ai có thể thấy bài viết của bạn?</p>
+                    <span>Your post will show up in News Feed, on your profile and in search results.</span>
+                  </div>
+                  <ul class="list">
+                    <li>
+                      <div class="column">
+                        <div class="icon"><i class="fas fa-globe-asia"></i></div>
+                        <div class="details">
+                          <p>Public</p>
+                          <span>Anyone on or off Facebook</span>
                         </div>
-                        <div class="blog-post-react-count-num">31</div>
-                    </div>
-                    <div class = "blog-post-react row" style="padding-top: 10px;">
-                        <span class="blog-post-react-like col-md-6"><i class="fa-regular fa-heart" style="padding-right: 10px; "></i>Like</span>
-                        <span class="blog-post-react-cmt col-md-6"><i class="fa-regular fa-comment" style="padding-right: 10px;"></i>Comment</span>
-                    </div>
-                </div>
+                      </div>
+                      <div class="radio"></div>
+                    </li>
+                    <li class="active">
+                      <div class="column">
+                        <div class="icon"><i class="fas fa-user-friends"></i></div>
+                        <div class="details">
+                          <p>Bạn bè</p>
+                          <span>Your friends on Facebook</span>
+                        </div>
+                      </div>
+                      <div class="radio"></div>
+                    </li>
+                    <li>
+                      <div class="column">
+                        <div class="icon"><i class="fas fa-user"></i></div>
+                        <div class="details">
+                          <p>Specific</p>
+                          <span>Only show to some friends</span>
+                        </div>
+                      </div>
+                      <div class="radio"></div>
+                    </li>
+                    <li>
+                      <div class="column">
+                        <div class="icon"><i class="fas fa-lock"></i></div>
+                        <div class="details">
+                          <p>Only me</p>
+                          <span>Only you can see your post</span>
+                        </div>
+                      </div>
+                      <div class="radio"></div>
+                    </li>
+                    <li>
+                      <div class="column">
+                        <div class="icon"><i class="fas fa-cog"></i></div>
+                        <div class="details">
+                          <p>Custom</p>
+                          <span>Include and exclude friends</span>
+                        </div>
+                      </div>
+                      <div class="radio"></div>
+                    </li>
+                  </ul>
+                </section>
+              </div>
             </div>
+
+            <!--  BAI POST -->
+            <% forum.forEach(forum => { %>
+              <div class="blog-post-1" data-post-id="<%= forum.MaPost %>">
+                  <!-- Thông tin người dùng -->
+                  <div class="blog-post-item-1">
+                      <img 
+                          class="header-service-item-avatar-img" 
+                          src="<%= forum.AnhLogo %>" 
+                          alt="Avatar" 
+                          style="margin-left: 20px;">
+                      
+                          <span class="blog-post-contact-name">
+                            <a href="#"><%= forum.TenCuaHang %></a>
+                            <a 
+                                href="#" 
+                                class="follow-button" 
+                                data-seller-id="<%= forum.MaNguoiBan %>" 
+                                style="padding-left: 30px; color: rgb(30, 30, 204); text-decoration: none;"
+                                onclick="toggleFollowSeller(event, '<%= forum.MaNguoiBan %>')"
+                            >
+                                Theo dõi 
+                                <i class="fa-solid fa-circle-check follow-icon" style="margin-left: 3px; display: none;"></i>
+                            </a>
+
+                            <!-- Nút Close -->
+                            <button 
+                                class="close-post" 
+                                onclick="closePost('<%= forum.MaPost %>')"
+                                aria-label="Đóng bài viết"
+                            >
+                                <i class="fa-solid fa-times"></i>
+                            </button>
+                          </span>
+                        
+                      <div class="blog-post-time"><%= forum.displayTime %></div>
+              
+
+                     <!-- Nội dung bài viết -->
+                    <div 
+                      class="blog-noidung" 
+                      id="content-<%= forum.MaPost %>" 
+                      data-full-content="<%= forum.NoiDung.replace(/"/g, '&quot;') %>"
+                      >
+                      <% if (forum.NoiDung.length > 200) { %>
+                        <%- forum.NoiDung.substring(0, 200).replace(/\n/g, '<br>') %>...
+                      <% } else { %>
+                          <%- forum.NoiDung.replace(/\n/g, '<br>') %>
+                      <% } %>
+                    </div>
+    
+
+                      <!-- Nút Xem thêm -->
+                      <% if (forum.NoiDung.length > 200) { %>
+                        <button class="btn-show-more" data-post-id="<%= forum.MaPost %>" onclick="showFullContent('<%= forum.MaPost %>')">
+                        Xem thêm
+                        </button>
+                      <% } %>
+              
+                      <% if (forum.Video) { %>
+                      <div class="blog-post-video">
+                          <iframe width="100%" height="315" src="<%= forum.Video %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                      </div>
+                      <% } else if (forum.HinhAnh) { %>
+                      <div class="blog-post-image">
+                          <img class="blog-post-img" src="<%= forum.HinhAnh %>" alt="Post Image">
+                      </div>
+                      <% } %>
+              
+                      <!-- Phản ứng bài viết -->
+                      <div class="blog-post-react-count">
+                          <div class="blog-post-react-count-sp">
+                              <i class="fa-solid fa-heart" style="color: red;"></i>
+                              <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                              <i class="fa-regular fa-face-smile" style="color: orange;"></i>
+                          </div>
+                          <div class="blog-post-react-count-num">
+                              <span class="blog-post-react-like-num"><%= forum.SoLuotThich || 0 %> Thích</span>
+                              <span style="margin-left: 15px;"><%= forum.SoLuotBinhLuan || 0 %> Bình luận</span>
+                          </div>
+                      </div>
+              
+                      <!-- Các hành động -->
+                      <div class="blog-post-react row" style="padding-top: 10px;">
+                          <span 
+                              class="blog-post-react-like col-md-6" 
+                              data-post-id="<%= forum.MaPost %>"  
+                              onclick="toggleLike(this)"
+                          >
+                              <i class="fa-regular fa-heart dis-like-icon" style="display: inline;"></i>
+                              <i class="fa-solid fa-heart like-icon" style="display: none; color: red;"></i>
+                              Like
+                          </span>
+                        
+                          <span class="blog-post-react-cmt col-md-6">
+                              <i class="fa-regular fa-comment" style="padding-right: 10px;"></i>Comment
+                          </span>
+                      </div>
+                  </div>
+              </div>
+              <% }); %>
+              
         </div>
         <div class="blog-contact-user col-md-3">
             <div class="blog-contact-user-title">Được tài trợ</div>
@@ -136,24 +334,502 @@
                 </div>
             </div>
 
-            <!-- <hr style=" margin-left: 30px; width: 250px; border: 1px solid rgba(0, 0, 0, 0.17); ">
-
-            <div class="blog-contact-user-title" style="margin-top: 10px;">Theo dõi</div>
-            <div class="blog-contact-user-item">
-                <img class="blog-contact-user-img"src="../image/r1c8.webp">
-                <span class="blog-contact-user-text" style="font-weight: 550;">Tên DN</span>
-                <span class="blog-contact-user-text" style="margin-top: 30px; margin-left: 12px;">Mô tả</span>
-            </div>
-            <div class="blog-contact-user-item">
-                <img class="blog-contact-user-img"src="../image/r1c8.webp">
-                <span class="blog-contact-user-text" style="font-weight: 550;">Tên DN</span>
-                <span class="blog-contact-user-text" style="margin-top: 30px; margin-left: 12px;">Mô tả</span>
-            </div> -->
-
-
         </div>     
     </div>
-    <script type="text/javascript" src="../function.js"></script>
+    <script>
+
+      //XU LY THEO DOI
+      // Bộ lưu trạng thái các người bán đã theo dõi (client-side)
+      const followedSellers = new Set();
+
+      // Hàm toggle (bật/tắt) theo dõi
+      function toggleFollowSeller(event, sellerId) {
+          event.preventDefault(); // Ngăn điều hướng mặc định
+
+          // Xác định nút hiện tại và icon theo dõi
+          const followButton = event.target.closest('.follow-button');
+          const followIcon = followButton.querySelector('.follow-icon');
+
+          // Kiểm tra trạng thái theo dõi hiện tại
+          if (followedSellers.has(sellerId)) {
+              // Nếu đang theo dõi, hủy theo dõi
+              followIcon.style.display = 'none';
+              followButton.classList.remove('following');
+              followButton.textContent = 'Theo dõi ';
+              followButton.appendChild(followIcon); // Đảm bảo icon vẫn ở cuối
+              followedSellers.delete(sellerId); // Xóa khỏi danh sách theo dõi
+
+              // Gửi yêu cầu hủy theo dõi đến server
+              unfollowSeller(sellerId);
+          } else {
+              // Nếu chưa theo dõi, bật theo dõi
+              followIcon.style.display = 'inline';
+              followButton.classList.add('following');
+              followButton.textContent = 'Đang theo dõi ';
+              followButton.appendChild(followIcon); // Đảm bảo icon vẫn ở cuối
+              followedSellers.add(sellerId); // Thêm vào danh sách theo dõi
+
+              // Gửi yêu cầu theo dõi đến server
+              followSeller(sellerId);
+          }
+      }
+
+// Hàm gửi yêu cầu theo dõi tới server
+function followSeller(sellerId) {
+    fetch('/api/follow', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sellerId: sellerId }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log(`Đang theo dõi người bán với ID: ${sellerId}`);
+        } else {
+            console.error('Không thể theo dõi người bán');
+        }
+    })
+    .catch(error => {
+        console.error('Lỗi khi gửi yêu cầu theo dõi:', error);
+    });
+}
+
+// Hàm gửi yêu cầu hủy theo dõi tới server
+function unfollowSeller(sellerId) {
+    fetch('/api/unfollow', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sellerId: sellerId }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log(`Đã hủy theo dõi người bán với ID: ${sellerId}`);
+        } else {
+            console.error('Không thể hủy theo dõi người bán');
+        }
+    })
+    .catch(error => {
+        console.error('Lỗi khi gửi yêu cầu hủy theo dõi:', error);
+    });
+}
+
+      // Xu ly an bai post
+      function closePost(postId) {
+          // Tìm bài viết dựa trên ID
+          const postElement = document.querySelector(`.blog-post-1[data-post-id="${postId}"]`);
+          if (postElement) {
+              // Ẩn bài viết bằng cách thêm class hoặc xóa khỏi DOM
+              postElement.style.display = 'none'; // Ẩn bài viết
+              // postElement.remove(); // Hoặc xóa bài viết khỏi DOM
+          }
+      }
+
+
+
+      // Xu ly dong - mo popup
+      const input = document.querySelector('.blog-input');
+      const popup = document.getElementById('createPostPopup');
+      const overlay = document.getElementById('overlay');
+      const closeIcon = document.getElementById('close-icon');
+
+      // Hiển thị popup và overlay khi click vào input
+      input.addEventListener('click', () => {
+          popup.classList.add('active-popup');
+          overlay.classList.add('active-popup');
+      });
+
+      // Đóng popup khi click vào icon đóng
+      closeIcon.addEventListener('click', () => {
+          popup.classList.remove('active-popup');
+          overlay.classList.remove('active-popup');
+      });
+
+      // Đóng popup khi click vào overlay
+      overlay.addEventListener('click', () => {
+          popup.classList.remove('active-popup');
+          overlay.classList.remove('active-popup');
+      });
+
+
+
+
+      function postContent(postId) {
+          // Lấy nội dung từ textarea
+          const contentInput = document.getElementById("contentInput").value;
+
+          // Thay thế ký tự xuống dòng (\n) bằng <br>
+          const formattedContent = contentInput.replace(/\n/g, "<br>");
+
+          // Lấy thẻ có id="content-" + postId
+          const contentDisplay = document.getElementById("content-" + postId);
+          if (contentDisplay) {
+              // Gắn nội dung đã định dạng vào thẻ
+              contentDisplay.innerHTML = formattedContent;
+          }
+      }
+
+      // Gọi hàm với id cụ thể của mỗi bài viết
+      postContent('<%= forum.MaPost %>');
+
+
+      // Xử lý cho "Xem thêm" khi bài viết quá dài
+      function showFullContent(postId) {
+          const contentElement = document.getElementById(`content-${postId}`);
+          if (contentElement) {
+              // Lấy nội dung đầy đủ từ thuộc tính data
+              const fullContent = contentElement.getAttribute("data-full-content");
+              if (fullContent) {
+                  contentElement.textContent = fullContent; // Hiển thị nội dung đầy đủ
+              }
+          }
+
+          // Ẩn nút "Xem thêm"
+          const button = document.querySelector(`button[data-post-id="${postId}"]`);
+          if (button) {
+              button.style.display = "none";
+          }
+      }
+
+
+
+
+      // XU LY SU KIEN ADD HAGTAG #EVENT
+      function addHashtagToTextarea() {
+        const textarea = document.getElementById('contentInput');
+        
+        // Thêm hashtag #event vào vị trí con trỏ
+        const cursorPosition = textarea.selectionStart; // Lấy vị trí con trỏ hiện tại
+        const textBefore = textarea.value.substring(0, cursorPosition);
+        const textAfter = textarea.value.substring(cursorPosition);
+
+        // Chèn hashtag vào nội dung của textarea
+        textarea.value = textBefore + '#event' + textAfter;
+
+        // Đặt lại con trỏ sau nội dung vừa chèn
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd = cursorPosition + '#event'.length;
+      }
+
+      // XU LY SU KIEN ACTIVE AUDIENCE
+      // Lấy tất cả các mục trong danh sách
+      const listItems = document.querySelectorAll('.list li');
+      const privacyIcon = document.querySelector('.content .privacy i:first-child');
+      const privacyText = document.querySelector('.content .privacy span');
+
+      // Xử lý sự kiện click
+      listItems.forEach(item => {
+        item.addEventListener('click', () => {
+          // Xóa trạng thái 'active' khỏi các mục
+          listItems.forEach(i => i.classList.remove('active'));
+
+          // Thêm 'active' cho mục được click
+          item.classList.add('active');
+
+          // Lấy icon (class) từ thẻ <i> và text từ thẻ <p>
+          const newIcon = item.querySelector('.icon i').className; // Lấy class của <i>
+          const newText = item.querySelector('.details p').textContent; // Lấy nội dung của <p>
+
+          // Cập nhật icon và text trong phần hiển thị
+          privacyIcon.className = newIcon; // Thay đổi class của icon
+          privacyText.textContent = newText; // Thay đổi nội dung text
+        });
+      });
+
+
+
+
+
+      // XU LY HIEN THI EMOJI
+      // Hàm để hiển thị hoặc ẩn bảng emoji
+      function toggleEmojiPicker() {
+          const emojiPicker = document.getElementById("emojiPicker");
+          const displayStyle = emojiPicker.style.display;
+
+          // Chuyển đổi giữa hiển thị và ẩn bảng emoji
+          emojiPicker.style.display = displayStyle === "block" ? "none" : "block";
+      }
+
+      // Hàm để chọn emoji và chèn vào textarea
+      function selectEmoji(emoji) {
+      const contentInput = document.getElementById("contentInput");
+      contentInput.value += emoji; // Thêm emoji vào cuối văn bản hiện tại trong textarea
+
+      // Đóng bảng emoji sau khi chọn
+      document.getElementById("emojiPicker").style.display = "none";
+    }
+
+
+      // XU LY LIKE ACTION
+    // Hàm xử lý khi người dùng click vào Like
+    async function toggleLike(spanElement) {
+    const postId = spanElement.getAttribute('data-post-id'); // Lấy ID bài viết từ data attribute
+    const disLikeIcon = spanElement.querySelector('.dis-like-icon');
+    const likeIcon = spanElement.querySelector('.like-icon');
+    const likeCountSpan = spanElement.closest('.blog-post-react').previousElementSibling.querySelector('.blog-post-react-like-num');
+    
+    let likeCount = parseInt(likeCountSpan.textContent) || 0;
+    const isLike = disLikeIcon.style.display === 'inline'; // Kiểm tra trạng thái like (hiển thị like icon hay chưa)
+
+    // Cập nhật giao diện (ẩn/hiện icon và cập nhật số lượt thích)
+    if (isLike) {
+        disLikeIcon.style.display = 'none';
+        likeIcon.style.display = 'inline';
+        likeCount++;
+    } else {
+        likeIcon.style.display = 'none';
+        disLikeIcon.style.display = 'inline';
+        likeCount = Math.max(0, likeCount - 1);
+    }
+
+    // Cập nhật số lượt thích trên giao diện
+    likeCountSpan.textContent = `${likeCount} Thích`;
+
+    // Gửi yêu cầu POST tới server để cập nhật trạng thái like cho bài viết
+    try {
+        const response = await fetch('/api/updateLike', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                postId: postId,
+                like: isLike // true nếu like, false nếu unlike
+            })
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+            console.error('Cập nhật like thất bại:', data.message);
+        }
+    } catch (error) {
+        console.error('Lỗi kết nối:', error);
+    }
+}
+
+      // Hàm gửi yêu cầu "like/unlike" lên server
+    function sendLikeRequest(postId, isLike) {
+      fetch(`/updateLike?postId=${postId}&like=${isLike}`, {
+          method: 'POST'
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (!data.success) {
+              console.error('Không thể cập nhật trạng thái like:', data.message);
+          }
+      })
+      .catch(error => console.error('Lỗi:', error));
+  }
+      
+      // Hàm hiển thị khung chèn ảnh/video
+    function showMediaUpload() {
+      // Hiển thị khung chèn ảnh/video nhưng không kích hoạt input file
+      const mediaUpload = document.getElementById('mediaUpload');
+      mediaUpload.style.display = 'block';
+
+      // Tăng chiều cao của thẻ cha .container-createPost
+      const container = document.querySelector('.container-createPost');
+      container.style.height = '600px'; // Thay đổi chiều cao từ 400px lên 600px
+      }
+
+    // Hàm xử lý khi người dùng click vào camera icon
+    function triggerFileInput(type) {
+      // Hiển thị khung chèn ảnh/video
+      document.getElementById('mediaUpload').style.display = 'block';
+
+      // Tăng chiều cao của thẻ cha .container-createPost
+      const container = document.querySelector('.container-createPost');
+      container.style.height = '600px'; // Thay đổi chiều cao từ 400px lên 600px
+
+      // Kích hoạt sự kiện click trên input file (chỉ khi click vào camera)
+      document.getElementById('fileInput').click();
+    }
+
+    function handleFileSelect(event) {
+        const file = event.target.files[0]; // Lấy file từ input
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer'); // Container preview
+        const imagePreview = document.getElementById('imagePreview'); // Thẻ <img> để hiển thị ảnh
+        const mediaUpload = document.querySelector('.media-upload'); // Phần tử mediaUpload
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                // Đặt nguồn của ảnh là dữ liệu đã đọc
+                imagePreview.src = e.target.result;
+
+                // Hiển thị container preview và ẩn media-upload
+                imagePreviewContainer.style.display = 'block';
+                mediaUpload.style.display = 'none';
+            };
+
+            reader.readAsDataURL(file); // Đọc file dưới dạng URL
+        } else {
+            // Nếu không có file, hiển thị lại media-upload và ẩn preview
+            imagePreviewContainer.style.display = 'none';
+            mediaUpload.style.display = 'flex';
+        }
+    }
+
+
+
+
+      // Lấy các phần tử DOM
+      const uploadIcon = document.getElementById('uploadIcon');
+      const fileInput = document.getElementById('fileInput');
+
+      // Thêm sự kiện click vào biểu tượng tải lên
+      uploadIcon.addEventListener('click', () => {
+        // Kích hoạt input file khi người dùng nhấn vào biểu tượng camera
+        triggerFileInput();
+      });
+
+      // Lắng nghe sự kiện khi người dùng chọn file
+      fileInput.addEventListener('change', handleFileSelect);
+
+
+      // Xử lý hiện pop-up
+      document.addEventListener('DOMContentLoaded', () => {
+      const input = document.querySelector('.blog-input');
+      const popup = document.getElementById('createPostPopup');
+      const overlay = document.getElementById('overlay');
+
+      // Hiển thị popup và overlay khi click vào input
+      input.addEventListener('click', () => {
+        popup.classList.add('active-popup');
+        overlay.classList.add('active-popup');
+      });
+
+      // Ẩn popup và overlay khi click vào overlay
+      overlay.addEventListener('click', () => {
+        popup.classList.remove('active-popup');
+        overlay.classList.remove('active-popup');
+      });
+    });
+
+
+      const container = document.querySelector(".container-createPost"),
+      privacy = container.querySelector(".post .privacy"),
+      arrowBack = container.querySelector(".audience .arrow-back");
+      privacy.addEventListener("click", () => {
+        container.classList.add("active");
+      });
+      arrowBack.addEventListener("click", () => {
+        container.classList.remove("active");
+      });
+
+     
+    document.querySelector('#postButton').addEventListener('click', async () => {
+    const NoiDung = document.querySelector('#contentInput').value.trim();
+    const MaNguoiBan = 'NB001'; // Lấy từ thông tin người dùng (ví dụ: session)
+
+    // Lấy tệp ảnh từ input file (nếu có)
+    const fileInput = document.querySelector('#fileInput'); // Giả sử bạn có một input file với id là 'fileInput'
+    const formData = new FormData();
+
+    // Kiểm tra nếu người dùng đã chọn ảnh
+    if (fileInput.files.length > 0) {
+        formData.append('HinhAnh', fileInput.files[0]); // Thêm ảnh vào FormData
+    } else {
+        console.error('Chưa chọn ảnh.');
+        alert('Chưa có ảnh để đăng.');
+        return;
+    }
+
+      // Thêm nội dung bài viết và mã người bán vào FormData
+      formData.append('NoiDung', NoiDung);
+      formData.append('MaNguoiBan', MaNguoiBan);
+
+      // Kiểm tra nội dung bài viết
+      if (!NoiDung) {
+          alert('Nội dung không được để trống.');
+          return;
+      }
+
+        // Tiến hành gửi yêu cầu POST với FormData (bao gồm tệp ảnh)
+        try {
+            const response = await fetch('/api/create', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log('Bài viết mới:', result.post);
+                alert('Đăng bài thành công.');
+            } else {
+                alert(result.error || 'Đăng bài thất bại.');
+            }
+        } catch (err) {
+            console.error('Error:', err);
+            alert('Lỗi kết nối đến server.');
+        }
+    });
+
+
+
+
+    // Hàm hiển thị bài viết mới
+    // Hàm hiển thị bài viết mới lên đầu
+    function addNewPost(post) {
+    const postList = document.querySelector('#postList');
+    const newPost = document.createElement('div');
+    newPost.className = 'blog-post-1';
+    newPost.innerHTML = `
+        <div class="blog-post-item-1">
+            <img 
+                class="header-service-item-avatar-img" 
+                src="${post.AnhLogo || '../image/avatar.jpg'}" 
+                alt="Avatar" 
+                style="margin-left: 20px;">
+            <span class="blog-post-contact-name">
+                <a href="#">${post.TenCuaHang}</a>
+                <a href="#" style="padding-left: 30px; color: rgb(30, 30, 204);">
+                    Theo dõi 
+                    <i class="fa-solid fa-circle-check" style="margin-left: 3px;"></i>
+                </a>
+            </span>
+            <div class="blog-noidung">${post.NoiDung}</div>
+            ${post.Video ? `
+                <div class="blog-post-video">
+                    <iframe width="100%" height="315" src="${post.Video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            ` : post.HinhAnh ? `
+                <div class="blog-post-image">
+                    <img class="blog-post-img" src="${post.HinhAnh}" alt="Post Image">
+                </div>
+            ` : ''}
+            <div class="blog-post-react-count">
+                <div class="blog-post-react-count-sp">
+                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                    <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                    <i class="fa-regular fa-face-smile" style="color: orange;"></i>
+                </div>
+                <div class="blog-post-react-count-num">
+                    <span>${post.SoLuotThich || 0} Thích</span>
+                    <span style="margin-left: 15px;">${post.SoLuotBinhLuan || 0} Bình luận</span>
+                </div>
+            </div>
+            <div class="blog-post-react row" style="padding-top: 10px;">
+                <span class="blog-post-react-like col-md-6">
+                    <i class="fa-regular fa-heart" style="padding-right: 10px;"></i>Like
+                </span>
+                <span class="blog-post-react-cmt col-md-6">
+                    <i class="fa-regular fa-comment" style="padding-right: 10px;"></i>Comment
+                </span>
+            </div>
+        </div>
+    `;
+        // Thêm bài viết mới vào đầu danh sách
+        postList.prepend(newPost);
+}
+
+
+    </script>
 
 </body>
 <%- include('layout/footer')  %>
