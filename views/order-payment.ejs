@@ -9,93 +9,7 @@
     <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
     <title>Order Payment</title>
     <style>
-        .order-payment-header-method,
-        .order-shipping-header-method {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 15px; /* Add space between method divs */
-            background-color: #f9f9f9;
-        }
-        .order-payment-header-method input,
-        .order-shipping-header-method input {
-            margin-right: 10px;
-        }
-        .order-payment-header-method label,
-        .order-shipping-header-method label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .order-payment-header-method p,
-        .order-shipping-header-method p {
-            margin: 0;
-            color: #666;
-        }
-        .order-address,
-        .order-product,
-        .order-payment,
-        .order-shipping,
-        .order-final,
-        .order-buy {
-            margin-bottom: 20px;
-        }
-        .order-shipping-header-title {
-            margin-left: 45px; /* Add left margin */
-            margin-bottom: 30px;
-        }
-        .order-shipping-header-method {
-            margin-left: 30px; /* Add left margin */
-            margin-right: 30px; /* Add right margin */
-            margin-bottom: 15px; /* Add space between shipping method divs */
-        }
-        .order-payment-header-method {
-            margin-bottom: 15px; /* Add space between payment method divs */
-        }
-        .order-payment-header-title,
-        .order-shipping-header-title,
-        .order-final-total-text {
-            color: #07583f;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .order-final-total-price {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        .order-payment-header-payType,
-        .order-shipping-header-type {
-            display: flex;
-        }
-        .promo-code-section {
-            margin-bottom: 20px;
-        }
-        .promo-code-message {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .promo-code-message.success {
-            color: green;
-        }
-        .promo-code-message.error {
-            color: red;
-        }
-        .shop-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .shop-logo {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .shop-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
+       
     </style>
 </head>
 <body>
@@ -190,7 +104,7 @@
                         <% }); %>
                         <div class="promo-code-section">
                             <input type="text" id="promo-code-<%= shopId %>" placeholder="Nhập mã khuyến mãi">
-                            <button onclick="applyPromoCode('<%= shopId %>')">Áp dụng</button>
+                            <button class="btn-confirm"onclick="applyPromoCode('<%= shopId %>')">Áp dụng</button>
                             <div id="promo-code-message-<%= shopId %>" class="promo-code-message"></div>
                         </div>
                     </div>

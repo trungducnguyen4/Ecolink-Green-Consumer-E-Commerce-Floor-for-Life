@@ -34,7 +34,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { 
         secure: false,
-        maxAge: 3600000
+        
      }  // Set secure: true nếu sử dụng HTTPS
 }));
 
