@@ -53,9 +53,9 @@ input[type="checkbox"], input[type="radio"]
 }
 ::placeholder
 {
-font-weight: 500;
-font-size: 14px;
-color: rgba(43, 41, 41, 0.42);
+    font-weight: 500;
+    font-size: 14px;
+    color: rgba(43, 41, 41, 0.42);
 }
 .login-background input[type=text] 
 {
@@ -65,8 +65,30 @@ color: rgba(43, 41, 41, 0.42);
     border: 1px solid #ccc;
     border-radius: 10px;
     justify-content: center;
-    margin: 0 auto auto 20px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
-    display: block; /* Đặt display block để margin auto hoạt động */
+    margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
+}
+.login-background input[type=email] 
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
+}
+.login-background input[type=password] 
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
 }
 .login-background input[type=file] 
 {
@@ -77,4 +99,28 @@ color: rgba(43, 41, 41, 0.42);
     margin: 0 auto auto 20px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
     display: block; /* Đặt display block để margin auto hoạt động */
     
+}
+
+.text-title
+{
+    display: inline;
+    margin-right: 10px;
+}
+
+.login-text
+{
+    padding-top: 5px;
+}
+.select-text-product
+{
+    width: 500px;
+    padding: 0px 10px 0px 0px;
+    border-radius: 8px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color:rgba(43, 41, 41, 0.42);
+    margin: 10px 0px 0px 25px;
 }
