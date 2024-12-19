@@ -70,18 +70,10 @@ router.get("/business-signin", (req, res) => {
 });
 router.post('/business-signin/user', upload.single('GiayPhepKD'), businessSigninController.registerBusiness);
 
-// Các route khác
-router.get("/news", (req, res) => {
-    res.render("news", { title: "News" });
-});
 
-router.get("/news-detail", (req, res) => {
-    res.render("news-detail", { title: "News detail" });
-});
 
-router.get("/forum", (req, res) => {
-    res.render("forum", { title: "Forum" });
-});
+
+
 
 router.get("/log-in", (req, res) => {
     res.render("log-in", { title: "Login" });
