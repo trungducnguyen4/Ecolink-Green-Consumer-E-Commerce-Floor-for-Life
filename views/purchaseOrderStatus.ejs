@@ -5,336 +5,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css"><!-- Bằng dòng này -->
-   
+    <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
     <link rel="stylesheet" href="./purchaseOrderStatement.css">
     <title>Personal</title>
 </head>
 <body>
-       <!-- HEADER -->
-        <!-- HEADER -->
-        <div class="header">
-            <!-- Header-Logo -->
-            
-              <img src="./image/logo.jpg" alt="" class="logo-img">
-              <h4 class="header-logo-text">Ecolink for life</h3>
-            
-            <div class="header-search">
-             
-              <!-- Header-Services -->
-                <div class="header-service">
-                  <div class="header-service-item">
-                    <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
+    <!-- HEADER -->
+    <div class="header">
+        <!-- Header-Logo -->
+        <img src="./image/logo.jpg" alt="" class="logo-img">
+        <h4 class="header-logo-text">Ecolink for life</h4>
+        <div class="header-search">
+            <!-- Header-Services -->
+            <div class="header-service">
+                <div class="header-service-item">
+                    <img class="header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
                     <a href="#contact">Ecolink</a>
-                  </div>
-      
-                  <div class="header-service-item">
+                </div>
+                <div class="header-service-item">
                     <i class="fa-solid fa-question"></i>
                     <a class="active" href="#home">Hỗ trợ</a>
-                  </div>
-      
-                  <div class="header-service-item">
+                </div>
+                <div class="header-service-item">
                     <i class="fa-regular fa-bell"></i>
                     <a href="#about">Thông báo</a>
-                  </div>
-                  
-                  
-                  
                 </div>
-          
-              <!-- Header-serach&cart -->
-               <div class="header-search-and-cart">
+            </div>
+            <!-- Header-serach&cart -->
+            <div class="header-search-and-cart">
                 <!-- Header-Search-frame -->
                 <div class="search-frame">
-                  <input class="header-search-input" type="text" placeholder="Tìm kiếm">
-                  <div class="header-search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </div>
-                  <!--Search history-->
-                  <div class="header__search-history">
-                    <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
-                    <ul class="header__search-history-list">
-                        <li class="header__search-history-item">
-                            <a href="" class="">Kem dưỡng da</a>
-                        </li>
-                        <li class="header__search-history-item">
-                            <a href="" class="">Kem trị mụn</a>
-                        </li>
-                    </ul>
-                  </div>
+                    <input class="header-search-input" type="text" placeholder="Tìm kiếm">
+                    <div class="header-search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <!--Search history-->
+                    <div class="header__search-history">
+                        <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
+                        <ul class="header__search-history-list">
+                            <li class="header__search-history-item">
+                                <a href="" class="">Kem dưỡng da</a>
+                            </li>
+                            <li class="header__search-history-item">
+                                <a href="" class="">Kem trị mụn</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-      
                 <!-- Cart -->
                 <div class="header-icon-cart">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                  <div class="cart-quantity">
-                    <p class="cart-quantity-number">15</p>
-                  </div>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div class="cart-quantity">
+                        <p class="cart-quantity-number">15</p>
+                    </div>
                 </div>
                 <div class="product-in-cart">
-                  <div class="product-in-cart-arrow"></div>
-                  <ul class="product-in-cart-list">
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp1.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Premium Vector</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp2.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Premium Vector</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp4.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp5.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp6.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp7.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp8.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="./image/sp9.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
-                    </li>
-                  </ul>
+                    <div class="product-in-cart-arrow"></div>
+                    <ul class="product-in-cart-list">
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Premium Vector</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Premium Vector</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                        </li>
+                    </ul>
                 </div>
-      
-               </div>
-             
-             <!-- NAVIGATION -->
-           <div class="navigation">
-            <ul class="navigation-list">
-              <li id = "trang-chu" class="navigation-item">Trang chủ</li>
-              <li id = "san-pham" class="navigation-item">Sản phẩm</li>
-              <li id = "dien-dan" class="navigation-item">Diễn đàn</li>
-              <li id = "blog" class="navigation-item">Bài Blog</li>
-            </ul>
-          </div>
             </div>
-           
-        </div> 
-        <div class="personal-body row">
             <!-- NAVIGATION -->
-            <div class="personal-body-navigation col-lg-3">
-                <div class="personal-body-navigation-frame">
-                    <!-- AVATAR -->
-                    <div class="personal-body-avatar">
-                        <div class="personal-body-avatar-frame">
-                            <img src="./image/avatar.jpg" alt="" class="personal-body-avatar-img">
-                            <div class="personal-body-avatar-name">Ecolink For Life</div>
-                        </div>
-                        <div class="personal-body-fix-frame">
-                            <i class="fa-solid fa-wrench"></i>
-                            <a href="/personal" class="personal-body-fix-text">Sửa hồ sơ</a>
-                        </div>
-                       
+            <div class="navigation">
+                <ul class="navigation-list">
+                    <li id="trang-chu" class="navigation-item">Trang chủ</li>
+                    <li id="san-pham" class="navigation-item">Sản phẩm</li>
+                    <li id="dien-dan" class="navigation-item">Diễn đàn</li>
+                    <li id="blog" class="navigation-item">Bài Blog</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="personal-body row">
+        <!-- NAVIGATION -->
+        <div class="personal-body-navigation col-lg-3">
+            <div class="personal-body-navigation-frame">
+                <!-- AVATAR -->
+                <div class="personal-body-avatar">
+                    <div class="personal-body-avatar-frame">
+                        <img src="./image/avatar.jpg" alt="" class="personal-body-avatar-img">
+                        <div class="personal-body-avatar-name">Ecolink For Life</div>
                     </div>
-                  <!-- MY ACCOUNT -->
-                  <div class="personal-body-my-account-frame">
+                    <div class="personal-body-fix-frame">
+                        <i class="fa-solid fa-wrench"></i>
+                        <a href="/personal" class="personal-body-fix-text">Sửa hồ sơ</a>
+                    </div>
+                </div>
+                <!-- MY ACCOUNT -->
+                <div class="personal-body-my-account-frame">
                     <div class="personal-body-my-account-header-frame" id="account-header">
                         <i class="fa-solid fa-user"></i>
                         <div class="personal-body-my-account-text">Tài Khoản Của Tôi</div>
                     </div>
-                    <ul class="personal-body-my-account-list">
-                      <li class="personal-body-my-account-item" id="profile">Hồ Sơ</li>
-                      <li class="personal-body-my-account-item" id="bank">Ngân Hàng</li>
-                      <li class="personal-body-my-account-item" id="address">Địa Chỉ</li>
-                      <li class="personal-body-my-account-item" id="password">Đổi Mật Khẩu</li>
-                      <li class="personal-body-my-account-item" id="announcement">Cài Đặt Thông Báo</li>
-                      <li class="personal-body-my-account-item" id="private">Những Thiết Lập Riêng Tư</li>
-                  </ul>
-                  </div>
-
-
-                    <!-- ORDER -->
-                     <div class="personal-body-order-frame">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <div class="personal-body-my-account-text nav-active">Đơn Mua</div>
-                     </div>
-                      <!-- NOTIFICATION -->
-                    <div class="personal-body-notification-frame">
-                        <div class="personal-body-order-header-frame">
-                            <i class="fa-regular fa-bell"></i>
-                            <div class="personal-body-my-account-text">Thông Báo</div>
-                        </div>
-                        <ul class="personal-body-order-list">
-                            <li class="personal-body-order-item">Cập Nhật Đơn Hàng </li>
-                            <li class="personal-body-order-item">Khuyến mãi</li>
-                        </ul>
-                    </div>
-                     
-                </div>
-                
-            </div>
-            <!-- DETAIL -->
-            
-            <div class="purchaseOrderStatus-body-detail col-lg-9">
-                <div class="purchaseOrderStatus-body-nav">
-                    <ul class="purchaseOrderStatus-body-nav-list">
-                        <li class="purchaseOrderStatus-body-nav-item nav-statetus-active">Tất cả</li>
-                        <li class="purchaseOrderStatus-body-nav-item">Chờ thanh toán</li>
-                        <li class="purchaseOrderStatus-body-nav-item">Vận chuyển</li>
-                        <li class="purchaseOrderStatus-body-nav-item">Chờ giao hàng</li>
-                        <li class="purchaseOrderStatus-body-nav-item">Hoàn thành</li>
-                        <li class="purchaseOrderStatus-body-nav-item">Đã hủy</li>
+                    <ul class="personal-body-my-account-list" id="account-list" style="display: none;">
+                        <li class="personal-body-my-account-item" id="profile">Hồ Sơ</li>
+                        <li class="personal-body-my-account-item" id="bank">Ngân Hàng</li>
+                        <li class="personal-body-my-account-item" id="address">Địa Chỉ</li>
+                        <li class="personal-body-my-account-item" id="password">Đổi Mật Khẩu</li>
+                        <li class="personal-body-my-account-item" id="announcement">Cài Đặt Thông Báo</li>
+                        <li class="personal-body-my-account-item" id="private">Những Thiết Lập Riêng Tư</li>
                     </ul>
                 </div>
-                <div class="purchaseOrderStatus-body-product-list">
-                    <div class="purchaseOrderStatus-body-product-item">
-                        <div class="purchaseOrderStatus-body-product-item-header">
-                            <div class="purchaseOrderStatus-body-product-shopName">Ecolink for life</div>
-                            <button class="purchaseOrderStatus-body-product-btnView">Xem shop</button>
-                            <div class="purchaseOrderStatus-body-product-process">Đang chuẩn bị hàng</div>
-                        </div>
-                        <div class="purchaseOrderStatus-body-product-item-body">
-                            <img src="./image/cscn7.jpg" alt="" class="purchaseOrderStatus-body-product-item-body-img">
-                            <div class="purchaseOrderStatus-body-product-item-body-infor">
-                                <div class="purchaseOrderStatus-body-product-item-body-productName">Kem dưỡng sáng da 2 trong 1</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-lable">Phân loại hàng</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-classify">Đen</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-num">x1</div>
-                            </div>
-                            <div class="purchaseOrderStatus-body-product-item-body-money">199.000đ</div>
-                           
-                        </div>
+                <!-- ORDER -->
+                <div class="personal-body-order-frame">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <div class="personal-body-my-account-text nav-active">Đơn Mua</div>
+                </div>
+                <!-- NOTIFICATION -->
+                <div class="personal-body-notification-frame">
+                    <div class="personal-body-order-header-frame">
+                        <i class="fa-regular fa-bell"></i>
+                        <div class="personal-body-my-account-text">Thông Báo</div>
                     </div>
-
-
-                    <div class="purchaseOrderStatus-body-product-item">
-                        <div class="purchaseOrderStatus-body-product-item-header">
-                            <div class="purchaseOrderStatus-body-product-shopName">Ecolink for life</div>
-                            <button class="purchaseOrderStatus-body-product-btnView">Xem shop</button>
-                            <div class="purchaseOrderStatus-body-product-process">Đang chuẩn bị hàng</div>
-                        </div>
-                        <div class="purchaseOrderStatus-body-product-item-body">
-                            <img src="./image/cscn8.jpg" alt="" class="purchaseOrderStatus-body-product-item-body-img">
-                            <div class="purchaseOrderStatus-body-product-item-body-infor">
-                                <div class="purchaseOrderStatus-body-product-item-body-productName">Kem dưỡng sáng da 2 trong 1</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-lable">Phân loại hàng</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-classify">Đen</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-num">x1</div>
-                            </div>
-                           
-                        </div>
-                    </div>
-
-
-
-                    <div class="purchaseOrderStatus-body-product-item">
-                        <div class="purchaseOrderStatus-body-product-item-header">
-                            <div class="purchaseOrderStatus-body-product-shopName">Ecolink for life</div>
-                            <button class="purchaseOrderStatus-body-product-btnView">Xem shop</button>
-                            <div class="purchaseOrderStatus-body-product-process">Đang chuẩn bị hàng</div>
-                        </div>
-                        <div class="purchaseOrderStatus-body-product-item-body">
-                            <img src="./image/cscn9.jpg" alt="" class="purchaseOrderStatus-body-product-item-body-img">
-                            <div class="purchaseOrderStatus-body-product-item-body-infor">
-                                <div class="purchaseOrderStatus-body-product-item-body-productName">Kem dưỡng sáng da 2 trong 1</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-lable">Phân loại hàng</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-classify">Đen</div>
-                                <div class="purchaseOrderStatus-body-product-item-body-num">x1</div>
-                            </div>
-                           
-                        </div>
-                    </div>
-
-
-
+                    <ul class="personal-body-order-list">
+                        <li class="personal-body-order-item">Cập Nhật Đơn Hàng </li>
+                        <li class="personal-body-order-item">Khuyến mãi</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <script>
-          /*ĐIỀU HƯỚNG TRẠNG THÁI ĐƠN HÀNG*/
-          document.addEventListener("DOMContentLoaded", function () {
-              // Lấy tất cả các mục trong danh sách điều hướng
-              const navItems = document.querySelectorAll('.purchaseOrderStatus-body-nav-item');
+        <!-- DETAIL -->
+        <div class="purchaseOrderStatus-body-detail col-lg-9">
+            <div class="purchaseOrderStatus-body-nav">
+                <ul class="purchaseOrderStatus-body-nav-list">
+                    <li class="purchaseOrderStatus-body-nav-item nav-statetus-active">Tất cả</li>
+                    <li class="purchaseOrderStatus-body-nav-item">Chờ thanh toán</li>
+                    <li class="purchaseOrderStatus-body-nav-item">Vận chuyển</li>
+                    <li class="purchaseOrderStatus-body-nav-item">Chờ giao hàng</li>
+                    <li class="purchaseOrderStatus-body-nav-item">Hoàn thành</li>
+                    <li class="purchaseOrderStatus-body-nav-item">Đã hủy</li>
+                </ul>
+            </div>
+            <div class="purchaseOrderStatus-body-product-list">
+                <% if (orders && orders.length > 0) { %>
+                    <% let currentOrder = ''; %>
+                    <% orders.forEach(order => { %>
+                        <% if (currentOrder !== order.MaDH) { %>
+                            <div class="purchaseOrderStatus-body-product-item-header">
+                                <div class="purchaseOrderStatus-body-product-shopName">Mã đơn hàng: <%= order.MaDH %></div>
+                                <div class="purchaseOrderStatus-body-product-process"><%= order.TrangThaiDH %></div>
+                                <div class="purchaseOrderStatus-body-product-total">Tổng giá trị đơn hàng: <%= order.TongTien %> VND</div>
+                            </div>
+                            <% currentOrder = order.MaDH; %>
+                        <% } %>
+                        <div class="purchaseOrderStatus-body-product-item">
+                            <div class="purchaseOrderStatus-body-product-item-body">
+                                <img src="/product_image/<%= order.HinhChinh %>" alt="<%= order.TenSP %>" class="purchaseOrderStatus-body-product-item-body-img">
+                                <div class="purchaseOrderStatus-body-product-item-body-infor">
+                                    <div class="purchaseOrderStatus-body-product-item-body-productName"><%= order.TenSP %></div>
+                                    <div class="purchaseOrderStatus-body-product-item-body-lable">Phân loại hàng</div>
+                                    <div class="purchaseOrderStatus-body-product-item-body-classify">Đen</div>
+                                    <div class="purchaseOrderStatus-body-product-item-body-num">x<%= order.SoLuongSP %></div>
+                                </div>
+                                <div class="purchaseOrderStatus-body-product-item-body-money"><%= order.DonGia %> VND</div>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>Không có đơn hàng nào.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <script>
+        /*ĐIỀU HƯỚNG TRẠNG THÁI ĐƠN HÀNG*/
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lấy tất cả các mục trong danh sách điều hướng
+            const navItems = document.querySelectorAll('.purchaseOrderStatus-body-nav-item');
 
-              // Thêm sự kiện click cho từng mục
-              navItems.forEach(item => {
-                  item.addEventListener('click', function () {
-                      // Xóa class 'nav-active' khỏi mục đang được chọn
-                      document.querySelector('.nav-statetus-active')?.classList.remove('nav-statetus-active');
+            // Thêm sự kiện click cho từng mục
+            navItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Xóa class 'nav-active' khỏi mục đang được chọn
+                    document.querySelector('.nav-statetus-active')?.classList.remove('nav-statetus-active');
 
-                      // Thêm class 'nav-active' vào mục vừa được click
-                      this.classList.add('nav-statetus-active');
-                  });
-              });
-          });
-
-          /*XỬ LÝ SỰ KIỆN CLICK VÀO TÀI KHOẢN THÌ SHOW CÁC CHỨC NĂNG CHI TIẾT*/
-          document.getElementById("account-header").addEventListener("click", function() {
-          var accountList = document.getElementById("account-list");
-          if (accountList.style.display === "none") {
-              accountList.style.display = "block";  // Hiển thị danh sách
-          } else {
-              accountList.style.display = "none";   // Ẩn danh sách
-          }
-      });
-
-
-      document.getElementById('profile').addEventListener('click', function() {
-            window.location.href = 'http://127.0.0.1:5500/assets/personal.html';
+                    // Thêm class 'nav-active' vào mục vừa được click
+                    this.classList.add('nav-statetus-active');
+                });
+            });
         });
 
-        </script>
+        /*XỬ LÝ SỰ KIỆN CLICK VÀO TÀI KHOẢN THÌ SHOW CÁC CHỨC NĂNG CHI TIẾT*/
+        document.getElementById("account-header").addEventListener("click", function() {
+            var accountList = document.getElementById("account-list");
+            if (accountList.style.display === "none") {
+                accountList.style.display = "block";  // Hiển thị danh sách
+            } else {
+                accountList.style.display = "none";   // Ẩn danh sách
+            }
+        });
 
+        document.getElementById('profile').addEventListener('click', function() {
+            window.location.href = 'http://127.0.0.1:5500/assets/personal.html';
+        });
+    </script>
 </body>
-
 <footer>
     <div class="footer">
-      <div class="footer-logo">
-        <h1 class="footer-logo-text">ECOLINK FOR LIFE</h1>
-      </div>
-      <div class="footer-infor">
-        <ul class="footer-infor-list">
-          <li class="footer-infor-item">About us</li>
-          <li class="footer-infor-item">News</li>
-          <li class="footer-infor-item">Official Store</li>
-          <li class="footer-infor-item">Company</li>
-          <li class="footer-infor-item">Careers</li>
-        </ul>
-      </div>
-    
-      <div class="footer-infor">
-        <ul class="footer-infor-list">
-          <li class="footer-infor-item">Get Help</li>
-          <li class="footer-infor-item">FAQ</li>
-          <li class="footer-infor-item">Shipping</li>
-          <li class="footer-infor-item">Payment</li>
-          <li class="footer-infor-item">Returns</li>
-          <li class="footer-infor-item">Contact Us</li>     
-        </ul>
-      </div>
-      <div class="footer-infor">
-        <ul class="footer-infor-list">
-          <li class="footer-infor-item">Follow Us</li>
-          <li class="footer-infor-item">
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-youtube"></i>
-            <i class="fa-brands fa-twitter"></i>
-          </li>
-        </ul>
-      </div>
+        <div class="footer-logo">
+            <h1 class="footer-logo-text">ECOLINK FOR LIFE</h1>
+        </div>
+        <div class="footer-infor">
+            <ul class="footer-infor-list">
+                <li class="footer-infor-item">About us</li>
+                <li class="footer-infor-item">News</li>
+                <li class="footer-infor-item">Official Store</li>
+                <li class="footer-infor-item">Company</li>
+                <li class="footer-infor-item">Careers</li>
+            </ul>
+        </div>
+        <div class="footer-infor">
+            <ul class="footer-infor-list">
+                <li class="footer-infor-item">Get Help</li>
+                <li class="footer-infor-item">FAQ</li>
+                <li class="footer-infor-item">Shipping</li>
+                <li class="footer-infor-item">Payment</li>
+                <li class="footer-infor-item">Returns</li>
+                <li class="footer-infor-item">Contact Us</li>
+            </ul>
+        </div>
+        <div class="footer-infor">
+            <ul class="footer-infor-list">
+                <li class="footer-infor-item">Follow Us</li>
+                <li class="footer-infor-item">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="footer-year-guide">
-      <a href="" class="footer-year-guide-item">Guide</a>
-      <a href="" class="footer-year-guide-item">Terms & Conditions</a>
-      <a href="" class="footer-year-guide-item">Privacy Policy</a>
+        <a href="" class="footer-year-guide-item">Guide</a>
+        <a href="" class="footer-year-guide-item">Terms & Conditions</a>
+        <a href="" class="footer-year-guide-item">Privacy Policy</a>
     </div>
     <div class="footer-year">
-      <i class="fa-regular fa-circle-check"></i>
-      2024 ECOLINK. All Rights Reserved
+        <i class="fa-regular fa-circle-check"></i>
+        2024 ECOLINK. All Rights Reserved
     </div>
 </footer>
 </html>

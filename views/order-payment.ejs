@@ -239,24 +239,33 @@
         </div>
 
         <div class="order-buy">
-            <button class="order-buy-btn">Đặt hàng</button>
+            <button class="order-buy-btn" onclick="placeOrder()">Đặt hàng</button>
         </div>
 
      </div>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script>
         let originalTotalCost = <%= cartItems.reduce((total, item) => total + item.DGBanMacDinh * item.SoLuongSPTrongGio, 0) %>;
         let shopDiscounts = {};
 
         document.addEventListener('DOMContentLoaded', function() {
             updateTotalCost();
+
+            // Add event listeners to update total cost when shipping method changes
+            document.querySelectorAll('input[name="shippingMethod"]').forEach(input => {
+                input.addEventListener('change', updateTotalCost);
+            });
         });
 
         function updateTotalCost() {
-            const shippingCost = parseFloat(document.querySelector('input[name="shippingMethod"]:checked').value);
+            const shippingCostElement = document.querySelector('input[name="shippingMethod"]:checked');
+            const shippingCost = shippingCostElement ? parseFloat(shippingCostElement.value) : 0;
             let totalCost = originalTotalCost + shippingCost;
+
             for (const discount of Object.values(shopDiscounts)) {
                 totalCost -= discount;
             }
+
             document.getElementById('total-cost').textContent = totalCost.toFixed(2) + ' VND';
         }
 
@@ -295,6 +304,56 @@
                 alert('Đã xảy ra lỗi khi áp dụng mã khuyến mãi: ' + error.message);
                 delete shopDiscounts[shopId];
                 updateTotalCost();
+            });
+        }
+
+        function placeOrder() {
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const shippingMethod = document.querySelector('input[name="shippingMethod"]:checked').value;
+            const specialRequest = document.getElementById('special-request') ? document.getElementById('special-request').value : '';
+
+            fetch('/place-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ paymentMethod, shippingMethod, specialRequest }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Đặt hàng thành công!',
+                        text: 'Đơn hàng của bạn đã được đặt thành công.',
+                        timer: 2000, // Display for 2 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        didClose: () => {
+                            window.location.href = '/purchaseOrderStatus'; // Redirect after the popup closes
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Đặt hàng thất bại!',
+                        text: data.message,
+                        timer: 3000, // Display for 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi hệ thống!',
+                    text: 'Đã xảy ra lỗi khi đặt hàng.',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
             });
         }
      </script>

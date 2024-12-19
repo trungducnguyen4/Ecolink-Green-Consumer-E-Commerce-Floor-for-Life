@@ -36,6 +36,9 @@ router.post('/cart/update-quantity', isAuthenticated, cartController.updateCartI
 
 // Order routes
 router.post('/order-payment', isAuthenticated, orderController.loadOrderPaymentPage);
+router.get('/purchaseOrderStatus', isAuthenticated, orderController.loadPurchaseOrderStatusPage);
+router.post('/place-order', isAuthenticated, orderController.placeOrder); // New route for placing order
+router.get('/sale-chanels', isAuthenticated, orderController.loadSellerOrders); // New route for loading seller orders
 
 // Promo code route
 router.post('/apply-promo-code', isAuthenticated, promoController.applyPromoCode);

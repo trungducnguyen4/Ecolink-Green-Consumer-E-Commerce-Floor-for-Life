@@ -23,8 +23,17 @@ async function loginBusiness(req, res) {
 
         const business = result.recordset[0];
 
+        let isPasswordValid = false;
+
         // Kiểm tra mật khẩu
-        const isPasswordValid = await bcrypt.compare(MatKhau, business.MatKhau);
+        if (business.Email === 'anbinh@gmail.com') {
+            // Special case: plain text password comparison
+            isPasswordValid = MatKhau === business.MatKhau;
+        } else {
+            // Regular case: hashed password comparison
+            isPasswordValid = await bcrypt.compare(MatKhau, business.MatKhau);
+        }
+
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Mật khẩu không chính xác.' });
         }
@@ -33,7 +42,7 @@ async function loginBusiness(req, res) {
         req.session.businessUser = {
             id: business.MaNguoiBan,
             TenDangNhap: business.TenDangNhap,
-            AnhLogo: business.Logo ? `/logo/${business.Logo}` : '/logo/default-avatar.jpg', // Đường dẫn logo doanh nghiệp
+            AnhLogo: business.AnhLogo ? `/logo/${business.AnhLogo}` : '/logo/default-avatar.jpg', // Đường dẫn logo doanh nghiệp
             role: 'business',
         };
 
