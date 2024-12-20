@@ -31,11 +31,11 @@ async function createUser(req, res) {
         }
 
         // Lấy mã lớn nhất hiện có
-        const maxCodeResult = await pool.request().query('SELECT MAX(MaUser) AS MaxMaUser FROM NguoiDung');
-        let newCode = 1; // Mặc định nếu chưa có mã người dùng nào
-        if (maxCodeResult.recordset[0].MaxMaUser) {
-            newCode = maxCodeResult.recordset[0].MaxMaUser + 1;
-        }
+        // const maxCodeResult = await pool.request().query('SELECT MAX(MaUser) AS MaxMaUser FROM NguoiDung');
+        // let newCode = 1; // Mặc định nếu chưa có mã người dùng nào
+        // if (maxCodeResult.recordset[0].MaxMaUser) {
+        //     newCode = maxCodeResult.recordset[0].MaxMaUser + 1;
+        // }
 
         // Mã hóa mật khẩu
         const hashedPassword = await bcrypt.hash(MatKhau, 10);
@@ -43,7 +43,7 @@ async function createUser(req, res) {
 
         // Thêm người dùng vào cơ sở dữ liệu
         await pool.request()
-            .input('MaUser', sql.Int, newCode)
+            //.input('MaUser', sql.Int, newCode)
             .input('TenDangNhap', sql.NVarChar, TenDangNhap)
             .input('MatKhau', sql.NVarChar, hashedPassword)
             .input('HoUser', sql.NVarChar, HoUser)
@@ -53,8 +53,8 @@ async function createUser(req, res) {
             .input('DiaChi', sql.NVarChar, DiaChi)
             .input('Email', sql.NVarChar, Email)
             .query(`
-                INSERT INTO NguoiDung (MaUser, TenDangNhap, MatKhau, HoUser, TenUser, GioiTinh, SoDienThoai, DiaChi, Email)
-                VALUES (@MaUser, @TenDangNhap, @MatKhau, @HoUser, @TenUser, @GioiTinh, @SoDienThoai, @DiaChi, @Email)
+                INSERT INTO NguoiDung (TenDangNhap, MatKhau, HoUser, TenUser, GioiTinh, SoDienThoai, DiaChi, Email)
+                VALUES ( @TenDangNhap, @MatKhau, @HoUser, @TenUser, @GioiTinh, @SoDienThoai, @DiaChi, @Email)
             `);
 
         console.log('Thêm người dùng thành công.');

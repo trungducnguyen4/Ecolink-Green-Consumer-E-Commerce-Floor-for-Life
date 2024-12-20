@@ -187,14 +187,9 @@ document.getElementById('rightBtn').addEventListener('click', function() {
     moveRight();
 });
 
-// Lấy phần tử sản phẩm bằng ID
-const product = document.getElementById("test_sp1");
 
-// Thêm sự kiện click
-product.addEventListener("click", () => {
-    // Chuyển hướng đến trang chi tiết sản phẩm
-    window.location.href = "http://127.0.0.1:5500/assets/product-detail.html?id=test_sp1";
-});
+
+
 
 
 

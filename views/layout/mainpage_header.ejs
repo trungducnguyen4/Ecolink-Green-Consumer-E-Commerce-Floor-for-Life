@@ -56,11 +56,11 @@
                <div class="header-search-and-cart">
                 <!-- Header-Search-frame -->
                 <div class="search-frame">
-                  <form action="/search" method="get" data-page="">
-                    <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm">
-                    <div class="header-search-icon">
+                  <form action="/products/search" method="get" >
+                    <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
+                    <button type="submit" class="header-search-icon">
                       <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
+                    </button>
                   </form>
                   <!--Search history-->
                   <div class="header__search-history">
@@ -75,6 +75,23 @@
                     </ul>
                   </div>
                 </div>
+
+                <script>
+                  const searchInput = document.querySelector(".header-search-input");
+                  const searchInputIcon = document.querySelector(".header-search-icon");
+                  const searchForm = document.querySelector("form");
+  
+                    searchInput.addEventListener("keypress", function (event) {
+                        // Kiểm tra nếu phím nhấn là Enter (mã phím 13)
+                        if (event.key === "Enter") {
+                            searchForm.submit();  // Gửi form khi Enter được nhấn
+                        }
+                    });
+  
+                    searchInputIcon.addEventListener("click", function () {
+                        searchForm.submit();  // Gửi form khi icon được nhấn
+                    });
+                  </script>
       
                 <!-- Cart -->
                 <a href="/cart" class="header-icon-cart">
