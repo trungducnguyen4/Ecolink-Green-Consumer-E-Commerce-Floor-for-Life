@@ -77,11 +77,12 @@ async function loadPurchaseOrderStatusPage(req, res) {
         const ordersResult = await pool.request()
             .input('MaUser', sql.NChar, userId)
             .query(`
-                SELECT dh.MaDH, dh.NgayDatHang, dh.TongTien, dh.TrangThaiDH, nb.TenCuaHang, nb.AnhLogo, sp.TenSP, sp.HinhChinh, ctdh.SoLuongSP, ctdh.DonGia
+                SELECT dh.MaDH, dh.NgayDatHang, dh.TongThanhToan, dh.TrangThai, ptvc.TenPTVC, nb.TenCuaHang, nb.AnhLogo, sp.TenSP, sp.HinhChinh, ctdh.SoLuongSP, ctdh.DonGia
                 FROM DonHang dh
                 JOIN CTDH ctdh ON dh.MaDH = ctdh.MaDH
                 JOIN SanPham sp ON ctdh.MaSP = sp.MaSP
                 JOIN NguoiBan nb ON ctdh.MaNguoiBan = nb.MaNguoiBan
+                JOIN PhuongThucVanChuyen ptvc ON dh.TongPhiVC = ptvc.PhiVC
                 WHERE dh.MaUser = @MaUser
                 ORDER BY dh.NgayDatHang DESC
             `);
@@ -114,18 +115,28 @@ async function placeOrder(req, res) {
             .query('SELECT COUNT(*) AS Total FROM DonHang');
         const orderId = `DH${orderIdResult.recordset[0].Total + 1}`;
 
+        // Fetch shipping fee
+        const shippingFeeResult = await transaction.request()
+            .input('MaPTVC', sql.NChar(20), shippingMethod)
+            .query(`
+                SELECT PhiVC
+                FROM PhuongThucVanChuyen
+                WHERE MaPTVC = @MaPTVC
+            `);
+
+        const shippingFee = shippingFeeResult.recordset[0].PhiVC;
+
         // Insert into DonHang
         await transaction.request()
             .input('MaDH', sql.NChar(20), orderId)
             .input('MaUser', sql.NChar(20), userId)
-            .input('MaPTVC', sql.NChar(20), shippingMethod)
-            .input('MaPTTT', sql.NChar(20), paymentMethod)
-            .input('TongTien', sql.Decimal(10, 2), 0) // Placeholder, will update later
-            .input('TrangThaiDH', sql.NVarChar(30), 'Chờ xác nhận')
-            .input('YeuCauDacBiet', sql.NVarChar(255), specialRequest)
+            .input('TongPhiVC', sql.Decimal(10, 2), shippingFee)
+            .input('TongGiamGia', sql.Decimal(10, 2), 0) // Placeholder, will update later
+            .input('TongThanhToan', sql.Decimal(10, 2), 0) // Placeholder, will update later
+            .input('TrangThai', sql.NVarChar(50), 'Chờ xác nhận')
             .query(`
-                INSERT INTO DonHang (MaDH, MaUser, MaPTVC, MaPTTT, TongTien, TrangThaiDH, YeuCauDacBiet)
-                VALUES (@MaDH, @MaUser, @MaPTVC, @MaPTTT, @TongTien, @TrangThaiDH, @YeuCauDacBiet)
+                INSERT INTO DonHang (MaDH, MaUser, NgayDatHang, TongPhiVC, TongGiamGia, TongThanhToan, TrangThai)
+                VALUES (@MaDH, @MaUser, GETDATE(), @TongPhiVC, @TongGiamGia, @TongThanhToan, @TrangThai)
             `);
 
         // Fetch cart items
@@ -151,8 +162,9 @@ async function placeOrder(req, res) {
         }, {});
 
         let totalAmount = 0;
+        let totalDiscount = 0;
 
-        // Insert into DonHangChiTiet
+        // Insert into CTDH
         for (const [sellerId, items] of Object.entries(groupedItems)) {
             for (const item of items) {
                 const itemTotal = item.DGBanMacDinh * item.SoLuongSPTrongGio;
@@ -160,25 +172,29 @@ async function placeOrder(req, res) {
 
                 await transaction.request()
                     .input('MaDH', sql.NChar(20), orderId)
-                    .input('MaNguoiBan', sql.NChar(20), sellerId)
                     .input('MaSP', sql.NChar(20), item.MaSP)
+                    .input('MaNguoiBan', sql.NChar(20), sellerId)
+                    .input('MaPTVC', sql.NChar(20), shippingMethod)
                     .input('SoLuongSP', sql.Int, item.SoLuongSPTrongGio)
                     .input('DonGia', sql.Decimal(10, 2), item.DGBanMacDinh)
-                    .input('PhanTramGiam', sql.Float, 0) // Placeholder, update if discount applied
+                    .input('PhiVanChuyen', sql.Decimal(10, 2), shippingFee)
+                    .input('GiamGia', sql.Decimal(10, 2), 0) // Placeholder, will update later
                     .query(`
-                        INSERT INTO CTDH (MaDH, MaNguoiBan, MaSP, SoLuongSP, DonGia, PhanTramGiam)
-                        VALUES (@MaDH, @MaNguoiBan, @MaSP, @SoLuongSP, @DonGia, @PhanTramGiam)
+                        INSERT INTO CTDH (MaSP, MaDH, MaNguoiBan, MaPTVC, SoLuongSP, DonGia, PhiVanChuyen, GiamGia)
+                        VALUES (@MaSP, @MaDH, @MaNguoiBan, @MaPTVC, @SoLuongSP, @DonGia, @PhiVanChuyen, @GiamGia)
                     `);
             }
         }
 
-        // Update total amount in DonHang
+        // Update total amounts in DonHang
         await transaction.request()
             .input('MaDH', sql.NChar(20), orderId)
-            .input('TongTien', sql.Decimal(10, 2), totalAmount)
+            .input('TongPhiVC', sql.Decimal(10, 2), shippingFee)
+            .input('TongGiamGia', sql.Decimal(10, 2), totalDiscount)
+            .input('TongThanhToan', sql.Decimal(10, 2), totalAmount + shippingFee - totalDiscount)
             .query(`
                 UPDATE DonHang
-                SET TongTien = @TongTien
+                SET TongPhiVC = @TongPhiVC, TongGiamGia = @TongGiamGia, TongThanhToan = @TongThanhToan
                 WHERE MaDH = @MaDH
             `);
 
@@ -206,21 +222,34 @@ async function loadSellerOrders(req, res) {
         const ordersResult = await pool.request()
             .input('MaNguoiBan', sql.NChar, sellerId)
             .query(`
-                SELECT dh.MaDH, dh.NgayDatHang, dh.TongTien, dh.TrangThaiDH, nd.HoUser, nd.TenUser, sp.TenSP, sp.HinhChinh, ctdh.SoLuongSP, ctdh.DonGia
+                SELECT dh.MaDH, dh.NgayDatHang, dh.TongThanhToan, dh.TrangThai, ptvc.TenPTVC, nd.HoUser, nd.TenUser, sp.TenSP, sp.HinhChinh, ctdh.SoLuongSP, ctdh.DonGia
                 FROM DonHang dh
                 JOIN CTDH ctdh ON dh.MaDH = ctdh.MaDH
                 JOIN SanPham sp ON ctdh.MaSP = sp.MaSP
                 JOIN NguoiDung nd ON dh.MaUser = nd.MaUser
+                JOIN PhuongThucVanChuyen ptvc ON ctdh.MaPTVC = ptvc.MaPTVC
                 WHERE ctdh.MaNguoiBan = @MaNguoiBan
                 ORDER BY dh.NgayDatHang DESC
             `);
 
         const orders = ordersResult.recordset;
 
-        res.render('sale_chanels', { title: 'Sale Channels', orders, seller: req.session.businessUser });
+        // Fetch products for the seller
+        const productsResult = await pool.request()
+            .input('MaNguoiBan', sql.NChar, sellerId)
+            .query(`
+                SELECT MaSP, TenSP, SoLuongTon, DGBanMacDinh, HinhChinh, MoTa
+                FROM SanPham
+                WHERE MaNguoiBan = @MaNguoiBan
+                ORDER BY TenSP
+            `);
+
+        const products = productsResult.recordset;
+
+        res.render('sale_chanels', { title: 'Sale Channels', orders, products, seller: req.session.businessUser });
     } catch (err) {
-        console.error('Error loading seller orders:', err);
-        res.status(500).send('Error loading seller orders');
+        console.error('Error loading seller orders and products:', err);
+        res.status(500).send('Error loading seller orders and products');
     }
 }
 

@@ -80,4 +80,63 @@ async function addToCart(req, res) {
     }
 }
 
-module.exports = { getCartItems, updateCartItemQuantity, addToCart };
+async function getCartItemsForHeader(req, res) {
+    if (!req.session.user) {
+        return res.status(401).json({ success: false, message: 'User not logged in' });
+    }
+
+    let userId = req.session.user.id.toString();
+    userId = userId.padEnd(20, ' ');
+
+    try {
+        const pool = await poolPromise;
+
+        // Fetch cart items
+        const cartResult = await pool.request()
+            .input('MaUser', sql.NChar, userId)
+            .query(`
+                SELECT sp.MaSP, sp.TenSP, sp.HinhChinh, stg.SoLuongSPTrongGio
+                FROM SanPhamTrongGio stg
+                JOIN SanPham sp ON stg.MaSP = sp.MaSP
+                WHERE stg.MaUser = @MaUser
+            `);
+
+        const cartItems = cartResult.recordset;
+
+        res.json({ success: true, cartItems });
+    } catch (err) {
+        console.error('Error fetching cart items for header:', err);
+        res.status(500).json({ success: false, message: 'Error fetching cart items for header' });
+    }
+}
+
+async function getCartItemCount(req, res) {
+    if (!req.session.user) {
+        return res.status(401).json({ success: false, message: 'User not logged in' });
+    }
+
+    let userId = req.session.user.id.toString();
+    userId = userId.padEnd(20, ' ');
+
+    try {
+        const pool = await poolPromise;
+
+        // Fetch cart item count
+        const cartCountResult = await pool.request()
+            .input('MaUser', sql.NChar, userId)
+            .query(`
+                SELECT SUM(SoLuongSPTrongGio) AS itemCount
+                FROM SanPhamTrongGio
+                WHERE MaUser = @MaUser
+            `);
+
+        const itemCount = cartCountResult.recordset[0].itemCount || 0;
+
+        res.json({ success: true, itemCount });
+    } catch (err) {
+        console.error('Error fetching cart item count:', err);
+        res.status(500).json({ success: false, message: 'Error fetching cart item count' });
+    }
+}
+
+module.exports = { getCartItems, updateCartItemQuantity, addToCart, getCartItemsForHeader, getCartItemCount };

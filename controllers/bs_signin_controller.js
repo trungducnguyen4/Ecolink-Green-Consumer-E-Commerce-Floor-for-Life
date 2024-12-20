@@ -75,7 +75,14 @@ async function registerBusiness(req, res) {
                 VALUES (@MaNguoiBan, @TenDangNhap, @MatKhau, @HoUserCH, @TenUserCH, @GioiTinh, @SoDienThoai, @TenCuaHang, @Email, @MaSoThue, @GiayPhepKD)
             `);
 
-        res.status(201).send('Đăng ký doanh nghiệp thành công.');
+        // Lưu thông tin người dùng vào session
+        req.session.businessUser = {
+            id: newCode,
+            TenDangNhap,
+            role: 'business',
+        };
+
+        res.status(201).json({ message: 'Đăng ký doanh nghiệp thành công.', redirectUrl: '/sale-chanels' });
     } catch (err) {
         console.error('Error in registerBusiness:', err);
         res.status(500).send('Đã xảy ra lỗi trong quá trình đăng ký.');

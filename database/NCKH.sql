@@ -21,7 +21,7 @@ CREATE TABLE DacDiemXanh (
     TenDDX nvarchar(100) NOT NULL UNIQUE, -- Tên đặc điểm phải duy nhất
     MoTaDDX nvarchar(max)
 );
-
+select * from NguoiBan
 
 CREATE TABLE CT_DDX (
     MaDDX nchar(20) NOT NULL, -- Mã đặc điểm xanh
@@ -150,6 +150,7 @@ CREATE TABLE BaiVietNguoiBan (
     NgayDang datetime  DEFAULT GETDATE(), -- Ngày đăng bài
     HienThi bit DEFAULT 1 -- Trạng thái hiển thị bài viết
 );
+select * from DonHang
 
 CREATE TABLE BinhLuan (
     MaUser nchar(20) NOT NULL, -- Người bình luận
@@ -269,4 +270,4 @@ VALUES (
     '2024-12-31',
     100000.00
 );
-select * from KhuyenMai
+select * from CTDH

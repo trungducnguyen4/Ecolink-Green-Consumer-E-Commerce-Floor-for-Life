@@ -28,7 +28,7 @@
                     Quản lý sản phẩm <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="text-sale">
-                    <div class="padding">Tất cả sản phẩm</div>
+                    <div class="padding" id="all-products-btn">Tất cả sản phẩm</div>
                     <a href="/add-product" class="padding">Thêm sản phẩm</a>
                 </div>
             </div>
@@ -115,6 +115,18 @@
                     <% } else { %>
                         <p>Không có đơn hàng nào.</p>
                     <% } %>
+                </div>
+                <!-- Section for displaying products -->
+                <div class="product-section" id="product-section" style="display: none;">
+                    <div class="product-table-header row">
+                        <div class="product-table-header-item col-lg-3">Sản phẩm</div>
+                        <div class="product-table-header-item col-lg-2">Số lượng tồn</div>
+                        <div class="product-table-header-item col-lg-2">Giá bán</div>
+                        <div class="product-table-header-item col-lg-5">Mô tả</div>
+                    </div>
+                    <div class="product-table-body" id="product-table-body">
+                        <!-- Products will be dynamically loaded here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,6 +309,16 @@
                     }
                 });
             });
+        });
+
+        // Toggle product section visibility
+        document.getElementById('all-products-btn').addEventListener('click', function() {
+            const productSection = document.getElementById('product-section');
+            if (productSection.style.display === 'none' || !productSection.style.display) {
+                productSection.style.display = 'block';
+            } else {
+                productSection.style.display = 'none';
+            }
         });
     </script>
 </body>

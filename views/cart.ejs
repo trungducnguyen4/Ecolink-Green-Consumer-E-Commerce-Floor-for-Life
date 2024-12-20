@@ -27,21 +27,6 @@
             border: 1px solid #ccc;
             margin: 0 2.5px; /* Reduce margin by 50% */
         }
-        .shop-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .shop-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .shop-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -81,6 +66,7 @@
         <div class="cart-header">
             <ul class="cart-header-list row">
                 <li class="cart-header-item col-lg-5">
+                    <input type="checkbox">
                     <p class="cart-header-item-product"> Sản phẩm</p>
                 </li>
                 <li class="cart-header-item col-lg-2">Đơn giá</li>
@@ -92,48 +78,33 @@
 
         <div class="cart-body">
             <% if (typeof cartItems !== 'undefined' && cartItems.length > 0) { %>
-                <% 
-                    const groupedItems = cartItems.reduce((acc, item) => {
-                        if (!acc[item.MaNguoiBan]) {
-                            acc[item.MaNguoiBan] = {
-                                shopName: item.TenCuaHang || 'Unknown Shop',
-                                shopLogo: item.AnhLogo || 'default-logo.png',
-                                items: []
-                            };
-                        }
-                        acc[item.MaNguoiBan].items.push(item);
-                        return acc;
-                    }, {});
-                %>
-                <% for (const [shopId, shop] of Object.entries(groupedItems)) { %>
-                    <div class="shop-group">
-                        <div class="shop-header">
-                            <img src="/shop_image/<%= shop.shopLogo %>" alt="<%= shop.shopName %>" class="shop-logo">
-                            <div class="shop-name"><%= shop.shopName %></div>
+                <% console.log('Cart Items:', cartItems); %> <!-- Debugging statement -->
+                <% cartItems.forEach(item => { %>
+                    <div class="cart-body-item row">
+                        <div class="cart-body-shopName">
+                            <input type="checkbox">
+                            <div class="cart-body-shopName-title"><%= item.TenCuaHang %></div>
                         </div>
-                        <% shop.items.forEach(item => { %>
-                            <div class="cart-body-item row">
-                                <div class="cart-body-infor-wrap row">
-                                    <div class="cart-body-infor col-lg-5">
-                                        <img src="/product_image/<%= item.HinhChinh %>" alt="<%= item.TenSP %>" class="cart-body-img">
-                                        <div class="cart-body-nameProduct"><%= item.TenSP %></div>
-                                        <div class="cart-body-typeProduct"><%= item.MoTa %></div>
-                                    </div>
-                                    <div class="cart-body-priceProduct col-lg-2"><%= item.DGBanMacDinh %></div>
-                                    <div class="cart-quantityProduct col-lg-2">
-                                        <div class="quantity-container">
-                                            <button class="quantity-btn" data-action="decrease" data-id="<%= item.MaSP %>">-</button>
-                                            <input type="number" value="<%= item.SoLuongSPTrongGio %>" min="1" class="quantity-input" data-price="<%= item.DGBanMacDinh %>" data-id="<%= item.MaSP %>" readonly>
-                                            <button class="quantity-btn" data-action="increase" data-id="<%= item.MaSP %>">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-body-totalCostProduct col-lg-2"><%= item.DGBanMacDinh * item.SoLuongSPTrongGio %></div>
-                                    <div class="cart-body-delete col-lg-1">Xóa</div>
+                        <div class="cart-body-infor-wrap row">
+                            <div class="cart-body-infor col-lg-5">
+                                <input type="checkbox">
+                                <img src="/product_image/<%= item.HinhChinh %>" alt="<%= item.TenSP %>" class="cart-body-img">
+                                <div class="cart-body-nameProduct"><%= item.TenSP %></div>
+                                <div class="cart-body-typeProduct"><%= item.MoTa %></div>
+                            </div>
+                            <div class="cart-body-priceProduct col-lg-2"><%= item.DGBanMacDinh %></div>
+                            <div class="cart-quantityProduct col-lg-2">
+                                <div class="quantity-container">
+                                    <button class="quantity-btn" data-action="decrease" data-id="<%= item.MaSP %>">-</button>
+                                    <input type="number" value="<%= item.SoLuongSPTrongGio %>" min="1" class="quantity-input" data-price="<%= item.DGBanMacDinh %>" data-id="<%= item.MaSP %>" readonly>
+                                    <button class="quantity-btn" data-action="increase" data-id="<%= item.MaSP %>">+</button>
                                 </div>
                             </div>
-                        <% }); %>
+                            <div class="cart-body-totalCostProduct col-lg-2"><%= item.DGBanMacDinh * item.SoLuongSPTrongGio %></div>
+                            <div class="cart-body-delete col-lg-1">Xóa</div>
+                        </div>
                     </div>
-                <% } %>
+                <% }); %>
             <% } else { %>
                 <p>Giỏ hàng của bạn đang trống.</p>
             <% } %>
@@ -161,66 +132,64 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function updateQuantity(input) {
-                const quantity = parseInt(input.value);
-                const price = parseFloat(input.dataset.price);
-                const productId = input.dataset.id;
+        function updateQuantity(input) {
+            const quantity = parseInt(input.value);
+            const price = parseFloat(input.dataset.price);
+            const productId = input.dataset.id;
 
-                const totalCostElement = input.closest('.cart-body-item').querySelector('.cart-body-totalCostProduct');
-                totalCostElement.textContent = (price * quantity).toFixed(2);
+            const totalCostElement = input.closest('.cart-body-item').querySelector('.cart-body-totalCostProduct');
+            totalCostElement.textContent = (price * quantity).toFixed(2);
 
-                // Update total cost
-                let totalCost = 0;
-                document.querySelectorAll('.cart-body-totalCostProduct').forEach(element => {
-                    totalCost += parseFloat(element.textContent);
-                });
-                document.getElementById('total-cost').textContent = totalCost.toFixed(2);
-
-                // Send AJAX request to update quantity in the database
-                fetch('/cart/update-quantity', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ productId, quantity }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert('Failed to update quantity');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while updating quantity');
-                });
-            }
-
-            document.querySelectorAll('.quantity-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const action = this.dataset.action;
-                    const input = this.closest('.quantity-container').querySelector('.quantity-input');
-                    let quantity = parseInt(input.value);
-
-                    if (action === 'increase') {
-                        quantity++;
-                    } else if (action === 'decrease' && quantity > 1) {
-                        quantity--;
-                    }
-
-                    input.value = quantity;
-                    updateQuantity(input);
-                });
+            // Update total cost
+            let totalCost = 0;
+            document.querySelectorAll('.cart-body-totalCostProduct').forEach(element => {
+                totalCost += parseFloat(element.textContent);
             });
+            document.getElementById('total-cost').textContent = totalCost.toFixed(2);
 
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('input', function() {
-                    if (this.value < 1) {
-                        this.value = 1;
-                    }
-                    updateQuantity(this);
-                });
+            // Send AJAX request to update quantity in the database
+            fetch('/cart/update-quantity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId, quantity }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    alert('Failed to update quantity');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating quantity');
+            });
+        }
+
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.dataset.action;
+                const input = this.closest('.quantity-container').querySelector('.quantity-input');
+                let quantity = parseInt(input.value);
+
+                if (action === 'increase') {
+                    quantity++;
+                } else if (action === 'decrease' && quantity > 1) {
+                    quantity--;
+                }
+
+                input.value = quantity;
+                updateQuantity(input);
+            });
+        });
+
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value < 1) {
+                    this.value = 1;
+                }
+                updateQuantity(this);
             });
         });
     </script>
