@@ -156,6 +156,13 @@ document.getElementById("stopButton").addEventListener("click", function() {
   document.getElementById("playButton").style.display = "inline"; // Show play button
 });
 
+// Automatically start the slideshow when the page loads
+window.onload = function() {
+  showSlides(); // Start slideshow automatically when the page loads
+  document.getElementById("playButton").style.display = "none"; // Hide play button
+  document.getElementById("stopButton").style.display = "inline"; // Show stop button
+};
+
 
 
 

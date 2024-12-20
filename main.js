@@ -10,6 +10,7 @@ const adminRoutes = require('./routes/admin_routes');
 const newsRoutes = require('./routes/news_routes'); 
 const newsDetailRoutes = require('./routes/newsDetail_routes');
 
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -57,6 +58,7 @@ app.use('/api', forumRoutes);
 app.use('/news', newsRoutes);  
 
 app.use('/news-detail', newsDetailRoutes);  
+app.use('/topPoster', newsDetailRoutes);   
 
 
 // Khởi động server sau khi kết nối DB thành công

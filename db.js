@@ -12,16 +12,28 @@ const sql = require('mssql');
 //     }
 //   };
   
+  // const sqlConfig = {
+  //   server: 'localhost', // Địa chỉ máy chủ
+  //   database: 'NCKH',
+  //   user: 'manager1', // Tên người dùng SQL Server
+  //   password: '123', // Mật khẩu
+  //   options: {
+  //     encrypt: true,  // Thường dùng cho kết nối an toàn
+  //     trustServerCertificate: true  // Chỉ cần nếu bạn đang sử dụng kết nối không an toàn
+  //   }
+  // };
+
   const sqlConfig = {
-    server: 'localhost', // Địa chỉ máy chủ
+    server: 'localhost',
+    port: 1433, // Cổng mặc định cho SQL Server
     database: 'NCKH',
-    user: 'manager1', // Tên người dùng SQL Server
-    password: '123', // Mật khẩu
+    user: 'sa',
+    password: 'Albert Einstein',
     options: {
-      encrypt: true,  // Thường dùng cho kết nối an toàn
-      trustServerCertificate: true  // Chỉ cần nếu bạn đang sử dụng kết nối không an toàn
-    }
-  };
+        encrypt: true,
+        trustServerCertificate: true, // Bắt buộc nếu không có chứng chỉ SSL
+    },
+};
 
 
 // Tạo một kết nối pool và xuất nó để sử dụng trong các module khác
