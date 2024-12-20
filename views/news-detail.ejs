@@ -1,6 +1,7 @@
 
 <link rel="stylesheet" href="./news.css">
 <link rel="stylesheet" href="/main.css">
+
 <%- include('layout/mainpage_header') %>
 
 <!-- NEWS-NAVIGATION -->
@@ -26,8 +27,8 @@
             <i class="fa-brands fa-twitter"></i>
             </div>
             <img style=" width: 755px;" src="<%= article.AnhBia %>" alt="" class="news-detail-body-img">
-            <p class="news-detail-body-content">
-                <%= article.NoiDung %>
+            <p style=" width: 760px; margin-top: 20px;" class="news-detail-body-content">
+                <%= article.NoiDung.replace(/&lt;br&gt;/g, '<br>').replace(/&lt;br\/&gt;/g, '<br>') %>
             </p>      
         </div>
         <% } else { %>
@@ -77,28 +78,105 @@
 
     
     <div class="news-body-blog col-lg-4">
-        <h3 class="new-body-blog-title">Top nhà tương tác hàng đầu</h3>
-        <img class="new-body-blog-img" src="https://i.pinimg.com/474x/85/b0/0f/85b00f1d368922e4bbc8be6daf178055.jpg" alt="">
+       
+        <h3 style="margin-left: 30px;
+        padding-top: 30px;"
+        class="new-body-blog-title">Top nhà tương tác hàng đầu</h3>
+
+        <img 
+        style="justify-items: center;"
+        id="top-poster-logo-img" class="new-body-blog-img" src="" alt="Logo nhà đăng bài">
+
+        <!-- Phần tử hiển thị tên cửa hàng -->
+        <h4 
+            class="top-poster-name" 
+            style="
+                height: 30px;
+                width: 220px;
+                background-color: #007b59;
+                text-align: center;
+                margin: 20px auto 5px auto;
+                line-height: 30px;
+                color: white;
+                border-radius: 10px;
+                position: relative;
+                font-size: 15px;
+            " 
+            id="top-poster-name">
+            Tên cửa hàng
+            
+        </h4>
+        <i class="fa-solid fa-crown" 
+                style="
+                    position: absolute;
+                    top: 240px;
+                    left: 310px;
+                    color: gold;
+                    font-size: 20px;
+        "></i>
+
+        <!-- Phần tử hiển thị số lượng bài viết -->
+        <p
+        style="
+        text-align: center;
+        color: gray;
+        " 
+        id="top-poster-count"></p>
+
+
         <h3 class="new-body-blog-title">Bài blog liên quan</h3>
         <div class="new-body-blog-relate">
             <ul class="new-body-blog-relate-list">
+                
                 <li class="new-body-blog-relate-item">
                     <img src="./image/art1.jpg" alt="" class="new-body-blog-relate-item-img">
-                    <h4 class="new-body-blog-relate-item-title">Danh sách ứng dụng thắng giải Apple Design Award 2024</h4>
+                    <h4 class="new-body-blog-relate-item-title"></h4>
                 </li>
-
-                <li class="new-body-blog-relate-item">
-                    <img src="./image/art4.jpg" alt="" class="new-body-blog-relate-item-img">
-                    <h4 class="new-body-blog-relate-item-title">Danh sách ứng dụng thắng giải Apple Design Award 2024</h4>
-                </li>
-                <li class="new-body-blog-relate-item">
-                    <img src="./image/art4.jpg" alt="" class="new-body-blog-relate-item-img">
-                    <h4 class="new-body-blog-relate-item-title">Danh sách ứng dụng thắng giải Apple Design Award 2024</h4>
-                </li>
+                
             </ul>
         </div>
     </div>
 </div>
+<script>
+
+    // Viết hàm fetchTopPoster trực tiếp trong thẻ <script>
+        async function fetchTopPoster() {
+            try {
+                // Gọi API từ server Node.js để lấy top poster
+                const response = await fetch('/topPoster'); // Đảm bảo endpoint đúng
+                const data = await response.json();
+
+                // Kiểm tra nếu có dữ liệu hợp lệ
+                if (!data.success) {
+                    alert('Không có dữ liệu');
+                    return;
+                }
+
+                // Cập nhật dữ liệu vào các phần tử HTML
+                const topPoster = data.data; // Lấy dữ liệu từ response
+
+                document.getElementById("top-poster-logo-img").src = topPoster.AnhLogo || 'default-logo.jpg';
+                document.getElementById("top-poster-name").innerText = `${topPoster.TenCuaHang}`;
+                document.getElementById("top-poster-count").innerText = `Số lượng bài viết: ${topPoster.SoLuongBaiViet || 0}`;
+            } catch (err) {
+                console.error('Error fetching top poster:', err);
+                alert('Có lỗi xảy ra khi lấy dữ liệu');
+            }
+        }
+
+        // Gọi hàm để lấy dữ liệu khi trang được tải
+        window.onload = fetchTopPoster;
+    // LOAD CONTENT
+    document.addEventListener("DOMContentLoaded", () => {
+    const contentElement = document.querySelector('.news-detail-body-content');
+
+    if (contentElement) {
+        // Thay thẻ <br> bằng một thẻ xuống dòng
+        contentElement.innerHTML = contentElement.textContent.replace(/<br\s*\/?>/g, '</p><p>');
+    }
+});
+
+</script>
 </body>
 <footer>
 <div class="footer">

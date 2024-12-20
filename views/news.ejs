@@ -11,103 +11,188 @@
             <div class="news-body-article-list col-lg-8">
 
               <% if (news && news.length > 0) { %>
-                <% news.forEach(article => { %>
-                    <a href="/news-detail/<%= article.MaBaiBlog %>" class="news-body-article-item">
-                        <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
-                        <div class="news-body-article-content-frame">
-                            <div class="news-body-article-title"><%= article.TieuDe %></div>
-                            <p class="news-body-article-content"><%= article.NoiDung.substring(0, 200) %></p>
-                            <span class="news-body-article-date"><%= article.NgayTao %></span>
-                        </div>
-                    </a>
-                <% }); %>
+                <% 
+                    const limitedNews = news.slice(0, 5); // Lấy 5 bài đầu tiên
+                    const remainingNews = news.slice(5); // Lấy phần còn lại
+                %>
+                <div class="news-list">
+                    <% limitedNews.forEach(article => { %>
+                        <a href="/news-detail/<%= article.MaBaiBlog %>" class="news-body-article-item">
+                            <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+                            <div class="news-body-article-content-frame">
+                                <div class="news-body-article-title"><%= article.TieuDe %></div>
+                                <p class="news-body-article-content"><%= article.NoiDung %></p>
+                                <div class="news-body-article-date"><%= article.NgayTao %></div>
+                            </div>
+                        </a>
+                    <% }); %>
+                </div>
+        
+                <div class="news-list-more" id="additional-news" style="display: none;">
+                    <% remainingNews.forEach(article => { %>
+                        <a href="/news-detail/<%= article.MaBaiBlog %>" class="news-body-article-item">
+                            <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+                            <div class="news-body-article-content-frame">
+                                <div class="news-body-article-title"><%= article.TieuDe %></div>
+                                <p class="news-body-article-content"><%= article.NoiDung %></p>
+                                <div class="news-body-article-date"><%= article.NgayTao %></div>
+                            </div>
+                        </a>
+                    <% }); %>
+                </div>
+        
+                <!-- Nút Xem Thêm -->
+                <div class="main-card-see-more" id="see-more-btn">
+                    Xem thêm <i class="fa-solid fa-chevron-down"></i>
+                </div>
               <% } else { %>
                   <p>Không có bài viết nào thuộc danh mục này.</p>
               <% } %>
-
-                <br>
-                <div class="main-card-see-more">Xem thêm
-                  <i class="fa-solid fa-chevron-down"></i>
-                </div>
+              
+              <div id="more-news-container">
+                  <!-- Các bài viết thêm sẽ được chèn vào đây -->
+              </div>
             </div>
             
 
             
             <div class="news-body-blog col-lg-4">
-                <h3 class="new-body-blog-title">Top nhà tương tác hàng đầu</h3>
-                <img class="new-body-blog-img" src="../image/logo.jpg" alt="">
+              <h3 style="margin-left: 30px;
+              padding-top: 10px;"
+              class="new-body-blog-title">Top nhà tương tác hàng đầu</h3>
+      
+              <img 
+              style="justify-items: center;"
+              id="top-poster-logo-img" class="new-body-blog-img" src="" alt="Logo nhà đăng bài">
+      
+              <!-- Phần tử hiển thị tên cửa hàng -->
+              <h4 
+                  class="top-poster-name" 
+                  style="
+                      height: 30px;
+                      width: 220px;
+                      background-color: #007b59;
+                      text-align: center;
+                      margin: 20px auto 5px auto;
+                      line-height: 30px;
+                      color: white;
+                      border-radius: 10px;
+                      position: relative;
+                      font-size: 15px;
+                  " 
+                  id="top-poster-name">
+                  Tên cửa hàng
+                  
+              </h4>
+              <i class="fa-solid fa-crown" 
+                      style="
+                          position: absolute;
+                          top: 215px;
+                          left: 280px;
+                          color: gold;
+                          font-size: 20px;
+              "></i>
+      
+              <!-- Phần tử hiển thị số lượng bài viết -->
+              <p
+              style="
+              text-align: center;
+              color: gray;
+              " 
+              id="top-poster-count"></p>
+
                 <h3 class="new-body-blog-title">Bài blog liên quan</h3>
                 <div class="new-body-blog-relate">
-                    <ul class="new-body-blog-relate-list">
-                        <li class="new-body-blog-relate-item">
-                            <img src="../image/art1.jpg" alt="" class="new-body-blog-relate-item-img">
-                            <h4 class="new-body-blog-relate-item-title">Tương lai của năng lượng xanh: Những đổi mới thúc đẩy cuộc cách mạng sinh thái</h4>
-                        </li>
-
-                        <li class="new-body-blog-relate-item">
-                            <img src="../image/art2.jpg" alt="" class="new-body-blog-relate-item-img">
-                            <h4 class="new-body-blog-relate-item-title">Thời trang bền vững: Ngành công nghiệp đang trở nên xanh như thế nào</h4>
-                        </li>
-                        <li class="new-body-blog-relate-item">
-                            <img src="../image/art3.jpg" alt="" class="new-body-blog-relate-item-img">
-                            <h4 class="new-body-blog-relate-item-title">Giảm rác thải nhựa: Chiến lược cho một hành tinh xanh hơn</h4>
-                        </li>
-
-                        <li class="new-body-blog-relate-item">
-                          <img src="../image/art4.jpg" alt="" class="new-body-blog-relate-item-img">
-                          <h4 class="new-body-blog-relate-item-title">Kiến trúc thân thiện với môi trường: Xây dựng tương lai bền vững</h4>
-                        </li>
-
-                        <li class="new-body-blog-relate-item">
-                          <img src="../image/art5.jpg" alt="" class="new-body-blog-relate-item-img">
-                          <h4 class="new-body-blog-relate-item-title">Tác động của biến đổi khí hậu đối với an ninh lương thực toàn cầu</h4>
-                        </li>
-                    </ul>
+                  <ul class="new-body-blog-relate-list">
+                    <% 
+                        const limitedNews = news.slice(0, 5); // Lấy 5 bài đầu tiên để hiển thị trong phần chính
+                        const remainingNews = news.slice(5, 10); // Lấy 5 bài tiếp theo để hiển thị trong danh sách liên quan
+                    %>
+                    <% remainingNews.forEach(article => { %>
+                        <a href="/news-detail/<%= article.MaBaiBlog %>" class="new-body-blog-relate-item">
+                            <img src="<%= article.AnhBia %>" alt="" class="new-body-blog-relate-item-img">
+                            <h4 class="new-body-blog-relate-item-title"><%= article.TieuDe %></h4>
+                        </a>
+                    <% }); %>
+                </ul>
                 </div>
             </div>
          </div>
-         <script type="text/javascript" >
+         <script >
+
+
+          document.getElementById('see-more-btn').addEventListener('click', function() {
+              // Lấy phần tử chứa các bài báo thêm
+              var additionalNews = document.getElementById('additional-news');
+              
+              // Hiển thị các bài báo thêm
+              if (additionalNews.style.display === 'none') {
+                  additionalNews.style.display = 'block'; // Hiển thị
+                  this.innerHTML = 'Thu gọn <i class="fa-solid fa-chevron-up"></i>'; // Cập nhật nội dung nút
+              } else {
+                  additionalNews.style.display = 'none'; // Ẩn
+                  this.innerHTML = 'Xem thêm <i class="fa-solid fa-chevron-down"></i>'; // Cập nhật nội dung nút
+              }
+          });
+
+
+
+          // Viết hàm fetchTopPoster không sử dụng async/await
+          function fetchTopPoster() {
+                  // Gọi API từ server Node.js để lấy top poster
+                  fetch('/topPoster') // Đảm bảo endpoint đúng
+                      .then(function(response) {
+                          if (!response.ok) {
+                              throw new Error('Lỗi kết nối tới server');
+                          }
+                          return response.json(); // Chuyển đổi phản hồi thành JSON
+                      })
+                      .then(function(data) {
+                          // Kiểm tra nếu có dữ liệu hợp lệ
+                          if (!data.success) {
+                              alert('Không có dữ liệu');
+                              return;
+                          }
+
+                          // Cập nhật dữ liệu vào các phần tử HTML
+                          const topPoster = data.data; // Lấy dữ liệu từ response
+
+                          document.getElementById("top-poster-logo-img").src = topPoster.AnhLogo || 'default-logo.jpg';
+                          document.getElementById("top-poster-name").innerText = `${topPoster.TenCuaHang}`;
+                          document.getElementById("top-poster-count").innerText = `Số lượng bài viết: ${topPoster.SoLuongBaiViet || 0}`;
+                      })
+                      .catch(function(err) {
+                          console.error('Error fetching top poster:', err);
+                          alert('Có lỗi xảy ra khi lấy dữ liệu');
+                      });
+              }
+        
+
           function setActiveClass() {
-        // Lấy URL hiện tại
-        var currentUrl = window.location.href;
+              // Lấy URL hiện tại
+              var currentUrl = window.location.href;
 
-        // Danh sách các trang và ID tương ứng
-        var pages = {
-        };
+              // Danh sách các trang và ID tương ứng
+              var pages = {
+              };
 
-        // Xóa class active khỏi tất cả các mục
-        var items = document.querySelectorAll('.navigation-item');
-        items.forEach(function(item) {
-            item.classList.remove('active');
-        });
+              // Xóa class active khỏi tất cả các mục
+              var items = document.querySelectorAll('.navigation-item');
+              items.forEach(function(item) {
+                  item.classList.remove('active');
+              });
 
-        // Gán class active cho mục tương ứng
-        if (pages[currentUrl]) {
-            document.getElementById(pages[currentUrl]).classList.add('active');
-        }
-    }
+              // Gán class active cho mục tương ứng
+              if (pages[currentUrl]) {
+                  document.getElementById(pages[currentUrl]).classList.add('active');
+              }
+          }
 
-function navigateTo(url) {
-    window.location.href = url; // Chuyển hướng đến URL
-}
-
-// Gán sự kiện cho các mục trong menu
-document.getElementById('trang-chu').onclick = function() { // Chuyển đến Trang Chủ
-};
-
-document.getElementById('san-pham').onclick = function() { // Chuyển đến Sản Phẩm
-};
-
-document.getElementById('dien-dan').onclick = function() {// Chuyển đến Diễn Đàn
-};
-
-document.getElementById('blog').onclick = function() { // Chuyển đến Blog
-};
-
-// Gọi hàm khi trang được tải xong
-window.onload = function() {
-    setActiveClass(); // Gán class active cho mục hiện tại
-};
+          // Gọi hàm khi trang được tải xong
+          window.onload = function() {
+              setActiveClass(); // Gán class active cho mục hiện tại
+              fetchTopPoster(); // Lấy dữ liệu top poster
+          };
 
          </script>
 </body>
