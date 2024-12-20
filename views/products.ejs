@@ -54,8 +54,9 @@
               <!-- Header-Search-frame -->
               <div class="search-frame">
                 <form action="/products/search" method="get" >
-                  <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
-                  <button type="submit" class="header-search-icon">
+                  <input 
+                  class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
+                  <button style="border: none;" type="submit" class="header-search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </form>
@@ -140,12 +141,12 @@
             
             <!-- NAVIGATION -->
           <div class="navigation">
-          <ul class="navigation-list">
-            <li id = "trang-chu" ><a id="" href="/" class="navigation-item">Trang chủ</a></li>
-            <li id = "san-pham" ><a href="/products" class="navigation-item" >Sản phẩm</a></li>
-            <li id = "dien-dan" ><a href="/forum" class="navigation-item">Diễn đàn</a></li>
-            <li id = "blog" > <a href="/news" class="navigation-item">Bài Blog</a></li>
-          </ul>
+            <ul class="navigation-list">
+              <a id="trang-chu" href="/" class="navigation-item">Trang chủ</a>
+              <a id="san-pham" href="/products" class="navigation-item" >Sản phẩm</a>
+              <a id="dien-dan" href="/forum" class="navigation-item">Diễn đàn</a>
+              <a id="blog" href="/news" class="navigation-item">Bài Blog</a>
+            </ul>
         </div>
           </div>
           
@@ -217,6 +218,40 @@
           </div>
 
           <script>
+            
+        document.addEventListener('DOMContentLoaded', function () {
+          // Lấy URL đầy đủ hiện tại
+          var currentUrl = window.location.href;
+
+          // Lấy tất cả các thẻ <a> trong navigation
+          var navItems = document.querySelectorAll('.navigation-item');
+
+          // Xử lý gán class dựa trên URL hiện tại
+          navItems.forEach(function (item) {
+              // Xóa class 'nav-head-active' khỏi tất cả các mục
+              item.classList.remove('nav-head-active');
+
+              // So sánh href của thẻ <a> với URL hiện tại
+              if (currentUrl === item.href) {
+                  item.classList.add('nav-head-active');
+              }
+          });
+
+    // Thêm sự kiện click cho từng thẻ
+    navItems.forEach(function (item) {
+        item.addEventListener('click', function (event) {
+            // Xóa class 'nav-head-active' khỏi tất cả các mục
+            navItems.forEach(function (nav) {
+                nav.classList.remove('nav-head-active');
+            });
+
+            // Thêm class 'nav-head-active' vào mục được click
+            item.classList.add('nav-head-active');
+        });
+    });
+});
+
+
               // Lắng nghe sự kiện thay đổi trạng thái của checkbox
               document.querySelectorAll('input[name="categories"]').forEach(checkbox => {
                   checkbox.addEventListener('change', applyFilters);
