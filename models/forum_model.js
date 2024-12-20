@@ -8,12 +8,14 @@ async function getForum() {
         const query = `
             SELECT 
                 bp.MaPost, bp.TenPost, bp.NoiDung, bp.ThoiGianDang,
-                bp.MaNguoiBan, nb.HoUserCH + ' ' + nb.TenUserCH AS TenNguoiBan,
+                bp.TenDangNhap, nb.HoUserCH + ' ' + nb.TenUserCH AS TenNguoiBan, nd.HoUser + ' ' + nd.TenUser AS TenNguoiDung ,
                 nb.TenCuaHang, nb.DiaChi, bp.SoLuotThich,
                 bp.SoLuotBinhLuan, bp.HinhAnh, bp.Video,
                 bp.TrangThai, nb.AnhLogo
             FROM BaiPost bp
-            LEFT JOIN NguoiBan nb ON bp.MaNguoiBan = nb.MaNguoiBan
+            LEFT JOIN NguoiBan nb ON bp.TenDangNhap = nb.TenDangNhap
+			LEFT JOIN NguoiDung nd ON bp.TenDangNhap = nd.TenDangNhap
+
         `;
         const result = await pool.request().query(query);
         return result.recordset;
@@ -24,27 +26,36 @@ async function getForum() {
 }
 
 // Tạo bài viết mới
-async function createPost({ NoiDung, MaNguoiBan, HinhAnh }) {
+async function createPost(postData) {
+    const { NoiDung, TenDangNhap, LoaiNguoiDang, HinhAnh } = postData;
+
     try {
-        const pool = await poolPromise;
+        const request = new sql.Request();
+
+        // Thêm tham số vào yêu cầu
+        request.input('NoiDung', sql.NVarChar, NoiDung);  // NVarChar cho chuỗi
+        request.input('TenDangNhap', sql.NVarChar, TenDangNhap);  // TenDangNhap là chuỗi
+        request.input('LoaiNguoiDang', sql.NVarChar, LoaiNguoiDang);  // LoaiNguoiDang là chuỗi
+        request.input('HinhAnh', sql.NVarChar, HinhAnh || null);  // HinhAnh có thể null nếu không có
+
+        // Câu truy vấn SQL
         const query = `
-            INSERT INTO BaiPost (NoiDung, ThoiGianDang, MaNguoiBan, SoLuotThich, SoLuotBinhLuan, HinhAnh, Video, TrangThai)
-            OUTPUT INSERTED.*
-            VALUES (@NoiDung, @ThoiGianDang, @MaNguoiBan, 0, 0, @HinhAnh, NULL, 1)
+            INSERT INTO BaiPost (NoiDung, TenDangNhap, LoaiNguoiDang, HinhAnh)
+            OUTPUT inserted.*
+            VALUES (@NoiDung, @TenDangNhap, @LoaiNguoiDang, @HinhAnh)
         `;
-        const result = await pool
-            .request()
-            .input('NoiDung', NoiDung)
-            .input('ThoiGianDang', new Date())
-            .input('MaNguoiBan', MaNguoiBan)
-            .input('HinhAnh', HinhAnh)
-            .query(query);
-        return result.recordset[0];
+
+        // Thực thi truy vấn
+        const result = await request.query(query);
+
+        // Trả về kết quả
+        return result.recordset[0];  // Lấy bài viết vừa được tạo
     } catch (err) {
-        console.error('Error creating post:', err);
-        throw err;
+        console.error('Lỗi khi tạo bài viết:', err);
+        throw new Error('Lỗi khi tạo bài viết');
     }
 }
+
 
 // Cập nhật lượt thích
 async function updateLike(postId, isLike) {

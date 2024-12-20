@@ -99,11 +99,26 @@ function unfollowSeller(sellerId) {
       const closeIcon = document.getElementById('close-icon');
 
       // Hiển thị popup và overlay khi click vào input
-      input.addEventListener('click', () => {
-          popup.classList.add('active-popup');
-          overlay.classList.add('active-popup');
-      });
+        input.addEventListener('click', async () => {
+            try {
+                // Gửi yêu cầu đến server để kiểm tra trạng thái đăng nhập người dùng
+                const response = await fetch('/check-login-status');
 
+                if (response.status === 401) {
+                    // Nếu chưa đăng nhập, hiển thị thông báo
+                    alert('Bạn cần đăng nhập để sử dụng tính năng này.');
+                } else {
+                    // Nếu đã đăng nhập, hiển thị popup
+                    popup.classList.add('active-popup');
+                    overlay.classList.add('active-popup');
+                }
+            } catch (error) {
+                console.error('Lỗi khi kiểm tra đăng nhập:', error);
+            }
+        });
+
+
+     
       // Đóng popup khi click vào icon đóng
       closeIcon.addEventListener('click', () => {
           popup.classList.remove('active-popup');
@@ -359,18 +374,18 @@ function unfollowSeller(sellerId) {
       const popup = document.getElementById('createPostPopup');
       const overlay = document.getElementById('overlay');
 
-      // Hiển thị popup và overlay khi click vào input
-      input.addEventListener('click', () => {
-        popup.classList.add('active-popup');
-        overlay.classList.add('active-popup');
-      });
+    //   // Hiển thị popup và overlay khi click vào input
+    //   input.addEventListener('click', () => {
+    //     popup.classList.add('active-popup');
+    //     overlay.classList.add('active-popup');
+    //   });
 
-      // Ẩn popup và overlay khi click vào overlay
-      overlay.addEventListener('click', () => {
-        popup.classList.remove('active-popup');
-        overlay.classList.remove('active-popup');
-      });
-    });
+    //   // Ẩn popup và overlay khi click vào overlay
+    //   overlay.addEventListener('click', () => {
+    //     popup.classList.remove('active-popup');
+    //     overlay.classList.remove('active-popup');
+    //   });
+    // });
 
 
       const container = document.querySelector(".container-createPost"),
@@ -384,53 +399,10 @@ function unfollowSeller(sellerId) {
       });
 
      
-    document.querySelector('#postButton').addEventListener('click', async () => {
-    const NoiDung = document.querySelector('#contentInput').value.trim();
-    const MaNguoiBan = 'NB001'; // Lấy từ thông tin người dùng (ví dụ: session)
-
-    // Lấy tệp ảnh từ input file (nếu có)
-    const fileInput = document.querySelector('#fileInput'); // Giả sử bạn có một input file với id là 'fileInput'
-    const formData = new FormData();
-
-    // Kiểm tra nếu người dùng đã chọn ảnh
-    if (fileInput.files.length > 0) {
-        formData.append('HinhAnh', fileInput.files[0]); // Thêm ảnh vào FormData
-    } else {
-        console.error('Chưa chọn ảnh.');
-        alert('Chưa có ảnh để đăng.');
-        return;
-    }
-
-      // Thêm nội dung bài viết và mã người bán vào FormData
-      formData.append('NoiDung', NoiDung);
-      formData.append('MaNguoiBan', MaNguoiBan);
-
-      // Kiểm tra nội dung bài viết
-      if (!NoiDung) {
-          alert('Nội dung không được để trống.');
-          return;
-      }
-
-        // Tiến hành gửi yêu cầu POST với FormData (bao gồm tệp ảnh)
-        try {
-            const response = await fetch('/api/create', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                console.log('Bài viết mới:', result.post);
-                alert('Đăng bài thành công.');
-            } else {
-                alert(result.error || 'Đăng bài thất bại.');
-            }
-        } catch (err) {
-            console.error('Error:', err);
-            alert('Lỗi kết nối đến server.');
-        }
-    });
-
+    
+      
+    
+    
 
 
 
@@ -487,6 +459,6 @@ function unfollowSeller(sellerId) {
     `;
         // Thêm bài viết mới vào đầu danh sách
         postList.prepend(newPost);
-}
+}});
 
 

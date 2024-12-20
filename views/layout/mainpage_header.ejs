@@ -31,7 +31,7 @@
                   <div class="header-service-item">
                     <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="Avatar">
                     <% if (session.user || session.businessUser) { %>
-                      <span><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></span>
+                      <span><a href="<%= session.user ? '/personal' : (session.businessUser ? '/sale-chanels' : '#') %>"><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></a></span>
                       <a href="/logout">Đăng xuất</a>
                   <% } else { %>
                       <a href="/us-log-in">Đăng nhập</a>

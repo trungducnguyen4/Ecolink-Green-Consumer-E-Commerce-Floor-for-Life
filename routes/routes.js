@@ -16,6 +16,7 @@ const homeController = require('../controllers/home_controller'); // Thêm homeC
 const checkBusinessUser = require('../middlewares/check_business_user');
 const orderController = require('../controllers/order_controller'); // Import order controller
 const promoController = require('../controllers/promo_controller'); // Import promo controller
+const personalController = require('../controllers/personal_controller'); // Import personal controller
 
 // Initialize session middleware
 router.use(session({
@@ -79,9 +80,12 @@ router.get("/log-in", (req, res) => {
     res.render("log-in", { title: "Login" });
 });
 
-router.get("/personal", (req, res) => {
-    res.render("personal", { title: "Personal" });
-});
+
+// Hiển thị trang cá nhân
+router.get('/personal', isAuthenticated, personalController.getPersonalInfo);
+
+// Cập nhật thông tin cá nhân
+router.post('/personal/updatePersonal', isAuthenticated, personalController.upload.single('Avatar'), personalController.updatePersonalInfo);
 
 router.get("/personal_forum", (req, res) => {
     res.render("personal_forum", { title: "Personal forum" });
@@ -155,6 +159,15 @@ router.get('/dashboard', isAuthenticated, (req, res) => {
 
 router.get('/business-dashboard', isAuthenticated, (req, res) => {
     res.status(200).send(`Chào mừng ${req.session.businessUser.TenDangNhap} đến trang dashboard`);
+});
+
+// Kiểm tra nếu người dùng đã đăng nhập
+router.get('/check-login-status', (req, res) => {
+    if (req.session.user || req.session.businessUser) {
+        res.status(200).json({ loggedIn: true });
+    } else {
+        res.status(401).json({ loggedIn: false });
+    }
 });
 
 module.exports = router;

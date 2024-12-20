@@ -50,26 +50,39 @@ async function getFollowedSellers(req, res) {
     }
 }
 
-// Tạo bài viết mới
-async function createPost(req, res) {
-    const { MaNguoiBan, NoiDung } = req.body;
 
-    if (!MaNguoiBan || !NoiDung) {
-        return res.status(400).json({ error: 'Mã người bán và nội dung không được để trống.' });
+// Controller tạo bài viết
+async function createPost(req, res) {
+    console.log('Request body:', req.body);  // Kiểm tra dữ liệu không phải file
+    console.log('Uploaded file:', req.file);  // Kiểm tra file đã tải lên
+    const { NoiDung, TenDangNhap, LoaiNguoiDang } = req.body;
+
+    // Kiểm tra dữ liệu
+    if (!NoiDung || !TenDangNhap || !LoaiNguoiDang) {
+        return res.status(400).json({ error: 'Thiếu dữ liệu bài viết.' });
     }
 
     try {
-        const HinhAnh = req.files?.HinhAnh?.[0]
-            ? `http://localhost:3000/upload/${req.files.HinhAnh[0].filename}`
-            : null;
+        // Kiểm tra và lưu file hình ảnh
+        const HinhAnh = req.file ? req.file.filename : null;
 
-        const newPost = await forumModel.createPost({ NoiDung, MaNguoiBan, HinhAnh });
+        // Gọi model để tạo bài viết mới
+        const newPost = await createPost({
+            NoiDung,
+            TenDangNhap,
+            LoaiNguoiDang,
+            HinhAnh,
+        });
+
         res.status(201).json({ message: 'Đăng bài thành công.', post: newPost });
     } catch (err) {
-        console.error('Error creating post:', err);
-        res.status(500).json({ error: 'Lỗi khi đăng bài.' });
+        console.error('Lỗi khi tạo bài viết:', err);
+        res.status(500).json({ error: 'Lỗi khi tạo bài viết.' });
     }
 }
+
+
+
 
 // Cập nhật lượt thích cho bài viết
 async function updateLike(req, res) {
