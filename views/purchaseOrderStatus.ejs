@@ -175,8 +175,7 @@
                         <% if (currentOrder !== order.MaDH) { %>
                             <div class="purchaseOrderStatus-body-product-item-header">
                                 <div class="purchaseOrderStatus-body-product-shopName">Mã đơn hàng: <%= order.MaDH %></div>
-                                <div class="purchaseOrderStatus-body-product-process"><%= order.TrangThaiDH %></div>
-                                <div class="purchaseOrderStatus-body-product-total">Tổng giá trị đơn hàng: <%= order.TongTien %> VND</div>
+                                <div class="purchaseOrderStatus-body-product-total">Tổng giá trị đơn hàng: <%= order.TongThanhToan %> VND</div>
                             </div>
                             <% currentOrder = order.MaDH; %>
                         <% } %>
@@ -189,7 +188,11 @@
                                     <div class="purchaseOrderStatus-body-product-item-body-classify">Đen</div>
                                     <div class="purchaseOrderStatus-body-product-item-body-num">x<%= order.SoLuongSP %></div>
                                 </div>
-                                <div class="purchaseOrderStatus-body-product-item-body-money"><%= order.DonGia %> VND</div>
+                                <div class="purchaseOrderStatus-body-product-item-body-money">
+                                    <%= order.DonGia * order.SoLuongSP %> VND
+                                    <div class="purchaseOrderStatus-body-product-shipping">Phương thức vận chuyển: <%= order.TenPTVC %></div>
+                                    <div class="purchaseOrderStatus-body-product-process">Trạng thái: <%= order.TrangThaiDH %></div>
+                                </div>
                             </div>
                         </div>
                     <% }); %>

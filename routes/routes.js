@@ -33,6 +33,8 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/cart/add', cartController.addToCart);
 router.get('/cart', isAuthenticated, cartController.getCartItems);
 router.post('/cart/update-quantity', isAuthenticated, cartController.updateCartItemQuantity);
+router.get('/cart/header', isAuthenticated, cartController.getCartItemsForHeader); // New route for fetching cart items for header
+router.get('/cart/count', isAuthenticated, cartController.getCartItemCount); // New route for fetching cart item count
 
 // Order routes
 router.post('/order-payment', isAuthenticated, orderController.loadOrderPaymentPage);
@@ -48,6 +50,7 @@ router.get('/products', productController.getProductsPage);
 router.get('/products/search', productController.searchProducts);
 router.get('/products/filter', productController.getProductsPage);
 router.get('/product-detail/:id', productController.getProductDetail);
+router.get('/seller-products', isAuthenticated, productController.getSellerProducts); // New route for fetching seller products
 
 // Trang chủ
 router.get("/", homeController.getHomePage);  // Trang chủ sử dụng homeController

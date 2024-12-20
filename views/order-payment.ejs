@@ -219,7 +219,7 @@
                 <div class="order-shipping-header-type">
                     <% shippingMethods.forEach((method, index) => { %>
                         <div class="order-shipping-header-method">
-                            <input type="radio" name="shippingMethod" value="<%= method.PhiVC %>" <%= index === 0 ? 'checked' : '' %> onchange="updateTotalCost()">
+                            <input type="radio" name="shippingMethod" value="<%= method.MaPTVC %>" data-phivc="<%= method.PhiVC %>" <%= index === 0 ? 'checked' : '' %> onchange="updateTotalCost()">
                             <label><%= method.TenPTVC %></label>
                             <p>Phí vận chuyển: <%= method.PhiVC %> VND</p>
                             <p>Thời gian giao hàng: <%= method.ThoiGianGH %></p>
@@ -259,7 +259,7 @@
 
         function updateTotalCost() {
             const shippingCostElement = document.querySelector('input[name="shippingMethod"]:checked');
-            const shippingCost = shippingCostElement ? parseFloat(shippingCostElement.value) : 0;
+            const shippingCost = shippingCostElement ? parseFloat(shippingCostElement.dataset.phivc) : 0;
             let totalCost = originalTotalCost + shippingCost;
 
             for (const discount of Object.values(shopDiscounts)) {
