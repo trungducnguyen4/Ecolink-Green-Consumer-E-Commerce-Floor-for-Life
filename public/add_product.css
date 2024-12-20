@@ -65,6 +65,39 @@ input[type="checkbox"], input[type="radio"]
     margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
     display: inline; /* Đặt display block để margin auto hoạt động */
 }
+.login-background input[type=number] 
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
+}
+textarea
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
+}
+.select-text-product
+{
+    width: 500px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 10px 0px 0px 25px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
+}
 .login-background input[type=file] 
 {
     width: 500px;
@@ -85,4 +118,15 @@ input[type="checkbox"], input[type="radio"]
 .login-text
 {
     padding-top: 5px;
+}
+.btn
+{
+    margin-top: 30px;
+    margin-left: 350px;
+    background-color: #007b59;
+    color: white;
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
 }
