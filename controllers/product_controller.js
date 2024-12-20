@@ -244,10 +244,64 @@ async function addProduct(req, res) {
     }
 }
 
+async function loadSellerProducts(req, res) {
+    if (!req.session.businessUser) {
+        return res.status(401).send('User not logged in');
+    }
 
+    let sellerId = req.session.businessUser.id.toString();
+    sellerId = sellerId.padEnd(20, ' ');
 
+    try {
+        const pool = await poolPromise;
 
+        // Fetch products for the seller
+        const productsResult = await pool.request()
+            .input('MaNguoiBan', sql.NChar, sellerId)
+            .query(`
+                SELECT MaSP, TenSP, SoLuongTon, DGBanMacDinh, HinhChinh, MoTa
+                FROM SanPham
+                WHERE MaNguoiBan = @MaNguoiBan
+                ORDER BY TenSP
+            `);
 
+        const products = productsResult.recordset;
 
+        res.render('seller_products', { title: 'Seller Products', products, seller: req.session.businessUser });
+    } catch (err) {
+        console.error('Error loading seller products:', err);
+        res.status(500).send('Error loading seller products');
+    }
+}
 
-module.exports = {getProductsPage, searchProducts, getProductDetail, addProduct, upload};
+async function getSellerProducts(req, res) {
+    if (!req.session.businessUser) {
+        return res.status(401).json({ success: false, message: 'User not logged in' });
+    }
+
+    let sellerId = req.session.businessUser.id.toString();
+    sellerId = sellerId.padEnd(20, ' ');
+
+    try {
+        const pool = await poolPromise;
+
+        // Fetch products for the seller
+        const productsResult = await pool.request()
+            .input('MaNguoiBan', sql.NChar, sellerId)
+            .query(`
+                SELECT MaSP, TenSP, SoLuongTon, DGBanMacDinh, HinhChinh, MoTa
+                FROM SanPham
+                WHERE MaNguoiBan = @MaNguoiBan
+                ORDER BY TenSP
+            `);
+
+        const products = productsResult.recordset;
+
+        res.json({ success: true, products });
+    } catch (err) {
+        console.error('Error fetching seller products:', err);
+        res.status(500).json({ success: false, message: 'Error fetching seller products' });
+    }
+}
+
+module.exports = {getProductsPage, searchProducts, getProductDetail, addProduct, upload, loadSellerProducts, getSellerProducts};

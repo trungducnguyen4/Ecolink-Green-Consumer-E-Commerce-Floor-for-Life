@@ -80,44 +80,13 @@
                 <a href="/cart" class="header-icon-cart">
                   <i class="fa-solid fa-cart-shopping"></i>
                   <div class="cart-quantity">
-                    <p class="cart-quantity-number">15</p>
+                    <p class="cart-quantity-number" id="cart-quantity-number">0</p>
                   </div>
                 </a>
                 <div class="product-in-cart">
                   <div class="product-in-cart-arrow"></div>
-                  <ul class="product-in-cart-list">
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp1.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Premium Vector</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp2.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Premium Vector</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp4.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp5.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp6.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp7.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp8.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
-                    </li>
-                    <li class="product-in-cart-item">
-                      <img src="/image/sp9.jpg" alt="" class="product-in-cart-item-img">
-                      <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
-                    </li>
+                  <ul class="product-in-cart-list" id="cart-items-list">
+                    <!-- Cart items will be dynamically loaded here -->
                   </ul>
                 </div>
       
@@ -135,3 +104,47 @@
             </div>
            
         </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/cart/count')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('cart-quantity-number').textContent = data.itemCount;
+                    } else {
+                        console.error('Failed to load cart item count:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching cart item count:', error);
+                });
+
+            document.querySelector('.header-icon-cart').addEventListener('mouseover', function() {
+                fetch('/cart/header')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const cartItemsList = document.getElementById('cart-items-list');
+                            cartItemsList.innerHTML = ''; // Clear existing items
+                            data.cartItems.forEach(item => {
+                                const listItem = document.createElement('li');
+                                listItem.classList.add('product-in-cart-item');
+                                listItem.innerHTML = `
+                                    <img src="/product_image/${item.HinhChinh}" alt="${item.TenSP}" class="product-in-cart-item-img">
+                                    <div class="product-in-cart-item-name">${item.TenSP}</div>
+                                    <div class="product-in-cart-item-quantity">x${item.SoLuongSPTrongGio}</div>
+                                `;
+                                cartItemsList.appendChild(listItem);
+                            });
+                        } else {
+                            console.error('Failed to load cart items:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cart items:', error);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
