@@ -1,3 +1,12 @@
+
+html
+{   
+    font-size: 62.5%; 
+    line-height: 1.6 rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;  
+    font-weight: 600;
+}
 .wrapper {
     background-color: #f5f5f5;
     padding-top: 100px;
@@ -80,6 +89,59 @@
     color: #a0a0a0;
 }
 
+.quantity-container {
+    display: flex;
+    align-items: center; /* Căn chỉnh theo trục dọc */
+    justify-content: center; /* Căn chỉnh theo trục ngang */
+    gap: 5px; /* Khoảng cách giữa các phần tử */
+    margin-top: 30px;
+  }
+  
+  .quantity-btn {
+    
+    width: 30px; /* Chiều rộng nút */
+    height: 40px; /* Chiều cao nút */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Bo góc */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .quantity-btn:hover {
+    background-color: #ddd; /* Màu nền khi hover */
+  }
+  
+  .quantity-input {
+    width: 50px; /* Chiều rộng input */
+    height: 30px; /* Chiều cao input để khớp với nút */
+    text-align: center; /* Căn giữa nội dung */
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Bo góc */
+    font-size: 16px;
+  }
+  
+.shop-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.shop-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.shop-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 .total-cost-wrap {
     background-color: white;
     margin-top: 10px;
@@ -100,25 +162,39 @@
 }
 
 .total-cost-price {
-    font-size: 27px;
-    color: orangered;
+    font-size: 24px;
+    color: red;
     line-height: 80px;
-    margin-left: 10px;
+    margin: 10px 0px 0px 20px;
 }
 .total-cost-text {
+    display: inline;
     font-size: 17px;
     line-height: 80px;
+    padding: 10px 0px 0px 10px;
 }
 
 .total-cost-buy-order {
     line-height: 80px;
 }
 .btn-order {
-    width: 200px;
+    width: 150px;
     height: 40px;
     background-color: #007b59;
     color: white;
     border: none;
     line-height: 40px;
   
+}
+.checkmark 
+{
+    position: absolute;
+    margin: 0 auto auto 0;
+    background-color: #eee;
+    border-radius: 50%;
+}
+input[type="number"]
+{
+    border: none;
+    padding-left: 3px;
 }

@@ -136,7 +136,7 @@
               
                 <!-- Hàng sản phẩm thực phẩm -->
                 <div class="home-body-product-item-frame">
-                  <i class="fa-solid fa-chevron-left" id="home-product-leftBtn"></i>
+                  <i class="fa-solid fa-chevron-left " id="home-product-leftBtn"></i>
                   <% productsTP.forEach(product => { %>
                       <a href="/product-detail/<%= product.MaSP  %>" class="body-list-product-item">
                           <div class="body-list-products-item-img">
@@ -151,7 +151,7 @@
                           </div>
                       </a>
                   <% }); %>
-                  <i class="fa-solid fa-chevron-right" id="home-product-rightBtn"></i>
+                  <i class="fa-solid fa-chevron-right " id="home-product-rightBtn rightBtn "></i>
                 </div>
 
             </div>
@@ -402,8 +402,8 @@
                 errorMessage: 'Wait a minute! I will contact with EcoAssistant now.',
                 backgroundColor: "#ffffff",
                 backgroundImage: 'enter image path or link', // If set, this will overlap the background color of the chat window.
-                height: 550,
-                width: 400,
+                height: 450,
+                width: 350,
                 fontSize: 16,
                 //starterPrompts: ['What is a bot?', 'Who are you?'], // It overrides the starter prompts set by the chat flow passed
                 starterPromptFontSize: 15,

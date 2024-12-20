@@ -1,7 +1,15 @@
+html
+{   
+    font-size: 62.5%; 
+    line-height: 1.6 rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;  
+    font-weight: 600;
+}
 .wrapper {
     background-color: #f5f5f5;
     padding-top: 100px;
-    height: 1000px;
+    
 }
 .order-address {
     background-color: white;
@@ -88,13 +96,14 @@
     align-items: center;
     height: 60px;
     line-height: 60px;
-    border: 1px solid #c1c1c1;
+    border: none;
     width: 100%;
     margin-bottom: 10px;
 }
 
 .order-product-body-infor {
     display: flex;
+    border: none;
 }
 .order-product-body-img {
     margin: auto 0;
@@ -177,7 +186,8 @@
     padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 20px;
-    border-bottom: 1px solid #a0a0a0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng */
+    border-radius: 8px; /* (Tuỳ chọn) Bo góc để đẹp hơn */
 }
 .order-payment-header {
 
@@ -185,6 +195,7 @@
 }
 .order-payment-header-title {
     font-size: 18px;
+    margin-left: 10px;
 }
 
 .order-payment-header-payType {
@@ -192,10 +203,11 @@
 }
 
 .order-payment-header-creditType {
-    width: 140px;
+    width: 40px;
     height: 30px;
-    border: 1px solid #c2c1c1cc;
+    border: 2px solid #ebe9e9cc;
     margin-left: 10px;
+    padding-left: 10px;
     color: #c1c1c1;
     text-align: center;
     line-height: 30px;
@@ -205,7 +217,7 @@
     cursor: pointer;
 }
 .order-payment-header-momoType {
-    width: 80px;
+    width: 40px;
     height: 30px;
     border: 1px solid #c2c1c1cc;
     margin-left: 10px;
@@ -218,7 +230,7 @@
     cursor: pointer;
 }
 .order-payment-header-cashType {
-    width: 80px;
+    width: 40px;
     height: 30px;
     border: 1px solid #007b59;
     margin-left: 10px;
@@ -236,8 +248,14 @@
     background-color: white;
     margin-left: 30px;
     margin-right: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng */
+    border-radius: 8px; /* (Tuỳ chọn) Bo góc để đẹp hơn */
 }
-
+.order-final-total {
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
 .order-final-total-order,
 .order-final-total-deliver,
 .order-final-total-cost {
@@ -285,4 +303,157 @@
     height: 40px;
     border: none;
     border-radius: 2px;
+}
+input[type=text] 
+{
+    width: 500px;
+    height: 32px;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 10px 0px 0px 0px; /* Đảm bảo input có độ rộng cụ thể và căn giữa */
+    display: inline; /* Đặt display block để margin auto hoạt động */
+}
+.btn-confirm
+{
+    margin-left: 10px;
+    width: 80px;
+    height: 32px;
+    background-color: #007b59;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+.order-payment-header-method
+{
+    align-items: center;
+    text-align: justify;
+    width: 280px;
+    height: 80px;
+    display: flex;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin: 0px 10px 0px 5px;
+    margin-bottom: 10px; /* Add space between method divs */
+    background-color: #f9f9f9;
+}
+.order-shipping-header {
+    background-color: white;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    padding-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng */
+    border-radius: 8px; /* (Tuỳ chọn) Bo góc để đẹp hơn */
+}
+.order-shipping-header-method 
+{
+    width: 300px;
+    height: 80px;
+    display: flex;
+    padding: 5px 0px 15px 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin: 0px 10px 0px 5px;
+    background-color: #f9f9f9;
+}
+.paymentMethod-frame {
+    margin-left: 10px;
+}
+.shippingMethod-frame {
+    margin-left: 10px;
+}
+.order-payment-header {
+display: block;
+    direction: column;
+}
+.order-payment-header-method input,
+.order-shipping-header-method input {
+    margin-right: 5px;
+}
+.order-payment-header-method label,
+.order-shipping-header-method label {
+    
+    font-weight: bold;
+    margin: 0px 5px 0px 5px;
+}
+.order-payment-header-method p,
+.order-shipping-header-method p {
+    margin: 0px 5px 0px 5px;
+    color: #666;
+    text-align: justify;
+}
+.order-shipping {
+
+}
+.order-address,
+.order-product,
+.order-payment,
+.order-final,
+.order-buy {
+    margin-bottom: 20px;
+}
+.order-shipping-header-title {
+    margin-left: 35px; /* Add left margin */
+    margin-bottom: 15px;
+}
+.order-shipping-header-method {
+    margin-left: 30px; /* Add left margin */
+    margin-right: 30px; /* Add right margin */
+    margin-bottom: 15px; /* Add space between shipping method divs */
+}
+.order-payment-header-method {
+    margin-bottom: 15px; /* Add space between payment method divs */
+}
+.order-payment-header-title,
+.order-shipping-header-title,
+.order-final-total-text {
+    color: #07583f;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.order-final-total-price {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.order-payment-header-payType,
+.order-shipping-header-type {
+    display: flex;
+    margin-top: 25px;
+    padding-bottom: 20px;
+}
+.promo-code-section {
+    margin-bottom: 20px;
+}
+.promo-code-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.promo-code-message.success {
+    color: green;
+}
+.promo-code-message.error {
+    color: red;
+}
+.shop-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.shop-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.shop-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+input[type="radio"]
+{
+    accent-color: #007b59; /* Màu tùy chỉnh */
 }

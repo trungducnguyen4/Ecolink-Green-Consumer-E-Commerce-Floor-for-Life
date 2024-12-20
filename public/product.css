@@ -92,6 +92,7 @@
     width: 100px;
     height: 35px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
   /* PRODUCT */
@@ -108,6 +109,8 @@
     align-items: center;
     transition: transform linear 0.1s;
     will-change: transform;
+    color: black;
+
 }
 .body-list-product-item:hover {
     box-shadow: 0 1px 20px 0 rgba(0,0,0,0.05);
@@ -133,9 +136,13 @@
     margin: 0 auto; 
  
 }
+#product-item {
+    text-decoration: none; /* Loại bỏ gạch chân nếu có */
+    color: inherit; /* Giữ nguyên màu sắc ban đầu */
+
+}
 .body-list-product-item-title {
     margin-top: 5px;
-    color: #007B59;
     width: 155px; /* Giới hạn chiều rộng */
     display: -webkit-box; /* Sử dụng WebKit box model */
     -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
@@ -207,14 +214,34 @@
     width: 40px;
     height: 30px;
     border-radius: 2px;
+    cursor: pointer;
+}
+/* Khi phần tử .body-page-number-item có lớp page-number-active, áp dụng cho thẻ <a> bên trong */
+.body-page-number-item.page-number-active a{
+    background-color: #007B59;
+    color: #ffffff;
+
 }
 .body-page-number-item.page-number-active {
     background-color: #007B59;
     color: #ffffff;
 }
+
+/* Hiệu ứng khi hover trên .body-page-number-item */
 .body-page-number-item:hover {
     color: #007B59;
+    text-decoration: none;
 }
-.body-page-number-item.page-number-active:hover {
-    color: #ffffff; /* Hoặc có thể giữ nguyên màu như lớp active */
+
+/* Khi phần tử có lớp page-number-active cũng được hover, giữ nguyên màu sắc */
+.body-page-number-item.page-number-active a:hover {
+    color: #ffffff; /* Giữ nguyên màu của lớp active khi hover */
+}
+#icon-left:hover {
+    cursor: pointer;
+    color: #007B59;
+}
+#icon-right:hover {
+    cursor: pointer;
+    color: #007B59;
 }

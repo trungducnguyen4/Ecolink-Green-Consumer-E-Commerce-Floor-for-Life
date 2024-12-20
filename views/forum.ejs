@@ -4,8 +4,8 @@
     <div class="blog row">
         <div class="blog-contact col-md-3">
             <div class="blog-contact-avatar">
-                <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="">
-                <h4 class="blog-contact-avatar-name"><a href="" class="active">Ecolink for life</a></h4>
+                <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="">
+                <h4 class="blog-contact-avatar-name"><a href="" class="active"><%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %></a></h4>
             </div>
            <div class="blog-contact-item-frame">
             <div class="blog-contact-item">
@@ -29,7 +29,7 @@
         <div class="blog-post col-md-6"  style="overflow-y: auto; max-height: 100vh;">
             <div class="blog-post-frame">
                 <div class="blog-post-item">
-                    <img class= "header-service-item-avatar-img" src="../image/avatar.jpg" alt="" style="margin-left: -px;">
+                    <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="" style="margin-left: -px;">
                     <input class="blog-input" placeholder="Bảng tin mới">
                     <div class="" >
                         <span class="blog-post-picture-vid"><i class="fa-regular fa-image"></i>Ảnh/Video</span>
@@ -48,11 +48,11 @@
                     <i class="fas fa-times" id="close-icon" style="cursor: pointer;"></i>
                   </header>
                 
-                  <form action="#">
+                  <form >
                     <div class="content">
-                      <img src="icons/logo.png" alt="logo">
+                      <img src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="logo">
                       <div class="details">
-                        <p>Hân Nguyễn</p>
+                        <p><%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %></p>
                         <div class="privacy">
                           <i class="fas fa-user-friends"></i>
                           <span>Bạn bè</span>
@@ -60,7 +60,7 @@
                         </div>
                       </div>
                     </div>
-                    <textarea id="contentInput" placeholder="Hân ơi, Bạn đang nghĩ gì thế?" spellcheck="false" required></textarea>
+                    <textarea id="contentInput" placeholder="<%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %>, Bạn đang nghĩ gì thế?" spellcheck="false" required></textarea>
 
 
                     <!-- Khung chèn ảnh và video -->
@@ -215,7 +215,7 @@
                   <div class="blog-post-item-1">
                       <img 
                           class="header-service-item-avatar-img" 
-                          src="<%= forum.AnhLogo %>" 
+                          src="<%= forum.AnhLogo? '/logo/'+forum.AnhLogo : '/avatar/default-avatar.jpg' %>" 
                           alt="Avatar" 
                           style="margin-left: 20px;">
                       
@@ -266,13 +266,9 @@
                         </button>
                       <% } %>
               
-                      <% if (forum.Video) { %>
-                      <div class="blog-post-video">
-                          <iframe width="100%" height="315" src="<%= forum.Video %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                      </div>
-                      <% } else if (forum.HinhAnh) { %>
+                      <% if (forum.HinhAnh) { %>
                       <div class="blog-post-image">
-                          <img class="blog-post-img" src="<%= forum.HinhAnh %>" alt="Post Image">
+                          <img class="blog-post-img" src="'/upload/'<%= forum.HinhAnh %>" alt="Post Image">
                       </div>
                       <% } %>
               
@@ -336,8 +332,153 @@
 
         </div>     
     </div>
-    <script>
+    
+<link rel="stylesheet" href="chatbot.js">
+<script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "140ae8e9-704b-4685-8867-e2c580d9d721",
+        apiHost: "http://localhost:3000",
+        chatflowConfig: {
+            // topK: 2
+        },
+        theme: {
+            button: {
+                backgroundColor: "#dcd8d8",
+                right: 20,
+                bottom: 20,
+                size: 48, // small | medium | large | number
+                dragAndDrop: true,
+                iconColor: "black",
+                customIconSrc: "https://i.pinimg.com/736x/f1/7d/db/f17ddb244e3f2f6a720e61cd3f8161fb.jpg",
+                autoWindowOpen: {
+                    autoOpen: true, //parameter to control automatic window opening
+                    openDelay: 2, // Optional parameter for delay time in seconds
+                    autoOpenOnMobile: false, //parameter to control automatic window opening in mobile
+                    },
+            },
+            tooltip: {
+                showTooltip: true,
+                tooltipMessage: 'Hi There 👋!',
+                tooltipBackgroundColor: 'black',
+                tooltipTextColor: 'white',
+                tooltipFontSize: 16,
+            },
+            chatWindow: {
+                showTitle: true,
+                title: 'Ecolink for life',
+                titleAvatarSrc: 'https://i.pinimg.com/736x/f1/7d/db/f17ddb244e3f2f6a720e61cd3f8161fb.jpg',
+                showAgentMessages: true,
+                welcomeMessage: 'Hello! How can I help you',
+                errorMessage: 'Wait a minute! I will contact with EcoAssistant now.',
+                backgroundColor: "#ffffff",
+                backgroundImage: 'enter image path or link', // If set, this will overlap the background color of the chat window.
+                height: 450,
+                width: 350,
+                fontSize: 16,
+                //starterPrompts: ['What is a bot?', 'Who are you?'], // It overrides the starter prompts set by the chat flow passed
+                starterPromptFontSize: 15,
+                clearChatOnReload: false, // If set to true, the chat will be cleared when the page reloads.
+                botMessage: {
+                    backgroundColor: "#f7f8ff",
+                    textColor: "#303235",
+                    showAvatar: true,
+                    avatarSrc: "https://i.pinimg.com/736x/f1/7d/db/f17ddb244e3f2f6a720e61cd3f8161fb.jpg",
+                },
+                userMessage: {
+                    backgroundColor: "#007b59",
+                    textColor: "#ffffff",
+                    showAvatar: true,
+                    avatarSrc: "https://i.pinimg.com/736x/2b/c9/05/2bc905c07667a2e70cc78fe0242b8d78.jpg",
+                },
+                textInput: {
+                    placeholder: 'Type your question',
+                    backgroundColor: '#ffffff',
+                    textColor: '#303235',
+                    sendButtonColor: '#007b59',
+                    maxChars: 50,
+                    maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 50 characters.',
+                    autoFocus: true, // If not used, autofocus is disabled on mobile and enabled on desktop. true enables it on both, false disables it on both.
+                    sendMessageSound: true,
+                    // sendSoundLocation: "send_message.mp3", // If this is not used, the default sound effect will be played if sendSoundMessage is true.
+                    receiveMessageSound: true,
+                    // receiveSoundLocation: "receive_message.mp3", // If this is not used, the default sound effect will be played if receiveSoundMessage is true. 
+                },
+                feedback: {
+                    color: '#303235',
+                },
+                footer: {
+                    textColor: '#303235',
+                    text: 'Powered by',
+                    company: 'Ecolink for life',
+                    companyLink: 'https://flowiseai.com',
+                }
+            }
+        }
+    })
+</script>
+<script src="/forum.js" defer></script>
+<script src="./check_session.js" defer> </script>
+<script>
+  document.querySelector('#postButton').addEventListener('click', async (e) => {
+       // Ngăn chặn tải lại trang
+       event.preventDefault();
+        const NoiDung = document.querySelector('#contentInput').value.trim();
+        const fileInput = document.querySelector('#fileInput');
+        const formData = new FormData();
+    
+        // Kiểm tra nội dung
+        if (!NoiDung) {
+            alert('Nội dung không được để trống.');
+            return;
+        }
+    
+        //Lấy dữ liệu từ session qua EJS
+        const TenDangNhap = "<%= session.user ? session.user.TenDangNhap : (session.businessUser ? session.businessUser.TenDangNhap : '') %>";
+        const LoaiNguoiDang = "<%= session.user ? 'Cá nhân' : (session.businessUser ? 'Doanh nghiệp' : '') %>";
+    
+        // Kiểm tra dữ liệu session
+        if (!TenDangNhap || !LoaiNguoiDang) {
+            alert('Dữ liệu người dùng không hợp lệ.');
+            return;
+        }
+    
+        // Thêm các dữ liệu vào FormData
+        formData.append('NoiDung', NoiDung);
+        formData.append('TenDangNhap', TenDangNhap);
+        formData.append('LoaiNguoiDang', LoaiNguoiDang);
+    
+        // Nếu có file được chọn, thêm vào FormData
+        if (fileInput.files.length > 0) {
+            formData.append('HinhAnh', fileInput.files[0]);
+        }
+    
+        // Gửi yêu cầu POST đến server
+        try {
+            const response = await fetch('/create', {
+                method: 'POST',
+                body: formData,
+            });
+        
+            const result = await response.json();
+            if (response.ok) {
+                alert('Đăng bài thành công!');
+                console.log(result);
+            } else {
+                console.log(result); // Ghi nhật ký phản hồi không thành công
+                alert(result.error || 'Đăng bài thất bại!');
+            }
+        } catch (error) {
+            console.error('Lỗi:', error);
+            alert('Đăng bài thất bại do lỗi không xác định.');
+        }
+        
+    });
 
+
+
+
+    
       //XU LY THEO DOI
       // Bộ lưu trạng thái các người bán đã theo dõi (client-side)
       const followedSellers = new Set();
@@ -438,11 +579,26 @@ function unfollowSeller(sellerId) {
       const closeIcon = document.getElementById('close-icon');
 
       // Hiển thị popup và overlay khi click vào input
-      input.addEventListener('click', () => {
-          popup.classList.add('active-popup');
-          overlay.classList.add('active-popup');
-      });
+        input.addEventListener('click', async () => {
+            try {
+                // Gửi yêu cầu đến server để kiểm tra trạng thái đăng nhập người dùng
+                const response = await fetch('/check-login-status');
 
+                if (response.status === 401) {
+                    // Nếu chưa đăng nhập, hiển thị thông báo
+                    alert('Bạn cần đăng nhập để sử dụng tính năng này.');
+                } else {
+                    // Nếu đã đăng nhập, hiển thị popup
+                    popup.classList.add('active-popup');
+                    overlay.classList.add('active-popup');
+                }
+            } catch (error) {
+                console.error('Lỗi khi kiểm tra đăng nhập:', error);
+            }
+        });
+
+
+     
       // Đóng popup khi click vào icon đóng
       closeIcon.addEventListener('click', () => {
           popup.classList.remove('active-popup');
@@ -698,18 +854,18 @@ function unfollowSeller(sellerId) {
       const popup = document.getElementById('createPostPopup');
       const overlay = document.getElementById('overlay');
 
-      // Hiển thị popup và overlay khi click vào input
-      input.addEventListener('click', () => {
-        popup.classList.add('active-popup');
-        overlay.classList.add('active-popup');
-      });
+    //   // Hiển thị popup và overlay khi click vào input
+    //   input.addEventListener('click', () => {
+    //     popup.classList.add('active-popup');
+    //     overlay.classList.add('active-popup');
+    //   });
 
-      // Ẩn popup và overlay khi click vào overlay
-      overlay.addEventListener('click', () => {
-        popup.classList.remove('active-popup');
-        overlay.classList.remove('active-popup');
-      });
-    });
+    //   // Ẩn popup và overlay khi click vào overlay
+    //   overlay.addEventListener('click', () => {
+    //     popup.classList.remove('active-popup');
+    //     overlay.classList.remove('active-popup');
+    //   });
+    // });
 
 
       const container = document.querySelector(".container-createPost"),
@@ -723,53 +879,10 @@ function unfollowSeller(sellerId) {
       });
 
      
-    document.querySelector('#postButton').addEventListener('click', async () => {
-    const NoiDung = document.querySelector('#contentInput').value.trim();
-    const MaNguoiBan = 'NB001'; // Lấy từ thông tin người dùng (ví dụ: session)
-
-    // Lấy tệp ảnh từ input file (nếu có)
-    const fileInput = document.querySelector('#fileInput'); // Giả sử bạn có một input file với id là 'fileInput'
-    const formData = new FormData();
-
-    // Kiểm tra nếu người dùng đã chọn ảnh
-    if (fileInput.files.length > 0) {
-        formData.append('HinhAnh', fileInput.files[0]); // Thêm ảnh vào FormData
-    } else {
-        console.error('Chưa chọn ảnh.');
-        alert('Chưa có ảnh để đăng.');
-        return;
-    }
-
-      // Thêm nội dung bài viết và mã người bán vào FormData
-      formData.append('NoiDung', NoiDung);
-      formData.append('MaNguoiBan', MaNguoiBan);
-
-      // Kiểm tra nội dung bài viết
-      if (!NoiDung) {
-          alert('Nội dung không được để trống.');
-          return;
-      }
-
-        // Tiến hành gửi yêu cầu POST với FormData (bao gồm tệp ảnh)
-        try {
-            const response = await fetch('/api/create', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                console.log('Bài viết mới:', result.post);
-                alert('Đăng bài thành công.');
-            } else {
-                alert(result.error || 'Đăng bài thất bại.');
-            }
-        } catch (err) {
-            console.error('Error:', err);
-            alert('Lỗi kết nối đến server.');
-        }
-    });
-
+    
+      
+    
+    
 
 
 
@@ -826,10 +939,11 @@ function unfollowSeller(sellerId) {
     `;
         // Thêm bài viết mới vào đầu danh sách
         postList.prepend(newPost);
-}
+}});
 
 
-    </script>
+
+</script>
 
 </body>
 <%- include('layout/footer')  %>

@@ -10,6 +10,7 @@ const adminRoutes = require('./routes/admin_routes');
 const newsRoutes = require('./routes/news_routes'); 
 const newsDetailRoutes = require('./routes/newsDetail_routes');
 
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -24,13 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Cấu hình middleware để phục vụ tệp trong thư mục upload
 app.use('/upload', express.static(__dirname + '/upload'));
-// Đăng ký các router
-app.use('/forum', forumRoutes);  
-app.use('/admin', adminRoutes); 
-app.use('/api', forumRoutes);  
-app.use('/news', newsRoutes);  
-
-app.use('/news-detail', newsDetailRoutes);  
 
 
 
@@ -41,7 +35,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { 
         secure: false,
-        maxAge: 3600000
+        
      }  // Set secure: true nếu sử dụng HTTPS
 }));
 
@@ -57,6 +51,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // Sử dụng các route đã định nghĩa
 app.use('/', routes);
+// Đăng ký các router
+app.use('/forum', forumRoutes);  
+app.use('/admin', adminRoutes); 
+app.use('/api', forumRoutes);  
+app.use('/news', newsRoutes);  
+
+app.use('/news-detail', newsDetailRoutes);  
+app.use('/topPoster', newsDetailRoutes);   
+
 
 // Khởi động server sau khi kết nối DB thành công
 db.poolPromise

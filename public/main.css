@@ -687,9 +687,17 @@ input:focus {
     height: 95px;
     background-color: #ffffff;
     border-radius: 10px;
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+
+
 }
 .new-body-blog-relate-item:hover {
-    opacity: 0.7;
+    cursor: pointer;
+    transform: scale(1.1); /* Phóng to 10% khi hover */
+    color: gray;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm box-shadow */
+    text-decoration: none;
+   
 }
 .new-body-blog-relate-item-img {
     width: 130px;
@@ -704,7 +712,6 @@ input:focus {
     margin-left: 9px;
     margin: auto 10px auto 5px ;
     font-weight: 600;
-    text-align: justify;
 }
 
 /* NEWS-DEATAIL */
