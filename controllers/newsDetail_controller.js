@@ -23,5 +23,14 @@ async function getNewsDetailPage(req, res) {
         res.status(500).send('Internal Server Error');
     }
 }
+async function getNewsPage(req, res) {
+    try {
+        const news = await newsModel.getNews();
+        res.render('news', { news });
+    } catch (err) {
+        res.status(500).send('Internal Server Error');
+    }
+}
 
-module.exports = { getNewsDetailPage }; // Xuất controller
+
+module.exports = { getNewsDetailPage, getNewsPage }; // Xuất controller
