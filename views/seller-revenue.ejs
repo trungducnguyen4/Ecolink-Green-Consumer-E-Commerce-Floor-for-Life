@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Revenue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Doanh Thu</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Đơn Hàng</th>
+                    <th>Ngày Đặt Hàng</th>
+                    <th>Doanh Thu (VND)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (revenueData.length > 0) { %>
+                    <% revenueData.forEach(order => { %>
+                        <tr>
+                            <td><%= order.MaDH %></td>
+                            <td><%= new Date(order.NgayDatHang).toLocaleDateString('vi-VN') %></td>
+                            <td><%= new Intl.NumberFormat('vi-VN').format(order.DoanhThu) %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3">Không có dữ liệu doanh thu.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

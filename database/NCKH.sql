@@ -282,3 +282,13 @@ BEGIN
     END
 END;
 
+SELECT name
+FROM sys.key_constraints
+WHERE type = 'PK' AND OBJECT_NAME(parent_object_id) = 'DanhGiaSanPham';
+
+ALTER TABLE DanhGiaSanPham
+DROP CONSTRAINT PK__DanhGiaS__4278A45738770D27;
+
+ALTER TABLE DanhGiaSanPham
+ADD MaDH nchar(20)
+select * from DanhGiaSanPham

@@ -58,7 +58,7 @@ async function addReview(req, res) {
         const reviewCount = existingReviewResult.recordset[0].ReviewCount;
 
         if (reviewCount > 0) {
-            return res.status(400).json({ success: false, message: 'Review already exists for this order, product, and user.' });
+            return res.status(400).send('Review already exists for this order, product, and user.');
         }
 
         // Insert the new review
@@ -82,4 +82,49 @@ async function addReview(req, res) {
     }
 }
 
-module.exports = { addReview, upload };
+async function getReview(req, res) {
+    const { orderId, productName } = req.query;
+    const MaUser = req.session.user.id;
+
+    try {
+        const pool = await poolPromise;
+
+        // Retrieve MaSP based on productName
+        const productResult = await pool.request()
+            .input('TenSP', sql.NVarChar(200), productName)
+            .query(`
+                SELECT MaSP
+                FROM SanPham
+                WHERE TenSP = @TenSP
+            `);
+
+        if (productResult.recordset.length === 0) {
+            return res.status(404).json({ success: false, message: 'Product not found.' });
+        }
+
+        const MaSP = productResult.recordset[0].MaSP;
+
+        // Retrieve the review
+        const reviewResult = await pool.request()
+            .input('MaDH', sql.NChar(20), orderId)
+            .input('MaSP', sql.NChar(20), MaSP)
+            .input('MaUser', sql.NChar(20), MaUser)
+            .query(`
+                SELECT DiemDanhGia, NDDanhGia, HinhDanhGia, VideoDanhGia
+                FROM DanhGiaSanPham
+                WHERE MaDH = @MaDH AND MaSP = @MaSP AND MaUser = @MaUser
+            `);
+
+        if (reviewResult.recordset.length === 0) {
+            return res.status(404).json({ success: false, message: 'Review not found.' });
+        }
+
+        const review = reviewResult.recordset[0];
+        res.json({ success: true, review });
+    } catch (err) {
+        console.error('Error fetching review:', err);
+        res.status(500).json({ success: false, message: 'Error fetching review', error: err.message });
+    }
+}
+
+module.exports = { addReview, getReview, upload };

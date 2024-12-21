@@ -43,6 +43,7 @@ router.get('/purchaseOrderStatus', isAuthenticated, orderController.loadPurchase
 router.post('/place-order', isAuthenticated, orderController.placeOrder); // New route for placing order
 router.get('/sale-chanels', isAuthenticated, orderController.loadSellerOrders); // New route for loading seller orders
 router.get('/delivery-methods', orderController.getDeliveryMethods);
+router.get('/seller-revenue', isAuthenticated, orderController.loadSellerRevenuePage);
 // Promo code route
 router.post('/apply-promo-code', isAuthenticated, promoController.applyPromoCode);
 
