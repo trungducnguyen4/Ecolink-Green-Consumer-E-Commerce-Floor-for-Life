@@ -112,7 +112,7 @@
                 <i class="fas fa-save"></i> Tạo mới
             </button>
             
-            <button class="btn" id="updateButton">
+            <button class="btn" id="updateButton" onclick="updateBlog()">
                 <i class="fas fa-edit"></i> Cập nhật
             </button>
             
@@ -131,7 +131,6 @@
 
 
 
-    // Hàm để mở modal và chỉnh sửa bài viết
     function openModalToEdit(postId) {
         // Gửi yêu cầu GET đến API để lấy thông tin bài blog theo mã
         fetch(`/admin/getPost/${postId}`)
@@ -139,22 +138,35 @@
                 if (!response.ok) {
                     throw new Error('Không thể lấy thông tin bài viết');
                 }
-                return response.json();  // Trả về dữ liệu bài viết
+                return response.json(); // Trả về dữ liệu bài viết
             })
             .then(postData => {
                 // Gán dữ liệu bài viết vào các trường trong modal
-                document.getElementById('title').value = postData.TieuDe;  // Gán tiêu đề vào ô input
-                document.getElementById('content').innerHTML = postData.NoiDung;  // Gán nội dung vào textarea
-                document.getElementById('category').value = postData.TenDanhMuc;  // Gán danh mục vào ô select
+                document.getElementById('title').value = postData.TieuDe; // Gán tiêu đề vào ô input
+                document.getElementById('content').innerHTML = postData.NoiDung; // Gán nội dung vào textarea
+                document.getElementById('category').value = postData.TenDanhMuc; // Gán danh mục vào ô select
+
+                // Hiển thị tên file ảnh hoặc ảnh hiện tại
+                const imagePreview = document.getElementById('imagePreview');
+                if (postData.AnhBia) {
+                    imagePreview.innerHTML = `
+                        <p style = "Margin-bottom: 0px">Ảnh bìa hiện tại:</p>
+                        <img src="${postData.AnhBia}" alt="Ảnh bìa" style="max-width: 100%; height: auto; margin-top: 10px;">
+                        <p style = "width: 485px; font-size: 14px; color: grey">Tên ảnh: ${postData.AnhBia}</p>
+                    `;
+                } else {
+                    imagePreview.innerHTML = '<p>Không có ảnh bìa hiện tại.</p>';
+                }
+
+                // Reset file input (cho phép người dùng chọn lại file mới)
+                document.getElementById('image').value = '';
 
                 // Hiển thị modal chỉnh sửa
                 const modal = document.getElementById('modal');
-                modal.classList.add('active')
-
-                
+                modal.classList.add('active');
             })
             .catch(error => {
-                alert(error.message);  // Hiển thị lỗi nếu không lấy được dữ liệu
+                alert(error.message); // Hiển thị lỗi nếu không lấy được dữ liệu
             });
     }
 
@@ -420,26 +432,29 @@
 
     // Preview hình ảnh khi chọn file
     function previewImage(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const imageUrl = e.target.result;
+    const file = event.target.files[0]; // Lấy file từ input
+    if (!file) return; // Nếu không có file, thoát hàm
 
-        // Chèn hình ảnh vào vị trí con trỏ trong nội dung
-        const content = document.getElementById('content');
+    const reader = new FileReader(); // Khởi tạo FileReader
+    reader.onload = function (e) {
+        const imageUrl = e.target.result; // Lấy URL của ảnh
+
+        // Tạo thẻ img để hiển thị ảnh
         const img = document.createElement('img');
         img.src = imageUrl;
-        img.style.width = '100px';
-        img.style.height = '100px';
+        img.style.width = '100%';
+        img.style.height = '400px';
         img.style.objectFit = 'cover';
+        img.alt = 'Ảnh bìa đã chọn';
 
-        // Xóa phần preview bên dưới nút chọn ảnh
+        // Xóa nội dung cũ và thêm ảnh vào div preview
         const previewContainer = document.getElementById('imagePreview');
-        previewContainer.innerHTML = ''; // Xóa bất kỳ hình ảnh nào đã được hiển thị
-        content.appendChild(img); // Chèn hình ảnh vào nội dung bài viết
+        previewContainer.innerHTML = ''; // Xóa nội dung trước đó
+        previewContainer.appendChild(img); // Thêm ảnh mới vào
     };
-    reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
+}
+
 
 </script>
 </body>

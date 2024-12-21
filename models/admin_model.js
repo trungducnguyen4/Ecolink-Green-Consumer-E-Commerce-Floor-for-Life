@@ -50,6 +50,7 @@ async function getPostById(postId) {
                 SELECT 
                     BaiBlog.TieuDe, 
                     BaiBlog.NoiDung,
+                    BaiBlog.AnhBia,
                     DanhMucBlog.TenDanhMuc, 
                     NguoiBan.TenCuaHang
                 FROM BaiBlog
@@ -200,4 +201,4 @@ async function savePost(postData) {
 
 
 
-module.exports = { getBlog, deleteBlog, savePost, getPostById };
+module.exports = { getBlog, deleteBlog, savePost, getPostById, updateBlog };
