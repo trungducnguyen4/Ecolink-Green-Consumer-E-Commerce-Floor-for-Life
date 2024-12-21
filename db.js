@@ -12,6 +12,7 @@ const sqlConfig = {
     }
   };
   
+
   // const sqlConfig = {
   //   server: 'localhost', // Địa chỉ máy chủ
   //   database: 'NCKH',
@@ -22,6 +23,7 @@ const sqlConfig = {
   //     trustServerCertificate: true  // Chỉ cần nếu bạn đang sử dụng kết nối không an toàn
   //   }
   // };
+
 
 //   const sqlConfig = {
 //     server: 'localhost',
