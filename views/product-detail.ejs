@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="../cart.js">
     
     <title><%= product.TenSP %></title>
-    
-    <title>Product-detail</title>
 </head>
 <body>
         <!-- HEADER -->
@@ -311,6 +309,23 @@
                         <div class="client-comment">
                             <p><%= review.NDDanhGia %></p>
                             <small>Ngày đánh giá: <%= new Date(review.NgayDanhGia).toLocaleDateString('vi-VN') %></small>
+                            <% if (review.HinhDanhGia) { %>
+                                <div class="review-image">
+                                    <img src="/review_uploads/<%= review.HinhDanhGia %>" alt="Hình ảnh đánh giá" style="max-width: 200px;">
+                                </div>
+                            <% } else { %>
+                                <p>Không có hình ảnh đánh giá.</p>
+                            <% } %>
+                            <% if (review.VideoDanhGia) { %>
+                                <div class="review-video">
+                                    <video controls style="max-width: 200px;">
+                                        <source src="/review_uploads/<%= review.VideoDanhGia %>" type="video/mp4">
+                                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                                    </video>
+                                </div>
+                            <% } else { %>
+                                <p>Không có video đánh giá.</p>
+                            <% } %>
                         </div>
                     </div>
                 <% }); %>
@@ -332,9 +347,6 @@
        </div>
      </div>
      <script src="/product-detail.js"></script>
-     <script type="text/javascript" src="/main.js">
-      
-     </script>
      <script>
         function addToCart(productId, productPrice) {
             const quantity = parseInt(document.getElementById('quantity').value);

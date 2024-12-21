@@ -16,7 +16,7 @@ const homeController = require('../controllers/home_controller'); // Thêm homeC
 const checkBusinessUser = require('../middlewares/check_business_user');
 const orderController = require('../controllers/order_controller'); // Import order controller
 const promoController = require('../controllers/promo_controller'); // Import promo controller
-const personalController = require('../controllers/personal_controller'); // Import personal controller
+const reviewRoutes = require('./review_routes'); // Import review routes
 
 // Initialize session middleware
 router.use(session({
@@ -42,7 +42,7 @@ router.post('/order-payment', isAuthenticated, orderController.loadOrderPaymentP
 router.get('/purchaseOrderStatus', isAuthenticated, orderController.loadPurchaseOrderStatusPage);
 router.post('/place-order', isAuthenticated, orderController.placeOrder); // New route for placing order
 router.get('/sale-chanels', isAuthenticated, orderController.loadSellerOrders); // New route for loading seller orders
-
+router.get('/delivery-methods', orderController.getDeliveryMethods);
 // Promo code route
 router.post('/apply-promo-code', isAuthenticated, promoController.applyPromoCode);
 
@@ -52,6 +52,13 @@ router.get('/products/search', productController.searchProducts);
 router.get('/products/filter', productController.getProductsPage);
 router.get('/product-detail/:id', productController.getProductDetail);
 router.get('/seller-products', isAuthenticated, productController.getSellerProducts); // New route for fetching seller products
+
+// Add new route for updating product details
+router.post('/update-product/:productId', isAuthenticated, productController.updateProduct);
+router.post('/update-order-status', orderController.updateOrderStatus);
+
+// Review routes
+router.use('/reviews', reviewRoutes);
 
 // Trang chủ
 router.get("/", homeController.getHomePage);  // Trang chủ sử dụng homeController
@@ -77,21 +84,26 @@ router.get("/business-signin", (req, res) => {
 });
 router.post('/business-signin/user', upload.single('GiayPhepKD'), businessSigninController.registerBusiness);
 
+// Các route khác
+router.get("/news", (req, res) => {
+    res.render("news", { title: "News" });
+});
 
+router.get("/news-detail", (req, res) => {
+    res.render("news-detail", { title: "News detail" });
+});
 
-
-
+router.get("/forum", (req, res) => {
+    res.render("forum", { title: "Forum" });
+});
 
 router.get("/log-in", (req, res) => {
     res.render("log-in", { title: "Login" });
 });
 
-
-// Hiển thị trang cá nhân
-router.get('/personal', isAuthenticated, personalController.getPersonalInfo);
-
-// Cập nhật thông tin cá nhân
-router.post('/personal/updatePersonal', isAuthenticated, personalController.upload.single('Avatar'), personalController.updatePersonalInfo);
+router.get("/personal", (req, res) => {
+    res.render("personal", { title: "Personal" });
+});
 
 router.get("/personal_forum", (req, res) => {
     res.render("personal_forum", { title: "Personal forum" });
@@ -166,7 +178,6 @@ router.get('/dashboard', isAuthenticated, (req, res) => {
 router.get('/business-dashboard', isAuthenticated, (req, res) => {
     res.status(200).send(`Chào mừng ${req.session.businessUser.TenDangNhap} đến trang dashboard`);
 });
-
 // Kiểm tra nếu người dùng đã đăng nhập
 router.get('/check-login-status', (req, res) => {
     if (req.session.user || req.session.businessUser) {
