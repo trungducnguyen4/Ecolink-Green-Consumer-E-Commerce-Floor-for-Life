@@ -61,57 +61,6 @@ function performSearch() {
     }
 }
 
-// XỬ LÝ CHUYỂN TRANG
-function setActiveClass() {
-    // Lấy URL hiện tại
-    var currentUrl = window.location.href;
-
-    // Danh sách các trang và ID tương ứng
-    var pages = {
-        "http://127.0.0.1:5500/assets/products.html": "san-pham",
-        "http://127.0.0.1:5500/assets/news.html": "blog",
-        "http://127.0.0.1:5500/assets/forum.html": "dien-dan", // Thay bằng URL thật
-        "http://127.0.0.1:5500/assets/home.html": "trang-chu" // Thay bằng URL thật
-    };
-
-    // Xóa class active khỏi tất cả các mục
-    var items = document.querySelectorAll('.navigation-item');
-    items.forEach(function(item) {
-        item.classList.remove('active');
-    });
-
-    // Gán class active cho mục tương ứng
-    if (pages[currentUrl]) {
-        document.getElementById(pages[currentUrl]).classList.add('active');
-    }
-}
-
-function navigateTo(url) {
-    window.location.href = url; // Chuyển hướng đến URL
-}
-
-// Gán sự kiện cho các mục trong menu
-document.getElementById('trang-chu').onclick = function() {
-    navigateTo('http://127.0.0.1:5500/assets/home.html'); // Chuyển đến Trang Chủ
-};
-
-document.getElementById('san-pham').onclick = function() {
-    navigateTo('http://127.0.0.1:5500/assets/products.html'); // Chuyển đến Sản Phẩm
-};
-
-document.getElementById('dien-dan').onclick = function() {
-    navigateTo('http://127.0.0.1:5500/assets/forum.html'); // Chuyển đến Diễn Đàn
-};
-
-document.getElementById('blog').onclick = function() {
-    navigateTo('http://127.0.0.1:5500/assets/news.html'); // Chuyển đến Blog
-};
-
-// Gọi hàm khi trang được tải xong
-window.onload = function() {
-    setActiveClass(); // Gán class active cho mục hiện tại
-};
-
 
 
 

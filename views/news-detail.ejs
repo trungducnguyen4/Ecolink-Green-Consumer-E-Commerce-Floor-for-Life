@@ -6,11 +6,21 @@
 
 <!-- NEWS-NAVIGATION -->
 <div class="news-navigation">
-    <a href="" class="news-navigation-item active">Nổi bật</a>
-    <a href="" class="news-navigation-item">Sức khỏe</a>
-    <a href="" class="news-navigation-item">Sự kiện</a>
-    <a href="" class="news-navigation-item">Đời sống</a>
+    <a href="/news?category=NB" class="news-navigation-item" style="text-decoration: none;">
+        Nổi bật
+    </a>
+    <a href="/news?category=SKH" class="news-navigation-item" style="text-decoration: none;">
+        Sức khỏe
+    </a>
+    <a href="/news?category=SKI" class="news-navigation-item" style="text-decoration: none;">
+        Sự kiện
+    </a>
+    <a href="/news?category=DS" class="news-navigation-item" style="text-decoration: none;">
+        Đời sống
+    </a>
 </div>
+
+
 
 
 <!-- NEWS-DETAIL-BODY -->
@@ -43,10 +53,10 @@
                 <ul class="news-deatail-body-cmt-others-cmt-list">
                     <li class="news-deatail-body-cmt-others-cmt-item">
                         <div class="news-deatail-body-cmt-others-cmt-item-infor">
-                            <img src="./image/avt1.jpg" alt="" class="news-deatail-body-cmt-others-cmt-item-avt">
+                            <img src="https://i.pinimg.com/474x/17/49/60/17496041f2aa296b7abc040581ef135b.jpg" alt="" class="news-deatail-body-cmt-others-cmt-item-avt">
                             <h5 class="news-deatail-body-cmt-others-cmt-item-name">Ecolink for life</h5>
                         </div>
-                        <div class="news-deatail-body-cmt-others-cmt-item-content">Nội dung comment</div>
+                        <div class="news-deatail-body-cmt-others-cmt-item-content">Rất có ích </div>
                         <div class="news-deatail-body-cmt-others-cmt-item-react">
                             <i class="fa-solid fa-thumbs-up"></i>
                             <div class="news-deatail-body-cmt-others-cmt-item-react-like-quantity">12N</div>
@@ -58,10 +68,10 @@
 
                     <li class="news-deatail-body-cmt-others-cmt-item">
                         <div class="news-deatail-body-cmt-others-cmt-item-infor">
-                            <img src="./image/avt2.jpg" alt="" class="news-deatail-body-cmt-others-cmt-item-avt">
-                            <h5 class="news-deatail-body-cmt-others-cmt-item-name">Ecolink for life</h5>
+                            <img src="https://i.pinimg.com/736x/e1/6f/92/e16f92f3f92c9dd728dbcb3680f8368e.jpg" alt="" class="news-deatail-body-cmt-others-cmt-item-avt">
+                            <h5 class="news-deatail-body-cmt-others-cmt-item-name">thanhtruc04</h5>
                         </div>
-                        <div class="news-deatail-body-cmt-others-cmt-item-content">Nội dung comment</div>
+                        <div class="news-deatail-body-cmt-others-cmt-item-content">Bài này cần được phổ biến nhiều hơn</div>
                         <div class="news-deatail-body-cmt-others-cmt-item-react">
                             <i class="fa-solid fa-thumbs-up"></i>
                             <div class="news-deatail-body-cmt-others-cmt-item-react-like-quantity">12N</div>
@@ -106,14 +116,19 @@
             Tên cửa hàng
             
         </h4>
-        <i class="fa-solid fa-crown" 
-                style="
-                    position: absolute;
-                    top: 240px;
-                    left: 310px;
-                    color: gold;
-                    font-size: 20px;
-        "></i>
+        <i 
+              style="
+              font-size: 25px; /* Kích thước biểu tượng */
+                color: orangered; /* Màu sắc biểu tượng */
+                background-color: white;
+                padding: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+                transform: rotate(10deg); /* Nghiêng biểu tượng một chút */
+                transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động */
+                margin-top: -55px;
+                margin-left: 290px;
+              "
+              class="fa-brands fa-square-web-awesome-stroke"></i>
 
         <!-- Phần tử hiển thị số lượng bài viết -->
         <p
@@ -126,11 +141,26 @@
 
         <h3 class="new-body-blog-title">Bài blog liên quan</h3>
         <div class="new-body-blog-relate">
-            <ul class="new-body-blog-relate-list">
+            <ul style="padding-top: 2px; padding-bottom: 5px;" class="new-body-blog-relate-list">
                 
+                <li  class="new-body-blog-relate-item">
+                    <img src="https://nld.mediacdn.vn/291774122806476800/2024/6/13/chot-a-thay-1718269219348547828812.jpg" alt="" class="new-body-blog-relate-item-img">
+                    <h4 class="new-body-blog-relate-item-title">Sống xanh từ những lựa chọn hằng ngày</h4>
+                </li>
+
                 <li class="new-body-blog-relate-item">
-                    <img src="./image/art1.jpg" alt="" class="new-body-blog-relate-item-img">
-                    <h4 class="new-body-blog-relate-item-title"></h4>
+                    <img src="https://www.recycleone.vn/wp-content/uploads/2022/07/song-xanh-5-1.jpeg" alt="" class="new-body-blog-relate-item-img">
+                    <h4 class="new-body-blog-relate-item-title">11 biện pháp bảo vệ môi trường sống đơn giản và ý nghĩa</h4>
+                </li>
+
+                <li class="new-body-blog-relate-item">
+                    <img src="https://cdn-resize-img.vietcetera.com/_next/image?url=https%3A%2F%2Fimg.vietcetera.com%2Fwp-content%2Fuploads%2F2019%2F09%2Fcropped-9.jpg&q=80&w=2048" alt="" class="new-body-blog-relate-item-img">
+                    <h4 class="new-body-blog-relate-item-title">28 Tips sống xanh cho người bận rộn</h4>
+                </li>
+
+                <li class="new-body-blog-relate-item">
+                    <img src="https://mtcs.1cdn.vn/2024/11/20/buyt-dien-7094.jpg" alt="" class="new-body-blog-relate-item-img">
+                    <h4 class="new-body-blog-relate-item-title">TP Hồ Chí Minh: 100% phương tiện sử dụng điện hoặc năng lượng xanh vào năm 2030</h4>
                 </li>
                 
             </ul>

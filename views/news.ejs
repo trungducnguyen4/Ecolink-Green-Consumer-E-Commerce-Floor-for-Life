@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/news.css">
+<link rel="stylesheet" href="/public/main.css">
 <%- include('layout/mainpage_header') %>
         <!-- NEWS-NAVIGAETION -->
         <div class="news-navigation">
@@ -57,8 +58,7 @@
 
             
             <div class="news-body-blog col-lg-4">
-              <h3 style="margin-left: 30px;
-              padding-top: 10px;"
+              <h3 style="margin-left: 15px;"
               class="new-body-blog-title">Top nhà tương tác hàng đầu</h3>
       
               <img 
@@ -84,14 +84,20 @@
                   Tên cửa hàng
                   
               </h4>
-              <i class="fa-solid fa-crown" 
-                      style="
-                          position: absolute;
-                          top: 215px;
-                          left: 280px;
-                          color: gold;
-                          font-size: 20px;
-              "></i>
+              <i 
+              style="
+              font-size: 25px; /* Kích thước biểu tượng */
+                color: orangered; /* Màu sắc biểu tượng */
+                background-color: white;
+                padding: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+                transform: rotate(10deg); /* Nghiêng biểu tượng một chút */
+                transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động */
+                margin-top: -50px;
+                margin-left: 275px;
+              "
+              
+              class="fa-brands fa-square-web-awesome-stroke"></i>
       
               <!-- Phần tử hiển thị số lượng bài viết -->
               <p
@@ -119,6 +125,7 @@
             </div>
          </div>
          <script >
+
 
 
           document.getElementById('see-more-btn').addEventListener('click', function() {

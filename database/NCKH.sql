@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ﻿CREATE TABLE DacDiemXanh (
+=======
+﻿
+
+CREATE TABLE DacDiemXanh (
+>>>>>>> debug-forum-blog
     MaDDX nchar(20) PRIMARY KEY,
     TenDDX nvarchar(100) NOT NULL UNIQUE, -- Tên đặc điểm phải duy nhất
     MoTaDDX nvarchar(max)
@@ -104,7 +110,11 @@ CREATE TABLE KhuyenMai (
 
 CREATE TABLE DonHang (
     MaDH nchar(20) PRIMARY KEY,            -- Mã đơn hàng
+<<<<<<< HEAD
     MaUser nchar(20) NOT NULL,             -- Mã khách hàng
+=======
+    MaUser int NOT NULL,             -- Mã khách hàng
+>>>>>>> debug-forum-blog
     NgayDatHang datetime NOT NULL,         -- Ngày đặt hàng
     TongPhiVC decimal(10, 2) DEFAULT 0,    -- Tổng phí vận chuyển (tính từ phí vận chuyển)
     TongGiamGia decimal(10, 2) DEFAULT 0,  -- Tổng giảm giá cho đơn hàng (có thể tính được từ tổng tiền *% giảm)
@@ -147,17 +157,29 @@ CREATE TABLE SanPhamTrongGio (
     SoLuongSPTrongGio int  CHECK (SoLuongSPTrongGio > 0), -- Số lượng phải lớn hơn 0
     PRIMARY KEY (MaUser, MaGioHang, MaSP)
 );
+<<<<<<< HEAD
 CREATE TABLE BaiPost (
     MaPost nchar(20) IDENTITY(1,1) PRIMARY KEY, 
     TenPost nvarchar(255), 
     NoiDung nvarchar(max), 
     ThoiGianDang datetime DEFAULT GETDATE(), 
     MaNguoiBan nchar(20), 
+=======
+
+Create TABLE BaiPost (
+    MaPost INT IDENTITY(1,1) PRIMARY KEY, 
+    TenPost nvarchar(255), 
+    NoiDung nvarchar(max), 
+    ThoiGianDang datetime DEFAULT GETDATE(), 
+    TenDangNhap nvarchar(50),
+	LoaiNguoiDang nvarchar(20),
+>>>>>>> debug-forum-blog
     SoLuotThich int DEFAULT 0, 
     SoLuotBinhLuan int DEFAULT 0,
     HinhAnh nvarchar(500), 
     Video nvarchar(500),
     TrangThai bit DEFAULT 1, 
+<<<<<<< HEAD
     FOREIGN KEY (MaNguoiBan) REFERENCES NguoiBan(MaNguoiBan)
 );
 
@@ -167,17 +189,37 @@ CREATE TABLE BinhLuan (
     NoiDung text , -- Nội dung bình luận
     NgayBinhLuan datetime DEFAULT GETDATE(), -- Ngày bình luận
     PRIMARY KEY (MaUser, MaPost)
+=======
+    
 );
+
+
+CREATE TABLE BinhLuan (
+    TenDangNhap nvarchar(50),
+    MaPost nchar(20) NOT NULL, -- Bài viết được bình luận
+    NoiDung text , -- Nội dung bình luận
+    NgayBinhLuan datetime DEFAULT GETDATE(), -- Ngày bình luận
+    PRIMARY KEY (TenDangNhap, MaPost)
+>>>>>>> debug-forum-blog
+);
+
 CREATE TABLE Chat (
     MaNguoiBan nchar(20) NOT NULL, -- Người bán tham gia chat
-    MaUser nchar(20) NOT NULL, -- Người dùng tham gia chat
+    MaUser int NOT NULL, -- Người dùng tham gia chat
     NoiDung text , -- Nội dung tin nhắn
     ThoiGian datetime  DEFAULT GETDATE(), -- Thời gian gửi tin nhắn
     PRIMARY KEY (MaNguoiBan, MaUser) -- Đảm bảo duy nhất cho mỗi tin nhắn
 );
+<<<<<<< HEAD
 -- TABLE "Trang thai bai viet"
 Go
 CREATE TABLE TrangThai (
+=======
+
+-- TABLE "Trang thai bai viet"
+Go
+Create TABLE TrangThai (
+>>>>>>> debug-forum-blog
     MaTrangThai nchar(20) PRIMARY KEY,
     TenTrangThai NVARCHAR(50) NOT NULL -- Ví d?: Ðã dang, Ch? duy?t, B?n nháp
 );
@@ -191,6 +233,7 @@ CREATE TABLE DanhMucBlog (
 -- TABLE "BÀI BLOG"
 Go
 CREATE TABLE BaiBlog (
+<<<<<<< HEAD
     MaBaiBlog nchar(20) IDENTITY(1,1) PRIMARY KEY, 
     TieuDe NVARCHAR(200) NOT NULL,          
     NoiDung NVARCHAR(MAX) NOT NULL,
@@ -200,10 +243,42 @@ CREATE TABLE BaiBlog (
     MaNguoiBan NCHAR(20),                   
     NgayTao DATETIME DEFAULT GETDATE(),    
     NgayCapNhat DATETIME DEFAULT GETDATE(), 
+=======
+    MaBaiBlog int IDENTITY(1,1) PRIMARY KEY, 
+    TieuDe NVARCHAR(200) NOT NULL,          
+    NoiDung NVARCHAR(MAX) NOT NULL,
+	AnhBia nvarchar(500),
+    MaDanhMuc NCHAR(20),                         
+    MaTrangThai NCHAR(20),                        
+    MaNguoiBan NCHAR(20),                   
+    NgayTao DATETIME DEFAULT GETDATE(),    
+    NgayCapNhat DATETIME DEFAULT GETDATE(),
+	Nguon nvarchar(255),
+>>>>>>> debug-forum-blog
     FOREIGN KEY (MaDanhMuc) REFERENCES DanhMucBlog(MaDanhMuc), 
     FOREIGN KEY (MaNguoiBan) REFERENCES NguoiBan(MaNguoiBan),  
     FOREIGN KEY (MaTrangThai) REFERENCES TrangThai(MaTrangThai) 
 );
+<<<<<<< HEAD
+=======
+
+----
+
+
+--Follow
+CREATE TABLE Follow (
+    TenDangNhap nvarchar(50) Not null,
+    TenDangNhapDuocTheoDoi nvarchar(50) NOT NULL,  -- Mã người bán bị theo dõi (Followed Seller ID)
+    NgayTheoDoi DATETIME DEFAULT GETDATE(),  -- Ngày theo dõi
+    PRIMARY KEY (TenDangNhap , TenDangNhapDuocTheoDoi),
+   );
+
+
+select * from SanPham
+-- Insert vào GioHang
+INSERT INTO GioHang (MaUser, MaGioHang, NgayTaoGio)
+VALUES ('1', 'GH01000001', GETDATE());
+>>>>>>> debug-forum-blog
 
 ----
 alter table BaiBlog

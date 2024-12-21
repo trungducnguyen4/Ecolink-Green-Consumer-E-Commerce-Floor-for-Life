@@ -49,4 +49,42 @@ async function getArticleById(MaBaiPost) {
     }
 }
 
-module.exports = { getArticleById, getTopPoster  };
+
+
+// Lấy tất cả bài viết cùng mã danh mục nhưng loại trừ bài viết hiện tại
+async function getRelatedArticles(MaBaiPost) {
+    try {
+        const pool = await poolPromise; // Kết nối đến pool
+
+        // Truy vấn để lấy thông tin bài viết hiện tại (bao gồm MaDanhMuc)
+        const currentPostResult = await pool.request()
+            .input('MaBaiBlog', sql.Int, MaBaiPost)
+            .query("SELECT MaDanhMuc FROM BaiBlog WHERE MaBaiBlog = @MaBaiBlog");
+
+        // Nếu không tìm thấy bài viết
+        if (currentPostResult.recordset.length === 0) {
+            return null;
+        }
+
+        // Lấy mã danh mục từ bài viết hiện tại
+        const MaDanhMuc = currentPostResult.recordset[0].MaDanhMuc;
+
+        // Truy vấn tất cả bài viết cùng mã danh mục, loại trừ bài viết hiện tại
+        const relatedPostsResult = await pool.request()
+            .input('MaDanhMuc', sql.Int, MaDanhMuc)
+            .input('MaBaiBlog', sql.Int, MaBaiPost)
+            .query(`
+                SELECT * 
+                FROM BaiBlog 
+                WHERE MaDanhMuc = @MaDanhMuc AND MaBaiBlog != @MaBaiBlog
+            `);
+
+        // Trả về danh sách bài viết
+        return relatedPostsResult.recordset;
+    } catch (err) {
+        console.error('Error fetching related articles:', err.message);
+        throw new Error('Could not fetch related articles'); // Thông báo lỗi chi tiết
+    }
+}
+
+module.exports = { getArticleById, getTopPoster, getRelatedArticles  };

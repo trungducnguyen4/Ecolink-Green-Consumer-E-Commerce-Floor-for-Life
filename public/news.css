@@ -2,6 +2,7 @@
 .news-navigation-item.nav-active {
     color: #007b59;
 }
+
 .news-body-article-date {
     color: gray;
     margin-top: -8px;
@@ -106,7 +107,7 @@ a.news-body-article-item {
     text-overflow: ellipsis; /* Adds the ellipsis on the last line */
 }
 .news-body-blog {
-    margin-top: -20px;
+
 
 }
 .new-body-blog-img {
