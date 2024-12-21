@@ -198,6 +198,14 @@ async function placeOrder(req, res) {
                 WHERE MaDH = @MaDH
             `);
 
+        // Delete cart items
+        await transaction.request()
+            .input('MaUser', sql.NChar(20), userId)
+            .query(`
+                DELETE FROM SanPhamTrongGio
+                WHERE MaUser = @MaUser
+            `);
+
         await transaction.commit();
 
         res.json({ success: true, orderId });
@@ -286,6 +294,37 @@ async function getDeliveryMethods(req, res) {
         res.status(500).json({ success: false, message: 'Error fetching delivery methods' });
     }
 }
+async function loadSellerRevenuePage(req, res) {
+    if (!req.session.businessUser) {
+        return res.status(401).send('User not logged in');
+    }
 
+    const MaNguoiBan = req.session.businessUser.MaNguoiBan;
 
-module.exports = { loadOrderPaymentPage, loadPurchaseOrderStatusPage, placeOrder, loadSellerOrders, updateOrderStatus,getDeliveryMethods };
+    try {
+        const pool = await poolPromise;
+        const revenueResult = await pool.request()
+            .input('MaNguoiBan', sql.NChar(20), MaNguoiBan)
+            .query(`
+                SELECT 
+                    dh.MaDH, 
+                    dh.NgayDatHang, 
+                    SUM(ctdh.SoLuongSP * ctdh.DonGia) AS DoanhThu
+                FROM DonHang dh
+                JOIN CTDH ctdh ON dh.MaDH = ctdh.MaDH
+                WHERE ctdh.MaNguoiBan = @MaNguoiBan
+                AND dh.TrangThai = 'Đã giao'
+                GROUP BY dh.MaDH, dh.NgayDatHang
+                ORDER BY dh.NgayDatHang DESC
+            `);
+
+        const revenueData = revenueResult.recordset;
+
+        res.render('seller-revenue', { title: 'Seller Revenue', revenueData });
+    } catch (err) {
+        console.error('Error loading seller revenue page:', err);
+        res.status(500).send('Error loading seller revenue page');
+    }
+}
+
+module.exports = { loadOrderPaymentPage, loadPurchaseOrderStatusPage, placeOrder, loadSellerOrders, updateOrderStatus,getDeliveryMethods, loadSellerRevenuePage };

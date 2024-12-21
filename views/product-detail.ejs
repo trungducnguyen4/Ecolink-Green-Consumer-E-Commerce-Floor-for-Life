@@ -220,11 +220,11 @@
             </div>
             <% if (product.SoLuongTon > 0) { %>
                 <div class="product-detail-buy">
-                    <div class="product-detail-add-cart" onclick="addToCart('<%= product.MaSP %>', <%= product.DGBanMacDinh %>)">  
+                    <div class="product-detail-add-cart" onclick="handleAddToCart('<%= product.MaSP %>', <%= product.DGBanMacDinh %>)">  
                         <i class="fa-solid fa-cart-plus"></i>
                         Thêm vào giỏ hàng
                     </div>
-                    <div class="product-detail-buy-now">  
+                    <div class="product-detail-buy-now" onclick="handleBuyNow('<%= product.MaSP %>', <%= product.DGBanMacDinh %>)">  
                         Mua ngay
                     </div>
                 </div>
@@ -348,7 +348,24 @@
      </div>
      <script src="/product-detail.js"></script>
      <script>
-        function addToCart(productId, productPrice) {
+        function handleAddToCart(productId, productPrice) {
+            <% if (!session.user) { %>
+                window.location.href = '/us-log-in';
+                return;
+            <% } %>
+            addToCart(productId, productPrice);
+        }
+
+        function handleBuyNow(productId, productPrice) {
+            console.log('handleBuyNow called with productId:', productId, 'and productPrice:', productPrice);
+            <% if (!session.user) { %>
+                window.location.href = '/us-log-in';
+                return;
+            <% } %>
+            addToCart(productId, productPrice, true);
+        }
+
+        function addToCart(productId, productPrice, redirectToCart = false) {
             const quantity = parseInt(document.getElementById('quantity').value);
             fetch('/cart/add', {
                 method: 'POST',
@@ -360,7 +377,11 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Sản phẩm đã được thêm vào giỏ hàng');
+                    if (redirectToCart) {
+                        window.location.href = '/cart';
+                    } else {
+                        alert('Sản phẩm đã được thêm vào giỏ hàng');
+                    }
                 } else {
                     alert('Không thể thêm sản phẩm vào giỏ hàng: ' + data.message);
                 }
