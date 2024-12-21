@@ -1,10 +1,11 @@
 <link rel="stylesheet" href="/forum.css">
+
 <%- include('layout/mainpage_header') %>
     <!-- Blog main -->
     <div class="blog row">
         <div class="blog-contact col-md-3">
             <div class="blog-contact-avatar">
-                <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="">
+                <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="Avatar" >
                 <h4 class="blog-contact-avatar-name"><a href="" class="active"><%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %></a></h4>
             </div>
            <div class="blog-contact-item-frame">
@@ -48,9 +49,9 @@
                     <i class="fas fa-times" id="close-icon" style="cursor: pointer;"></i>
                   </header>
                 
-                  <form >
+                  <form id="postForm" action="/forum/create" method="POST" enctype="multipart/form-data">
                     <div class="content">
-                      <img src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="logo">
+                        <img src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="logo">
                       <div class="details">
                         <p><%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %></p>
                         <div class="privacy">
@@ -60,7 +61,7 @@
                         </div>
                       </div>
                     </div>
-                    <textarea id="contentInput" placeholder="<%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %>, Bạn đang nghĩ gì thế?" spellcheck="false" required></textarea>
+                    <textarea id="contentInput"  name="NoiDung" placeholder="<%= session.user ? session.user.TenDangNhap :(session.businessUser? session.businessUser.TenDangNhap : 'Bạn chưa đăng nhâp') %>, Bạn đang nghĩ gì thế?" spellcheck="false" required></textarea>
 
 
                     <!-- Khung chèn ảnh và video -->
@@ -70,7 +71,7 @@
                           <span>Thêm ảnh/video</span>
                         </div>
                         <!-- Thêm input file ẩn -->
-                        <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
+                        <input type="file" id="fileInput" name="HinhAnh" accept="image/*" onchange="handleFileSelect(event)">
                     </div>
                       <!-- Hiển thị hình ảnh đã chọn -->
                       <div id="imagePreviewContainer" style="display: none;">
@@ -140,7 +141,7 @@
                       
                       
                     </div>
-                    <button id="postButton">Đăng</button>
+                    <button type="submit" id="postButton" >Đăng</button>
                   </form>
                 </section>
                 <section class="audience">
@@ -215,18 +216,18 @@
                   <div class="blog-post-item-1">
                       <img 
                           class="header-service-item-avatar-img" 
-                          src="<%= forum.AnhLogo? '/logo/'+forum.AnhLogo : '/avatar/default-avatar.jpg' %>" 
+                          src=" <%= forum.LoaiNguoiDang  === 'user'  ? './avatar/'+forum.Avatar : './logo/'+forum.AnhLogo %> " 
                           alt="Avatar" 
                           style="margin-left: 20px;">
                       
                           <span class="blog-post-contact-name">
-                            <a href="#"><%= forum.TenCuaHang %></a>
+                            <a href="#"><%= forum.LoaiNguoiDang  === 'user'  ? forum.TenDangNhap : forum.TenCuaHang %>  </a>
                             <a 
                                 href="#" 
                                 class="follow-button" 
-                                data-seller-id="<%= forum.MaNguoiBan %>" 
+                                data-seller-id="<%= forum.LoaiNguoiDang  === 'user'  ? forum.TenDangNhap : forum.TenDangNhap %>" 
                                 style="padding-left: 30px; color: rgb(30, 30, 204); text-decoration: none;"
-                                onclick="toggleFollowSeller(event, '<%= forum.MaNguoiBan %>')"
+                                onclick="toggleFollowSeller(event, `<%= forum.LoaiNguoiDang  === 'user'? forum.TenDangNhap : forum.TenDangNhap %>`)"
                             >
                                 Theo dõi 
                                 <i class="fa-solid fa-circle-check follow-icon" style="margin-left: 3px; display: none;"></i>
@@ -242,7 +243,7 @@
                             </button>
                           </span>
                         
-                      <div class="blog-post-time"><%= forum.displayTime %></div>
+                          <div class="blog-post-time" data-time="<%= forum.ThoiGianDangUTC %>"></div>
               
 
                      <!-- Nội dung bài viết -->
@@ -266,9 +267,10 @@
                         </button>
                       <% } %>
               
+                      
                       <% if (forum.HinhAnh) { %>
                       <div class="blog-post-image">
-                          <img class="blog-post-img" src="'/upload/'<%= forum.HinhAnh %>" alt="Post Image">
+                          <img class="blog-post-img" src="./upload/<%= forum.HinhAnh %>" alt="Post Image">
                       </div>
                       <% } %>
               
@@ -332,254 +334,133 @@
 
         </div>     
     </div>
-    
-<link rel="stylesheet" href="chatbot.js">
-<script type="module">
-    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
-    Chatbot.init({
-        chatflowid: "140ae8e9-704b-4685-8867-e2c580d9d721",
-        apiHost: "http://localhost:3000",
-        chatflowConfig: {
-            // topK: 2
-        },
-        theme: {
-            button: {
-                backgroundColor: "#dcd8d8",
-                right: 20,
-                bottom: 20,
-                size: 48, // small | medium | large | number
-                dragAndDrop: true,
-                iconColor: "black",
-                customIconSrc: "https://i.pinimg.com/736x/f1/7d/db/f17ddb244e3f2f6a720e61cd3f8161fb.jpg",
-                autoWindowOpen: {
-                    autoOpen: true, //parameter to control automatic window opening
-                    openDelay: 2, // Optional parameter for delay time in seconds
-                    autoOpenOnMobile: false, //parameter to control automatic window opening in mobile
-                    },
-            },
-            tooltip: {
-                showTooltip: true,
-                tooltipMessage: 'Hi There 👋!',
-                tooltipBackgroundColor: 'black',
-                tooltipTextColor: 'white',
-                tooltipFontSize: 16,
-            },
-            chatWindow: {
-                showTitle: true,
-                title: 'Ecolink for life',
-                titleAvatarSrc: 'https://i.pinimg.com/736x/f1/7d/db/f17ddb244e3f2f6a720e61cd3f8161fb.jpg',
-                showAgentMessages: true,
-                welcomeMessage: 'Hello! How can I help you',
-                errorMessage: 'Wait a minute! I will contact with EcoAssistant now.',
-                backgroundColor: "#ffffff",
-                backgroundImage: 'enter image path or link', // If set, this will overlap the background color of the chat window.
-                height: 450,
-                width: 350,
-                fontSize: 16,
-                //starterPrompts: ['What is a bot?', 'Who are you?'], // It overrides the starter prompts set by the chat flow passed
-                starterPromptFontSize: 15,
-                clearChatOnReload: false, // If set to true, the chat will be cleared when the page reloads.
-                botMessage: {
-                    backgroundColor: "#f7f8ff",
-                    textColor: "#303235",
-                    showAvatar: true,
-                    avatarSrc: "https://i.pinimg.com/736x/f1/7d/db/f17ddb244e3f2f6a720e61cd3f8161fb.jpg",
-                },
-                userMessage: {
-                    backgroundColor: "#007b59",
-                    textColor: "#ffffff",
-                    showAvatar: true,
-                    avatarSrc: "https://i.pinimg.com/736x/2b/c9/05/2bc905c07667a2e70cc78fe0242b8d78.jpg",
-                },
-                textInput: {
-                    placeholder: 'Type your question',
-                    backgroundColor: '#ffffff',
-                    textColor: '#303235',
-                    sendButtonColor: '#007b59',
-                    maxChars: 50,
-                    maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 50 characters.',
-                    autoFocus: true, // If not used, autofocus is disabled on mobile and enabled on desktop. true enables it on both, false disables it on both.
-                    sendMessageSound: true,
-                    // sendSoundLocation: "send_message.mp3", // If this is not used, the default sound effect will be played if sendSoundMessage is true.
-                    receiveMessageSound: true,
-                    // receiveSoundLocation: "receive_message.mp3", // If this is not used, the default sound effect will be played if receiveSoundMessage is true. 
-                },
-                feedback: {
-                    color: '#303235',
-                },
-                footer: {
-                    textColor: '#303235',
-                    text: 'Powered by',
-                    company: 'Ecolink for life',
-                    companyLink: 'https://flowiseai.com',
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data-10-year-range.js"></script>
+    <script>
+      // XU LY THOI GIAN
+      document.addEventListener('DOMContentLoaded', function() { // Đảm bảo DOM đã sẵn sàng
+        const timeElements = document.querySelectorAll('.blog-post-time');
+
+        function updateTimes() {
+            const currentTime = moment();
+            timeElements.forEach(element => {
+                const utcTime = element.dataset.time;
+                
+                console.log("utcTime trong frontend:", utcTime); // In ra để debug (BƯỚC KIỂM TRA QUAN TRỌNG)
+                console.log("Thời gian hiện tại:", currentTime.format());
+                if (utcTime) {
+                    const localTime = moment.utc(utcTime).subtract(7, 'hours').fromNow();
+                    element.textContent = localTime; // <--- ĐÂY LÀ ĐIỀU BẠN CẦN!
+                } else {
+                    element.textContent = "Vừa xong";
                 }
-            }
-        }
-    })
-</script>
-<script src="/forum.js" defer></script>
-<script src="./check_session.js" defer> </script>
-<script>
-  document.querySelector('#postButton').addEventListener('click', async (e) => {
-       // Ngăn chặn tải lại trang
-       event.preventDefault();
-        const NoiDung = document.querySelector('#contentInput').value.trim();
-        const fileInput = document.querySelector('#fileInput');
-        const formData = new FormData();
-    
-        // Kiểm tra nội dung
-        if (!NoiDung) {
-            alert('Nội dung không được để trống.');
-            return;
-        }
-    
-        //Lấy dữ liệu từ session qua EJS
-        const TenDangNhap = "<%= session.user ? session.user.TenDangNhap : (session.businessUser ? session.businessUser.TenDangNhap : '') %>";
-        const LoaiNguoiDang = "<%= session.user ? 'Cá nhân' : (session.businessUser ? 'Doanh nghiệp' : '') %>";
-    
-        // Kiểm tra dữ liệu session
-        if (!TenDangNhap || !LoaiNguoiDang) {
-            alert('Dữ liệu người dùng không hợp lệ.');
-            return;
-        }
-    
-        // Thêm các dữ liệu vào FormData
-        formData.append('NoiDung', NoiDung);
-        formData.append('TenDangNhap', TenDangNhap);
-        formData.append('LoaiNguoiDang', LoaiNguoiDang);
-    
-        // Nếu có file được chọn, thêm vào FormData
-        if (fileInput.files.length > 0) {
-            formData.append('HinhAnh', fileInput.files[0]);
-        }
-    
-        // Gửi yêu cầu POST đến server
-        try {
-            const response = await fetch('/create', {
-                method: 'POST',
-                body: formData,
             });
-        
-            const result = await response.json();
-            if (response.ok) {
-                alert('Đăng bài thành công!');
-                console.log(result);
-            } else {
-                console.log(result); // Ghi nhật ký phản hồi không thành công
-                alert(result.error || 'Đăng bài thất bại!');
-            }
-        } catch (error) {
-            console.error('Lỗi:', error);
-            alert('Đăng bài thất bại do lỗi không xác định.');
         }
-        
+
+        updateTimes(); // Gọi hàm lần đầu khi trang được tải
+        setInterval(updateTimes, 60000); // Cập nhật mỗi phút
     });
-
-
-
-
+      // XU LY THEO DOI
     
-      //XU LY THEO DOI
       // Bộ lưu trạng thái các người bán đã theo dõi (client-side)
       const followedSellers = new Set();
-
+    
       // Hàm toggle (bật/tắt) theo dõi
       function toggleFollowSeller(event, sellerId) {
-          event.preventDefault(); // Ngăn điều hướng mặc định
-
-          // Xác định nút hiện tại và icon theo dõi
-          const followButton = event.target.closest('.follow-button');
-          const followIcon = followButton.querySelector('.follow-icon');
-
-          // Kiểm tra trạng thái theo dõi hiện tại
-          if (followedSellers.has(sellerId)) {
-              // Nếu đang theo dõi, hủy theo dõi
-              followIcon.style.display = 'none';
-              followButton.classList.remove('following');
-              followButton.textContent = 'Theo dõi ';
-              followButton.appendChild(followIcon); // Đảm bảo icon vẫn ở cuối
-              followedSellers.delete(sellerId); // Xóa khỏi danh sách theo dõi
-
-              // Gửi yêu cầu hủy theo dõi đến server
-              unfollowSeller(sellerId);
-          } else {
-              // Nếu chưa theo dõi, bật theo dõi
-              followIcon.style.display = 'inline';
-              followButton.classList.add('following');
-              followButton.textContent = 'Đang theo dõi ';
-              followButton.appendChild(followIcon); // Đảm bảo icon vẫn ở cuối
-              followedSellers.add(sellerId); // Thêm vào danh sách theo dõi
-
-              // Gửi yêu cầu theo dõi đến server
-              followSeller(sellerId);
-          }
+        event.preventDefault(); // Ngăn điều hướng mặc định
+    
+        // Xác định nút hiện tại và icon theo dõi
+        const followButton = event.target.closest('.follow-button');
+        const followIcon = followButton.querySelector('.follow-icon');
+    
+        // Kiểm tra trạng thái theo dõi hiện tại
+        if (followedSellers.has(sellerId)) {
+          // Nếu đang theo dõi, hủy theo dõi
+          followIcon.style.display = 'none';
+          followButton.classList.remove('following');
+          followButton.textContent = 'Theo dõi ';
+          followButton.appendChild(followIcon); // Đảm bảo icon vẫn ở cuối
+          followedSellers.delete(sellerId); // Xóa khỏi danh sách theo dõi
+    
+          // Gửi yêu cầu hủy theo dõi đến server
+          unfollowSeller(sellerId);
+        } else {
+          // Nếu chưa theo dõi, bật theo dõi
+          followIcon.style.display = 'inline';
+          followButton.classList.add('following');
+          followButton.textContent = 'Đang theo dõi ';
+          followButton.appendChild(followIcon); // Đảm bảo icon vẫn ở cuối
+          followedSellers.add(sellerId); // Thêm vào danh sách theo dõi
+    
+          // Gửi yêu cầu theo dõi đến server
+          followSeller(sellerId);
+        }
       }
-
-// Hàm gửi yêu cầu theo dõi tới server
-function followSeller(sellerId) {
-    fetch('/api/follow', {
-        method: 'POST',
-        headers: {
+    
+      // Hàm gửi yêu cầu theo dõi tới server
+      function followSeller(sellerId) {
+        fetch('/api/follow', {
+          method: 'POST',
+          headers: {
             'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ sellerId: sellerId }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log(`Đang theo dõi người bán với ID: ${sellerId}`);
-        } else {
-            console.error('Không thể theo dõi người bán');
-        }
-    })
-    .catch(error => {
-        console.error('Lỗi khi gửi yêu cầu theo dõi:', error);
-    });
-}
-
-// Hàm gửi yêu cầu hủy theo dõi tới server
-function unfollowSeller(sellerId) {
-    fetch('/api/unfollow', {
-        method: 'POST',
-        headers: {
+          },
+          body: JSON.stringify({ sellerId: sellerId }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log(`Đang theo dõi người bán với ID: ${sellerId}`);
+            } else {
+              console.error('Không thể theo dõi người bán');
+            }
+          })
+          .catch(error => {
+            console.error('Lỗi khi gửi yêu cầu theo dõi:', error);
+          });
+      }
+    
+      // Hàm gửi yêu cầu hủy theo dõi tới server
+      function unfollowSeller(sellerId) {
+        fetch('/api/unfollow', {
+          method: 'POST',
+          headers: {
             'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ sellerId: sellerId }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log(`Đã hủy theo dõi người bán với ID: ${sellerId}`);
-        } else {
-            console.error('Không thể hủy theo dõi người bán');
-        }
-    })
-    .catch(error => {
-        console.error('Lỗi khi gửi yêu cầu hủy theo dõi:', error);
-    });
-}
-
+          },
+          body: JSON.stringify({ sellerId: sellerId }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log(`Đã hủy theo dõi người bán với ID: ${sellerId}`);
+            } else {
+              console.error('Không thể hủy theo dõi người bán');
+            }
+          })
+          .catch(error => {
+            console.error('Lỗi khi gửi yêu cầu hủy theo dõi:', error);
+          });
+      }
+    
       // Xu ly an bai post
       function closePost(postId) {
-          // Tìm bài viết dựa trên ID
-          const postElement = document.querySelector(`.blog-post-1[data-post-id="${postId}"]`);
-          if (postElement) {
-              // Ẩn bài viết bằng cách thêm class hoặc xóa khỏi DOM
-              postElement.style.display = 'none'; // Ẩn bài viết
-              // postElement.remove(); // Hoặc xóa bài viết khỏi DOM
-          }
+        // Tìm bài viết dựa trên ID
+        const postElement = document.querySelector(`.blog-post-1[data-post-id="${postId}"]`);
+        if (postElement) {
+          // Ẩn bài viết bằng cách thêm class hoặc xóa khỏi DOM
+          postElement.style.display = 'none'; // Ẩn bài viết
+          // postElement.remove(); // Hoặc xóa bài viết khỏi DOM
+        }
       }
-
-
-
+    
       // Xu ly dong - mo popup
       const input = document.querySelector('.blog-input');
       const popup = document.getElementById('createPostPopup');
       const overlay = document.getElementById('overlay');
       const closeIcon = document.getElementById('close-icon');
-
+    
       // Hiển thị popup và overlay khi click vào input
-        input.addEventListener('click', async () => {
+      input.addEventListener('click', async () => {
             try {
                 // Gửi yêu cầu đến server để kiểm tra trạng thái đăng nhập người dùng
                 const response = await fetch('/check-login-status');
@@ -596,354 +477,255 @@ function unfollowSeller(sellerId) {
                 console.error('Lỗi khi kiểm tra đăng nhập:', error);
             }
         });
-
-
-     
+    
       // Đóng popup khi click vào icon đóng
       closeIcon.addEventListener('click', () => {
-          popup.classList.remove('active-popup');
-          overlay.classList.remove('active-popup');
+        popup.classList.remove('active-popup');
+        overlay.classList.remove('active-popup');
       });
-
+    
       // Đóng popup khi click vào overlay
       overlay.addEventListener('click', () => {
-          popup.classList.remove('active-popup');
-          overlay.classList.remove('active-popup');
+        popup.classList.remove('active-popup');
+        overlay.classList.remove('active-popup');
       });
-
-
-
-
+    
       function postContent(postId) {
-          // Lấy nội dung từ textarea
-          const contentInput = document.getElementById("contentInput").value;
-
-          // Thay thế ký tự xuống dòng (\n) bằng <br>
-          const formattedContent = contentInput.replace(/\n/g, "<br>");
-
-          // Lấy thẻ có id="content-" + postId
-          const contentDisplay = document.getElementById("content-" + postId);
-          if (contentDisplay) {
-              // Gắn nội dung đã định dạng vào thẻ
-              contentDisplay.innerHTML = formattedContent;
-          }
+        // Lấy nội dung từ textarea
+        const contentInput = document.getElementById("contentInput").value;
+    
+        // Thay thế ký tự xuống dòng (\n) bằng <br>
+        const formattedContent = contentInput.replace(/\n/g, "<br>");
+    
+        // Lấy thẻ có id="content-" + postId
+        const contentDisplay = document.getElementById("content-" + postId);
+        if (contentDisplay) {
+          // Gắn nội dung đã định dạng vào thẻ
+          contentDisplay.innerHTML = formattedContent;
+        }
       }
-
+    
       // Gọi hàm với id cụ thể của mỗi bài viết
       postContent('<%= forum.MaPost %>');
-
-
+    
       // Xử lý cho "Xem thêm" khi bài viết quá dài
       function showFullContent(postId) {
-          const contentElement = document.getElementById(`content-${postId}`);
-          if (contentElement) {
-              // Lấy nội dung đầy đủ từ thuộc tính data
-              const fullContent = contentElement.getAttribute("data-full-content");
-              if (fullContent) {
-                  contentElement.textContent = fullContent; // Hiển thị nội dung đầy đủ
-              }
+        const contentElement = document.getElementById(`content-${postId}`);
+        if (contentElement) {
+          // Lấy nội dung đầy đủ từ thuộc tính data
+          const fullContent = contentElement.getAttribute("data-full-content");
+          if (fullContent) {
+            contentElement.textContent = fullContent; // Hiển thị nội dung đầy đủ
           }
-
-          // Ẩn nút "Xem thêm"
-          const button = document.querySelector(`button[data-post-id="${postId}"]`);
-          if (button) {
-              button.style.display = "none";
-          }
+        }
+    
+        // Ẩn nút "Xem thêm"
+        const button = document.querySelector(`button[data-post-id="${postId}"]`);
+        if (button) {
+          button.style.display = "none";
+        }
       }
-
-
-
-
+    
       // XU LY SU KIEN ADD HAGTAG #EVENT
       function addHashtagToTextarea() {
         const textarea = document.getElementById('contentInput');
-        
+    
         // Thêm hashtag #event vào vị trí con trỏ
         const cursorPosition = textarea.selectionStart; // Lấy vị trí con trỏ hiện tại
         const textBefore = textarea.value.substring(0, cursorPosition);
         const textAfter = textarea.value.substring(cursorPosition);
-
+    
         // Chèn hashtag vào nội dung của textarea
         textarea.value = textBefore + '#event' + textAfter;
-
+    
         // Đặt lại con trỏ sau nội dung vừa chèn
         textarea.focus();
         textarea.selectionStart = textarea.selectionEnd = cursorPosition + '#event'.length;
       }
-
+    
       // XU LY SU KIEN ACTIVE AUDIENCE
       // Lấy tất cả các mục trong danh sách
       const listItems = document.querySelectorAll('.list li');
       const privacyIcon = document.querySelector('.content .privacy i:first-child');
       const privacyText = document.querySelector('.content .privacy span');
-
+    
       // Xử lý sự kiện click
       listItems.forEach(item => {
         item.addEventListener('click', () => {
           // Xóa trạng thái 'active' khỏi các mục
           listItems.forEach(i => i.classList.remove('active'));
-
+    
           // Thêm 'active' cho mục được click
           item.classList.add('active');
-
+    
           // Lấy icon (class) từ thẻ <i> và text từ thẻ <p>
           const newIcon = item.querySelector('.icon i').className; // Lấy class của <i>
           const newText = item.querySelector('.details p').textContent; // Lấy nội dung của <p>
-
+    
           // Cập nhật icon và text trong phần hiển thị
           privacyIcon.className = newIcon; // Thay đổi class của icon
           privacyText.textContent = newText; // Thay đổi nội dung text
         });
       });
-
-
-
-
-
+    
       // XU LY HIEN THI EMOJI
       // Hàm để hiển thị hoặc ẩn bảng emoji
       function toggleEmojiPicker() {
-          const emojiPicker = document.getElementById("emojiPicker");
-          const displayStyle = emojiPicker.style.display;
-
-          // Chuyển đổi giữa hiển thị và ẩn bảng emoji
-          emojiPicker.style.display = displayStyle === "block" ? "none" : "block";
+        const emojiPicker = document.getElementById("emojiPicker");
+        const displayStyle = emojiPicker.style.display;
+    
+        // Chuyển đổi giữa hiển thị và ẩn bảng emoji
+        emojiPicker.style.display = displayStyle === "block" ? "none" : "block";
       }
-
+    
       // Hàm để chọn emoji và chèn vào textarea
       function selectEmoji(emoji) {
-      const contentInput = document.getElementById("contentInput");
-      contentInput.value += emoji; // Thêm emoji vào cuối văn bản hiện tại trong textarea
-
-      // Đóng bảng emoji sau khi chọn
-      document.getElementById("emojiPicker").style.display = "none";
-    }
-
-
-      // XU LY LIKE ACTION
-    // Hàm xử lý khi người dùng click vào Like
-    async function toggleLike(spanElement) {
-    const postId = spanElement.getAttribute('data-post-id'); // Lấy ID bài viết từ data attribute
-    const disLikeIcon = spanElement.querySelector('.dis-like-icon');
-    const likeIcon = spanElement.querySelector('.like-icon');
-    const likeCountSpan = spanElement.closest('.blog-post-react').previousElementSibling.querySelector('.blog-post-react-like-num');
+        const contentInput = document.getElementById("contentInput");
+        contentInput.value += emoji; // Thêm emoji vào cuối văn bản hiện tại trong textarea
     
-    let likeCount = parseInt(likeCountSpan.textContent) || 0;
-    const isLike = disLikeIcon.style.display === 'inline'; // Kiểm tra trạng thái like (hiển thị like icon hay chưa)
-
-    // Cập nhật giao diện (ẩn/hiện icon và cập nhật số lượt thích)
-    if (isLike) {
-        disLikeIcon.style.display = 'none';
-        likeIcon.style.display = 'inline';
-        likeCount++;
-    } else {
-        likeIcon.style.display = 'none';
-        disLikeIcon.style.display = 'inline';
-        likeCount = Math.max(0, likeCount - 1);
-    }
-
-    // Cập nhật số lượt thích trên giao diện
-    likeCountSpan.textContent = `${likeCount} Thích`;
-
-    // Gửi yêu cầu POST tới server để cập nhật trạng thái like cho bài viết
-    try {
-        const response = await fetch('/api/updateLike', {
+        // Đóng bảng emoji sau khi chọn
+        document.getElementById("emojiPicker").style.display = "none";
+      }
+    
+      // XU LY LIKE ACTION
+      // Hàm xử lý khi người dùng click vào Like
+      async function toggleLike(spanElement) {
+        const postId = spanElement.getAttribute('data-post-id'); // Lấy ID bài viết từ data attribute
+        const disLikeIcon = spanElement.querySelector('.dis-like-icon');
+        const likeIcon = spanElement.querySelector('.like-icon');
+        const likeCountSpan = spanElement.closest('.blog-post-react').previousElementSibling.querySelector('.blog-post-react-like-num');
+    
+        let likeCount = parseInt(likeCountSpan.textContent) || 0;
+        const isLike = disLikeIcon.style.display === 'inline'; // Kiểm tra trạng thái like (hiển thị like icon hay chưa)
+    
+        // Cập nhật giao diện (ẩn/hiện icon và cập nhật số lượt thích)
+        if (isLike) {
+          disLikeIcon.style.display = 'none';
+          likeIcon.style.display = 'inline';
+          likeCount++;
+        } else {
+          likeIcon.style.display = 'none';
+          disLikeIcon.style.display = 'inline';
+          likeCount = Math.max(0, likeCount - 1);
+        }
+    
+        // Cập nhật số lượt thích trên giao diện
+        likeCountSpan.textContent = `${likeCount} Thích`;
+    
+        // Gửi yêu cầu POST tới server để cập nhật trạng thái like cho bài viết
+        try {
+          const response = await fetch('/api/updateLike', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                postId: postId,
-                like: isLike // true nếu like, false nếu unlike
+              postId: postId,
+              like: isLike // true nếu like, false nếu unlike
             })
-        });
-
-        const data = await response.json();
-        if (!data.success) {
-            console.error('Cập nhật like thất bại:', data.message);
-        }
-    } catch (error) {
-        console.error('Lỗi kết nối:', error);
-    }
-}
-
-      // Hàm gửi yêu cầu "like/unlike" lên server
-    function sendLikeRequest(postId, isLike) {
-      fetch(`/updateLike?postId=${postId}&like=${isLike}`, {
-          method: 'POST'
-      })
-      .then(response => response.json())
-      .then(data => {
+          });
+    
+          const data = await response.json();
           if (!data.success) {
-              console.error('Không thể cập nhật trạng thái like:', data.message);
+            console.error('Cập nhật like thất bại:', data.message);
           }
-      })
-      .catch(error => console.error('Lỗi:', error));
-  }
-      
-      // Hàm hiển thị khung chèn ảnh/video
-    function showMediaUpload() {
-      // Hiển thị khung chèn ảnh/video nhưng không kích hoạt input file
-      const mediaUpload = document.getElementById('mediaUpload');
-      mediaUpload.style.display = 'block';
-
-      // Tăng chiều cao của thẻ cha .container-createPost
-      const container = document.querySelector('.container-createPost');
-      container.style.height = '600px'; // Thay đổi chiều cao từ 400px lên 600px
+        } catch (error) {
+          console.error('Lỗi kết nối:', error);
+        }
       }
-
-    // Hàm xử lý khi người dùng click vào camera icon
-    function triggerFileInput(type) {
-      // Hiển thị khung chèn ảnh/video
-      document.getElementById('mediaUpload').style.display = 'block';
-
-      // Tăng chiều cao của thẻ cha .container-createPost
-      const container = document.querySelector('.container-createPost');
-      container.style.height = '600px'; // Thay đổi chiều cao từ 400px lên 600px
-
-      // Kích hoạt sự kiện click trên input file (chỉ khi click vào camera)
-      document.getElementById('fileInput').click();
-    }
-
-    function handleFileSelect(event) {
+    
+      // Hàm gửi yêu cầu "like/unlike" lên server
+      function sendLikeRequest(postId, isLike) {
+        fetch(`/updateLike?postId=${postId}&like=${isLike}`, {
+          method: 'POST'
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (!data.success) {
+              console.error('Không thể cập nhật trạng thái like:', data.message);
+            }
+          })
+          .catch(error => console.error('Lỗi:', error));
+      }
+    
+      // Hàm hiển thị khung chèn ảnh/video
+      function showMediaUpload() {
+        // Hiển thị khung chèn ảnh/video nhưng không kích hoạt input file
+        const mediaUpload = document.getElementById('mediaUpload');
+        mediaUpload.style.display = 'block';
+    
+        // Tăng chiều cao của thẻ cha .container-createPost
+        const container = document.querySelector('.container-createPost');
+        container.style.height = '600px'; // Thay đổi chiều cao từ 400px lên 600px
+      }
+    
+      // Hàm xử lý khi người dùng click vào camera icon
+      function triggerFileInput(type) {
+        // Hiển thị khung chèn ảnh/video
+        document.getElementById('mediaUpload').style.display = 'block';
+    
+        // Tăng chiều cao của thẻ cha .container-createPost
+        const container = document.querySelector('.container-createPost');
+        container.style.height = '600px'; // Thay đổi chiều cao từ 400px lên 600px
+    
+        // Kích hoạt sự kiện click trên input file (chỉ khi click vào camera)
+        document.getElementById('fileInput').click();
+      }
+    
+      function handleFileSelect(event) {
         const file = event.target.files[0]; // Lấy file từ input
         const imagePreviewContainer = document.getElementById('imagePreviewContainer'); // Container preview
         const imagePreview = document.getElementById('imagePreview'); // Thẻ <img> để hiển thị ảnh
         const mediaUpload = document.querySelector('.media-upload'); // Phần tử mediaUpload
-
+    
         if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                // Đặt nguồn của ảnh là dữ liệu đã đọc
-                imagePreview.src = e.target.result;
-
-                // Hiển thị container preview và ẩn media-upload
-                imagePreviewContainer.style.display = 'block';
-                mediaUpload.style.display = 'none';
-            };
-
-            reader.readAsDataURL(file); // Đọc file dưới dạng URL
+          const reader = new FileReader();
+    
+          reader.onload = function(e) {
+            // Đặt nguồn của ảnh là dữ liệu đã đọc
+            imagePreview.src = e.target.result;
+    
+            // Hiển thị container preview và ẩn media-upload
+            imagePreviewContainer.style.display = 'block';
+            mediaUpload.style.display = 'none';
+          };
+    
+          reader.readAsDataURL(file); // Đọc file dưới dạng URL
         } else {
-            // Nếu không có file, hiển thị lại media-upload và ẩn preview
-            imagePreviewContainer.style.display = 'none';
-            mediaUpload.style.display = 'flex';
+          // Nếu không có file, hiển thị lại media-upload và ẩn preview
+          imagePreviewContainer.style.display = 'none';
+          mediaUpload.style.display = 'flex';
         }
-    }
-
-
-
-
+      }
+    
       // Lấy các phần tử DOM
       const uploadIcon = document.getElementById('uploadIcon');
       const fileInput = document.getElementById('fileInput');
-
+    
       // Thêm sự kiện click vào biểu tượng tải lên
       uploadIcon.addEventListener('click', () => {
         // Kích hoạt input file khi người dùng nhấn vào biểu tượng camera
         triggerFileInput();
       });
-
+    
       // Lắng nghe sự kiện khi người dùng chọn file
       fileInput.addEventListener('change', handleFileSelect);
-
-
-      // Xử lý hiện pop-up
-      document.addEventListener('DOMContentLoaded', () => {
-      const input = document.querySelector('.blog-input');
-      const popup = document.getElementById('createPostPopup');
-      const overlay = document.getElementById('overlay');
-
-    //   // Hiển thị popup và overlay khi click vào input
-    //   input.addEventListener('click', () => {
-    //     popup.classList.add('active-popup');
-    //     overlay.classList.add('active-popup');
-    //   });
-
-    //   // Ẩn popup và overlay khi click vào overlay
-    //   overlay.addEventListener('click', () => {
-    //     popup.classList.remove('active-popup');
-    //     overlay.classList.remove('active-popup');
-    //   });
-    // });
-
-
+    
       const container = document.querySelector(".container-createPost"),
-      privacy = container.querySelector(".post .privacy"),
-      arrowBack = container.querySelector(".audience .arrow-back");
+        privacy = container.querySelector(".post .privacy"),
+        arrowBack = container.querySelector(".audience .arrow-back");
+    
       privacy.addEventListener("click", () => {
         container.classList.add("active");
       });
+    
       arrowBack.addEventListener("click", () => {
         container.classList.remove("active");
       });
-
-     
     
+      // Hàm hiển thị bài viết mới
+      // Hàm hiển thị bài viết mới lên đầu
       
-    
-    
-
-
-
-    // Hàm hiển thị bài viết mới
-    // Hàm hiển thị bài viết mới lên đầu
-    function addNewPost(post) {
-    const postList = document.querySelector('#postList');
-    const newPost = document.createElement('div');
-    newPost.className = 'blog-post-1';
-    newPost.innerHTML = `
-        <div class="blog-post-item-1">
-            <img 
-                class="header-service-item-avatar-img" 
-                src="${post.AnhLogo || '../image/avatar.jpg'}" 
-                alt="Avatar" 
-                style="margin-left: 20px;">
-            <span class="blog-post-contact-name">
-                <a href="#">${post.TenCuaHang}</a>
-                <a href="#" style="padding-left: 30px; color: rgb(30, 30, 204);">
-                    Theo dõi 
-                    <i class="fa-solid fa-circle-check" style="margin-left: 3px;"></i>
-                </a>
-            </span>
-            <div class="blog-noidung">${post.NoiDung}</div>
-            ${post.Video ? `
-                <div class="blog-post-video">
-                    <iframe width="100%" height="315" src="${post.Video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-            ` : post.HinhAnh ? `
-                <div class="blog-post-image">
-                    <img class="blog-post-img" src="${post.HinhAnh}" alt="Post Image">
-                </div>
-            ` : ''}
-            <div class="blog-post-react-count">
-                <div class="blog-post-react-count-sp">
-                    <i class="fa-solid fa-heart" style="color: red;"></i>
-                    <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
-                    <i class="fa-regular fa-face-smile" style="color: orange;"></i>
-                </div>
-                <div class="blog-post-react-count-num">
-                    <span>${post.SoLuotThich || 0} Thích</span>
-                    <span style="margin-left: 15px;">${post.SoLuotBinhLuan || 0} Bình luận</span>
-                </div>
-            </div>
-            <div class="blog-post-react row" style="padding-top: 10px;">
-                <span class="blog-post-react-like col-md-6">
-                    <i class="fa-regular fa-heart" style="padding-right: 10px;"></i>Like
-                </span>
-                <span class="blog-post-react-cmt col-md-6">
-                    <i class="fa-regular fa-comment" style="padding-right: 10px;"></i>Comment
-                </span>
-            </div>
-        </div>
-    `;
-        // Thêm bài viết mới vào đầu danh sách
-        postList.prepend(newPost);
-}});
-
-
-
-</script>
-
+    </script>
 </body>
 <%- include('layout/footer')  %>

@@ -1,16 +1,16 @@
 const newsDetailModel = require('../models/newsDetail_model'); // Import model
 
-// Controller để lấy chi tiết bài báo theo MaBaiBlog
-async function getNewsDetailPage(req, res) {
+
+async function getNewsPage(req, res) {
     const MaBaiPost = req.params.MaBaiBlog; // Lấy MaBaiBlog từ tham số URL
 
     try {
         // Lấy bài viết từ model theo MaBaiPost
-        const newsDetail = await newsDetailModel.getArticleById(MaBaiPost);
+        const newsDetail2 = await newsDetailModel.getRelatedArticles(MaBaiPost);
 
         // Nếu bài viết tồn tại, render trang chi tiết bài viết
-        if (newsDetail) {
-            res.render('news-detail', { article: newsDetail }); // Truyền dữ liệu bài viết vào view
+        if (newsDetail2) {
+            res.render('news-detail', { article2: newsDetail2 }); // Truyền dữ liệu bài viết vào view
         } else {
             // Nếu không tìm thấy bài viết
             res.status(404).json({
@@ -23,6 +23,4 @@ async function getNewsDetailPage(req, res) {
         res.status(500).send('Internal Server Error');
     }
 }
-
-
-module.exports = { getNewsDetailPage }; // Xuất controller
+module.exports = { getNewsPage }; // Xuất controller

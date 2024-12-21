@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../function.js">
     <link rel="stylesheet" href="../public/main.css">
     <link rel="stylesheet" href="/product.css">
+    <script src="./check_session.js" defer> </script>
+
 </head>
 <body>
     <!-- HEADER -->
@@ -27,13 +29,13 @@
               <div class="header-service">
                 <div class="header-service-item">
                   <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="Avatar">
-                  <% if (session.user || session.businessUser) { %>
-                    <span><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></span>
-                    <a href="/logout">Đăng xuất</a>
-                <% } else { %>
-                    <a href="/us-log-in">Đăng nhập</a>
-                <% } %>
-                </div>
+                    <% if (session.user || session.businessUser) { %>
+                      <span><a href="<%= session.user ? '/personal' : (session.businessUser ? '/sale-chanels' : '#') %>"><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></a></span>
+                      <a href="/logout">Đăng xuất</a>
+                  <% } else { %>
+                      <a href="/us-log-in">Đăng nhập</a>
+                  <% } %>
+                  </div>
     
                 <div class="header-service-item">
                   <i class="fa-solid fa-question"></i>
@@ -54,8 +56,9 @@
               <!-- Header-Search-frame -->
               <div class="search-frame">
                 <form action="/products/search" method="get" >
-                  <input class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
-                  <button type="submit" class="header-search-icon">
+                  <input 
+                  class="header-search-input" type="text" name="keyword" placeholder="Tìm kiếm" >
+                  <button style="border: none;" type="submit" class="header-search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </form>
@@ -95,57 +98,69 @@
               <a href="/cart" class="header-icon-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <div class="cart-quantity">
-                  <p class="cart-quantity-number">15</p>
+                  <p class="cart-quantity-number" id="cart-quantity-number">0</p>
                 </div>
               </a>
               <div class="product-in-cart">
                 <div class="product-in-cart-arrow"></div>
-                <ul class="product-in-cart-list">
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp1.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Premium Vector</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp2.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Premium Vector</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp4.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp5.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp6.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp7.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp8.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
-                  </li>
-                  <li class="product-in-cart-item">
-                    <img src="/image/sp9.jpg" alt="" class="product-in-cart-item-img">
-                    <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
-                  </li>
+                <ul class="product-in-cart-list" id="cart-items-list">
+                  <!-- Cart items will be dynamically loaded here -->
                 </ul>
               </div>
+
+              <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('/cart/count')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('cart-quantity-number').textContent = data.itemCount;
+                            } else {
+                                console.error('Failed to load cart item count:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching cart item count:', error);
+                        });
+        
+                    document.querySelector('.header-icon-cart').addEventListener('mouseover', function() {
+                        fetch('/cart/header')
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    const cartItemsList = document.getElementById('cart-items-list');
+                                    cartItemsList.innerHTML = ''; // Clear existing items
+                                    data.cartItems.forEach(item => {
+                                        const listItem = document.createElement('li');
+                                        listItem.classList.add('product-in-cart-item');
+                                        listItem.innerHTML = `
+                                            <img src="/product_image/${item.HinhChinh}" alt="${item.TenSP}" class="product-in-cart-item-img">
+                                            <div class="product-in-cart-item-name">${item.TenSP}</div>
+                                            <div class="product-in-cart-item-quantity">x${item.SoLuongSPTrongGio}</div>
+                                        `;
+                                        cartItemsList.appendChild(listItem);
+                                    });
+                                } else {
+                                    console.error('Failed to load cart items:', data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching cart items:', error);
+                            });
+                    });
+                });
+            </script>
     
               </div>
             
             <!-- NAVIGATION -->
           <div class="navigation">
-          <ul class="navigation-list">
-            <li id = "trang-chu" ><a id="" href="/" class="navigation-item">Trang chủ</a></li>
-            <li id = "san-pham" ><a href="/products" class="navigation-item" >Sản phẩm</a></li>
-            <li id = "dien-dan" ><a href="/forum" class="navigation-item">Diễn đàn</a></li>
-            <li id = "blog" > <a href="/news" class="navigation-item">Bài Blog</a></li>
-          </ul>
+            <ul class="navigation-list">
+              <a id="trang-chu" href="/" class="navigation-item">Trang chủ</a>
+              <a id="san-pham" href="/products" class="navigation-item" >Sản phẩm</a>
+              <a id="dien-dan" href="/forum" class="navigation-item">Diễn đàn</a>
+              <a id="blog" href="/news" class="navigation-item">Bài Blog</a>
+            </ul>
         </div>
           </div>
           
@@ -217,6 +232,40 @@
           </div>
 
           <script>
+            
+        document.addEventListener('DOMContentLoaded', function () {
+          // Lấy URL đầy đủ hiện tại
+          var currentUrl = window.location.href;
+
+          // Lấy tất cả các thẻ <a> trong navigation
+          var navItems = document.querySelectorAll('.navigation-item');
+
+          // Xử lý gán class dựa trên URL hiện tại
+          navItems.forEach(function (item) {
+              // Xóa class 'nav-head-active' khỏi tất cả các mục
+              item.classList.remove('nav-head-active');
+
+              // So sánh href của thẻ <a> với URL hiện tại
+              if (currentUrl === item.href) {
+                  item.classList.add('nav-head-active');
+              }
+          });
+
+    // Thêm sự kiện click cho từng thẻ
+    navItems.forEach(function (item) {
+        item.addEventListener('click', function (event) {
+            // Xóa class 'nav-head-active' khỏi tất cả các mục
+            navItems.forEach(function (nav) {
+                nav.classList.remove('nav-head-active');
+            });
+
+            // Thêm class 'nav-head-active' vào mục được click
+            item.classList.add('nav-head-active');
+        });
+    });
+});
+
+
               // Lắng nghe sự kiện thay đổi trạng thái của checkbox
               document.querySelectorAll('input[name="categories"]').forEach(checkbox => {
                   checkbox.addEventListener('change', applyFilters);

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const sql = require('mssql');
+
 const routes = require('./routes/routes');
 const path = require('path');
 
@@ -49,12 +49,14 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
+
 // Sử dụng các route đã định nghĩa
 app.use('/', routes);
 // Đăng ký các router
 app.use('/forum', forumRoutes);  
 app.use('/admin', adminRoutes); 
-app.use('/api', forumRoutes);  
 app.use('/news', newsRoutes);  
 
 app.use('/news-detail', newsDetailRoutes);  
