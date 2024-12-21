@@ -46,7 +46,7 @@ async function loginBusiness(req, res) {
             role: 'business',
         };
 
-        res.status(200).send('Đăng nhập thành công!');
+        res.status(200).json({ message: 'Đăng nhập thành công!', redirectUrl: '/sale-chanels' });
     } catch (err) {
         console.error('Error in loginBusiness:', err);
         return res.status(500).json({ message: 'Đã xảy ra lỗi trong quá trình đăng nhập.' });
