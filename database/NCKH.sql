@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE TABLE DacDiemXanh (
     MaDDX nchar(20) PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE NhomSanPham (
     MoTa nvarchar(max)
 );
 
-
+delete SanPham
 CREATE TABLE SanPham (
     MaSP nchar(20) PRIMARY KEY,
     MaNhomSP nchar(20) , -- Mã nhóm sản phẩm
@@ -51,7 +51,7 @@ create table NguoiBan (
 	MoTaCH nvarchar(max) -- Mô tả cửa hàng
 );
 CREATE TABLE NguoiDung (
-    MaUser int Identity(1,1) PRIMARY KEY,
+    MaUser nchar(20) Identity(1,1) PRIMARY KEY,
 	TenDangNhap nvarchar(50) UNIQUE, -- Tên đăng nhập không trùng lặp
     MatKhau nvarchar(100),
     HoUser nvarchar(50) ,
@@ -106,7 +106,8 @@ CREATE TABLE KhuyenMai (
 
 CREATE TABLE DonHang (
     MaDH nchar(20) PRIMARY KEY,            -- Mã đơn hàng
-    MaUser int NOT NULL,             -- Mã khách hàng
+    MaUser nchar(20) NOT NULL,             -- Mã khách hàng
+
     NgayDatHang datetime NOT NULL,         -- Ngày đặt hàng
     TongPhiVC decimal(10, 2) DEFAULT 0,    -- Tổng phí vận chuyển (tính từ phí vận chuyển)
     TongGiamGia decimal(10, 2) DEFAULT 0,  -- Tổng giảm giá cho đơn hàng (có thể tính được từ tổng tiền *% giảm)
@@ -161,8 +162,7 @@ Create TABLE BaiPost (
     SoLuotBinhLuan int DEFAULT 0,
     HinhAnh nvarchar(500), 
     Video nvarchar(500),
-    TrangThai bit DEFAULT 1, 
-    
+    TrangThai bit DEFAULT 1,
 );
 
 
@@ -213,8 +213,6 @@ CREATE TABLE BaiBlog (
     FOREIGN KEY (MaTrangThai) REFERENCES TrangThai(MaTrangThai) 
 );
 
-----
-
 
 --Follow
 CREATE TABLE Follow (
@@ -229,12 +227,18 @@ select * from SanPham
 -- Insert vào GioHang
 INSERT INTO GioHang (MaUser, MaGioHang, NgayTaoGio)
 VALUES ('1', 'GH01000001', GETDATE());
+alter table BaiBlog
+add Nguon nvarchar(255); -- Cột Nguon để lưu thông tin nguồn
 
--- Insert sản phẩm vào SanPhamTrongGio
-INSERT INTO SanPhamTrongGio (MaUser, MaGioHang, MaSP, SoLuongSPTrongGio)
-VALUES ('1', 'GH01000001', 'SP01000001', 2);
-select * from SanPham
-
+--Follow
+CREATE TABLE Follow (
+    MaNguoiBan nchar(20) NOT NULL,  -- Mã người bán (Seller ID)
+    MaNguoiBanTheoDoi nchar(20) NOT NULL,  -- Mã người bán bị theo dõi (Followed Seller ID)
+    NgayTheoDoi DATETIME DEFAULT GETDATE(),  -- Ngày theo dõi
+    PRIMARY KEY (MaNguoiBan, MaNguoiBanTheoDoi),
+    FOREIGN KEY (MaNguoiBan) REFERENCES NguoiBan(MaNguoiBan),  -- Liên kết đến bảng người bán
+    FOREIGN KEY (MaNguoiBanTheoDoi) REFERENCES NguoiBan(MaNguoiBan)  -- Liên kết đến bảng người bán
+);
 CREATE PROCEDURE AddToCart
     @MaUser nchar(20),
     @MaSP nchar(20),
@@ -277,56 +281,4 @@ BEGIN
         VALUES (@MaUser, @MaGioHang, @MaSP, @SoLuong);
     END
 END;
-INSERT INTO NguoiBan (
-    MaNguoiBan, TenDangNhap, MatKhau, HoUserCH, TenUserCH, GioiTinh, 
-    TenCuaHang, DiaChi, SoDienThoai, Email, MaSoThue, GiayPhepKD, 
-    NgayTao, TrangThai, AnhLogo, MoTaCH
-)
-VALUES (
-    N'NB001', 
-    N'nguoiban123', 
-    N'hashed_password', 
-    N'Nguyen', 
-    N'An', 
-    N'Nam', 
-    N'CH Tạp Hóa An Bình', 
-    N'123 Đường ABC, Quận 1, TP.HCM', 
-    N'0987654321', 
-    N'anbinh@gmail.com', 
-    N'123456789', 
-    N'https://example.com/giayphep.png', 
-    GETDATE(), 
-    1, 
-    N'https://example.com/logo.png', 
-    N'Cửa hàng chuyên cung cấp các mặt hàng tạp hóa, nhu yếu phẩm.'
-);
-INSERT INTO KhuyenMai (
-    MaKM, MaNguoiBan, TenKM, NoiDungKM, PhanTramGiam, 
-    NgayBatDau, NgayKetThuc, DieuKienGiam
-)
-VALUES (
-    N'KM001',
-    N'NB001',
-    N'Khuyến mãi Tết 2024',
-    N'Giảm 10% cho các đơn hàng từ 500,000 VNĐ trở lên.',
-    10,
-    '2024-01-01',
-    '2024-01-31',
-    500000.00
-);
 
-INSERT INTO KhuyenMai (
-    MaKM, MaNguoiBan, TenKM, NoiDungKM, PhanTramGiam, 
-    NgayBatDau, NgayKetThuc, DieuKienGiam
-)
-VALUES (
-    N'KM002',
-    N'NB001',
-    N'Khuyến mãi Tết 2024',
-    N'Giảm 10% cho các đơn hàng từ 500,000 VNĐ trở lên.',
-    10,
-    '2024-01-01',
-    '2024-12-31',
-    100000.00
-);
-select * from CTDH

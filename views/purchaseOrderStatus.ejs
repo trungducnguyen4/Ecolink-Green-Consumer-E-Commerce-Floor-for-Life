@@ -1,3 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="./purchaseOrderStatement.css">
+    <title>Personal</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <!-- Header-Logo -->
+        <img src="./image/logo.jpg" alt="" class="logo-img">
+        <h4 class="header-logo-text">Ecolink for life</h4>
+        <div class="header-search">
+            <!-- Header-Services -->
+            <div class="header-service">
+                <div class="header-service-item">
+                    <img class="header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
+                    <a href="#contact">Ecolink</a>
+                </div>
+                <div class="header-service-item">
+                    <i class="fa-solid fa-question"></i>
+                    <a class="active" href="#home">Hỗ trợ</a>
+                </div>
+                <div class="header-service-item">
+                    <i class="fa-regular fa-bell"></i>
+                    <a href="#about">Thông báo</a>
+                </div>
+            </div>
+            <!-- Header-serach&cart -->
+            <div class="header-search-and-cart">
+                <!-- Header-Search-frame -->
+                <div class="search-frame">
+                    <input class="header-search-input" type="text" placeholder="Tìm kiếm">
+                    <div class="header-search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <!--Search history-->
+                    <div class="header__search-history">
+                        <h3 class="header__search-history-heading">Lịch sử tìm kiếm </h3>
+                        <ul class="header__search-history-list">
+                            <li class="header__search-history-item">
+                                <a href="" class="">Kem dưỡng da</a>
+                            </li>
+                            <li class="header__search-history-item">
+                                <a href="" class="">Kem trị mụn</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Cart -->
+                <div class="header-icon-cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div class="cart-quantity">
+                        <p class="cart-quantity-number">15</p>
+                    </div>
+                </div>
+                <div class="product-in-cart">
+                    <div class="product-in-cart-arrow"></div>
+                    <ul class="product-in-cart-list">
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp1.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Premium Vector</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp2.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Premium Vector</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp4.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp5.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Strawberry Milkshake Can Packaging Design</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp6.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp7.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Design for vitamins and supplements</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp8.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                        </li>
+                        <li class="product-in-cart-item">
+                            <img src="./image/sp9.jpg" alt="" class="product-in-cart-item-img">
+                            <div class="product-in-cart-item-name">Pamper your skin with the moisturizing effects of lemongrass Essential oil</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- NAVIGATION -->
+            <div class="navigation">
+                <ul class="navigation-list">
+                    <li id="trang-chu" class="navigation-item">Trang chủ</li>
+                    <li id="san-pham" class="navigation-item">Sản phẩm</li>
+                    <li id="dien-dan" class="navigation-item">Diễn đàn</li>
+                    <li id="blog" class="navigation-item">Bài Blog</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 <%- include('layout/mainpage_header') %>
 <link rel="stylesheet" href="./purchaseOrderStatement.css">
     <div class="personal-body row">
@@ -62,32 +174,50 @@
             </div>
             <div class="purchaseOrderStatus-body-product-list">
                 <% if (orders && orders.length > 0) { %>
-                    <% let currentOrder = ''; %>
-                    <% orders.forEach(order => { %>
-                        <% if (currentOrder !== order.MaDH) { %>
-                            <div class="purchaseOrderStatus-body-product-item-header">
-                                <div class="purchaseOrderStatus-body-product-shopName">Mã đơn hàng: <%= order.MaDH %></div>
-                                <div class="purchaseOrderStatus-body-product-total">Tổng giá trị đơn hàng: <%= order.TongThanhToan %> VND</div>
-                            </div>
-                            <% currentOrder = order.MaDH; %>
-                        <% } %>
-                        <div class="purchaseOrderStatus-body-product-item">
-                            <div class="purchaseOrderStatus-body-product-item-body">
-                                <img src="/product_image/<%= order.HinhChinh %>" alt="<%= order.TenSP %>" class="purchaseOrderStatus-body-product-item-body-img">
-                                <div class="purchaseOrderStatus-body-product-item-body-infor">
-                                    <div class="purchaseOrderStatus-body-product-item-body-productName"><%= order.TenSP %></div>
-                                    <div class="purchaseOrderStatus-body-product-item-body-lable">Phân loại hàng</div>
-                                    <div class="purchaseOrderStatus-body-product-item-body-classify">Đen</div>
-                                    <div class="purchaseOrderStatus-body-product-item-body-num">x<%= order.SoLuongSP %></div>
-                                </div>
-                                <div class="purchaseOrderStatus-body-product-item-body-money">
-                                    <%= order.DonGia * order.SoLuongSP %> VND
-                                    <div class="purchaseOrderStatus-body-product-shipping">Phương thức vận chuyển: <%= order.TenPTVC %></div>
-                                    <div class="purchaseOrderStatus-body-product-process">Trạng thái: <%= order.TrangThaiDH %></div>
-                                </div>
-                            </div>
-                        </div>
-                    <% }); %>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Tổng giá trị đơn hàng</th>
+                                <th>Sản phẩm</th>
+                                <th>Phân loại hàng</th>
+                                <th>Số lượng</th>
+                                <th>Phương thức vận chuyển</th>
+                                <th>Trạng thái</th>
+                                <th>Đánh giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let currentOrder = ''; %>
+                            <% orders.forEach(order => { %>
+                                <% if (currentOrder !== order.MaDH) { %>
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="purchaseOrderStatus-body-product-item-header">
+                                                <div class="purchaseOrderStatus-body-product-shopName" style="margin-right: 15px;">Mã đơn hàng: <%= order.MaDH %></div>
+                                                <div class="purchaseOrderStatus-body-product-total">Tổng giá trị đơn hàng: <%= order.TongThanhToan %> VND</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% currentOrder = order.MaDH; %>
+                                <% } %>
+                                <tr>
+                                    <td><%= order.MaDH %></td>
+                                    <td><%= order.TongThanhToan %> VND</td>
+                                    <td><%= order.TenSP %></td>
+                                    <td>Đen</td>
+                                    <td>x<%= order.SoLuongSP %></td>
+                                    <td><%= order.TenPTVC %></td>
+                                    <td><%= order.TrangThai %></td>
+                                    <td>
+                                        <% if (order.TrangThai === 'Đã giao') { %>
+                                            <button class="btn-review" data-order-id="<%= order.MaDH %>" data-product-name="<%= order.TenSP %>">Review</button>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
                 <% } else { %>
                     <p>Không có đơn hàng nào.</p>
                 <% } %>
@@ -124,6 +254,97 @@
 
         document.getElementById('profile').addEventListener('click', function() {
             window.location.href = 'http://127.0.0.1:5500/assets/personal.html';
+        });
+
+        document.querySelectorAll('.btn-review').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.dataset.productName;
+                const orderId = this.dataset.orderId;
+
+                Swal.fire({
+                    title: 'Đánh giá sản phẩm',
+                    html: `
+                        <input type="hidden" id="TenSP" value="${productName}">
+                        <input type="hidden" id="MaDH" value="${orderId}">
+                        <label for="DiemDanhGia">Điểm đánh giá (1-5):</label>
+                        <input type="number" id="DiemDanhGia" class="swal2-input" min="1" max="5">
+                        <label for="NDDanhGia">Nội dung đánh giá:</label>
+                        <textarea id="NDDanhGia" class="swal2-textarea"></textarea>
+                        <label for="HinhDanhGia">Hình ảnh đánh giá:</label>
+                        <input type="file" id="HinhDanhGia" class="swal2-input" accept="image/*">
+                        <label for="VideoDanhGia">Video đánh giá:</label>
+                        <input type="file" id="VideoDanhGia" class="swal2-input" accept="video/*">
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Lưu',
+                    cancelButtonText: 'Hủy',
+                    preConfirm: () => {
+                        const TenSP = document.getElementById('TenSP').value;
+                        const MaDH = document.getElementById('MaDH').value;
+                        const DiemDanhGia = document.getElementById('DiemDanhGia').value;
+                        const NDDanhGia = document.getElementById('NDDanhGia').value;
+                        const HinhDanhGia = document.getElementById('HinhDanhGia').files[0];
+                        const VideoDanhGia = document.getElementById('VideoDanhGia').files[0];
+
+                        const formData = new FormData();
+                        formData.append('TenSP', TenSP);
+                        formData.append('MaDH', MaDH);
+                        formData.append('DiemDanhGia', DiemDanhGia);
+                        formData.append('NDDanhGia', NDDanhGia);
+                        formData.append('HinhDanhGia', HinhDanhGia);
+                        formData.append('VideoDanhGia', VideoDanhGia);
+
+                        return formData;
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        fetch('/reviews/add-review', {
+                            method: 'POST',
+                            body: result.value,
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.text().then(text => { throw new Error(text) });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Đánh giá thành công!',
+                                    text: 'Cảm ơn bạn đã đánh giá sản phẩm.',
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Đánh giá thất bại!',
+                                    text: data.message,
+                                    footer: data.error,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi hệ thống!',
+                                text: 'Đã xảy ra lỗi khi đánh giá sản phẩm.',
+                                footer: error.message,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                            });
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
