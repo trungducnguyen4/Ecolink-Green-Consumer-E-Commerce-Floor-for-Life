@@ -26,7 +26,7 @@ async function loginBusiness(req, res) {
         let isPasswordValid = false;
 
         // Kiểm tra mật khẩu
-        if (business.Email === 'anbinh@gmail.com') {
+        if (business.Email === 'oganica@gmail.com') {
             // Special case: plain text password comparison
             isPasswordValid = MatKhau === business.MatKhau;
         } else {
