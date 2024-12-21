@@ -267,11 +267,8 @@
                         </button>
                       <% } %>
               
-                      <% if (forum.Video) { %>
-                      <div class="blog-post-video">
-                          <iframe width="100%" height="315" src="<%= forum.Video %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                      </div>
-                      <% } else if (forum.HinhAnh) { %>
+                      
+                      <% if (forum.HinhAnh) { %>
                       <div class="blog-post-image">
                           <img class="blog-post-img" src="./upload/<%= forum.HinhAnh %>" alt="Post Image">
                       </div>
