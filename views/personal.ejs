@@ -80,8 +80,11 @@
                     </div>
                     <div class="personal-body-detail-body-item-frame">
                         <label class="personal-body-detail-body-lable col-lg-3">Giới tính</label>
-                        <input type="radio" id="Nam" name="GioiTinh" value="Nam" <%= user.GioiTinh === 'Nam' ? 'checked' : '' %>> Nam
-                        <input type="radio" id="Nu" name="GioiTinh" value="Nữ" <%= user.GioiTinh === 'Nữ' ? 'checked' : '' %>> Nữ
+                        <div class="gioi-tinh-frame">
+                            <input type="radio" id="Nam" name="GioiTinh" value="Nam" <%= user.GioiTinh === 'Nam' ? 'checked' : '' %>> Nam
+                            <input type="radio" id="Nu" name="GioiTinh" value="Nữ" <%= user.GioiTinh === 'Nữ' ? 'checked' : '' %>> Nữ
+                        </div>
+                        
                     </div>
                     <div class="personal-body-detail-body-item-frame">
                         <label for="NgaySinh" class="personal-body-detail-body-lable col-lg-3">Ngày sinh</label>
@@ -90,9 +93,12 @@
                     <div class="personal-body-detail-body-item-frame">
                         <label for="Avatar" class="personal-body-detail-body-lable col-lg-3">Ảnh đại diện</label>
                         <input type="file" id="Avatar" name="Avatar" class="file-uploader">
+                        
+                    </div>
+                    <div class="previewAvatar-frame">
                         <img id="previewAvatar" src="/avatar/<%= user.Avatar || 'default-avatar.jpg' %>" alt="Avatar" class="avatar-preview">
                     </div>
-                
+                    
                     <!-- Nút lưu -->
                     <button type="submit" class="btn btn-success">Lưu thông tin</button>
                 </form>

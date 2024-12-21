@@ -1,6 +1,7 @@
 .personal-body
 {
     background-color: #efefef;
+   
 }
 .personal-body-navigation {
     margin-top: 150px;
@@ -85,7 +86,8 @@
 .personal-body-detail {
     background-color:#ffff;
     margin-top: 150px;
-    height: 500px;
+    margin-bottom: 20px;
+    width: 940px;
 }
 .personal-body-detail-header-text {
     font-size: 15px;
@@ -113,17 +115,53 @@
     font-weight: 550;
 }
 .personal-body-detail-body-item-input {
-    margin-left: 10px;
     width: 300px;
 }
-.personal-body-detail-body-male {
-    margin-right: 20px;
+.gioi-tinh-frame {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
 }
 
-.personal-body-detail-body-date {
-    margin-right: 20px;
-    width: 80px;
+.gioi-tinh-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer; /* Thêm hiệu ứng con trỏ khi hover */
+    font-weight: 500; /* Đặt font dày cho nhãn */
 }
+
+.gioi-tinh-frame input[type="radio"] {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; /* Làm tròn radio button */
+    border: 2px solid #007bff; /* Màu viền của radio */
+    background-color: #fff; /* Màu nền của radio */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+    
+    cursor: pointer;
+}
+
+.gioi-tinh-frame input[type="radio"]:checked {
+    background-color: #007bff; /* Màu nền khi chọn */
+    border-color: #0056b3; /* Màu viền khi chọn */
+}
+
+.gioi-tinh-frame input[type="radio"]:checked + .gioi-tinh-label {
+    color: #007bff; /* Màu chữ khi chọn */
+}
+
+.gioi-tinh-frame input[type="radio"]:hover {
+    border-color: #0056b3; /* Màu viền khi hover */
+}
+
+.gioi-tinh-frame input[type="radio"]:checked:hover {
+    background-color: #0056b3; /* Màu nền khi hover và chọn */
+}
+
+
 .personal-body-detail-body-btnSave {
     width: 80px;
     height: 30px;
@@ -133,13 +171,64 @@
     margin-left: 480px;
     margin-top: 20px;
 }
+.previewAvatar-frame {
+    border: 1px solid black;
+    
+    width: 180px;
+    height: 180px;
+    margin-left: 242px;
+    margin-top: 10px;
+    
+    align-items: center;
+}
+.personal-body-detail-body-date {
+    padding-left: 20px;
+    margin-right: 20px;
+    width: 140px;
+    font-size: 13px;
+    border-radius: 8px;
+    border: 2px solid #ddd; /* Màu viền nhẹ nhàng */
+    background-color: #f9f9f9; /* Màu nền sáng */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển động khi tương tác */
+}
+
+.personal-body-detail-body-date:focus {
+    border-color: #007bff; /* Màu viền khi focus */
+    background-color: #e6f7ff; /* Màu nền khi focus */
+    outline: none; /* Bỏ viền ngoài khi focus */
+}
+
+.personal-body-detail-body-date::-webkit-outer-spin-button,
+.personal-body-detail-body-date::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.personal-body-detail-body-date:disabled {
+    background-color: #e9ecef; /* Màu nền khi trường bị vô hiệu hóa */
+    border-color: #ddd; /* Viền nhạt */
+}
+
+.personal-body-detail-body-date::placeholder {
+    color: #aaa; /* Màu placeholder */
+}
+
+.personal-body-detail-body-date:focus::placeholder {
+    color: transparent; /* Ẩn placeholder khi focus */
+}
 
 .avatar-preview {
-    display: block;
-    margin-top: 10px;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid #ddd;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.btn-success {
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 40px;
 }
