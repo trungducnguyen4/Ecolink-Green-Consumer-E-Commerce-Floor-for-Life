@@ -18,7 +18,7 @@ async function getHomePage(req, res) {
 
         // Lấy sản phẩm thuộc nhóm văn phòng phẩm
         const productsVPPResult = await pool.request()
-            .input('MaNhomSP', sql.NChar(20), 'VVP')
+            .input('MaNhomSP', sql.NChar(20), 'VPP')
             .query(`
                 SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
@@ -64,17 +64,7 @@ async function getHomePage(req, res) {
 
         const productsMP = productsMPResult.recordset;
 
-        // Lấy sản phẩm thuộc nhóm Thoi trang
-        const productsTTResult = await pool.request()
-            .input('MaNhomSP', sql.NChar(20), 'QA')
-            .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
-                FROM SanPham
-                WHERE MaNhomSP = @MaNhomSP
-                ORDER BY NEWID()
-            `);
-
-        const productsTT = productsTTResult.recordset;
+        
 
         // Lấy sản phẩm thuộc nhóm đồ uốn
         const productsDUResult = await pool.request()
@@ -88,17 +78,7 @@ async function getHomePage(req, res) {
 
         const productsDU = productsDUResult.recordset;
 
-        // Lấy sản phẩm thuộc nhóm thiết bị điện tử
-        const productsTBDTResult = await pool.request()
-            .input('MaNhomSP', sql.NChar(20), 'TBDT')
-            .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
-                FROM SanPham
-                WHERE MaNhomSP = @MaNhomSP
-                ORDER BY NEWID()
-            `);
-
-        const productsTBDT = productsTBDTResult.recordset;
+        
 
         // Lấy sản phẩm thuộc nhóm đồ uốn
         const productsKhacResult = await pool.request()
@@ -113,7 +93,7 @@ async function getHomePage(req, res) {
         const productsKhac = productsKhacResult.recordset;
 
         // Render trang home với danh sách sản phẩm
-        res.render('home', { productsTP,productsVPP,productsGD,productsCSCN,productsMP,productsTT,productsDU,productsTBDT,productsKhac });
+        res.render('home', { productsTP,productsVPP,productsGD,productsCSCN,productsMP,productsDU,productsKhac });
     } catch (err) {
         console.error('Error in getHomePage:', err);
         res.status(500).render('error', { message: 'Lỗi khi tải trang chủ.' });

@@ -36,7 +36,9 @@
             <i class="fa-brands fa-youtube"></i>
             <i class="fa-brands fa-twitter"></i>
             </div>
-            <img style=" width: 755px;" src="<%= article.AnhBia %>" alt="" class="news-detail-body-img">
+            <% if (article.AnhBia) { %>
+                <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+            <% } %>
             <p style=" width: 760px; margin-top: 20px;" class="news-detail-body-content">
                 <%= article.NoiDung.replace(/&lt;br&gt;/g, '<br>').replace(/&lt;br\/&gt;/g, '<br>') %>
             </p>      

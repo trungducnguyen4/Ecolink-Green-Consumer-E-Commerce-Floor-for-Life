@@ -1,9 +1,10 @@
 // models/productModel.js
-const { poolPromise } = require('../db');
+const { poolPromise,sql } = require('../db');
 
 
 // npm install moment-timezone
 const moment = require('moment-timezone');
+
 
 async function getBlog() {
     try {
@@ -28,7 +29,7 @@ async function getBlog() {
         // Định dạng ngày giờ theo múi giờ GMT+7
         result.recordset.forEach(blog => {
             const formattedDateTime = moment(blog.NgayTao)
-                .tz('Asia/Bangkok') // Chọn múi giờ Hà Nội/Bangkok
+                .tz('Asia/Bangkok').subtract(7,'hour') // Chọn múi giờ Hà Nội/Bangkok
                 .format('DD-MM-YYYY HH:mm:ss'); // Định dạng dd-mm-yyyy hh:mm:ss
             blog.NgayTao = formattedDateTime;
         });
@@ -173,16 +174,18 @@ async function savePost(postData) {
         }
 
         const maDanhMuc = categoryResult.recordset[0].MaDanhMuc; // Lấy mã danh mục
+        const MaNguoiBan = 'CH001';
 
         // Thực hiện chèn bài viết vào bảng BaiBlog
         const result = await pool.request()
-            .input('title', postData.title)
-            .input('content', postData.content)
-            .input('category', maDanhMuc)
-            .input('AnhBia', postData.AnhBia || null) // Nếu không có ảnh bìa, lưu null
+            .input('title', sql.NVarChar(200), postData.title)
+            .input('content', sql.NVarChar('max'), postData.content)
+            .input('category', sql.NChar(20), maDanhMuc)
+            .input('AnhBia', sql.NVarChar(500), postData.AnhBia || null) // Nếu không có ảnh bìa, lưu null
+            .input('MaNguoiBan', sql.NChar(20), MaNguoiBan)
             .query(`
                 INSERT INTO BaiBlog (TieuDe, NoiDung, MaDanhMuc, AnhBia, MaTrangThai, MaNguoiBan)
-                VALUES (@title, @content, @category, @AnhBia, 'DD', N'NB015') 
+                VALUES (@title, @content, @category, @AnhBia, 'DD', @MaNguoiBan) 
             `);
 
         // Kiểm tra xem bài viết có được lưu thành công hay không

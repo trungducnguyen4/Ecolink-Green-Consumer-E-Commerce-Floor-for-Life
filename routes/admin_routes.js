@@ -109,7 +109,7 @@ const multer = require('multer');
 const path = require('path');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'upload/'); // Thư mục lưu file
+        cb(null, 'public/upload/'); // Thư mục lưu file
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}-${file.originalname}`);

@@ -283,8 +283,9 @@ display: none;
     margin: auto 0 auto 10px;
     color: orangered;
 }
-.order-table-body-item-order, .order-table-body-item-state ,
-.order-table-body-item-date, .order-table-body-item-deliver
+
+.order-table-body-item-order, .order-table-body-item-status, .order-table-body-item-quantity,
+.order-table-body-item-shipping, .order-table-body-item-update
 {
     line-height: 70px;
     display: flex;
@@ -345,4 +346,28 @@ display: none;
 .btn-active {
     background-color: #007B59;
     color: white;
+}
+.btn-update-order {
+    width: 100px;
+    height: 30px;
+    justify-content: center;
+    line-height: 30px;
+    background-color: #007bff; /* Màu xanh dương */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Xóa viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột */
+    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng chuyển màu và phóng to */
+}
+
+/* Hiệu ứng hover */
+.btn-update-order:hover {
+    background-color: #0056b3; /* Màu xanh dương tối hơn khi hover */
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+/* Hiệu ứng nhấn */
+.btn-update-order:active {
+    background-color: #004085; /* Màu xanh dương đậm hơn khi nhấn */
+    transform: scale(0.95); /* Thu nhỏ khi nhấn */
 }

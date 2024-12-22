@@ -43,6 +43,18 @@
                     <div class="padding" id="all-products-btn">Tất cả sản phẩm</div>
                     <a href="/add-product" class="padding">Thêm sản phẩm</a>
                 </div>
+                <div class="title-text-sale dropdown-toggle">
+                    Quản lý Blog <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="text-sale">
+                    <a href="/admin" class="padding">Quản lý bài viết</a>
+                </div>
+                <div class="title-text-sale dropdown-toggle">
+                    Hồ sơ cửa hàng <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="text-sale">
+                    <a href="" class="padding">Sửa hồ sơ</a>
+                </div>
             </div>
             
             <div class="right-sale col-lg-10">
@@ -89,14 +101,14 @@
                     <div class="order-table-header-item col-lg-3">Sản phẩm</div>
                     <div class="order-table-header-item col-lg-2">Đơn hàng</div>
                     <div class="order-table-header-item col-lg-2">Trạng thái</div>
-                    <div class="order-table-header-item col-lg-2">Số lượng</div>
+                    <div class="order-table-header-item col-lg-1">Số lượng</div>
                     <div class="order-table-header-item col-lg-2">Đơn vị vận chuyển</div>
-                    <div class="order-table-header-item col-lg-1">Cập nhật đơn hàng</div>
+                    <div class="order-table-header-item col-lg-2">Cập nhật đơn hàng</div>
                 </div>
-                <div class="order-table-body" id="order-section-body">
+                <div class="order-table-body row" id="order-section-body">
                     <% if (orders.length > 0) { %>
                         <% orders.forEach(order => { %>
-                            <div class="order-table-body-item row">
+                            <div class="order-table-body-item ">
                                 <div class="order-table-body-item-product col-lg-3">
                                     <img class="order-table-body-item-product-img" src="/product_image/<%= order.HinhChinh %>" alt="<%= order.TenSP %>">
                                     <div class="order-table-body-item-product-infor">
@@ -104,15 +116,15 @@
                                         <div class="order-table-body-item-product-type">150 ml</div>
                                     </div>
                                     <div class="order-table-body-item-product-quantity-frame">
-                                        <div class="order-table-body-item-product-quantity-lb">x</div>
-                                        <div class="order-table-body-item-product-quantity"><%= order.SoLuongSP %></div>
+                                        <!-- <div class="order-table-body-item-product-quantity-lb">x</div>
+                                        <div class="order-table-body-item-product-quantity"><%= order.SoLuongSP %></div> -->
                                     </div>
                                 </div>
                                 <div class="order-table-body-item-order col-lg-2"><%= order.MaDH %></div>
                                 <div class="order-table-body-item-status col-lg-2"><%= order.TrangThai%></div>
-                                <div class="order-table-body-item-quantity col-lg-2"><%= order.SoLuongSP %></div>
+                                <div class="order-table-body-item-quantity col-lg-1"><%= order.SoLuongSP %></div>
                                 <div class="order-table-body-item-shipping col-lg-2"><%= order.TenPTVC %></div>
-                                <div class="order-table-body-item-update col-lg-1">
+                                <div class="order-table-body-item-update col-lg-2">
                                     <button class="btn-update-order" data-order-id="<%= order.MaDH %>">Cập nhật</button>
                                 </div>
                             </div>

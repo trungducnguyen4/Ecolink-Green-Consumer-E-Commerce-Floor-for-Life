@@ -17,7 +17,7 @@ const checkBusinessUser = require('../middlewares/check_business_user');
 const orderController = require('../controllers/order_controller'); // Import order controller
 const promoController = require('../controllers/promo_controller'); // Import promo controller
 const reviewRoutes = require('./review_routes'); // Import review routes
-
+const personalController = require('../controllers/personal_controller'); // Import personal controller
 // Initialize session middleware
 router.use(session({
     secret: 'your-secret-key',
@@ -84,26 +84,22 @@ router.get("/business-signin", (req, res) => {
 });
 router.post('/business-signin/user', upload.single('GiayPhepKD'), businessSigninController.registerBusiness);
 
-// Các route khác
-router.get("/news", (req, res) => {
-    res.render("news", { title: "News" });
-});
 
 router.get("/news-detail", (req, res) => {
     res.render("news-detail", { title: "News detail" });
 });
 
-router.get("/forum", (req, res) => {
-    res.render("forum", { title: "Forum" });
-});
+
 
 router.get("/log-in", (req, res) => {
     res.render("log-in", { title: "Login" });
 });
 
-router.get("/personal", (req, res) => {
-    res.render("personal", { title: "Personal" });
-});
+// Hiển thị trang cá nhân
+router.get('/personal', isAuthenticated, personalController.getPersonalInfo);
+
+// Cập nhật thông tin cá nhân
+router.post('/personal/updatePersonal', isAuthenticated, personalController.upload.single('Avatar'), personalController.updatePersonalInfo);
 
 router.get("/personal_forum", (req, res) => {
     res.render("personal_forum", { title: "Personal forum" });

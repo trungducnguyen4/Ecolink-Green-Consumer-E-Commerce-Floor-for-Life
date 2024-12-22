@@ -24,8 +24,8 @@
         <!-- Header-Services -->
         <div class="header-service">
             <div class="header-service-item">
-            <img class= "header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
-            <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
+            <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="">
+            <a href="<%= session.user ? '/personal' : (session.businessUser ? '/sale-chanels' : '#') %>">Ecolink</a>
             </div>
 
             <div class="header-service-item">
