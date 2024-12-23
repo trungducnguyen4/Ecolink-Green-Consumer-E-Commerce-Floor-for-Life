@@ -1,4 +1,5 @@
-
+<link rel="stylesheet" href="/public/function.js">
+<link rel="stylesheet" href="/public/home.css">
 <%- include('layout/mainpage_header') %>
     <!--Phần nội dung-->
     <div class="main-background slideshow-container">
@@ -139,7 +140,7 @@
                 <!-- Hàng sản phẩm thực phẩm -->
                 <div class="home-body-product-item-frame">
                   <i class="fa-solid fa-chevron-left " id="home-product-leftBtn"></i>
-                  <% productsTP.forEach(product => { %>
+                  <% productsTP.forEach((product, index) => { %>
                       <a href="/product-detail/<%= product.MaSP  %>" class="body-list-product-item">
                           <div class="body-list-products-item-img">
                               <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TenSP %>" class="product-list-img">
@@ -153,7 +154,7 @@
                           </div>
                       </a>
                   <% }); %>
-                  <i class="fa-solid fa-chevron-right " id="home-product-rightBtn rightBtn "></i>
+                  <i class="fa-solid fa-chevron-right " id="home-product-rightBtn "></i>
                 </div>
 
             </div>
@@ -285,30 +286,35 @@
                 </div>
             </div>
 
-            <!-- Hàng sản phẩm thứ năm -->
-            <div class="home-body-product-item">
-              <h3 class="home-body-product-item-title" style="color: white;">
-                <i class="fa-solid fa-crown"></i>
-                Mỹ phẩm</h3>
-                <div class="home-body-product-item-frame">
-                  <i class="fa-solid fa-chevron-left" id=" home-product-leftBtn"></i>
-                  <% productsMP.forEach(product => { %>
-                    <a href="/product-detail/<%= product.MaSP  %>" class="body-list-product-item">
-                        <div class="body-list-products-item-img">
-                            <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TenSP %>" class="product-list-img">
-                        </div>
-                        <div class="body-list-product-item-title"><%= product.TenSP %></div>
-                        <div class="body-list-product-item-discount">15%</div> <!-- Thay bằng logic nếu có giảm giá -->
-                        <div class="body-list-products-item-price">
-                            <%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %>
-                            <div class="body-list-products-item-price-unit">đ</div>
-                            <i class="fa-solid fa-tag"></i>
-                        </div>
-                    </a>
-                    <% }); %>
-                  <i class="fa-solid fa-chevron-right" id=" home-product-leftBtn"></i>
-                </div>
+           <!-- Hàng sản phẩm thứ năm -->
+
+          <div class="home-body-product-item">
+            <h3 class="home-body-product-item-title" style="color: white;">
+              <i class="fa-solid fa-crown"></i>
+              Mỹ phẩm
+            </h3>
+            <div class="home-body-product-item-frame">
+              <i class="fa-solid fa-chevron-left home-product-btn" id="home-product-leftBtn"></i>
+              <% productsMP.forEach((product, index) => { %>
+                <a href="/product-detail/<%= product.MaSP %>" 
+                  class="body-list-product-item1"
+                  data-index="<%= index %>">
+                  <div class="body-list-products-item-img">
+                    <img src="/product_image/<%= product.HinhChinh %>" alt="<%= product.TenSP %>" class="product-list-img">
+                  </div>
+                  <div class="body-list-product-item-title"><%= product.TenSP %></div>
+                  <div class="body-list-product-item-discount">15%</div>
+                  <div class="body-list-products-item-price">
+                    <%= new Intl.NumberFormat('vi-VN').format(product.DGBanMacDinh) %>
+                    <div class="body-list-products-item-price-unit">đ</div>
+                    <i class="fa-solid fa-tag"></i>
+                  </div>
+                </a>
+              <% }); %>
+              <i class="fa-solid fa-chevron-right home-product-btn" id="home-product-rightBtn"></i>
             </div>
+          </div>
+
 
             <!-- Hàng sản phẩm thứ sáu -->
             
@@ -430,9 +436,48 @@
         }
     })
 </script>
-    <script type="text/javascript" src="/function.js">
-             
-    </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const leftBtnsp = document.getElementById('home-product-leftBtn');
+  const rightBtnsp = document.getElementById('home-product-rightBtn');
+  const productItems = document.querySelectorAll('.body-list-product-item1');
+  
+  let currentStartIndex = 0; // Chỉ số bắt đầu hiển thị
+  const visibleCount = 5; // Số sản phẩm hiển thị tối đa
+
+  function updateVisibility() {
+    productItems.forEach((item, index) => {
+      if (index >= currentStartIndex && index < currentStartIndex + visibleCount) {
+        item.style.display = 'flex'; // Hiển thị sản phẩm trong dãy
+      } else {
+        item.style.display = 'none'; // Ẩn sản phẩm ngoài dãy
+      }
+    });
+  }
+
+  leftBtnsp.addEventListener('click', function () {
+    if (currentStartIndex > 0) {
+      currentStartIndex--; // Lùi 1 sản phẩm
+      updateVisibility();
+    }
+  });
+
+  rightBtnsp.addEventListener('click', function () {
+  if (currentStartIndex + visibleCount < productItems.length) {
+    currentStartIndex++; // Tiến 1 sản phẩm
+  } else {
+    currentStartIndex = 0; // Nếu vượt quá cuối danh sách, quay lại từ đầu
+  }
+  updateVisibility();
+});
+
+
+  // Khởi tạo trạng thái ban đầu
+  updateVisibility();
+});
+
+</script>
 
 </body>
 <%- include('layout/footer')  %>

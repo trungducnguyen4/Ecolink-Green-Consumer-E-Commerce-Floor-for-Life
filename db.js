@@ -12,6 +12,16 @@ const sql = require('mssql');
 //     }
 //   };
   
+//   const sqlConfig = {
+//     server: 'localhost', // Địa chỉ máy chủ
+//     database: 'NCKH',
+//     user: 'manager1', // Tên người dùng SQL Server
+//     password: '123', // Mật khẩu
+//     options: {
+//       encrypt: true,  // Thường dùng cho kết nối an toàn
+//       trustServerCertificate: true  // Chỉ cần nếu bạn đang sử dụng kết nối không an toàn
+//     }
+//   };
 
   const sqlConfig = {
     server: 'localhost', // Địa chỉ máy chủ

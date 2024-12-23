@@ -582,16 +582,38 @@ i.fa-mug-hot:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform linear 0.1s;
-    will-change: transform;
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+    opacity: 1; /* Mặc định là hiển thị */
     
 }
+.body-list-product-item1 {
+    width: 190px;
+    height: 280px;
+    background-color: #ffffff;
+    margin-right: 6px;
+    border: 1px solid #e1e1e1;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease-in-out; /* Hiệu ứng mượt mà */
+    opacity: 1; /* Mặc định là hiển thị */
+}
+
+.body-list-product-item1.hidden {
+    opacity: 0; /* Ẩn bằng cách giảm độ mờ */
+    pointer-events: none; /* Ngăn không cho tương tác */
+    transition: opacity 0.3s ease-in-out; /* Hiệu ứng chuyển đổi độ mờ */
+}
+
 .body-list-product-item:hover {
-    box-shadow: 0 1px 20px 0 rgba(0,0,0,0.05);
-    transform: translateY(-2px);
-    border-color: #007B59;
+    box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.2); /* Tăng bóng đổ */
+    transform: translateY(-5px); /* Di chuyển lên và tăng kích thước nhẹ */
+    border-color: #00B074; /* Tăng độ sáng của viền */
     text-decoration: none;
     color: black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Mượt mà hơn */
 }
 .body-list-product-item:hover .product-list-img {
     border-color: #007B59; /* Đổi màu border của hình ảnh khi hover */
@@ -648,13 +670,4 @@ i.fa-mug-hot:hover {
     margin-left: -127px;
     text-align: center;
     line-height: 20px;
-}
-.list-range-active {
-    text-align: center;
-    line-height: 35px;
-    background-color: #007B59;
-    color: #ffffff;
-    width: 100px;
-    height: 35px;
-    border-radius: 5px;
 }
