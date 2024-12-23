@@ -86,29 +86,29 @@ async function updatePost(postId, postData) {
     try {
         const pool = await poolPromise; // Kết nối đến database pool
 
-        // Truy vấn mã danh mục dựa trên tên danh mục
-        const categoryResult = await pool.request()
-            .input('categoryName', postData.category)
-            .query(`SELECT MaDanhMuc FROM DanhMucBlog WHERE TenDanhMuc = @categoryName`);
+        // // Truy vấn mã danh mục dựa trên tên danh mục
+        // const categoryResult = await pool.request()
+        //     .input('categoryName', postData.category)
+        //     .query(`SELECT MaDanhMuc FROM DanhMucBlog WHERE TenDanhMuc = @categoryName`);
 
-        // Kiểm tra nếu không tìm thấy mã danh mục
-        if (categoryResult.recordset.length === 0) {
-            throw new Error(`Không tìm thấy danh mục: ${postData.category}`);
-        }
+        // // Kiểm tra nếu không tìm thấy mã danh mục
+        // if (categoryResult.recordset.length === 0) {
+        //     throw new Error(`Không tìm thấy danh mục: ${postData.category}`);
+        // }
 
-        const maDanhMuc = categoryResult.recordset[0].MaDanhMuc; // Lấy mã danh mục
+        // const maDanhMuc = categoryResult.recordset[0].MaDanhMuc; // Lấy mã danh mục
 
         // Thực hiện cập nhật bài viết trong bảng BaiBlog
         const result = await pool.request()
             .input('postId', postId)
             .input('title', postData.title)
             .input('content', postData.content)
-            .input('category', maDanhMuc)
+            .input('category', postData.category)
             .input('AnhBia', postData.AnhBia || null) // Nếu không có ảnh bìa, lưu null
             .query(`
                 UPDATE BaiBlog
                 SET TieuDe = @title,
-                    NoiDung = @content,
+                    NoiDung = 'abcdef',
                     MaDanhMuc = 'SKH',
                     AnhBia = 'https://i.pinimg.com/474x/be/a4/83/bea4836ad6c98b6f4093fb75ade591c8.jpg'
                 WHERE MaBaiBlog = @postId

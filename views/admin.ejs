@@ -229,44 +229,44 @@
         console.log('Post ID cần cập nhật:', postId);
         const formData = new FormData();
 
-    // Lấy thông tin bài viết từ form
-    const title = document.getElementById('title').value;
-    const content = document.getElementById('content').innerHTML; // Lấy nội dung dạng HTML
-    const category = document.getElementById('category').value;
-    const imageInput = document.getElementById('image'); // Input file ảnh
+            // Lấy thông tin bài viết từ form
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').innerHTML; // Lấy nội dung dạng HTML
+            const category = document.getElementById('category').value;
+            const imageInput = document.getElementById('image'); // Input file ảnh
 
-    if (!title || !content || !category) {
-        alert('Vui lòng điền đầy đủ thông tin bài viết!');
-        return;
-    }
-
-    formData.append('title', title);
-    formData.append('content', content); // Lưu nội dung HTML, bao gồm cả thẻ <br>
-    formData.append('category', category);
-
-    if (imageInput.files.length > 0) {
-        formData.append('AnhBia', imageInput.files[0]); // Thêm file ảnh vào formData
-    }
-
-    // Gửi yêu cầu PUT đến server với postId
-    fetch(`/admin/updatePost/${postId}`, {
-        method: 'PUT',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Bài viết đã được cập nhật thành công!');
-                window.location.reload();
-            } else {
-                alert(data.message || 'Lỗi khi cập nhật bài viết!');
+            if (!title || !content || !category) {
+                alert('Vui lòng điền đầy đủ thông tin bài viết!');
+                return;
             }
-        })
-        .catch(err => {
-            console.error('Lỗi:', err);
-            alert('Đã xảy ra lỗi khi kết nối đến server.');
-        });
-}
+
+            formData.append('title', title);
+            formData.append('content', content); // Lưu nội dung HTML, bao gồm cả thẻ <br>
+            formData.append('category', category);
+
+            if (imageInput.files.length > 0) {
+                formData.append('AnhBia', imageInput.files[0]); // Thêm file ảnh vào formData
+            }
+
+            // Gửi yêu cầu PUT đến server với postId
+            fetch(`/admin/updatePost/${postId}`, {
+                method: 'PUT',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Bài viết đã được cập nhật thành công!');
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Lỗi khi cập nhật bài viết!');
+                    }
+                })
+                .catch(err => {
+                    console.error('Lỗi:', err);
+                    alert('Đã xảy ra lỗi khi kết nối đến server.');
+                });
+        }
 
     function savePost() {
         const formData = new FormData();
