@@ -29,21 +29,28 @@ router.get('/getPost/:postId', async (req, res) => {
         res.status(500).json({ message: 'Đã xảy ra lỗi khi lấy bài viết.' });
     }
 });
-// Cập nhật bài viết
-router.put('/admin/updatePost/:id', async (req, res) => {
-    const postId = req.params.id;
-    const postData = req.body;
-
+// Router - Cập nhật bài viết
+// Sử dụng upload trong router
+router.put('/updatePost/:id', async (req, res) => {
     try {
-        const isUpdated = await updateBlog(postId, postData);  // Gọi hàm updateBlog trong model
+        // Lấy dữ liệu từ request
+        const postId = req.params.id;
+        const { title, content, category } = req.body;
+
+        // Dữ liệu bài viết
+        const postData = { title, content, category };
+
+        // Gọi hàm updatePost với dữ liệu
+        const isUpdated = await adminModel.updatePost(postId, postData);
 
         if (isUpdated) {
-            res.status(200).json({ success: true, message: 'Bài viết đã được cập nhật thành công' });
+            res.json({ success: true, message: 'Bài viết đã được cập nhật thành công!' });
         } else {
-            res.status(404).json({ success: false, message: 'Bài viết không tồn tại hoặc không thay đổi' });
+            res.status(404).json({ success: false, message: 'Bài viết không tồn tại hoặc không có thay đổi!' });
         }
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'Lỗi khi cập nhật bài viết', error: error.message });
+    } catch (err) {
+        console.error('Lỗi:', err);
+        res.status(500).json({ success: false, message: 'Đã xảy ra lỗi trong quá trình cập nhật bài viết!' });
     }
 });
 

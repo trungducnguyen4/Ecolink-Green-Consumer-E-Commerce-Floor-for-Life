@@ -50,6 +50,7 @@ async function getPostById(postId) {
                 SELECT 
                     BaiBlog.TieuDe, 
                     BaiBlog.NoiDung,
+                    BaiBlog.AnhBia,
                     DanhMucBlog.TenDanhMuc, 
                     NguoiBan.TenCuaHang
                 FROM BaiBlog
@@ -81,24 +82,50 @@ async function getPostById(postId) {
 }
 
 
-async function updateBlog(postId, postData) {
-    const pool = await poolPromise;  // Giả sử poolPromise là một kết nối tới cơ sở dữ liệu
+async function updatePost(postId, postData) {
+    try {
+        const pool = await poolPromise; // Kết nối đến database pool
 
-    // Truy vấn để cập nhật bài viết
-    const result = await pool.request()
-        .input('title', postData.title)
-        .input('content', postData.content)
-        .input('category', postData.category)
-        .input('postId', postId)
-        .query(`
-            UPDATE BaiBlog
-            SET TieuDe = @title, NoiDung = @content, MaDanhMuc = @category
-            WHERE MaBaiBlog = @postId
-        `);
+        // Truy vấn mã danh mục dựa trên tên danh mục
+        const categoryResult = await pool.request()
+            .input('categoryName', postData.category)
+            .query(`SELECT MaDanhMuc FROM DanhMucBlog WHERE TenDanhMuc = @categoryName`);
 
-    return result.rowsAffected[0] > 0;  // Kiểm tra xem có bài viết nào được cập nhật không
+        // Kiểm tra nếu không tìm thấy mã danh mục
+        if (categoryResult.recordset.length === 0) {
+            throw new Error(`Không tìm thấy danh mục: ${postData.category}`);
+        }
+
+        const maDanhMuc = categoryResult.recordset[0].MaDanhMuc; // Lấy mã danh mục
+
+        // Thực hiện cập nhật bài viết trong bảng BaiBlog
+        const result = await pool.request()
+            .input('postId', postId)
+            .input('title', postData.title)
+            .input('content', postData.content)
+            .input('category', maDanhMuc)
+            .input('AnhBia', postData.AnhBia || null) // Nếu không có ảnh bìa, lưu null
+            .query(`
+                UPDATE BaiBlog
+                SET TieuDe = @title,
+                    NoiDung = @content,
+                    MaDanhMuc = 'SKH',
+                    AnhBia = 'https://i.pinimg.com/474x/be/a4/83/bea4836ad6c98b6f4093fb75ade591c8.jpg'
+                WHERE MaBaiBlog = @postId
+            `);
+
+        // Kiểm tra xem bài viết có được cập nhật thành công hay không
+        if (result.rowsAffected[0] > 0) {
+            return true; // Cập nhật thành công
+        } else {
+            return false; // Không có bài viết nào được cập nhật
+        }
+    } catch (err) {
+        // Ghi log lỗi chi tiết
+        console.error('Lỗi khi cập nhật bài viết trong cơ sở dữ liệu:', err);
+        throw new Error('Có lỗi xảy ra khi cập nhật bài viết vào cơ sở dữ liệu.'); // Ném lỗi để controller xử lý
+    }
 }
-
 
 async function deleteBlog(postId) {
     console.log(`Xóa bài viết với ID: ${postId}`);
@@ -200,4 +227,4 @@ async function savePost(postData) {
 
 
 
-module.exports = { getBlog, deleteBlog, savePost, getPostById };
+module.exports = { getBlog, deleteBlog, savePost, getPostById, updatePost };

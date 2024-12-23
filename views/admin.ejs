@@ -65,7 +65,7 @@
                         <a href="#" class="view" data-post-id="<%= admin.MaBaiBlog %>">
                             <i class="fas fa-eye"></i> Xem
                         </a>
-                        <a href="#" class="edit" data-post-id="<%= admin.MaBaiBlog %>">
+                        <a href="#" class="edit" onclick="openModal('edit')" data-post-id="<%= admin.MaBaiBlog %>">
                             <i class="fas fa-edit"></i> Chỉnh sửa
                         </a>
                         <a href="#" class="delete" data-post-id="<%= admin.MaBaiBlog %>">
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label for="content">Nội dung</label>
-                <div id="content" class="editable-content" contenteditable="true" placeholder="Nhập nội dung bài viết">2</div>
+                <div id="content" class="editable-content" contenteditable="true" placeholder="Nhập nội dung bài viết"></div>
             </div>
             <div class="form-group">
                 <label for="category">Danh mục</label>
@@ -112,9 +112,19 @@
                 <i class="fas fa-save"></i> Tạo mới
             </button>
             
-            <button class="btn" id="updateButton">
-                <i class="fas fa-edit"></i> Cập nhật
-            </button>
+            <button 
+    onclick="updatePost(this.dataset.postId)" 
+    data-post-id="<%= admin.MaBaiBlog %>" 
+    class="btn" 
+    id="updateButton" 
+    style="display: none;">
+    <i class="fas fa-edit"></i> Cập nhật bài viết
+</button>
+
+            
+            
+            
+            
             
             <button class="btn cancel" onclick="closeModal()">
                 <i class="fas fa-times"></i> Hủy
@@ -131,32 +141,74 @@
 
 
 
-    // Hàm để mở modal và chỉnh sửa bài viết
     function openModalToEdit(postId) {
-        // Gửi yêu cầu GET đến API để lấy thông tin bài blog theo mã
-        fetch(`/admin/getPost/${postId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Không thể lấy thông tin bài viết');
+    // Gửi yêu cầu GET đến API để lấy thông tin bài blog theo mã
+    fetch(`/admin/getPost/${postId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Không thể lấy thông tin bài viết');
+            }
+            return response.json(); // Trả về dữ liệu bài viết
+        })
+        .then(postData => {
+            // Gán dữ liệu bài viết vào các trường trong modal
+            document.getElementById('title').value = postData.TieuDe; // Gán tiêu đề vào ô input
+            document.getElementById('content').innerHTML = postData.NoiDung; // Gán nội dung vào textarea
+            document.getElementById('category').value = postData.TenDanhMuc; // Gán danh mục vào ô select
+
+            // Hiển thị ảnh bìa từ link `postData.AnhBia`
+            const previewContainer = document.getElementById('imagePreview');
+            previewContainer.innerHTML = ''; // Xóa nội dung cũ
+
+            if (postData.AnhBia) { // Kiểm tra nếu link ảnh bìa tồn tại
+                const img = document.createElement('img');
+                img.src = postData.AnhBia; // Gán link ảnh bìa từ dữ liệu
+                img.alt = 'Ảnh bìa bài viết';
+                img.style.width = '100%';
+                img.style.height = '400px';
+                img.style.border = '1px solid black';
+                img.style.objectFit = 'cover';
+                previewContainer.appendChild(img); // Hiển thị ảnh bìa
+            }
+
+            // Thêm sự kiện preview khi chọn ảnh mới
+            const imageInput = document.getElementById('image');
+            imageInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewContainer.innerHTML = ''; // Xóa ảnh cũ
+                        const newImg = document.createElement('img');
+                        newImg.src = e.target.result; // Gán link ảnh mới
+                        newImg.alt = 'Ảnh bìa mới';
+                        newImg.style.width = '100%';
+                        newImg.style.height = '400px';
+                        newImg.style.border = '1px solid black';
+                        newImg.style.objectFit = 'cover';
+                        previewContainer.appendChild(newImg);
+                    };
+                    reader.readAsDataURL(file); // Đọc file ảnh
                 }
-                return response.json();  // Trả về dữ liệu bài viết
-            })
-            .then(postData => {
-                // Gán dữ liệu bài viết vào các trường trong modal
-                document.getElementById('title').value = postData.TieuDe;  // Gán tiêu đề vào ô input
-                document.getElementById('content').innerHTML = postData.NoiDung;  // Gán nội dung vào textarea
-                document.getElementById('category').value = postData.TenDanhMuc;  // Gán danh mục vào ô select
-
-                // Hiển thị modal chỉnh sửa
-                const modal = document.getElementById('modal');
-                modal.classList.add('active')
-
-                
-            })
-            .catch(error => {
-                alert(error.message);  // Hiển thị lỗi nếu không lấy được dữ liệu
             });
-    }
+
+            // Hiển thị modal chỉnh sửa
+            const modal = document.getElementById('modal');
+            modal.classList.add('active');
+
+
+            // Gọi hàm updatePost và truyền postId
+            document.getElementById('updateButton').onclick = function() {
+                updatePost(postId); // Truyền postId vào hàm updatePost
+            }
+        })
+        .catch(error => {
+            alert(error.message); // Hiển thị lỗi nếu không lấy được dữ liệu
+        });
+}
+
+
+
 
     // Sự kiện cho các nút chỉnh sửa
     document.querySelectorAll('.edit').forEach(button => {
@@ -171,55 +223,136 @@
         });
     });
     
-    function updateBlog(postId) {
-        const title = document.getElementById('title').value; // Lấy tiêu đề từ input
-        const content = document.getElementById('content').textContent; // Lấy nội dung từ editor (contenteditable)
-        const category = document.getElementById('category').value; // Lấy danh mục từ input/select
 
-        // Kiểm tra xem các trường có bị bỏ trống không
-        if (!title || !content || !category) {
-            alert('Vui lòng điền đầy đủ thông tin bài viết!');
-            return;
-        }
+    
+    function updatePost(postId) {
+        console.log('Post ID cần cập nhật:', postId);
+        const formData = new FormData();
 
-        const postData = { title, content, category };
+    // Lấy thông tin bài viết từ form
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').innerHTML; // Lấy nội dung dạng HTML
+    const category = document.getElementById('category').value;
+    const imageInput = document.getElementById('image'); // Input file ảnh
 
-        // Gửi yêu cầu PUT để cập nhật bài viết
-        fetch(`/admin/updatePost/${postId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postData)
-        })
-        .then(response => response.json()) // Đảm bảo rằng phản hồi từ server là JSON
+    if (!title || !content || !category) {
+        alert('Vui lòng điền đầy đủ thông tin bài viết!');
+        return;
+    }
+
+    formData.append('title', title);
+    formData.append('content', content); // Lưu nội dung HTML, bao gồm cả thẻ <br>
+    formData.append('category', category);
+
+    if (imageInput.files.length > 0) {
+        formData.append('AnhBia', imageInput.files[0]); // Thêm file ảnh vào formData
+    }
+
+    // Gửi yêu cầu PUT đến server với postId
+    fetch(`/admin/updatePost/${postId}`, {
+        method: 'PUT',
+        body: formData,
+    })
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert('Bài viết đã được cập nhật thành công!');
-                // Có thể làm mới trang hoặc điều hướng người dùng
                 window.location.reload();
             } else {
                 alert(data.message || 'Lỗi khi cập nhật bài viết!');
             }
         })
-        .catch(error => {
-            console.error('Lỗi:', error);
-            alert('Đã xảy ra lỗi khi kết nối với server.');
+        .catch(err => {
+            console.error('Lỗi:', err);
+            alert('Đã xảy ra lỗi khi kết nối đến server.');
         });
-    }
+}
+
+    function savePost() {
+        const formData = new FormData();
+
+        // Lấy thông tin bài viết từ form
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').innerHTML; // Lấy nội dung dạng HTML
+        const category = document.getElementById('category').value;
+        const imageInput = document.getElementById('image'); // Input file ảnh
+
+        if (!title || !content || !category) {
+            alert('Vui lòng điền đầy đủ thông tin bài viết!');
+            return;
+        }
+
+        formData.append('title', title);
+        formData.append('content', content); // Lưu nội dung HTML, bao gồm cả thẻ <br>
+        formData.append('category', category);
+
+        if (imageInput.files.length > 0) {
+            formData.append('AnhBia', imageInput.files[0]); // Thêm file ảnh vào formData
+        }
+
+        // Gửi yêu cầu POST đến server
+        fetch('/admin/savePost', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Bài viết đã được lưu thành công!');
+                window.location.reload();
+            } else {
+                alert(data.message || 'Lỗi khi lưu bài viết!');
+            }
+        })
+        .catch(err => {
+            console.error('Lỗi:', err);
+            alert('Đã xảy ra lỗi khi kết nối đến server.');
+        });
+        }
+
+
+
 
     function openModal(action, postId = null) {
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modalTitle');
         const saveButton = document.getElementById('saveButton');
+        const updateButton = document.getElementById('updateButton'); // Thêm biến cho nút cập nhật
+
+        // Ẩn nút cập nhật, chỉ hiển thị nút Lưu bài viết trong chế độ thêm bài viết mới
+        updateButton.style.display = 'none';
+        saveButton.style.display = 'inline-block';
 
         if (action === 'edit') {
             modalTitle.textContent = 'Chỉnh sửa bài viết';
             saveButton.textContent = 'Cập nhật bài viết';
-            // Load existing post data (dummy example)
-            document.getElementById('title').value = 'Bài viết đầu tiên';
-            document.getElementById('content').innerHTML = 'Nội dung bài viết đầu tiên';
-            document.getElementById('category').value = 'Blog';
+
+            // Ẩn nút "Lưu bài viết", hiển thị nút "Cập nhật bài viết"
+            saveButton.style.display = 'none';
+            updateButton.style.display = 'inline-block';
+
+            // Lấy dữ liệu bài viết từ server (Giả sử bạn gọi API hoặc dùng dữ liệu tĩnh)
+            fetch(`/admin/getPost/${postId}`)
+                .then(response => response.json())
+                .then(postData => {
+                    document.getElementById('title').value = postData.TieuDe;
+                    document.getElementById('content').innerHTML = postData.NoiDung;
+                    document.getElementById('category').value = postData.TenDanhMuc;
+
+                    // Hiển thị ảnh bìa (nếu có)
+                    const imagePreview = document.getElementById('imagePreview');
+                    const img = document.createElement('img');
+                    img.src = postData.AnhBia;  // Sử dụng link ảnh từ postData
+                    img.style.width = '150px';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'cover';
+                    imagePreview.innerHTML = '';  // Xóa bất kỳ hình ảnh nào trước đó
+                    imagePreview.appendChild(img); // Thêm ảnh vào preview
+                })
+                .catch(error => {
+                    console.error("Không thể lấy dữ liệu bài viết:", error);
+                });
+
         } else {
             modalTitle.textContent = 'Thêm bài viết';
             saveButton.textContent = 'Lưu bài viết';
@@ -230,6 +363,7 @@
 
         modal.classList.add('active');
     }
+
 
     function closeModal() {
         document.getElementById('modal').classList.remove('active');
@@ -318,48 +452,6 @@
     // }
 
 
-    function savePost() {
-    const formData = new FormData();
-
-    // Lấy thông tin bài viết từ form
-    const title = document.getElementById('title').value;
-    const content = document.getElementById('content').innerHTML; // Lấy nội dung dạng HTML
-    const category = document.getElementById('category').value;
-    const imageInput = document.getElementById('image'); // Input file ảnh
-
-    if (!title || !content || !category) {
-        alert('Vui lòng điền đầy đủ thông tin bài viết!');
-        return;
-    }
-
-    formData.append('title', title);
-    formData.append('content', content); // Lưu nội dung HTML, bao gồm cả thẻ <br>
-    formData.append('category', category);
-
-    if (imageInput.files.length > 0) {
-        formData.append('AnhBia', imageInput.files[0]); // Thêm file ảnh vào formData
-    }
-
-    // Gửi yêu cầu POST đến server
-    fetch('/admin/savePost', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Bài viết đã được lưu thành công!');
-            window.location.reload();
-        } else {
-            alert(data.message || 'Lỗi khi lưu bài viết!');
-        }
-    })
-    .catch(err => {
-        console.error('Lỗi:', err);
-        alert('Đã xảy ra lỗi khi kết nối đến server.');
-    });
-}
-
 
     function viewPost(postId) {
         alert(`Xem bài viết có ID: ${postId}`);
@@ -418,28 +510,31 @@
 
 
 
-    // Preview hình ảnh khi chọn file
-    function previewImage(event) {
+   // Preview hình ảnh khi chọn file
+function previewImage(event) {
     const file = event.target.files[0];
+    if (!file) return; // Kiểm tra nếu không có file được chọn
+
     const reader = new FileReader();
     reader.onload = function(e) {
         const imageUrl = e.target.result;
 
-        // Chèn hình ảnh vào vị trí con trỏ trong nội dung
-        const content = document.getElementById('content');
+        // Hiển thị hình ảnh trong khu vực preview
+        const previewContainer = document.getElementById('imagePreview');
+        previewContainer.innerHTML = ''; // Xóa hình ảnh đã hiển thị trước đó
         const img = document.createElement('img');
         img.src = imageUrl;
-        img.style.width = '100px';
-        img.style.height = '100px';
+        img.style.width = '100%';
+        img.style.height = '400px';
         img.style.objectFit = 'cover';
+        img.style.border = '1px solid grey';
+        img.alt = 'Ảnh bìa';
 
-        // Xóa phần preview bên dưới nút chọn ảnh
-        const previewContainer = document.getElementById('imagePreview');
-        previewContainer.innerHTML = ''; // Xóa bất kỳ hình ảnh nào đã được hiển thị
-        content.appendChild(img); // Chèn hình ảnh vào nội dung bài viết
+        previewContainer.appendChild(img); // Chèn hình ảnh vào khu vực preview
     };
     reader.readAsDataURL(file);
-    }
+}
+
 
 </script>
 </body>

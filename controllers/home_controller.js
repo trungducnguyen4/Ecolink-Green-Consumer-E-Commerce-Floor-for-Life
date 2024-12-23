@@ -8,7 +8,7 @@ async function getHomePage(req, res) {
         const productsTPResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'TP')
             .query(`
-                SELECT top 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -20,7 +20,7 @@ async function getHomePage(req, res) {
         const productsVPPResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'VVP')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -32,7 +32,7 @@ async function getHomePage(req, res) {
         const productsGDResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'GD')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -44,7 +44,7 @@ async function getHomePage(req, res) {
         const productsCSCNResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'CSCN')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -56,7 +56,7 @@ async function getHomePage(req, res) {
         const productsMPResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'MP')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -68,7 +68,7 @@ async function getHomePage(req, res) {
         const productsTTResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'QA')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -80,7 +80,7 @@ async function getHomePage(req, res) {
         const productsDUResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'DU')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -92,7 +92,7 @@ async function getHomePage(req, res) {
         const productsTBDTResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'TBDT')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
@@ -104,7 +104,7 @@ async function getHomePage(req, res) {
         const productsKhacResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'Khac')
             .query(`
-                SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                SELECT MaSP, TenSP, DGBanMacDinh, HinhChinh
                 FROM SanPham
                 WHERE MaNhomSP = @MaNhomSP
                 ORDER BY NEWID()
