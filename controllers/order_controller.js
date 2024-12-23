@@ -198,6 +198,14 @@ async function placeOrder(req, res) {
                 WHERE MaDH = @MaDH
             `);
 
+        // Delete cart items
+        await transaction.request()
+            .input('MaUser', sql.NChar(20), userId)
+            .query(`
+                DELETE FROM SanPhamTrongGio
+                WHERE MaUser = @MaUser
+            `);
+
         await transaction.commit();
 
         res.json({ success: true, orderId });
@@ -227,7 +235,7 @@ async function loadSellerOrders(req, res) {
                 JOIN CTDH ctdh ON dh.MaDH = ctdh.MaDH
                 JOIN SanPham sp ON ctdh.MaSP = sp.MaSP
                 JOIN NguoiDung nd ON dh.MaUser = nd.MaUser
-                JOIN PhuongThucVanChuyen ptvc ON ctdh.MaPTVC = ptvc.MaPTVC
+                JOIN PhuongThucVanChuyen ptvc ON dh.TongPhiVC = ptvc.PhiVC
                 WHERE ctdh.MaNguoiBan = @MaNguoiBan
                 ORDER BY dh.NgayDatHang DESC
             `);
@@ -252,5 +260,71 @@ async function loadSellerOrders(req, res) {
         res.status(500).send('Error loading seller orders and products');
     }
 }
+async function updateOrderStatus(req, res) {
+    const { orderId, selectedStatus } = req.body;
 
-module.exports = { loadOrderPaymentPage, loadPurchaseOrderStatusPage, placeOrder, loadSellerOrders };
+    try {
+        const pool = await poolPromise;
+        await pool.request()
+            .input('MaDH', sql.NChar(20), orderId)
+            .input('TrangThai', sql.NVarChar(50), selectedStatus)
+            .query(`
+                UPDATE DonHang
+                SET TrangThai = @TrangThai
+                WHERE MaDH = @MaDH
+            `);
+
+        res.json({ success: true, message: 'Trạng thái đơn hàng đã được cập nhật.' });
+    } catch (err) {
+        console.error('Error updating order status:', err);
+        res.status(500).json({ success: false, message: `Đã xảy ra lỗi khi cập nhật trạng thái đơn hàng: ${err.message}` });
+    }
+}
+async function getDeliveryMethods(req, res) {
+    try {
+        const pool = await poolPromise;
+        const result = await pool.request().query(`
+            SELECT MaPTVC, TenPTVC
+            FROM PhuongThucVanChuyen
+        `);
+
+        res.json({ success: true, methods: result.recordset });
+    } catch (err) {
+        console.error('Error fetching delivery methods:', err);
+        res.status(500).json({ success: false, message: 'Error fetching delivery methods' });
+    }
+}
+async function loadSellerRevenuePage(req, res) {
+    if (!req.session.businessUser) {
+        return res.status(401).send('User not logged in');
+    }
+
+    const MaNguoiBan = req.session.businessUser.MaNguoiBan;
+
+    try {
+        const pool = await poolPromise;
+        const revenueResult = await pool.request()
+            .input('MaNguoiBan', sql.NChar(20), MaNguoiBan)
+            .query(`
+                SELECT 
+                    dh.MaDH, 
+                    dh.NgayDatHang, 
+                    SUM(ctdh.SoLuongSP * ctdh.DonGia) AS DoanhThu
+                FROM DonHang dh
+                JOIN CTDH ctdh ON dh.MaDH = ctdh.MaDH
+                WHERE ctdh.MaNguoiBan = @MaNguoiBan
+                AND dh.TrangThai = 'Đã giao'
+                GROUP BY dh.MaDH, dh.NgayDatHang
+                ORDER BY dh.NgayDatHang DESC
+            `);
+
+        const revenueData = revenueResult.recordset;
+
+        res.render('seller-revenue', { title: 'Seller Revenue', revenueData });
+    } catch (err) {
+        console.error('Error loading seller revenue page:', err);
+        res.status(500).send('Error loading seller revenue page');
+    }
+}
+
+module.exports = { loadOrderPaymentPage, loadPurchaseOrderStatusPage, placeOrder, loadSellerOrders, updateOrderStatus,getDeliveryMethods, loadSellerRevenuePage };

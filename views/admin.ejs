@@ -26,8 +26,8 @@
         <li><a href="#" class="blog"><i class="fas fa-blog"></i> Quản lý bài viết</a></li>
         <li><a href="#" class="users"><i class="fas fa-users"></i> Quản lý người dùng</a></li>
         <li><a href="#" class="report"><i class="fas fa-chart-line"></i> Báo cáo</a></li>
-        <li><a href="#" class="settings"><i class="fas fa-cogs"></i> Cài đặt</a></li>
-        <li><a href="#" class="settings"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+        <!-- <li><a href="#" class="settings"><i class="fas fa-cogs"></i> Cài đặt</a></li> -->
+        <!-- <li><a href="#" class="settings"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li> -->
     </ul>
     </div>
 
@@ -62,7 +62,7 @@
                     <td><%= admin.TenTrangThai %></td>
                     <td><%= admin.NgayTao %></td>
                     <td class="actions">
-                        <a href="#" class="view" data-post-id="<%= admin.MaBaiBlog %>">
+                        <a href="/news" class="view" data-post-id="<%= admin.MaBaiBlog %>">
                             <i class="fas fa-eye"></i> Xem
                         </a>
                         <a href="#" class="edit" onclick="openModal('edit')" data-post-id="<%= admin.MaBaiBlog %>">
@@ -531,6 +531,10 @@ function previewImage(event) {
         img.alt = 'Ảnh bìa';
 
         previewContainer.appendChild(img); // Chèn hình ảnh vào khu vực preview
+        // Xóa phần preview bên dưới nút chọn ảnh
+        
+        previewContainer.innerHTML = ''; // Xóa bất kỳ hình ảnh nào đã được hiển thị
+        //content.appendChild(img); // Chèn hình ảnh vào nội dung bài viết
     };
     reader.readAsDataURL(file);
 }

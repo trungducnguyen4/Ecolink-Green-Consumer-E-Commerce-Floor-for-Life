@@ -19,7 +19,10 @@
                 <div class="news-list">
                     <% limitedNews.forEach(article => { %>
                         <a href="/news-detail/<%= article.MaBaiBlog %>" class="news-body-article-item">
-                            <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+                          
+                        <% if (article.AnhBia) { %>
+                          <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+                      <% } %>
                             <div class="news-body-article-content-frame">
                                 <div class="news-body-article-title"><%= article.TieuDe %></div>
                                 <p class="news-body-article-content"><%= article.NoiDung %></p>
@@ -32,7 +35,9 @@
                 <div class="news-list-more" id="additional-news" style="display: none;">
                     <% remainingNews.forEach(article => { %>
                         <a href="/news-detail/<%= article.MaBaiBlog %>" class="news-body-article-item">
+                          <% if (article.AnhBia) { %>
                             <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+                        <% } %>
                             <div class="news-body-article-content-frame">
                                 <div class="news-body-article-title"><%= article.TieuDe %></div>
                                 <p class="news-body-article-content"><%= article.NoiDung %></p>
@@ -164,8 +169,10 @@
                           // Cập nhật dữ liệu vào các phần tử HTML
                           const topPoster = data.data; // Lấy dữ liệu từ response
 
-                          document.getElementById("top-poster-logo-img").src = topPoster.AnhLogo || 'default-logo.jpg';
-                          document.getElementById("top-poster-name").innerText = `${topPoster.TenCuaHang}`;
+                          document.getElementById("top-poster-logo-img").src = './logo/'+topPoster.AnhLogo || 'default-logo.jpg';
+                          document.getElementById("top-poster-name").innerText = topPoster.TenCuaHang.length > 20 
+        ? `...${topPoster.TenCuaHang.substring(topPoster.TenCuaHang.length - 17)}` 
+        : topPoster.TenCuaHang;
                           document.getElementById("top-poster-count").innerText = `Số lượng bài viết: ${topPoster.SoLuongBaiViet || 0}`;
                       })
                       .catch(function(err) {

@@ -43,8 +43,8 @@
         <!-- Header-Services -->
         <div class="header-service">
             <div class="header-service-item">
-            <img class="header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
-            <a href="http://127.0.0.1:5500/assets/personal.html">Ecolink</a>
+            <img class="header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="">
+            <a href="<%= session.user ? '/personal' : (session.businessUser ? '/sale-chanels' : '') %>"><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></a>
             </div>
 
             <div class="header-service-item">
@@ -68,7 +68,6 @@
         <div class="cart-header">
             <ul class="cart-header-list row">
                 <li class="cart-header-item col-lg-5">
-                    <input type="checkbox">
                     <p class="cart-header-item-product"> Sản phẩm</p>
                 </li>
                 <li class="cart-header-item col-lg-2">Đơn giá</li>
@@ -84,12 +83,10 @@
                 <% cartItems.forEach(item => { %>
                     <div class="cart-body-item row">
                         <div class="cart-body-shopName">
-                            <input type="checkbox">
                             <div class="cart-body-shopName-title"><%= item.TenCuaHang %></div>
                         </div>
                         <div class="cart-body-infor-wrap row">
                             <div class="cart-body-infor col-lg-5">
-                                <input type="checkbox">
                                 <img src="/product_image/<%= item.HinhChinh %>" alt="<%= item.TenSP %>" class="cart-body-img">
                                 <div class="cart-body-nameProduct"><%= item.TenSP %></div>
                                 <div class="cart-body-typeProduct"><%= item.MoTa %></div>
@@ -116,7 +113,7 @@
         <div class="total-cost-wrap">
             <div class="total-cost-wrap row">
                 <div class="total-cost-selectAll col-lg-6">
-                    <input type="checkbox" class="">
+                    <!-- <input type="checkbox" class=""> -->
                     <p class="total-cost-text">Chọn tất cả</p>
                 </div>
                 <div class="total-cost-total-price col-lg-3">
