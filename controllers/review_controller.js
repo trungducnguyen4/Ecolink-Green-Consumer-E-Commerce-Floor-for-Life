@@ -48,7 +48,7 @@ async function addReview(req, res) {
         const existingReviewResult = await pool.request()
             .input('MaDH', sql.NChar(20), MaDH)
             .input('MaSP', sql.NChar(20), MaSP)
-            .input('MaUser', sql.NChar(20), MaUser)
+            .input('MaUser', sql.Int, MaUser)
             .query(`
                 SELECT COUNT(*) AS ReviewCount
                 FROM DanhGiaSanPham
@@ -65,7 +65,7 @@ async function addReview(req, res) {
         await pool.request()
             .input('MaSP', sql.NChar(20), MaSP)
             .input('MaDH', sql.NChar(20), MaDH)
-            .input('MaUser', sql.NChar(20), MaUser)
+            .input('MaUser', sql.Int, MaUser)
             .input('DiemDanhGia', sql.Int, DiemDanhGia)
             .input('NDDanhGia', sql.Text, NDDanhGia)
             .input('HinhDanhGia', sql.NVarChar(300), HinhDanhGia)
@@ -108,7 +108,7 @@ async function getReview(req, res) {
         const reviewResult = await pool.request()
             .input('MaDH', sql.NChar(20), orderId)
             .input('MaSP', sql.NChar(20), MaSP)
-            .input('MaUser', sql.NChar(20), MaUser)
+            .input('MaUser', sql.Int, MaUser)
             .query(`
                 SELECT DiemDanhGia, NDDanhGia, HinhDanhGia, VideoDanhGia
                 FROM DanhGiaSanPham

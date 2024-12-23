@@ -240,7 +240,7 @@ CREATE TABLE Follow (
     FOREIGN KEY (MaNguoiBanTheoDoi) REFERENCES NguoiBan(MaNguoiBan)  -- Liên kết đến bảng người bán
 );
 CREATE PROCEDURE AddToCart
-    @MaUser nchar(20),
+    @MaUser Int,
     @MaSP nchar(20),
     @SoLuong int,
     @ProductPrice decimal(10, 2)

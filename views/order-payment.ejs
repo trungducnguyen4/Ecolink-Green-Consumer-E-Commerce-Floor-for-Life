@@ -138,9 +138,12 @@
                         <div class="order-shipping-header-method">
 
                             <input type="radio" name="shippingMethod" value="<%= method.MaPTVC %>" data-phivc="<%= method.PhiVC %>" <%= index === 0 ? 'checked' : '' %> onchange="updateTotalCost()">
-                            <label><%= method.TenPTVC %></label>
-                            <p>Phí vận chuyển: <%= method.PhiVC %> VND</p>
-                            <p>Thời gian giao hàng: <%= method.ThoiGianGH %></p>
+                            <div class="shippingMethod-frame">
+                                <label><%= method.TenPTVC %></label>
+                                <p>Phí vận chuyển: <%= method.PhiVC %> VND</p>
+                                <p>Thời gian giao hàng: <%= method.ThoiGianGH %></p>
+                            </div>
+                            
 
                         </div>
                     <% }); %>

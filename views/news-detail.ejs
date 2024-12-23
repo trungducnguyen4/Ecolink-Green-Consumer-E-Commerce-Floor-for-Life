@@ -48,7 +48,7 @@
         <% } %>
         <div class="news-deatail-body-cmt">
             <div class="news-deatail-body-cmt-user-cmt">
-                <img src="./image/logo.jpg" alt="" class="news-deatail-body-cmt-user-cmt-img">
+                <img src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="" class="news-deatail-body-cmt-user-cmt-img">
                 <input type="text" placeholder="Có bình luận gì không?" class="news-deatail-body-cmt-user-cmt-txt">
             </div>
             <div class="news-deatail-body-cmt-others-cmt">

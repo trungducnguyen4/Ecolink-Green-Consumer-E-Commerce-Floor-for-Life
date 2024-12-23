@@ -110,7 +110,7 @@ height: 100vh; /* Chiều cao toàn màn hình */
 
 /* Main content styles */
 .container {
-height: 510px;
+height: 650px;
 flex-grow: 1;
 margin: 20px;
 background: white;
@@ -146,10 +146,10 @@ h1 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    height: 395px; /* Đặt chiều cao cố định cho bảng */
+    height: 515px; /* Đặt chiều cao cố định cho bảng */
     display: block; /* Cần có display:block để overflow hoạt động */
     overflow-y: auto; /* Tạo cuộn dọc nếu cần */
-    max-height: 375px; /* Tối đa chiều cao để bảng có thể cuộn */
+    max-height: 615px; /* Tối đa chiều cao để bảng có thể cuộn */
 }
 
 .table th, .table td {

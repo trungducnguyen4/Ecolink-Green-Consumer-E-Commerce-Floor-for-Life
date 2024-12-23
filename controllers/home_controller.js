@@ -52,6 +52,18 @@ async function getHomePage(req, res) {
 
         const productsCSCN = productsCSCNResult.recordset;
 
+                // Lấy sản phẩm thuộc nhóm Thoi trang
+                const productsTTResult = await pool.request()
+                .input('MaNhomSP', sql.NChar(20), 'QA')
+                .query(`
+                    SELECT TOP 5 MaSP, TenSP, DGBanMacDinh, HinhChinh
+                    FROM SanPham
+                    WHERE MaNhomSP = @MaNhomSP
+                    ORDER BY NEWID()
+                `);
+    
+            const productsTT = productsTTResult.recordset;
+
         // Lấy sản phẩm thuộc nhóm mỹ phẩm
         const productsMPResult = await pool.request()
             .input('MaNhomSP', sql.NChar(20), 'MP')
@@ -93,7 +105,7 @@ async function getHomePage(req, res) {
         const productsKhac = productsKhacResult.recordset;
 
         // Render trang home với danh sách sản phẩm
-        res.render('home', { productsTP,productsVPP,productsGD,productsCSCN,productsMP,productsDU,productsKhac });
+        res.render('home', { productsTP,productsVPP,productsGD,productsTT,productsCSCN,productsMP,productsDU,productsKhac });
     } catch (err) {
         console.error('Error in getHomePage:', err);
         res.status(500).render('error', { message: 'Lỗi khi tải trang chủ.' });

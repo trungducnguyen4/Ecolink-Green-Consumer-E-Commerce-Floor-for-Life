@@ -14,7 +14,7 @@ async function loadOrderPaymentPage(req, res) {
 
         // Fetch cart items
         const cartResult = await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT sp.MaSP, sp.TenSP, sp.HinhChinh, sp.DGBanMacDinh, stg.SoLuongSPTrongGio,
                        nb.TenCuaHang, nb.AnhLogo, nb.MaNguoiBan
@@ -28,7 +28,7 @@ async function loadOrderPaymentPage(req, res) {
 
         // Fetch user address and phone number
         const userResult = await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT HoUser, TenUser, SoDienThoai, DiaChi
                 FROM NguoiDung
@@ -75,7 +75,7 @@ async function loadPurchaseOrderStatusPage(req, res) {
 
         // Fetch all orders for the user
         const ordersResult = await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT dh.MaDH, dh.NgayDatHang, dh.TongThanhToan, dh.TrangThai, ptvc.TenPTVC, nb.TenCuaHang, nb.AnhLogo, sp.TenSP, sp.HinhChinh, ctdh.SoLuongSP, ctdh.DonGia
                 FROM DonHang dh
@@ -129,7 +129,7 @@ async function placeOrder(req, res) {
         // Insert into DonHang
         await transaction.request()
             .input('MaDH', sql.NChar(20), orderId)
-            .input('MaUser', sql.NChar(20), userId)
+            .input('MaUser', sql.Int, userId)
             .input('TongPhiVC', sql.Decimal(10, 2), shippingFee)
             .input('TongGiamGia', sql.Decimal(10, 2), 0) // Placeholder, will update later
             .input('TongThanhToan', sql.Decimal(10, 2), 0) // Placeholder, will update later
@@ -141,7 +141,7 @@ async function placeOrder(req, res) {
 
         // Fetch cart items
         const cartItemsResult = await transaction.request()
-            .input('MaUser', sql.NChar(20), userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT sp.MaSP, sp.DGBanMacDinh, stg.SoLuongSPTrongGio, nb.MaNguoiBan
                 FROM SanPhamTrongGio stg
@@ -200,7 +200,7 @@ async function placeOrder(req, res) {
 
         // Delete cart items
         await transaction.request()
-            .input('MaUser', sql.NChar(20), userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 DELETE FROM SanPhamTrongGio
                 WHERE MaUser = @MaUser

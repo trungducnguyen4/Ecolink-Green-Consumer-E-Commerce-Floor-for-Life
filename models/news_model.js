@@ -1,4 +1,4 @@
-const { poolPromise } = require('../db'); // Kết nối đến cơ sở dữ liệu
+const { poolPromise,sql } = require('../db'); // Kết nối đến cơ sở dữ liệu
 const moment = require('moment-timezone'); // Định dạng ngày giờ
 
 
@@ -7,7 +7,7 @@ async function getNewsByCategory(category) {
     try {
         const pool = await poolPromise; // Lấy kết nối pool
         const result = await pool.request()
-            .input('MaDanhMuc', category) // Truyền tham số danh mục
+            .input('MaDanhMuc',sql.NChar(20), category) // Truyền tham số danh mục
             .query(`
                 SELECT 
                     BaiBlog.MaBaiBlog, 

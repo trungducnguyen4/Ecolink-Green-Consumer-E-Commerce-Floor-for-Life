@@ -16,7 +16,7 @@ async function getCartItems(req, res) {
     try {
         const pool = await poolPromise;
         const result = await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT sp.MaSP, sp.TenSP, sp.HinhChinh, sp.DGBanMacDinh, sp.SoLuongTon, stg.SoLuongSPTrongGio,
                        nb.TenCuaHang, nb.AnhLogo, nb.MaNguoiBan
@@ -43,7 +43,7 @@ async function updateCartItemQuantity(req, res) {
     try {
         const pool = await poolPromise;
         await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .input('MaSP', sql.NChar, productId)
             .input('SoLuongSPTrongGio', sql.Int, quantity)
             .query(`
@@ -66,7 +66,7 @@ async function addToCart(req, res) {
     try {
         const pool = await poolPromise;
         const request = pool.request();
-        request.input('MaUser', sql.NChar, userId);
+        request.input('MaUser', sql.Int, userId);
         request.input('MaSP', sql.NChar, productId);
         request.input('SoLuong', sql.Int, quantity);
         request.input('ProductPrice', sql.Decimal(10, 2), productPrice);
@@ -93,7 +93,7 @@ async function getCartItemsForHeader(req, res) {
 
         // Fetch cart items
         const cartResult = await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT sp.MaSP, sp.TenSP, sp.HinhChinh, stg.SoLuongSPTrongGio
                 FROM SanPhamTrongGio stg
@@ -123,7 +123,7 @@ async function getCartItemCount(req, res) {
 
         // Fetch cart item count
         const cartCountResult = await pool.request()
-            .input('MaUser', sql.NChar, userId)
+            .input('MaUser', sql.Int, userId)
             .query(`
                 SELECT SUM(SoLuongSPTrongGio) AS itemCount
                 FROM SanPhamTrongGio
