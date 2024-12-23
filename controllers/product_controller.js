@@ -304,4 +304,39 @@ async function getSellerProducts(req, res) {
     }
 }
 
-module.exports = {getProductsPage, searchProducts, getProductDetail, addProduct, upload, loadSellerProducts, getSellerProducts};
+async function updateProduct(req, res) {
+    const { productId } = req.params; // Extract product ID from the URL
+    const { SoLuongTon, DGBanMacDinh, MoTa } = req.body; // Extract product fields from the request body
+
+    console.log('Received update request for product:', productId, req.body); // Debug message
+
+    try {
+        // Establish database connection
+        const pool = await poolPromise;
+
+        // Execute SQL query to update the product
+        await pool.request()
+            .input('MaSP', sql.NChar(20), productId.trim()) // Trim the productId
+            .input('SoLuongTon', sql.Int, SoLuongTon)
+            .input('DGBanMacDinh', sql.Decimal(10, 2), DGBanMacDinh)
+            .input('MoTa', sql.NVarChar(sql.MAX), MoTa)
+            .query(`
+                UPDATE SanPham
+                SET SoLuongTon = @SoLuongTon,
+                    DGBanMacDinh = @DGBanMacDinh,
+                    MoTa = @MoTa
+                WHERE MaSP = @MaSP
+            `);
+
+        console.log('Product updated successfully:', productId); // Debug message
+
+        // Send success response
+        res.json({ success: true });
+    } catch (err) {
+        // Log and handle errors
+        console.error('Error updating product:', err);
+        res.status(500).json({ success: false, message: 'Error updating product' });
+    }
+}
+
+module.exports = { getProductsPage, searchProducts, getProductDetail, addProduct, upload, loadSellerProducts, getSellerProducts, updateProduct };

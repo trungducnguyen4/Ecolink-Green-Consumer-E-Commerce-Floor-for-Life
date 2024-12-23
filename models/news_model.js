@@ -30,11 +30,11 @@ async function getNewsByCategory(category) {
         // Định dạng ngày giờ theo múi giờ GMT+7
         result.recordset.forEach(blog => {
             blog.NgayTao = moment(blog.NgayTao)
-                .tz('Asia/Bangkok') // Múi giờ Bangkok/Hà Nội
+                .tz('Asia/Bangkok').subtract(7,'hour') // Múi giờ Bangkok/Hà Nội
                 .format('DD-MM-YYYY HH:mm:ss'); // Định dạng dd-mm-yyyy hh:mm:ss
 
             blog.NgayCapNhat = moment(blog.NgayCapNhat)
-                .tz('Asia/Bangkok')
+                .tz('Asia/Bangkok').subtract(7,'hour')
                 .format('DD-MM-YYYY HH:mm:ss');
         });
 
