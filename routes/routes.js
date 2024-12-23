@@ -34,6 +34,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/cart/add', cartController.addToCart);
 router.get('/cart', isAuthenticated, cartController.getCartItems);
 router.post('/cart/update-quantity', isAuthenticated, cartController.updateCartItemQuantity);
+router.post('/cart/delete', isAuthenticated, cartController.deleteCartItem); // New route for deleting cart item
 router.get('/cart/header', isAuthenticated, cartController.getCartItemsForHeader); // New route for fetching cart items for header
 router.get('/cart/count', isAuthenticated, cartController.getCartItemCount); // New route for fetching cart item count
 

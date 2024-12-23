@@ -139,4 +139,25 @@ async function getCartItemCount(req, res) {
     }
 }
 
-module.exports = { getCartItems, updateCartItemQuantity, addToCart, getCartItemsForHeader, getCartItemCount };
+async function deleteCartItem(req, res) {
+    const { productId } = req.body;
+    const userId = req.session.user.id.toString().padEnd(20, ' '); // Pad the userId to match nchar(20)
+
+    try {
+        const pool = await poolPromise;
+        await pool.request()
+            .input('MaUser', sql.NChar, userId)
+            .input('MaSP', sql.NChar, productId)
+            .query(`
+                DELETE FROM SanPhamTrongGio
+                WHERE MaUser = @MaUser AND MaSP = @MaSP
+            `);
+
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting cart item:', err);
+        res.status(500).json({ success: false, error: 'Error deleting cart item' });
+    }
+}
+
+module.exports = { getCartItems, updateCartItemQuantity, addToCart, getCartItemsForHeader, getCartItemCount, deleteCartItem };

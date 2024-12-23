@@ -28,6 +28,13 @@
             border: 1px solid #ccc;
             margin: 0 2.5px; /* Reduce margin by 50% */
         }
+        .cart-body-delete {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .cart-body-delete:hover {
+            color: red;
+        }
 
     </style>
 </head>
@@ -100,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="cart-body-totalCostProduct col-lg-2"><%= item.DGBanMacDinh * item.SoLuongSPTrongGio %></div>
-                            <div class="cart-body-delete col-lg-1">Xóa</div>
+                            <div class="cart-body-delete col-lg-1" data-id="<%= item.MaSP %>">Xóa</div>
                         </div>
                     </div>
                 <% }); %>
@@ -189,6 +196,40 @@
                     this.value = 1;
                 }
                 updateQuantity(this);
+            });
+        });
+
+        document.querySelectorAll('.cart-body-delete').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                const cartItem = this.closest('.cart-body-item');
+
+                // Send AJAX request to delete the product from the cart
+                fetch('/cart/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productId }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        cartItem.remove();
+                        // Update total cost
+                        let totalCost = 0;
+                        document.querySelectorAll('.cart-body-totalCostProduct').forEach(element => {
+                            totalCost += parseFloat(element.textContent);
+                        });
+                        document.getElementById('total-cost').textContent = totalCost.toFixed(2);
+                    } else {
+                        alert('Failed to delete product from cart');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting product from cart');
+                });
             });
         });
     </script>
