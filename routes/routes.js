@@ -36,7 +36,7 @@ router.get('/cart', isAuthenticated, cartController.getCartItems);
 router.post('/cart/update-quantity', isAuthenticated, cartController.updateCartItemQuantity);
 router.get('/cart/header', isAuthenticated, cartController.getCartItemsForHeader); // New route for fetching cart items for header
 router.get('/cart/count', isAuthenticated, cartController.getCartItemCount); // New route for fetching cart item count
-
+router.post('/cart/delete', isAuthenticated, cartController.deleteCartItem); // New route for deleting cart item
 // Order routes
 router.post('/order-payment', isAuthenticated, orderController.loadOrderPaymentPage);
 router.get('/purchaseOrderStatus', isAuthenticated, orderController.loadPurchaseOrderStatusPage);
