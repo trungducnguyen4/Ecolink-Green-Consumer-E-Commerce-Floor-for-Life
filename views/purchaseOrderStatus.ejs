@@ -20,8 +20,8 @@
             <!-- Header-Services -->
             <div class="header-service">
                 <div class="header-service-item">
-                    <img class="header-service-item-avatar-img" src="./image/avatar.jpg" alt="">
-                    <a href="#contact">Ecolink</a>
+                    <img class="header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="">
+                    <a href="#contact"><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></a>
                 </div>
                 <div class="header-service-item">
                     <i class="fa-solid fa-question"></i>
@@ -118,8 +118,8 @@
                 <!-- AVATAR -->
                 <div class="personal-body-avatar">
                     <div class="personal-body-avatar-frame">
-                        <img src="./image/avatar.jpg" alt="" class="personal-body-avatar-img">
-                        <div class="personal-body-avatar-name">Ecolink For Life</div>
+                        <img src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="" class="personal-body-avatar-img">
+                        <div class="personal-body-avatar-name"><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></div>
                     </div>
                     <div class="personal-body-fix-frame">
                         <i class="fa-solid fa-wrench"></i>

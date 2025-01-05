@@ -201,7 +201,7 @@ async function savePost(postData) {
         }
 
         const maDanhMuc = categoryResult.recordset[0].MaDanhMuc; // Lấy mã danh mục
-        const MaNguoiBan = 'CH001';
+        const MaNguoiBan = 'CH003';
 
         // Thực hiện chèn bài viết vào bảng BaiBlog
         const result = await pool.request()

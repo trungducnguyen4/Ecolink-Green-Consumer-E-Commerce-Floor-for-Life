@@ -67,7 +67,7 @@ async function addReview(req, res) {
             .input('MaDH', sql.NChar(20), MaDH)
             .input('MaUser', sql.Int, MaUser)
             .input('DiemDanhGia', sql.Int, DiemDanhGia)
-            .input('NDDanhGia', sql.Text, NDDanhGia)
+            .input('NDDanhGia', sql.NVarChar(500), NDDanhGia)
             .input('HinhDanhGia', sql.NVarChar(300), HinhDanhGia)
             .input('VideoDanhGia', sql.NVarChar(300), VideoDanhGia)
             .query(`

@@ -68,53 +68,53 @@ function performSearch() {
 
 
 
-let slideIndex = 0;
-let slideTimeout;
+// let slideIndex = 0;
+// let slideTimeout;
 
-// Function to show slides
-function showSlides() {
-  let slides = document.getElementsByClassName("mySlides");
+// // Function to show slides
+// function showSlides() {
+//   let slides = document.getElementsByClassName("mySlides");
 
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
+//   for (let i = 0; i < slides.length; i++) {
+//     slides[i].style.display = "none";
+//   }
 
-  slideIndex++;
+//   slideIndex++;
 
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
+//   if (slideIndex > slides.length) {
+//     slideIndex = 1;
+//   }
 
-  slides[slideIndex - 1].style.display = "block";
+//   slides[slideIndex - 1].style.display = "block";
 
-  slideTimeout = setTimeout(showSlides, 2000); // Show next slide after 2 seconds
-}
+//   slideTimeout = setTimeout(showSlides, 2000); // Show next slide after 2 seconds
+// }
 
-// Function to stop the slideshow
-function stopSlides() {
-  clearTimeout(slideTimeout);
-}
+// // Function to stop the slideshow
+// function stopSlides() {
+//   clearTimeout(slideTimeout);
+// }
 
-// Play button click event
-document.getElementById("playButton").addEventListener("click", function() {
-  showSlides(); // Start slideshow
-  document.getElementById("playButton").style.display = "none"; // Hide play button
-  document.getElementById("stopButton").style.display = "inline"; // Show stop button
-});
+// // Play button click event
+// document.getElementById("playButton").addEventListener("click", function() {
+//   showSlides(); // Start slideshow
+//   document.getElementById("playButton").style.display = "none"; // Hide play button
+//   document.getElementById("stopButton").style.display = "inline"; // Show stop button
+// });
 
-// Stop button click event
-document.getElementById("stopButton").addEventListener("click", function() {
-  stopSlides(); // Stop slideshow
-  document.getElementById("stopButton").style.display = "none"; // Hide stop button
-  document.getElementById("playButton").style.display = "inline"; // Show play button
-});
+// // Stop button click event
+// document.getElementById("stopButton").addEventListener("click", function() {
+//   stopSlides(); // Stop slideshow
+//   document.getElementById("stopButton").style.display = "none"; // Hide stop button
+//   document.getElementById("playButton").style.display = "inline"; // Show play button
+// });
 
-// Automatically start the slideshow when the page loads
-window.onload = function() {
-  showSlides(); // Start slideshow automatically when the page loads
-  document.getElementById("playButton").style.display = "none"; // Hide play button
-  document.getElementById("stopButton").style.display = "inline"; // Show stop button
-};
+// // Automatically start the slideshow when the page loads
+// window.onload = function() {
+//   showSlides(); // Start slideshow automatically when the page loads
+//   document.getElementById("playButton").style.display = "none"; // Hide play button
+//   document.getElementById("stopButton").style.display = "inline"; // Show stop button
+// };
 
 
 

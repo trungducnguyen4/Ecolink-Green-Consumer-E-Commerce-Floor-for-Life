@@ -356,12 +356,11 @@ i.fa-circle-check:hover {
     overflow: hidden; /* Ẩn các phần dư ra ngoài */
   }
   
-  .mySlides {
-    display: none; /* Ẩn tất cả các slide mặc định */
+  .mySlides1 {
     width: 100%;
     height: 280px;
     margin-top: 118px;
-    z-index: -1;
+    padding-bottom: 20px;
   }
   
   img {
