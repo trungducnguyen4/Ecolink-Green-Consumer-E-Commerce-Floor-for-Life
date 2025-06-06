@@ -25,7 +25,7 @@
         <div class="header-service">
             <div class="header-service-item">
             <img class= "header-service-item-avatar-img" src="<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>" alt="">
-            <a href="<%= session.user ? '/personal' : (session.businessUser ? '/sale-chanels' : '#') %>">Ecolink</a>
+            <a href="<%= session.user ? '/personal' : (session.businessUser ? '/sale-chanels' : '#') %>"><%= session.user ? session.user.TenDangNhap : session.businessUser.TenDangNhap %></a>
             </div>
 
             <div class="header-service-item">
@@ -87,7 +87,7 @@
                 <% for (const [shopId, shop] of Object.entries(groupedItems)) { %>
                     <div class="shop-group">
                         <div class="shop-header">
-                            <img src="/shop_image/<%= shop.shopLogo %>" alt="<%= shop.shopName %>" class="shop-logo">
+                            <img src="/logo/<%= shop.shopLogo %>" alt="<%= shop.shopName %>" class="shop-logo">
                             <div class="shop-name"><%= shop.shopName %></div>
                         </div>
                         <% shop.items.forEach(item => { %>

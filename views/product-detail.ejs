@@ -100,6 +100,12 @@
                   <p class="cart-quantity-number" id="cart-quantity-number">0</p>
                 </div>
               </a>
+              <div class="product-in-cart">
+                <div class="product-in-cart-arrow"></div>
+                <ul class="product-in-cart-list" id="cart-items-list">
+                  <!-- Cart items will be dynamically loaded here -->
+                </ul>
+              </div>
 
               <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -144,12 +150,7 @@
                 });
             </script>
 
-              <div class="product-in-cart">
-                <div class="product-in-cart-arrow"></div>
-                <ul class="product-in-cart-list" id="cart-items-list">
-                  <!-- Cart items will be dynamically loaded here -->
-                </ul>
-              </div>
+              
     
              </div>
            
@@ -255,10 +256,10 @@
           <% if (certificates.length > 0) { %>
             <% certificates.forEach(cert => { %>
                 <div class="certificate-item">
-                    <img src="/certificates/<%= cert.HinhDDX %>" alt="<%= cert.TenDDX %>" class="certificate-img">
+                    <img src="/certificates/<%= cert.HinhDDX %>" alt="<%= cert.TenDDX %>" class="certificate-img" style="margin-left: 20px; width: 250px;">
                     <div class="certificate-info">
-                        <p><strong><%= cert.TenDDX %></strong></p>
-                        <p><%= cert.CoQuanCap %></p>
+                        <p style="margin-left: 20px;"><strong>Tên chứng chỉ: <%= cert.TenDDX %></strong></p>
+                        <p style="margin-left: 20px;">Cơ quan cấp: <%= cert.CoQuanCap %></p>
                     </div>
                 </div>
             <% }); %>
@@ -311,7 +312,7 @@
                             <small>Ngày đánh giá: <%= new Date(review.NgayDanhGia).toLocaleDateString('vi-VN') %></small>
                             <% if (review.HinhDanhGia) { %>
                                 <div class="review-image">
-                                    <img src="/review_uploads/<%= review.HinhDanhGia %>" alt="Hình ảnh đánh giá" style="max-width: 200px;">
+                                    <img src="./review_uploads/1734970507006-banana-tree-8067514_1280.jpg" alt="Hình ảnh đánh giá" style="max-width: 200px;">
                                 </div>
                             <% } else { %>
                                 <p>Không có hình ảnh đánh giá.</p>
@@ -319,7 +320,7 @@
                             <% if (review.VideoDanhGia) { %>
                                 <div class="review-video">
                                     <video controls style="max-width: 200px;">
-                                        <source src="/review_uploads/<%= review.VideoDanhGia %>" type="video/mp4">
+                                        <source src="./review_uploads/<%= review.VideoDanhGia %>" type="video/mp4">
                                         Trình duyệt của bạn không hỗ trợ thẻ video.
                                     </video>
                                 </div>

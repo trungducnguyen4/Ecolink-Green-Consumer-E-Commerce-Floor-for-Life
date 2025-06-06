@@ -7,9 +7,9 @@
       <i class="fa-solid fa-chevron-left" id="home-slide-leftBtn"></i>
       <i class="fa-solid fa-chevron-right" id="home-slide-rightBtn"></i>
       <div>
-        <img class="mySlides" src="/image/ads.png" alt="">
+        <img class="mySlides1" src="/image/ads.png" alt="">
       </div>      
-      <div >
+      <!-- <div >
         <img class="mySlides" src="/image/ads2.png" alt="">
       </div>
       <div>
@@ -24,7 +24,7 @@
       <div>
         <img class="mySlides" src="/image/ads6.png" alt="">
       </div>
-        
+         -->
         <!-- <img class="icon-ads left" src="/iconn/chevronleft.svg" alt="" />
         <img class="icon-ads right" src="/iconn/chevronright.svg"  alt=""/> -->
     </div>
@@ -402,7 +402,7 @@
                     backgroundColor: "#007b59",
                     textColor: "#ffffff",
                     showAvatar: true,
-                    avatarSrc: "https://i.pinimg.com/736x/2b/c9/05/2bc905c07667a2e70cc78fe0242b8d78.jpg",
+                    avatarSrc: "<%= session.user ? session.user.AnhAvatar : (session.businessUser ? session.businessUser.AnhLogo : '/avatar/default-avatar.jpg') %>",
                 },
                 textInput: {
                     placeholder: 'Type your question',

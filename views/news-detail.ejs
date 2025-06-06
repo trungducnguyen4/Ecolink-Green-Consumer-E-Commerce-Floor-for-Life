@@ -37,7 +37,7 @@
             <i class="fa-brands fa-twitter"></i>
             </div>
             <% if (article.AnhBia) { %>
-                <img class="news-body-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>">
+                <img class="news-article-img" src="<%= article.AnhBia %>" alt="<%= article.TieuDe %>" style="width: 100%; max-width: 600px; height: auto;">
             <% } %>
             <p style=" width: 760px; margin-top: 20px;" class="news-detail-body-content">
                 <%= article.NoiDung.replace(/&lt;br&gt;/g, '<br>').replace(/&lt;br\/&gt;/g, '<br>') %>
